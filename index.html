@@ -3,176 +3,319 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ᎷᎡ/ᏦᎯ ᏉᏫᏫ - منصة تسويق تيك توك</title>
+    <title>ᎷᎡ/ᏦᎯ ᏉᏫᏫ - منصة تيك توك الشاملة</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: 'Segoe UI', Tahoma, sans-serif;
+            font-family: 'Cairo', sans-serif;
             background: #0a0a0a;
             min-height: 100vh;
             color: #fff;
+            overflow-x: hidden;
         }
         
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            background: #0a0a0a;
+        }
+        .bg-animation::before {
+            content: '';
+            position: absolute;
+            width: 200%; height: 200%;
+            top: -50%; left: -50%;
+            background: radial-gradient(circle, rgba(255,0,80,0.1) 0%, transparent 50%),
+                        radial-gradient(circle, rgba(0,255,255,0.05) 30%, transparent 60%);
+            animation: bgMove 20s ease-in-out infinite;
+        }
+        @keyframes bgMove {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(-5%, -5%) rotate(5deg); }
+        }
+
         /* Header */
         .header {
-            background: #1a1a1a;
-            padding: 20px;
-            text-align: center;
-            border-bottom: 3px solid #ff0050;
+            background: rgba(20,20,20,0.95);
+            padding: 15px 30px;
+            border-bottom: 2px solid #ff0050;
             position: sticky;
             top: 0;
-            z-index: 100;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
         }
+        .logo-section { display: flex; align-items: center; gap: 15px; }
         .logo-text {
-            font-size: 36px;
-            font-weight: bold;
+            font-size: 32px;
+            font-weight: 900;
             background: #ff0050;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             text-shadow: 0 0 30px rgba(255,0,80,0.5);
-            letter-spacing: 3px;
+            letter-spacing: 4px;
         }
-        .tagline { color: #888; margin-top: 5px; font-size: 14px; }
+        .tagline { color: #888; font-size: 12px; }
+
+        /* Currency Selector */
+        .currency-selector {
+            position: relative;
+        }
+        .currency-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background: #ff0050;
+            border: none;
+            border-radius: 25px;
+            color: #fff;
+            font-family: 'Cairo', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .currency-btn:hover { background: #e60048; transform: scale(1.05); }
+        .currency-btn .flag { font-size: 20px; }
+        .currency-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            margin-top: 10px;
+            background: #1a1a1a;
+            border: 2px solid #333;
+            border-radius: 15px;
+            padding: 10px;
+            min-width: 200px;
+            display: none;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+        }
+        .currency-dropdown.show { display: block; animation: fadeIn 0.3s; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        .currency-option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 15px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .currency-option:hover { background: rgba(255,0,80,0.2); }
+        .currency-option .flag { font-size: 24px; }
+        .currency-option .info { flex: 1; }
+        .currency-option .name { font-size: 14px; font-weight: 600; }
+        .currency-option .code { font-size: 12px; color: #888; }
 
         /* Navigation */
         .nav {
             display: flex;
             justify-content: center;
-            gap: 10px;
+            gap: 8px;
             padding: 15px;
-            background: #111;
+            background: rgba(15,15,15,0.9);
             flex-wrap: wrap;
+            border-bottom: 1px solid #222;
         }
         .nav-btn {
-            padding: 10px 25px;
-            border: 2px solid #ff0050;
+            padding: 12px 20px;
+            border: 2px solid #333;
             background: transparent;
-            color: #ff0050;
-            border-radius: 25px;
+            color: #aaa;
+            border-radius: 30px;
             cursor: pointer;
             transition: all 0.3s;
-            font-size: 14px;
+            font-family: 'Cairo', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
         .nav-btn:hover, .nav-btn.active {
-            background: #ff0050;
-            color: #fff;
+            border-color: #ff0050;
+            background: rgba(255,0,80,0.15);
+            color: #ff0050;
+            box-shadow: 0 0 20px rgba(255,0,80,0.2);
         }
 
         /* Main Container */
         .container {
-            max-width: 900px;
+            max-width: 1000px;
             margin: 30px auto;
             padding: 0 20px;
         }
 
-        /* Service Cards */
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 40px 20px;
+            margin-bottom: 30px;
+        }
+        .hero h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+            background: #ff0050;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .hero p { color: #888; font-size: 16px; }
+
+        /* Service Cards Grid */
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
             margin-top: 30px;
         }
         .service-card {
-            background: #1a1a1a;
-            border-radius: 20px;
-            padding: 30px;
+            background: rgba(26,26,26,0.9);
+            border-radius: 25px;
+            padding: 35px;
             text-align: center;
             border: 2px solid #333;
-            transition: all 0.3s;
+            transition: all 0.4s;
             position: relative;
             overflow: hidden;
+            backdrop-filter: blur(5px);
         }
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: #ff0050;
+            transform: scaleX(0);
+            transition: transform 0.4s;
+        }
+        .service-card:hover::before { transform: scaleX(1); }
         .service-card:hover {
             border-color: #ff0050;
-            transform: translateY(-5px);
-            box-shadow: 0 10px 40px rgba(255,0,80,0.2);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 60px rgba(255,0,80,0.15);
         }
-        .service-card.hot::before {
+        .service-card.hot {
+            border-color: #ff0050;
+            box-shadow: 0 0 30px rgba(255,0,80,0.1);
+        }
+        .service-card.hot::after {
             content: '🔥 الأكثر طلباً';
             position: absolute;
-            top: 10px;
-            left: -30px;
+            top: 15px;
+            left: -35px;
             background: #ff0050;
             color: #fff;
-            padding: 5px 40px;
+            padding: 5px 45px;
             transform: rotate(-45deg);
-            font-size: 12px;
-            font-weight: bold;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1px;
         }
         .service-icon {
-            font-size: 50px;
+            font-size: 55px;
             margin-bottom: 15px;
+            display: inline-block;
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
         .service-title {
-            font-size: 22px;
-            color: #fff;
-            margin-bottom: 10px;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 8px;
         }
         .service-desc {
             color: #888;
-            font-size: 14px;
-            margin-bottom: 20px;
+            font-size: 13px;
+            margin-bottom: 25px;
         }
 
-        /* Package Selector */
+        /* Packages */
         .packages {
             display: flex;
             flex-direction: column;
-            gap: 10px;
-            margin: 20px 0;
+            gap: 12px;
+            margin: 25px 0;
         }
         .package-option {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 15px;
-            background: #0f0f0f;
-            border-radius: 12px;
+            padding: 18px;
+            background: rgba(15,15,15,0.8);
+            border-radius: 15px;
             border: 2px solid #333;
             cursor: pointer;
             transition: all 0.3s;
         }
-        .package-option:hover, .package-option.selected {
-            border-color: #ff0050;
-            background: rgba(255,0,80,0.1);
+        .package-option:hover {
+            border-color: #555;
+            background: rgba(255,0,80,0.05);
         }
         .package-option.selected {
             border-color: #ff0050;
+            background: rgba(255,0,80,0.1);
+            box-shadow: 0 0 20px rgba(255,0,80,0.1);
         }
-        .package-info {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
+        .package-info { display: flex; align-items: center; gap: 15px; }
         .package-radio {
-            width: 20px;
-            height: 20px;
+            width: 22px; height: 22px;
             border: 2px solid #555;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
+            flex-shrink: 0;
         }
-        .package-option.selected .package-radio {
-            border-color: #ff0050;
-        }
+        .package-option.selected .package-radio { border-color: #ff0050; }
         .package-option.selected .package-radio::after {
             content: '';
-            width: 10px;
-            height: 10px;
+            width: 12px; height: 12px;
             background: #ff0050;
             border-radius: 50%;
+            animation: popIn 0.3s;
         }
-        .package-amount { font-weight: bold; font-size: 18px; }
-        .package-price { color: #ff0050; font-weight: bold; }
+        @keyframes popIn { from { transform: scale(0); } to { transform: scale(1); } }
+        .package-amount { font-weight: 700; font-size: 16px; }
+        .package-badge {
+            display: inline-block;
+            background: #ff0050;
+            color: #fff;
+            padding: 2px 10px;
+            border-radius: 10px;
+            font-size: 10px;
+            margin-right: 8px;
+        }
+        .package-price {
+            color: #ff0050;
+            font-weight: 700;
+            font-size: 18px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+        .package-price .old-price {
+            color: #555;
+            font-size: 12px;
+            text-decoration: line-through;
+        }
 
         /* Input Section */
         .input-section {
-            background: #1a1a1a;
+            background: rgba(15,15,15,0.8);
             border-radius: 20px;
             padding: 30px;
-            margin-top: 20px;
-            border: 2px solid #333;
+            margin-top: 25px;
+            border: 1px solid #333;
         }
         .input-group {
             margin-bottom: 20px;
@@ -180,24 +323,28 @@
         }
         label {
             display: block;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             color: #ccc;
             font-size: 14px;
+            font-weight: 600;
         }
-        input[type="url"], input[type="text"] {
+        input[type="url"], input[type="text"], input[type="email"] {
             width: 100%;
-            padding: 15px;
+            padding: 16px;
             border: 2px solid #333;
-            border-radius: 12px;
+            border-radius: 15px;
             background: #0f0f0f;
             color: #fff;
-            font-size: 16px;
-            transition: border-color 0.3s;
+            font-size: 15px;
+            font-family: 'Cairo', sans-serif;
+            transition: all 0.3s;
         }
         input:focus {
             outline: none;
             border-color: #ff0050;
+            box-shadow: 0 0 15px rgba(255,0,80,0.1);
         }
+        input::placeholder { color: #555; }
 
         /* Submit Button */
         .submit-btn {
@@ -206,254 +353,516 @@
             background: #ff0050;
             color: #fff;
             border: none;
-            border-radius: 12px;
+            border-radius: 15px;
             font-size: 18px;
-            font-weight: bold;
+            font-weight: 700;
             cursor: pointer;
             transition: all 0.3s;
+            font-family: 'Cairo', sans-serif;
             margin-top: 10px;
+            position: relative;
+            overflow: hidden;
         }
+        .submit-btn::after {
+            content: '';
+            position: absolute;
+            top: 50%; left: 50%;
+            width: 0; height: 0;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+        .submit-btn:hover::after { width: 300px; height: 300px; }
         .submit-btn:hover {
             background: #e60048;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 20px rgba(255,0,80,0.4);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(255,0,80,0.4);
         }
         .submit-btn:disabled {
             background: #444;
             cursor: not-allowed;
             transform: none;
+            box-shadow: none;
         }
 
         /* Progress */
         .progress-container {
             display: none;
-            margin-top: 25px;
+            margin-top: 30px;
         }
         .progress-bar {
             width: 100%;
-            height: 12px;
-            background: #333;
-            border-radius: 6px;
+            height: 14px;
+            background: #222;
+            border-radius: 7px;
             overflow: hidden;
+            position: relative;
         }
         .progress-fill {
             height: 100%;
             background: #ff0050;
             width: 0%;
             transition: width 0.5s;
-            border-radius: 6px;
+            border-radius: 7px;
+            position: relative;
+        }
+        .progress-fill::after {
+            content: '';
+            position: absolute;
+            top: 0; right: 0; bottom: 0;
+            width: 30px;
+            background: rgba(255,255,255,0.3);
+            filter: blur(5px);
+            animation: shimmer 1s infinite;
+        }
+        @keyframes shimmer {
+            0% { transform: translateX(-30px); }
+            100% { transform: translateX(30px); }
         }
         .progress-text {
-            margin-top: 10px;
+            margin-top: 15px;
             color: #ff0050;
-            font-weight: bold;
+            font-weight: 700;
+            font-size: 16px;
+        }
+        .timer {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 8px 20px;
+            background: rgba(255,0,80,0.1);
+            border: 1px solid #ff0050;
+            border-radius: 20px;
+            color: #ff0050;
+            font-size: 13px;
+            font-weight: 600;
         }
 
         /* Stats */
         .stats {
             display: none;
-            margin-top: 20px;
-            padding: 20px;
-            background: #0f0f0f;
-            border-radius: 12px;
+            margin-top: 25px;
+            padding: 25px;
+            background: rgba(15,15,15,0.9);
+            border-radius: 15px;
+            border: 1px solid #333;
         }
         .stat-row {
             display: flex;
             justify-content: space-between;
-            padding: 12px 0;
-            border-bottom: 1px solid #333;
+            align-items: center;
+            padding: 14px 0;
+            border-bottom: 1px solid #222;
         }
         .stat-row:last-child { border: none; }
-        .stat-value { color: #ff0050; font-weight: bold; }
+        .stat-label { color: #888; font-size: 14px; }
+        .stat-value {
+            color: #ff0050;
+            font-weight: 700;
+            font-size: 16px;
+        }
 
-        /* Success */
+        /* Success Message */
         .success-msg {
             display: none;
-            margin-top: 20px;
-            padding: 20px;
-            background: rgba(255,0,80,0.1);
+            margin-top: 25px;
+            padding: 25px;
+            background: rgba(255,0,80,0.08);
             border: 2px solid #ff0050;
-            border-radius: 12px;
+            border-radius: 20px;
             color: #ff0050;
             text-align: center;
+            animation: successPop 0.5s;
         }
+        @keyframes successPop {
+            0% { transform: scale(0.8); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .success-msg h3 { font-size: 22px; margin-bottom: 10px; }
+        .success-msg p { color: #ccc; font-size: 14px; }
 
         /* Features */
         .features {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 15px;
-            margin-top: 30px;
+            gap: 20px;
+            margin-top: 40px;
             text-align: center;
         }
         .feature {
-            background: #1a1a1a;
-            padding: 20px;
-            border-radius: 15px;
+            background: rgba(26,26,26,0.8);
+            padding: 25px;
+            border-radius: 20px;
+            border: 1px solid #222;
+            transition: all 0.3s;
         }
-        .feature-icon { font-size: 30px; margin-bottom: 8px; }
-        .feature-title { font-size: 14px; color: #fff; }
-        .feature-desc { font-size: 12px; color: #888; margin-top: 5px; }
+        .feature:hover {
+            border-color: #ff0050;
+            transform: translateY(-5px);
+        }
+        .feature-icon { font-size: 35px; margin-bottom: 12px; }
+        .feature-title { font-size: 14px; font-weight: 700; margin-bottom: 5px; }
+        .feature-desc { font-size: 12px; color: #666; }
+
+        /* Stats Counter */
+        .counter-section {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin: 40px 0;
+            text-align: center;
+        }
+        .counter-box {
+            background: rgba(26,26,26,0.8);
+            padding: 25px;
+            border-radius: 20px;
+            border: 1px solid #222;
+        }
+        .counter-number {
+            font-size: 32px;
+            font-weight: 900;
+            color: #ff0050;
+        }
+        .counter-label { color: #888; font-size: 13px; margin-top: 5px; }
 
         /* Footer */
         .footer {
             text-align: center;
-            padding: 30px;
-            color: #555;
-            font-size: 12px;
-            margin-top: 40px;
-            border-top: 1px solid #222;
+            padding: 40px 20px;
+            color: #444;
+            font-size: 13px;
+            margin-top: 50px;
+            border-top: 1px solid #1a1a1a;
+        }
+        .footer .logo-text {
+            font-size: 24px;
+            margin-bottom: 10px;
+            display: inline-block;
         }
 
         /* Hidden sections */
-        .section { display: none; }
+        .section { display: none; animation: sectionFade 0.4s; }
         .section.active { display: block; }
+        @keyframes sectionFade { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Timer */
-        .timer {
-            background: #ff0050;
-            color: #fff;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 12px;
-            display: inline-block;
-            margin-top: 10px;
-        }
-
-        @media (max-width: 600px) {
-            .features { grid-template-columns: repeat(2, 1fr); }
-            .logo-text { font-size: 24px; }
+        /* Responsive */
+        @media (max-width: 768px) {
+            .features, .counter-section { grid-template-columns: repeat(2, 1fr); }
+            .logo-text { font-size: 22px; }
+            .hero h1 { font-size: 26px; }
+            .header { flex-direction: column; text-align: center; }
         }
     </style>
 </head>
 <body>
 
+    <div class="bg-animation"></div>
+
     <div class="header">
-        <div class="logo-text">ᎷᎡ/ᏦᎯ ᏉᏫᏫ</div>
-        <p class="tagline">منصة تسويق تيك توك الذكية</p>
+        <div class="logo-section">
+            <div class="logo-text">ᎷᎡ/ᏦᎯ ᏉᏫᏫ</div>
+            <div class="tagline">منصة تيك توك الشاملة</div>
+        </div>
+        
+        <div class="currency-selector">
+            <button class="currency-btn" onclick="toggleCurrency()">
+                <span class="flag" id="currentFlag">🇸🇦</span>
+                <span id="currentCurrency">ريال سعودي</span>
+                <span>▼</span>
+            </button>
+            <div class="currency-dropdown" id="currencyDropdown">
+                <div class="currency-option" onclick="changeCurrency('SAR', '🇸🇦', 'ريال سعودي')">
+                    <span class="flag">🇸🇦</span>
+                    <div class="info">
+                        <div class="name">السعودية</div>
+                        <div class="code">SAR - ريال سعودي</div>
+                    </div>
+                </div>
+                <div class="currency-option" onclick="changeCurrency('AED', '🇦🇪', 'درهم إماراتي')">
+                    <span class="flag">🇦🇪</span>
+                    <div class="info">
+                        <div class="name">الإمارات</div>
+                        <div class="code">AED - درهم إماراتي</div>
+                    </div>
+                </div>
+                <div class="currency-option" onclick="changeCurrency('USD', '🇺🇸', 'دولار أمريكي')">
+                    <span class="flag">🇺🇸</span>
+                    <div class="info">
+                        <div class="name">الولايات المتحدة</div>
+                        <div class="code">USD - دولار أمريكي</div>
+                    </div>
+                </div>
+                <div class="currency-option" onclick="changeCurrency('EGP', '🇪🇬', 'جنيه مصري')">
+                    <span class="flag">🇪🇬</span>
+                    <div class="info">
+                        <div class="name">مصر</div>
+                        <div class="code">EGP - جنيه مصري</div>
+                    </div>
+                </div>
+                <div class="currency-option" onclick="changeCurrency('KWD', '🇰🇼', 'دينار كويتي')">
+                    <span class="flag">🇰🇼</span>
+                    <div class="info">
+                        <div class="name">الكويت</div>
+                        <div class="code">KWD - دينار كويتي</div>
+                    </div>
+                </div>
+                <div class="currency-option" onclick="changeCurrency('QAR', '🇶🇦', 'ريال قطري')">
+                    <span class="flag">🇶🇦</span>
+                    <div class="info">
+                        <div class="name">قطر</div>
+                        <div class="code">QAR - ريال قطري</div>
+                    </div>
+                </div>
+                <div class="currency-option" onclick="changeCurrency('BHD', '🇧🇭', 'دينار بحريني')">
+                    <span class="flag">🇧🇭</span>
+                    <div class="info">
+                        <div class="name">البحرين</div>
+                        <div class="code">BHD - دينار بحريني</div>
+                    </div>
+                </div>
+                <div class="currency-option" onclick="changeCurrency('OMR', '🇴🇲', 'ريال عماني')">
+                    <span class="flag">🇴🇲</span>
+                    <div class="info">
+                        <div class="name">عمان</div>
+                        <div class="code">OMR - ريال عماني</div>
+                    </div>
+                </div>
+                <div class="currency-option" onclick="changeCurrency('JOD', '🇯🇴', 'دينار أردني')">
+                    <span class="flag">🇯🇴</span>
+                    <div class="info">
+                        <div class="name">الأردن</div>
+                        <div class="code">JOD - دينار أردني</div>
+                    </div>
+                </div>
+                <div class="currency-option" onclick="changeCurrency('IQD', '🇮🇶', 'دينار عراقي')">
+                    <span class="flag">🇮🇶</span>
+                    <div class="info">
+                        <div class="name">العراق</div>
+                        <div class="code">IQD - دينار عراقي</div>
+                    </div>
+                </div>
+                <div class="currency-option" onclick="changeCurrency('MAD', '🇲🇦', 'درهم مغربي')">
+                    <span class="flag">🇲🇦</span>
+                    <div class="info">
+                        <div class="name">المغرب</div>
+                        <div class="code">MAD - درهم مغربي</div>
+                    </div>
+                </div>
+                <div class="currency-option" onclick="changeCurrency('TND', '🇹🇳', 'دينار تونسي')">
+                    <span class="flag">🇹🇳</span>
+                    <div class="info">
+                        <div class="name">تونس</div>
+                        <div class="code">TND - دينار تونسي</div>
+                    </div>
+                </div>
+                <div class="currency-option" onclick="changeCurrency('DZD', '🇩🇿', 'دينار جزائري')">
+                    <span class="flag">🇩🇿</span>
+                    <div class="info">
+                        <div class="name">الجزائر</div>
+                        <div class="code">DZD - دينار جزائري</div>
+                    </div>
+                </div>
+                <div class="currency-option" onclick="changeCurrency('LYD', '🇱🇾', 'دينار ليبي')">
+                    <span class="flag">🇱🇾</span>
+                    <div class="info">
+                        <div class="name">ليبيا</div>
+                        <div class="code">LYD - دينار ليبي</div>
+                    </div>
+                </div>
+                <div class="currency-option" onclick="changeCurrency('SYP', '🇸🇾', 'ليرة سورية')">
+                    <span class="flag">🇸🇾</span>
+                    <div class="info">
+                        <div class="name">سوريا</div>
+                        <div class="code">SYP - ليرة سورية</div>
+                    </div>
+                </div>
+                <div class="currency-option" onclick="changeCurrency('LBP', '🇱🇧', 'ليرة لبنانية')">
+                    <span class="flag">🇱🇧</span>
+                    <div class="info">
+                        <div class="name">لبنان</div>
+                        <div class="code">LBP - ليرة لبنانية</div>
+                    </div>
+                </div>
+                <div class="currency-option" onclick="changeCurrency('YER', '🇾🇪', 'ريال يمني')">
+                    <span class="flag">🇾🇪</span>
+                    <div class="info">
+                        <div class="name">اليمن</div>
+                        <div class="code">YER - ريال يمني</div>
+                    </div>
+                </div>
+                <div class="currency-option" onclick="changeCurrency('SDG', '🇸🇩', 'جنيه سوداني')">
+                    <span class="flag">🇸🇩</span>
+                    <div class="info">
+                        <div class="name">السودان</div>
+                        <div class="code">SDG - جنيه سوداني</div>
+                    </div>
+                </div>
+                <div class="currency-option" onclick="changeCurrency('EUR', '🇪🇺', 'يورو')">
+                    <span class="flag">🇪🇺</span>
+                    <div class="info">
+                        <div class="name">أوروبا</div>
+                        <div class="code">EUR - يورو</div>
+                    </div>
+                </div>
+                <div class="currency-option" onclick="changeCurrency('GBP', '🇬🇧', 'جنيه إسترليني')">
+                    <span class="flag">🇬🇧</span>
+                    <div class="info">
+                        <div class="name">بريطانيا</div>
+                        <div class="code">GBP - جنيه إسترليني</div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div class="nav">
         <button class="nav-btn active" onclick="showSection('views')">👁️ مشاهدات</button>
         <button class="nav-btn" onclick="showSection('likes')">❤️ إعجابات</button>
         <button class="nav-btn" onclick="showSection('followers')">👥 متابعين</button>
+        <button class="nav-btn" onclick="showSection('comments')">💬 تعليقات</button>
         <button class="nav-btn" onclick="showSection('shares')">📤 مشاركات</button>
+        <button class="nav-btn" onclick="showSection('saves')">🔖 حفظ</button>
+        <button class="nav-btn" onclick="showSection('live')">🔴 لايف</button>
+        <button class="nav-btn" onclick="showSection('combo')">🎁 باقات</button>
     </div>
 
     <div class="container">
 
+        <!-- Counter Stats -->
+        <div class="counter-section">
+            <div class="counter-box">
+                <div class="counter-number" id="counterOrders">12,847</div>
+                <div class="counter-label">طلب منفذ</div>
+            </div>
+            <div class="counter-box">
+                <div class="counter-number" id="counterUsers">45,231</div>
+                <div class="counter-label">مستخدم نشط</div>
+            </div>
+            <div class="counter-box">
+                <div class="counter-number" id="counterViews">2.5M+</div>
+                <div class="counter-label">مشاهدة مضافة</div>
+            </div>
+            <div class="counter-box">
+                <div class="counter-number" id="counterRating">4.9★</div>
+                <div class="counter-label">تقييم المستخدمين</div>
+            </div>
+        </div>
+
         <!-- VIEWS SECTION -->
         <div id="views" class="section active">
+            <div class="hero">
+                <h1>👁️ زيادة المشاهدات</h1>
+                <p>مشاهدات حقيقية من حسابات نشطة على تيك توك</p>
+            </div>
             <div class="services-grid">
                 <div class="service-card hot">
                     <div class="service-icon">👁️</div>
-                    <div class="service-title">زيادة المشاهدات</div>
-                    <div class="service-desc">مشاهدات حقيقية من حسابات نشطة</div>
+                    <div class="service-title">مشاهدات تيك توك</div>
+                    <div class="service-desc">مشاهدات عالية الجودة من مستخدمين حقيقيين</div>
                     
-                    <div class="packages">
-                        <div class="package-option" onclick="selectPackage(this, 5000, 10)">
+                    <div class="packages" id="viewsPackages">
+                        <div class="package-option" onclick="selectPackage(this, 1000, 3)">
+                            <div class="package-info">
+                                <div class="package-radio"></div>
+                                <div>
+                                    <div class="package-amount">1,000 مشاهدة</div>
+                                    <div style="color:#888; font-size:11px;">بداية سريعة</div>
+                                </div>
+                            </div>
+                            <div class="package-price"><span class="price-value">3</span> <span class="price-currency">ريال</span></div>
+                        </div>
+                        <div class="package-option" onclick="selectPackage(this, 5000, 12)">
                             <div class="package-info">
                                 <div class="package-radio"></div>
                                 <div>
                                     <div class="package-amount">5,000 مشاهدة</div>
-                                    <div style="color:#888; font-size:12px;">توصيل فوري</div>
+                                    <div style="color:#888; font-size:11px;">خصم 20%</div>
                                 </div>
                             </div>
-                            <div class="package-price">$10</div>
+                            <div class="package-price"><span class="price-value">12</span> <span class="price-currency">ريال</span></div>
                         </div>
-                        <div class="package-option" onclick="selectPackage(this, 10000, 18)">
+                        <div class="package-option selected" onclick="selectPackage(this, 10000, 20)">
                             <div class="package-info">
                                 <div class="package-radio"></div>
                                 <div>
                                     <div class="package-amount">10,000 مشاهدة</div>
-                                    <div style="color:#888; font-size:12px;">خصم 10%</div>
+                                    <span class="package-badge">الأكثر مبيعاً</span>
                                 </div>
                             </div>
-                            <div class="package-price">$18</div>
+                            <div class="package-price"><span class="price-value">20</span> <span class="price-currency">ريال</span></div>
                         </div>
-                        <div class="package-option selected" onclick="selectPackage(this, 50000, 75)">
+                        <div class="package-option" onclick="selectPackage(this, 50000, 85)">
                             <div class="package-info">
                                 <div class="package-radio"></div>
                                 <div>
                                     <div class="package-amount">50,000 مشاهدة</div>
-                                    <div style="color:#888; font-size:12px;">الأكثر مبيعاً</div>
+                                    <div style="color:#888; font-size:11px;">VIP</div>
                                 </div>
                             </div>
-                            <div class="package-price">$75</div>
+                            <div class="package-price"><span class="price-value">85</span> <span class="price-currency">ريال</span></div>
                         </div>
-                        <div class="package-option" onclick="selectPackage(this, 100000, 130)">
+                        <div class="package-option" onclick="selectPackage(this, 100000, 150)">
                             <div class="package-info">
                                 <div class="package-radio"></div>
                                 <div>
                                     <div class="package-amount">100,000 مشاهدة</div>
-                                    <div style="color:#888; font-size:12px;">خصم 35%</div>
+                                    <div style="color:#888; font-size:11px;">خصم 25%</div>
                                 </div>
                             </div>
-                            <div class="package-price">$130</div>
+                            <div class="package-price"><span class="price-value">150</span> <span class="price-currency">ريال</span></div>
                         </div>
-                        <div class="package-option" onclick="selectPackage(this, 500000, 550)">
+                        <div class="package-option" onclick="selectPackage(this, 500000, 650)">
                             <div class="package-info">
                                 <div class="package-radio"></div>
                                 <div>
                                     <div class="package-amount">500,000 مشاهدة</div>
-                                    <div style="color:#888; font-size:12px;">VIP Package</div>
+                                    <div style="color:#888; font-size:11px;">Mega</div>
                                 </div>
                             </div>
-                            <div class="package-price">$550</div>
+                            <div class="package-price"><span class="price-value">650</span> <span class="price-currency">ريال</span></div>
                         </div>
-                        <div class="package-option" onclick="selectPackage(this, 1000000, 900)">
+                        <div class="package-option" onclick="selectPackage(this, 1000000, 1200)">
                             <div class="package-info">
                                 <div class="package-radio"></div>
                                 <div>
                                     <div class="package-amount">1,000,000 مشاهدة</div>
-                                    <div style="color:#888; font-size:12px;">Mega Deal 🔥</div>
+                                    <span class="package-badge">🔥 Mega Deal</span>
                                 </div>
                             </div>
-                            <div class="package-price">$900</div>
+                            <div class="package-price"><span class="old-price"><span class="price-value">1500</span></span><br><span class="price-value">1200</span> <span class="price-currency">ريال</span></div>
                         </div>
                     </div>
 
                     <div class="input-section">
                         <div class="input-group">
-                            <label>رابط فيديو تيك توك</label>
+                            <label>🔗 رابط فيديو تيك توك</label>
                             <input type="url" id="viewsUrl" placeholder="https://www.tiktok.com/@username/video/...">
                         </div>
                         <div class="input-group">
-                            <label>البريد الإلكتروني (للتتبع)</label>
-                            <input type="text" id="viewsEmail" placeholder="your@email.com">
+                            <label>📧 البريد الإلكتروني (للتتبع)</label>
+                            <input type="email" id="viewsEmail" placeholder="your@email.com">
                         </div>
                         <button class="submit-btn" onclick="startService('views')">
-                            🚀 ابدأ الآن
+                            🚀 ابدأ الآن - <span class="btn-price"><span class="price-value">20</span> <span class="price-currency">ريال</span></span>
                         </button>
                     </div>
 
                     <div class="progress-container" id="viewsProgress">
-                        <div class="progress-bar">
-                            <div class="progress-fill" id="viewsFill"></div>
-                        </div>
+                        <div class="progress-bar"><div class="progress-fill" id="viewsFill"></div></div>
                         <div class="progress-text" id="viewsText">جاري التجهيز...</div>
                         <div class="timer" id="viewsTimer">الوقت المتبقي: --:--</div>
                     </div>
 
                     <div class="stats" id="viewsStats">
-                        <div class="stat-row">
-                            <span>المشاهدات المضافة</span>
-                            <span class="stat-value" id="viewsAdded">0</span>
-                        </div>
-                        <div class="stat-row">
-                            <span>الحالة</span>
-                            <span class="stat-value" id="viewsStatus">قيد الانتظار</span>
-                        </div>
-                        <div class="stat-row">
-                            <span>الوقت المستغرق</span>
-                            <span class="stat-value" id="viewsTime">0s</span>
-                        </div>
+                        <div class="stat-row"><span class="stat-label">المشاهدات المضافة</span><span class="stat-value" id="viewsAdded">0</span></div>
+                        <div class="stat-row"><span class="stat-label">الحالة</span><span class="stat-value" id="viewsStatus">قيد الانتظار</span></div>
+                        <div class="stat-row"><span class="stat-label">الوقت المستغرق</span><span class="stat-value" id="viewsTime">0s</span></div>
+                        <div class="stat-row"><span class="stat-label">رقم الطلب</span><span class="stat-value" id="viewsOrderId">#--</span></div>
                     </div>
 
                     <div class="success-msg" id="viewsSuccess">
-                        ✅ تم إرسال طلبك بنجاح!<br>
-                        سيتم البدء في إضافة المشاهدات خلال 5-15 دقيقة.<br>
-                        <small>تتبع حالة طلبك من خلال البريد الإلكتروني</small>
+                        <h3>✅ تم إرسال طلبك بنجاح!</h3>
+                        <p>سيتم البدء في إضافة المشاهدات خلال 5-15 دقيقة.<br>تتبع حالة طلبك من خلال البريد الإلكتروني</p>
                     </div>
                 </div>
             </div>
@@ -461,62 +870,61 @@
 
         <!-- LIKES SECTION -->
         <div id="likes" class="section">
+            <div class="hero">
+                <h1>❤️ زيادة الإعجابات</h1>
+                <p>إعجابات حقيقية من مستخدمين نشطين</p>
+            </div>
             <div class="services-grid">
                 <div class="service-card">
                     <div class="service-icon">❤️</div>
-                    <div class="service-title">زيادة الإعجابات</div>
-                    <div class="service-desc">إعجابات حقيقية من مستخدمين نشطين</div>
+                    <div class="service-title">إعجابات تيك توك</div>
+                    <div class="service-desc">إعجابات سريعة وآمنة 100%</div>
                     
-                    <div class="packages">
-                        <div class="package-option" onclick="selectPackage(this, 1000, 5)">
+                    <div class="packages" id="likesPackages">
+                        <div class="package-option" onclick="selectPackage(this, 500, 5)">
                             <div class="package-info">
                                 <div class="package-radio"></div>
-                                <div>
-                                    <div class="package-amount">1,000 إعجاب</div>
-                                    <div style="color:#888; font-size:12px;">بداية سريعة</div>
-                                </div>
+                                <div><div class="package-amount">500 إعجاب</div></div>
                             </div>
-                            <div class="package-price">$5</div>
+                            <div class="package-price"><span class="price-value">5</span> <span class="price-currency">ريال</span></div>
                         </div>
-                        <div class="package-option selected" onclick="selectPackage(this, 5000, 20)">
+                        <div class="package-option selected" onclick="selectPackage(this, 1000, 8)">
                             <div class="package-info">
                                 <div class="package-radio"></div>
-                                <div>
-                                    <div class="package-amount">5,000 إعجاب</div>
-                                    <div style="color:#888; font-size:12px;">الأكثر طلباً</div>
-                                </div>
+                                <div><div class="package-amount">1,000 إعجاب</div><span class="package-badge">شائع</span></div>
                             </div>
-                            <div class="package-price">$20</div>
+                            <div class="package-price"><span class="price-value">8</span> <span class="price-currency">ريال</span></div>
                         </div>
-                        <div class="package-option" onclick="selectPackage(this, 10000, 35)">
+                        <div class="package-option" onclick="selectPackage(this, 5000, 35)">
                             <div class="package-info">
                                 <div class="package-radio"></div>
-                                <div>
-                                    <div class="package-amount">10,000 إعجاب</div>
-                                    <div style="color:#888; font-size:12px;">خصم 30%</div>
-                                </div>
+                                <div><div class="package-amount">5,000 إعجاب</div></div>
                             </div>
-                            <div class="package-price">$35</div>
+                            <div class="package-price"><span class="price-value">35</span> <span class="price-currency">ريال</span></div>
                         </div>
-                        <div class="package-option" onclick="selectPackage(this, 50000, 150)">
+                        <div class="package-option" onclick="selectPackage(this, 10000, 60)">
                             <div class="package-info">
                                 <div class="package-radio"></div>
-                                <div>
-                                    <div class="package-amount">50,000 إعجاب</div>
-                                    <div style="color:#888; font-size:12px;">VIP</div>
-                                </div>
+                                <div><div class="package-amount">10,000 إعجاب</div><div style="color:#888; font-size:11px;">خصم 25%</div></div>
                             </div>
-                            <div class="package-price">$150</div>
+                            <div class="package-price"><span class="price-value">60</span> <span class="price-currency">ريال</span></div>
+                        </div>
+                        <div class="package-option" onclick="selectPackage(this, 50000, 250)">
+                            <div class="package-info">
+                                <div class="package-radio"></div>
+                                <div><div class="package-amount">50,000 إعجاب</div><span class="package-badge">VIP</span></div>
+                            </div>
+                            <div class="package-price"><span class="price-value">250</span> <span class="price-currency">ريال</span></div>
                         </div>
                     </div>
 
                     <div class="input-section">
                         <div class="input-group">
-                            <label>رابط فيديو تيك توك</label>
+                            <label>🔗 رابط فيديو تيك توك</label>
                             <input type="url" id="likesUrl" placeholder="https://www.tiktok.com/@username/video/...">
                         </div>
                         <button class="submit-btn" onclick="startService('likes')">
-                            ❤️ احصل على الإعجابات
+                            ❤️ احصل على الإعجابات - <span class="btn-price"><span class="price-value">8</span> <span class="price-currency">ريال</span></span>
                         </button>
                     </div>
 
@@ -525,7 +933,8 @@
                         <div class="progress-text" id="likesText">جاري التجهيز...</div>
                     </div>
                     <div class="success-msg" id="likesSuccess">
-                        ✅ تم إرسال طلب الإعجابات بنجاح!
+                        <h3>✅ تم إرسال طلب الإعجابات!</h3>
+                        <p>سيتم إضافة الإعجابات خلال دقائق</p>
                     </div>
                 </div>
             </div>
@@ -533,62 +942,61 @@
 
         <!-- FOLLOWERS SECTION -->
         <div id="followers" class="section">
+            <div class="hero">
+                <h1>👥 زيادة المتابعين</h1>
+                <p>متابعين حقيقيين ومتفاعلين</p>
+            </div>
             <div class="services-grid">
-                <div class="service-card">
+                <div class="service-card hot">
                     <div class="service-icon">👥</div>
-                    <div class="service-title">زيادة المتابعين</div>
-                    <div class="service-desc">متابعين حقيقيين ومتفاعلين</div>
+                    <div class="service-title">متابعين تيك توك</div>
+                    <div class="service-desc">متابعين حقيقيين بدون انخفاض</div>
                     
-                    <div class="packages">
-                        <div class="package-option" onclick="selectPackage(this, 1000, 15)">
+                    <div class="packages" id="followersPackages">
+                        <div class="package-option" onclick="selectPackage(this, 500, 15)">
                             <div class="package-info">
                                 <div class="package-radio"></div>
-                                <div>
-                                    <div class="package-amount">1,000 متابع</div>
-                                    <div style="color:#888; font-size:12px;">بداية</div>
-                                </div>
+                                <div><div class="package-amount">500 متابع</div></div>
                             </div>
-                            <div class="package-price">$15</div>
+                            <div class="package-price"><span class="price-value">15</span> <span class="price-currency">ريال</span></div>
                         </div>
-                        <div class="package-option selected" onclick="selectPackage(this, 5000, 60)">
+                        <div class="package-option selected" onclick="selectPackage(this, 1000, 25)">
                             <div class="package-info">
                                 <div class="package-radio"></div>
-                                <div>
-                                    <div class="package-amount">5,000 متابع</div>
-                                    <div style="color:#888; font-size:12px;">شائع</div>
-                                </div>
+                                <div><div class="package-amount">1,000 متابع</div><span class="package-badge">الأكثر طلباً</span></div>
                             </div>
-                            <div class="package-price">$60</div>
+                            <div class="package-price"><span class="price-value">25</span> <span class="price-currency">ريال</span></div>
                         </div>
-                        <div class="package-option" onclick="selectPackage(this, 10000, 100)">
+                        <div class="package-option" onclick="selectPackage(this, 5000, 100)">
                             <div class="package-info">
                                 <div class="package-radio"></div>
-                                <div>
-                                    <div class="package-amount">10,000 متابع</div>
-                                    <div style="color:#888; font-size:12px;">خصم 33%</div>
-                                </div>
+                                <div><div class="package-amount">5,000 متابع</div><div style="color:#888; font-size:11px;">خصم 20%</div></div>
                             </div>
-                            <div class="package-price">$100</div>
+                            <div class="package-price"><span class="price-value">100</span> <span class="price-currency">ريال</span></div>
                         </div>
-                        <div class="package-option" onclick="selectPackage(this, 50000, 400)">
+                        <div class="package-option" onclick="selectPackage(this, 10000, 180)">
                             <div class="package-info">
                                 <div class="package-radio"></div>
-                                <div>
-                                    <div class="package-amount">50,000 متابع</div>
-                                    <div style="color:#888; font-size:12px;">VIP</div>
-                                </div>
+                                <div><div class="package-amount">10,000 متابع</div><span class="package-badge">VIP</span></div>
                             </div>
-                            <div class="package-price">$400</div>
+                            <div class="package-price"><span class="price-value">180</span> <span class="price-currency">ريال</span></div>
+                        </div>
+                        <div class="package-option" onclick="selectPackage(this, 50000, 750)">
+                            <div class="package-info">
+                                <div class="package-radio"></div>
+                                <div><div class="package-amount">50,000 متابع</div><span class="package-badge">🔥 Mega</span></div>
+                            </div>
+                            <div class="package-price"><span class="price-value">750</span> <span class="price-currency">ريال</span></div>
                         </div>
                     </div>
 
                     <div class="input-section">
                         <div class="input-group">
-                            <label>رابط حساب تيك توك</label>
+                            <label>🔗 رابط حساب تيك توك</label>
                             <input type="url" id="followersUrl" placeholder="https://www.tiktok.com/@username">
                         </div>
                         <button class="submit-btn" onclick="startService('followers')">
-                            👥 احصل على المتابعين
+                            👥 احصل على المتابعين - <span class="btn-price"><span class="price-value">25</span> <span class="price-currency">ريال</span></span>
                         </button>
                     </div>
 
@@ -597,7 +1005,84 @@
                         <div class="progress-text" id="followersText">جاري التجهيز...</div>
                     </div>
                     <div class="success-msg" id="followersSuccess">
-                        ✅ تم إرسال طلب المتابعين بنجاح!
+                        <h3>✅ تم إرسال طلب المتابعين!</h3>
+                        <p>سيتم إضافة المتابعين تدريجياً خلال 24 ساعة</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- COMMENTS SECTION -->
+        <div id="comments" class="section">
+            <div class="hero">
+                <h1>💬 زيادة التعليقات</h1>
+                <p>تعليقات مخصصة أو عشوائية من حسابات حقيقية</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">💬</div>
+                    <div class="service-title">تعليقات تيك توك</div>
+                    <div class="service-desc">تعليقات إيجابية تزيد تفاعل الفيديو</div>
+                    
+                    <div class="packages" id="commentsPackages">
+                        <div class="package-option" onclick="selectPackage(this, 10, 10)">
+                            <div class="package-info">
+                                <div class="package-radio"></div>
+                                <div><div class="package-amount">10 تعليقات</div><div style="color:#888; font-size:11px;">عشوائية</div></div>
+                            </div>
+                            <div class="package-price"><span class="price-value">10</span> <span class="price-currency">ريال</span></div>
+                        </div>
+                        <div class="package-option selected" onclick="selectPackage(this, 25, 20)">
+                            <div class="package-info">
+                                <div class="package-radio"></div>
+                                <div><div class="package-amount">25 تعليق</div><span class="package-badge">شائع</span></div>
+                            </div>
+                            <div class="package-price"><span class="price-value">20</span> <span class="price-currency">ريال</span></div>
+                        </div>
+                        <div class="package-option" onclick="selectPackage(this, 50, 35)">
+                            <div class="package-info">
+                                <div class="package-radio"></div>
+                                <div><div class="package-amount">50 تعليق</div><div style="color:#888; font-size:11px;">خصم 30%</div></div>
+                            </div>
+                            <div class="package-price"><span class="price-value">35</span> <span class="price-currency">ريال</span></div>
+                        </div>
+                        <div class="package-option" onclick="selectPackage(this, 100, 60)">
+                            <div class="package-info">
+                                <div class="package-radio"></div>
+                                <div><div class="package-amount">100 تعليق</div><span class="package-badge">VIP</span></div>
+                            </div>
+                            <div class="package-price"><span class="price-value">60</span> <span class="price-currency">ريال</span></div>
+                        </div>
+                        <div class="package-option" onclick="selectPackage(this, 500, 250)">
+                            <div class="package-info">
+                                <div class="package-radio"></div>
+                                <div><div class="package-amount">500 تعليق</div><span class="package-badge">🔥 Mega</span></div>
+                            </div>
+                            <div class="package-price"><span class="price-value">250</span> <span class="price-currency">ريال</span></div>
+                        </div>
+                    </div>
+
+                    <div class="input-section">
+                        <div class="input-group">
+                            <label>🔗 رابط فيديو تيك توك</label>
+                            <input type="url" id="commentsUrl" placeholder="https://www.tiktok.com/@username/video/...">
+                        </div>
+                        <div class="input-group">
+                            <label>✏️ نص التعليقات المخصصة (اختياري)</label>
+                            <input type="text" id="commentsText" placeholder="اكتب التعليقات التي تريدها مفصولة بفاصلة...">
+                        </div>
+                        <button class="submit-btn" onclick="startService('comments')">
+                            💬 احصل على التعليقات - <span class="btn-price"><span class="price-value">20</span> <span class="price-currency">ريال</span></span>
+                        </button>
+                    </div>
+
+                    <div class="progress-container" id="commentsProgress">
+                        <div class="progress-bar"><div class="progress-fill" id="commentsFill"></div></div>
+                        <div class="progress-text" id="commentsText">جاري التجهيز...</div>
+                    </div>
+                    <div class="success-msg" id="commentsSuccess">
+                        <h3>✅ تم إرسال طلب التعليقات!</h3>
+                        <p>سيتم إضافة التعليقات خلال ساعة</p>
                     </div>
                 </div>
             </div>
@@ -605,49 +1090,54 @@
 
         <!-- SHARES SECTION -->
         <div id="shares" class="section">
+            <div class="hero">
+                <h1>📤 زيادة المشاركات</h1>
+                <p>مشاركات واسعة النطاق لفيديوهاتك</p>
+            </div>
             <div class="services-grid">
                 <div class="service-card">
                     <div class="service-icon">📤</div>
-                    <div class="service-title">زيادة المشاركات</div>
-                    <div class="service-desc">مشاركات واسعة النطاق لفيديوهاتك</div>
+                    <div class="service-title">مشاركات تيك توك</div>
+                    <div class="service-desc">مشاركات حقيقية تزيد انتشار الفيديو</div>
                     
-                    <div class="packages">
-                        <div class="package-option" onclick="selectPackage(this, 1000, 8)">
+                    <div class="packages" id="sharesPackages">
+                        <div class="package-option" onclick="selectPackage(this, 500, 8)">
                             <div class="package-info">
                                 <div class="package-radio"></div>
-                                <div>
-                                    <div class="package-amount">1,000 مشاركة</div>
-                                </div>
+                                <div><div class="package-amount">500 مشاركة</div></div>
                             </div>
-                            <div class="package-price">$8</div>
+                            <div class="package-price"><span class="price-value">8</span> <span class="price-currency">ريال</span></div>
                         </div>
-                        <div class="package-option selected" onclick="selectPackage(this, 5000, 30)">
+                        <div class="package-option selected" onclick="selectPackage(this, 1000, 15)">
                             <div class="package-info">
                                 <div class="package-radio"></div>
-                                <div>
-                                    <div class="package-amount">5,000 مشاركة</div>
-                                </div>
+                                <div><div class="package-amount">1,000 مشاركة</div><span class="package-badge">شائع</span></div>
                             </div>
-                            <div class="package-price">$30</div>
+                            <div class="package-price"><span class="price-value">15</span> <span class="price-currency">ريال</span></div>
                         </div>
-                        <div class="package-option" onclick="selectPackage(this, 10000, 50)">
+                        <div class="package-option" onclick="selectPackage(this, 5000, 60)">
                             <div class="package-info">
                                 <div class="package-radio"></div>
-                                <div>
-                                    <div class="package-amount">10,000 مشاركة</div>
-                                </div>
+                                <div><div class="package-amount">5,000 مشاركة</div><div style="color:#888; font-size:11px;">خصم 20%</div></div>
                             </div>
-                            <div class="package-price">$50</div>
+                            <div class="package-price"><span class="price-value">60</span> <span class="price-currency">ريال</span></div>
+                        </div>
+                        <div class="package-option" onclick="selectPackage(this, 10000, 100)">
+                            <div class="package-info">
+                                <div class="package-radio"></div>
+                                <div><div class="package-amount">10,000 مشاركة</div><span class="package-badge">VIP</span></div>
+                            </div>
+                            <div class="package-price"><span class="price-value">100</span> <span class="price-currency">ريال</span></div>
                         </div>
                     </div>
 
                     <div class="input-section">
                         <div class="input-group">
-                            <label>رابط فيديو تيك توك</label>
+                            <label>🔗 رابط فيديو تيك توك</label>
                             <input type="url" id="sharesUrl" placeholder="https://www.tiktok.com/@username/video/...">
                         </div>
                         <button class="submit-btn" onclick="startService('shares')">
-                            📤 احصل على المشاركات
+                            📤 احصل على المشاركات - <span class="btn-price"><span class="price-value">15</span> <span class="price-currency">ريال</span></span>
                         </button>
                     </div>
 
@@ -656,7 +1146,205 @@
                         <div class="progress-text" id="sharesText">جاري التجهيز...</div>
                     </div>
                     <div class="success-msg" id="sharesSuccess">
-                        ✅ تم إرسال طلب المشاركات بنجاح!
+                        <h3>✅ تم إرسال طلب المشاركات!</h3>
+                        <p>سيتم إضافة المشاركات خلال دقائق</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SAVES SECTION -->
+        <div id="saves" class="section">
+            <div class="hero">
+                <h1>🔖 زيادة الحفظ</h1>
+                <p>حفظ الفيديوهات في المفضلة</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">🔖</div>
+                    <div class="service-title">حفظ تيك توك</div>
+                    <div class="service-desc">حفظ الفيديوهات في قائمة المفضلة</div>
+                    
+                    <div class="packages" id="savesPackages">
+                        <div class="package-option" onclick="selectPackage(this, 500, 6)">
+                            <div class="package-info">
+                                <div class="package-radio"></div>
+                                <div><div class="package-amount">500 حفظ</div></div>
+                            </div>
+                            <div class="package-price"><span class="price-value">6</span> <span class="price-currency">ريال</span></div>
+                        </div>
+                        <div class="package-option selected" onclick="selectPackage(this, 1000, 10)">
+                            <div class="package-info">
+                                <div class="package-radio"></div>
+                                <div><div class="package-amount">1,000 حفظ</div><span class="package-badge">شائع</span></div>
+                            </div>
+                            <div class="package-price"><span class="price-value">10</span> <span class="price-currency">ريال</span></div>
+                        </div>
+                        <div class="package-option" onclick="selectPackage(this, 5000, 40)">
+                            <div class="package-info">
+                                <div class="package-radio"></div>
+                                <div><div class="package-amount">5,000 حفظ</div><div style="color:#888; font-size:11px;">خصم 20%</div></div>
+                            </div>
+                            <div class="package-price"><span class="price-value">40</span> <span class="price-currency">ريال</span></div>
+                        </div>
+                        <div class="package-option" onclick="selectPackage(this, 10000, 70)">
+                            <div class="package-info">
+                                <div class="package-radio"></div>
+                                <div><div class="package-amount">10,000 حفظ</div><span class="package-badge">VIP</span></div>
+                            </div>
+                            <div class="package-price"><span class="price-value">70</span> <span class="price-currency">ريال</span></div>
+                        </div>
+                    </div>
+
+                    <div class="input-section">
+                        <div class="input-group">
+                            <label>🔗 رابط فيديو تيك توك</label>
+                            <input type="url" id="savesUrl" placeholder="https://www.tiktok.com/@username/video/...">
+                        </div>
+                        <button class="submit-btn" onclick="startService('saves')">
+                            🔖 احصل على الحفظ - <span class="btn-price"><span class="price-value">10</span> <span class="price-currency">ريال</span></span>
+                        </button>
+                    </div>
+
+                    <div class="progress-container" id="savesProgress">
+                        <div class="progress-bar"><div class="progress-fill" id="savesFill"></div></div>
+                        <div class="progress-text" id="savesText">جاري التجهيز...</div>
+                    </div>
+                    <div class="success-msg" id="savesSuccess">
+                        <h3>✅ تم إرسال طلب الحفظ!</h3>
+                        <p>سيتم إضافة الحفظ خلال دقائق</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- LIVE SECTION -->
+        <div id="live" class="section">
+            <div class="hero">
+                <h1>🔴 زيادة مشاهدات البث المباشر</h1>
+                <p>مشاهدين للبث المباشر على تيك توك</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card hot">
+                    <div class="service-icon">🔴</div>
+                    <div class="service-title">مشاهدين لايف تيك توك</div>
+                    <div class="service-desc">مشاهدين حقيقيين للبث المباشر</div>
+                    
+                    <div class="packages" id="livePackages">
+                        <div class="package-option" onclick="selectPackage(this, 100, 20)">
+                            <div class="package-info">
+                                <div class="package-radio"></div>
+                                <div><div class="package-amount">100 مشاهد</div><div style="color:#888; font-size:11px;">30 دقيقة</div></div>
+                            </div>
+                            <div class="package-price"><span class="price-value">20</span> <span class="price-currency">ريال</span></div>
+                        </div>
+                        <div class="package-option selected" onclick="selectPackage(this, 500, 80)">
+                            <div class="package-info">
+                                <div class="package-radio"></div>
+                                <div><div class="package-amount">500 مشاهد</div><div style="color:#888; font-size:11px;">ساعة</div></div>
+                            </div>
+                            <div class="package-price"><span class="price-value">80</span> <span class="price-currency">ريال</span></div>
+                        </div>
+                        <div class="package-option" onclick="selectPackage(this, 1000, 150)">
+                            <div class="package-info">
+                                <div class="package-radio"></div>
+                                <div><div class="package-amount">1,000 مشاهد</div><span class="package-badge">الأكثر طلباً</span></div>
+                            </div>
+                            <div class="package-price"><span class="price-value">150</span> <span class="price-currency">ريال</span></div>
+                        </div>
+                        <div class="package-option" onclick="selectPackage(this, 5000, 600)">
+                            <div class="package-info">
+                                <div class="package-radio"></div>
+                                <div><div class="package-amount">5,000 مشاهد</div><span class="package-badge">VIP</span></div>
+                            </div>
+                            <div class="package-price"><span class="price-value">600</span> <span class="price-currency">ريال</span></div>
+                        </div>
+                    </div>
+
+                    <div class="input-section">
+                        <div class="input-group">
+                            <label>🔗 رابط البث المباشر</label>
+                            <input type="url" id="liveUrl" placeholder="https://www.tiktok.com/@username/live">
+                        </div>
+                        <button class="submit-btn" onclick="startService('live')">
+                            🔴 ابدأ البث - <span class="btn-price"><span class="price-value">80</span> <span class="price-currency">ريال</span></span>
+                        </button>
+                    </div>
+
+                    <div class="progress-container" id="liveProgress">
+                        <div class="progress-bar"><div class="progress-fill" id="liveFill"></div></div>
+                        <div class="progress-text" id="liveText">جاري التجهيز...</div>
+                    </div>
+                    <div class="success-msg" id="liveSuccess">
+                        <h3>✅ تم إرسال طلب المشاهدين!</h3>
+                        <p>سيتم دخول المشاهدين للبث خلال دقائق</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- COMBO PACKAGES -->
+        <div id="combo" class="section">
+            <div class="hero">
+                <h1>🎁 الباقات المشتركة</h1>
+                <p>أفضل العروض بأسعار مميزة</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card hot">
+                    <div class="service-icon">🎁</div>
+                    <div class="service-title">باقة البداية</div>
+                    <div class="service-desc">مشاهدات + إعجابات + متابعين</div>
+                    
+                    <div class="packages" id="comboPackages">
+                        <div class="package-option selected" onclick="selectPackage(this, 1, 50)">
+                            <div class="package-info">
+                                <div class="package-radio"></div>
+                                <div>
+                                    <div class="package-amount">باقة Starter</div>
+                                    <div style="color:#888; font-size:11px;">5K مشاهدة + 500 إعجاب + 200 متابع</div>
+                                </div>
+                            </div>
+                            <div class="package-price"><span class="old-price"><span class="price-value">70</span></span><br><span class="price-value">50</span> <span class="price-currency">ريال</span></div>
+                        </div>
+                        <div class="package-option" onclick="selectPackage(this, 2, 120)">
+                            <div class="package-info">
+                                <div class="package-radio"></div>
+                                <div>
+                                    <div class="package-amount">باقة Pro</div>
+                                    <div style="color:#888; font-size:11px;">20K مشاهدة + 2K إعجاب + 1K متابع</div>
+                                </div>
+                            </div>
+                            <div class="package-price"><span class="old-price"><span class="price-value">180</span></span><br><span class="price-value">120</span> <span class="price-currency">ريال</span></div>
+                        </div>
+                        <div class="package-option" onclick="selectPackage(this, 3, 300)">
+                            <div class="package-info">
+                                <div class="package-radio"></div>
+                                <div>
+                                    <div class="package-amount">باقة Influencer</div>
+                                    <span class="package-badge">🔥 الأفضل</span>
+                                </div>
+                            </div>
+                            <div class="package-price"><span class="old-price"><span class="price-value">500</span></span><br><span class="price-value">300</span> <span class="price-currency">ريال</span></div>
+                        </div>
+                    </div>
+
+                    <div class="input-section">
+                        <div class="input-group">
+                            <label>🔗 رابط الفيديو / الحساب</label>
+                            <input type="url" id="comboUrl" placeholder="https://www.tiktok.com/@username/...">
+                        </div>
+                        <button class="submit-btn" onclick="startService('combo')">
+                            🎁 احصل على الباقة - <span class="btn-price"><span class="price-value">50</span> <span class="price-currency">ريال</span></span>
+                        </button>
+                    </div>
+
+                    <div class="progress-container" id="comboProgress">
+                        <div class="progress-bar"><div class="progress-fill" id="comboFill"></div></div>
+                        <div class="progress-text" id="comboText">جاري التجهيز...</div>
+                    </div>
+                    <div class="success-msg" id="comboSuccess">
+                        <h3>✅ تم إرسال طلب الباقة!</h3>
+                        <p>سيتم تفعيل جميع الخدمات خلال دقائق</p>
                     </div>
                 </div>
             </div>
@@ -666,8 +1354,8 @@
         <div class="features">
             <div class="feature">
                 <div class="feature-icon">⚡</div>
-                <div class="feature-title">توصيل سريع</div>
-                <div class="feature-desc">خلال دقائق</div>
+                <div class="feature-title">توصيل فوري</div>
+                <div class="feature-desc">خلال 5-15 دقيقة</div>
             </div>
             <div class="feature">
                 <div class="feature-icon">🔒</div>
@@ -680,98 +1368,55 @@
                 <div class="feature-desc">إعادة تعبئة مجانية</div>
             </div>
             <div class="feature">
-                <div class="feature-icon">🎯</div>
-                <div class="feature-title">مستهدف</div>
-                <div class="feature-desc">حسابات حقيقية</div>
+                <div class="feature-icon">🌍</div>
+                <div class="feature-title">20+ عملة</div>
+                <div class="feature-desc">اختر بلدك</div>
             </div>
         </div>
 
         <div class="footer">
-            <p>ᎷᎡ/ᏦᎯ ᏉᏫᏫ © 2026 - جميع الحقوق محفوظة</p>
+            <div class="logo-text">ᎷᎡ/ᏦᎯ ᏉᏫᏫ</div>
+            <p>منصة تيك توك الشاملة © 2026</p>
             <p style="margin-top:10px; color:#333;">هذا الموقع للعرض والتعلم فقط</p>
         </div>
     </div>
 
     <script>
-        let selectedAmount = 50000;
-        let selectedPrice = 75;
+        // Currency Configuration
+        const currencies = {
+            'SAR': { flag: '🇸🇦', name: 'ريال سعودي', rate: 1, symbol: 'ريال' },
+            'AED': { flag: '🇦🇪', name: 'درهم إماراتي', rate: 0.98, symbol: 'درهم' },
+            'USD': { flag: '🇺🇸', name: 'دولار أمريكي', rate: 0.27, symbol: '$' },
+            'EGP': { flag: '🇪🇬', name: 'جنيه مصري', rate: 13.3, symbol: 'ج.م' },
+            'KWD': { flag: '🇰🇼', name: 'دينار كويتي', rate: 0.082, symbol: 'د.ك' },
+            'QAR': { flag: '🇶🇦', name: 'ريال قطري', rate: 0.97, symbol: 'ر.ق' },
+            'BHD': { flag: '🇧🇭', name: 'دينار بحريني', rate: 0.10, symbol: 'د.ب' },
+            'OMR': { flag: '🇴🇲', name: 'ريال عماني', rate: 0.10, symbol: 'ر.ع' },
+            'JOD': { flag: '🇯🇴', name: 'دينار أردني', rate: 0.19, symbol: 'د.أ' },
+            'IQD': { flag: '🇮🇶', name: 'دينار عراقي', rate: 350, symbol: 'د.ع' },
+            'MAD': { flag: '🇲🇦', name: 'درهم مغربي', rate: 2.7, symbol: 'درهم' },
+            'TND': { flag: '🇹🇳', name: 'دينار تونسي', rate: 0.83, symbol: 'د.ت' },
+            'DZD': { flag: '🇩🇿', name: 'دينار جزائري', rate: 36, symbol: 'د.ج' },
+            'LYD': { flag: '🇱🇾', name: 'دينار ليبي', rate: 1.3, symbol: 'د.ل' },
+            'SYP': { flag: '🇸🇾', name: 'ليرة سورية', rate: 6500, symbol: 'ل.س' },
+            'LBP': { flag: '🇱🇧', name: 'ليرة لبنانية', rate: 24000, symbol: 'ل.ل' },
+            'YER': { flag: '🇾🇪', name: 'ريال يمني', rate: 67, symbol: 'ر.ي' },
+            'SDG': { flag: '🇸🇩', name: 'جنيه سوداني', rate: 160, symbol: 'ج.س' },
+            'EUR': { flag: '🇪🇺', name: 'يورو', rate: 0.25, symbol: '€' },
+            'GBP': { flag: '🇬🇧', name: 'جنيه إسترليني', rate: 0.21, symbol: '£' }
+        };
 
-        function showSection(sectionId) {
-            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-            document.getElementById(sectionId).classList.add('active');
-            event.target.classList.add('active');
+        let currentCurrency = 'SAR';
+        let selectedAmount = 10000;
+        let selectedPrice = 20;
+
+        function toggleCurrency() {
+            document.getElementById('currencyDropdown').classList.toggle('show');
         }
 
-        function selectPackage(element, amount, price) {
-            // Remove selected from siblings
-            element.parentElement.querySelectorAll('.package-option').forEach(p => p.classList.remove('selected'));
-            element.classList.add('selected');
-            selectedAmount = amount;
-            selectedPrice = price;
-        }
-
-        function startService(type) {
-            const urlInput = document.getElementById(type + 'Url');
-            const url = urlInput.value;
-            
-            if (!url || !url.includes('tiktok.com')) {
-                alert('يرجى إدخال رابط تيك توك صحيح');
-                return;
-            }
-
-            const btn = document.querySelector('#' + type + ' .submit-btn');
-            const progressContainer = document.getElementById(type + 'Progress');
-            const progressFill = document.getElementById(type + 'Fill');
-            const progressText = document.getElementById(type + 'Text');
-            const successMsg = document.getElementById(type + 'Success');
-            const stats = document.getElementById(type + 'Stats');
-
-            btn.disabled = true;
-            btn.textContent = 'جاري المعالجة...';
-            progressContainer.style.display = 'block';
-            if (stats) stats.style.display = 'block';
-            successMsg.style.display = 'none';
-
-            let progress = 0;
-            const startTime = Date.now();
-
-            const interval = setInterval(() => {
-                progress += Math.random() * 4;
-                if (progress > 100) progress = 100;
-
-                progressFill.style.width = progress + '%';
-                
-                const elapsed = Math.floor((Date.now() - startTime) / 1000);
-                const remaining = Math.max(0, 300 - elapsed);
-                const mins = Math.floor(remaining / 60);
-                const secs = remaining % 60;
-
-                progressText.textContent = `جاري إرسال الطلب... ${Math.floor(progress)}%`;
-                
-                const timer = document.getElementById(type + 'Timer');
-                if (timer) timer.textContent = `الوقت المتبقي: ${mins}:${secs.toString().padStart(2, '0')}`;
-
-                const addedEl = document.getElementById(type + 'Added');
-                if (addedEl) addedEl.textContent = Math.floor((progress / 100) * selectedAmount).toLocaleString();
-
-                const timeEl = document.getElementById(type + 'Time');
-                if (timeEl) timeEl.textContent = elapsed + 's';
-
-                if (progress >= 100) {
-                    clearInterval(interval);
-                    btn.disabled = false;
-                    btn.textContent = type === 'views' ? '🚀 ابدأ الآن' : 
-                                     type === 'likes' ? '❤️ احصل على الإعجابات' :
-                                     type === 'followers' ? '👥 احصل على المتابعين' : '📤 احصل على المشاركات';
-                    successMsg.style.display = 'block';
-                    progressText.textContent = 'تم إرسال الطلب!';
-                    
-                    const statusEl = document.getElementById(type + 'Status');
-                    if (statusEl) statusEl.textContent = 'تم الإرسال';
-                }
-            }, 150);
-        }
-    </script>
-</body>
-</html>
+        function changeCurrency(code, flag, name) {
+            currentCurrency = code;
+            document.getElementById('currentFlag').textContent = flag;
+            document.getElementById('currentCurrency').textContent = name;
+            document.getElementById('currencyDropdown').classList.remove('show');
+           
