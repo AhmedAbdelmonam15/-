@@ -1,889 +1,1596 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ᎷᎡ/ᏦᎯ ᏉᏫᏫ - منصة تسويق تيك توك</title>
-<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<style>
-:root {
-  --cyan: #25F4EE; --pink: #FE2C55;
-  --bg: #0a0a0a; --card: #141414; --card2: #1a1a1a;
-  --border: #2a2a2a; --text: #fff; --muted: #888;
-}
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Tajawal',sans-serif}
-body{background:var(--bg);color:var(--text);overflow-x:hidden}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ᎷᎡ/ᏦᎯ ᏉᏫᏫ - منصة التسويق الإلكتروني الذكية</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --primary: #00f0ff;
+            --secondary: #7000ff;
+            --accent: #ff00a0;
+            --dark: #0a0a1a;
+            --darker: #050510;
+            --card: #12122a;
+            --card-hover: #1a1a3a;
+            --text: #e0e0ff;
+            --text-muted: #8899aa;
+            --success: #00ff88;
+            --warning: #ffcc00;
+            --danger: #ff3366;
+        }
 
-/* ===== LOGIN PAGE ===== */
-.login-page{
-  min-height:100vh;display:flex;align-items:center;justify-content:center;
-  background:linear-gradient(135deg,#0a0a0a 0%,#0f1a1a 50%,#1a0a0f 100%);
-  position:relative;overflow:hidden;
-}
-.login-page::before{
-  content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;
-  background:radial-gradient(circle at 30% 30%,rgba(37,244,238,0.08) 0%,transparent 50%),
-             radial-gradient(circle at 70% 70%,rgba(254,44,85,0.08) 0%,transparent 50%);
-}
-.login-box{
-  background:var(--card);border:1px solid var(--border);border-radius:24px;
-  padding:50px 40px;width:100%;max-width:420px;position:relative;z-index:2;
-  box-shadow:0 25px 80px rgba(0,0,0,0.6);
-}
-.login-logo{
-  text-align:center;font-size:36px;font-weight:900;margin-bottom:10px;
-  background:linear-gradient(135deg,var(--cyan),var(--pink));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-}
-.login-sub{text-align:center;color:var(--muted);margin-bottom:35px;font-size:15px}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-.input-group{margin-bottom:18px}
-.input-group label{display:block;margin-bottom:6px;font-size:13px;color:var(--muted)}
-.input-group input{
-  width:100%;padding:14px 16px;border:1px solid var(--border);border-radius:12px;
-  background:#0a0a0a;color:#fff;font-size:15px;transition:.3s;
-}
-.input-group input:focus{outline:none;border-color:var(--cyan);box-shadow:0 0 15px rgba(37,244,238,0.15)}
-.input-group input::placeholder{color:#444}
+        body {
+            font-family: 'Cairo', 'Tajawal', sans-serif;
+            background: var(--darker);
+            color: var(--text);
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
 
-.btn{
-  width:100%;padding:14px;border:none;border-radius:12px;font-size:15px;font-weight:700;
-  cursor:pointer;transition:.3s;font-family:'Tajawal',sans-serif;
-}
-.btn-primary{
-  background:linear-gradient(135deg,var(--cyan),var(--pink));color:#000;
-}
-.btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px30px rgba(37,244,238,0.3)}
-.btn-outline{
-  background:transparent;border:1px solid var(--border);color:#fff;
-  display:flex;align-items:center;justify-content:center;gap:10px;
-}
-.btn-outline:hover{border-color:var(--cyan);background:rgba(37,244,238,0.05)}
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
 
-.divider{display:flex;align-items:center;gap:15px;margin:22px 0;color:#555;font-size:13px}
-.divider::before,.divider::after{content:'';flex:1;height:1px;background:var(--border)}
+        .bg-animation .circle {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.15;
+            animation: float 20s infinite ease-in-out;
+        }
 
-/* ===== DASHBOARD ===== */
-.dashboard{display:none;min-height:100vh}
-.dashboard.active{display:block}
+        .bg-animation .circle:nth-child(1) {
+            width: 400px;
+            height: 400px;
+            background: var(--primary);
+            top: -100px;
+            right: -100px;
+            animation-delay: 0s;
+        }
 
-/* Sidebar */
-.sidebar{
-  position:fixed;top:0;right:0;width:260px;height:100vh;background:var(--card);
-  border-left:1px solid var(--border);padding:25px 20px;z-index:100;overflow-y:auto;
-}
-.sidebar-logo{
-  font-size:22px;font-weight:900;text-align:center;margin-bottom:35px;
-  background:linear-gradient(135deg,var(--cyan),var(--pink));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-}
-.sidebar-menu{list-style:none}
-.sidebar-menu li{
-  padding:12px 16px;border-radius:12px;margin-bottom:6px;cursor:pointer;
-  display:flex;align-items:center;gap:12px;font-size:14px;color:var(--muted);
-  transition:.3s;
-}
-.sidebar-menu li:hover,.sidebar-menu li.active{
-  background:rgba(37,244,238,0.08);color:var(--cyan);
-}
-.sidebar-menu li.active{border-right:3px solid var(--cyan)}
-.sidebar-menu li i{width:22px;text-align:center;font-size:15px}
+        .bg-animation .circle:nth-child(2) {
+            width: 300px;
+            height: 300px;
+            background: var(--secondary);
+            bottom: -50px;
+            left: -50px;
+            animation-delay: -5s;
+        }
 
-.sidebar-user{
-  position:absolute;bottom:20px;left:20px;right:20px;
-  background:var(--card2);border-radius:12px;padding:15px;display:flex;
-  align-items:center;gap:12px;border:1px solid var(--border);
-}
-.user-avatar{
-  width:40px;height:40px;border-radius:50%;
-  background:linear-gradient(135deg,var(--cyan),var(--pink));
-  display:flex;align-items:center;justify-content:center;
-  font-weight:900;color:#000;font-size:16px;
-}
-.user-info{flex:1}
-.user-info .name{font-size:14px;font-weight:700}
-.user-info .email{font-size:12px;color:var(--muted)}
-.logout-btn{
-  background:none;border:none;color:#666;cursor:pointer;font-size:16px;transition:.3s;
-}
-.logout-btn:hover{color:var(--pink)}
+        .bg-animation .circle:nth-child(3) {
+            width: 250px;
+            height: 250px;
+            background: var(--accent);
+            top: 50%;
+            left: 50%;
+            animation-delay: -10s;
+        }
 
-/* Main Content */
-.main-content{margin-right:260px;padding:25px 30px;min-height:100vh}
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(50px, -50px) scale(1.1); }
+            50% { transform: translate(-30px, 30px) scale(0.9); }
+            75% { transform: translate(40px, 20px) scale(1.05); }
+        }
 
-/* Top Bar */
-.topbar{
-  display:flex;justify-content:space-between;align-items:center;margin-bottom:30px;
-}
-.topbar h1{font-size:24px;font-weight:900}
-.topbar-actions{display:flex;gap:12px;align-items:center}
-.search-box{
-  background:var(--card);border:1px solid var(--border);border-radius:12px;
-  padding:10px 16px;display:flex;align-items:center;gap:10px;width:280px;
-}
-.search-box input{
-  background:none;border:none;color:#fff;font-size:14px;outline:none;width:100%;
-}
-.search-box i{color:var(--muted);font-size:14px}
-.badge-btn{
-  width:42px;height:42px;border-radius:12px;background:var(--card);
-  border:1px solid var(--border);color:#fff;display:flex;align-items:center;
-  justify-content:center;cursor:pointer;transition:.3s;position:relative;
-}
-.badge-btn:hover{border-color:var(--cyan)}
-.badge-btn .dot{
-  position:absolute;top:8px;right:8px;width:8px;height:8px;
-  background:var(--pink);border-radius:50%;
-}
+        /* Grid Pattern Overlay */
+        .grid-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background-image: 
+                linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
+        }
 
-/* Stats Cards */
-.stats-grid{
-  display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-bottom:30px;
-}
-.stat-card{
-  background:var(--card);border:1px solid var(--border);border-radius:16px;
-  padding:22px;transition:.3s;
-}
-.stat-card:hover{border-color:rgba(37,244,238,0.3);transform:translateY(-3px)}
-.stat-card-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px}
-.stat-card-icon{
-  width:44px;height:44px;border-radius:12px;display:flex;align-items:center;
-  justify-content:center;font-size:18px;
-}
-.stat-card-icon.cyan{background:rgba(37,244,238,0.1);color:var(--cyan)}
-.stat-card-icon.pink{background:rgba(254,44,85,0.1);color:var(--pink)}
-.stat-card-icon.green{background:rgba(0,255,136,0.1);color:#00ff88}
-.stat-card-icon.orange{background:rgba(255,170,0,0.1);color:#ffaa00}
-.stat-card-change{
-  font-size:12px;padding:4px 10px;border-radius:20px;font-weight:700;
-}
-.stat-card-change.up{background:rgba(0,255,136,0.1);color:#00ff88}
-.stat-card-change.down{background:rgba(254,44,85,0.1);color:var(--pink)}
-.stat-card-value{font-size:28px;font-weight:900;margin-bottom:4px}
-.stat-card-label{font-size:13px;color:var(--muted)}
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 15px 30px;
+            background: rgba(5, 5, 16, 0.9);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0, 240, 255, 0.1);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-/* Charts Row */
-.charts-row{
-  display:grid;grid-template-columns:2fr 1fr;gap:20px;margin-bottom:30px;
-}
-.chart-card{
-  background:var(--card);border:1px solid var(--border);border-radius:16px;
-  padding:22px;
-}
-.chart-card-header{
-  display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;
-}
-.chart-card-title{font-size:16px;font-weight:700}
-.chart-card-filter{
-  display:flex;gap:6px;
-}
-.filter-btn{
-  padding:6px 14px;border-radius:8px;border:none;background:var(--card2);
-  color:var(--muted);font-size:12px;cursor:pointer;font-family:'Tajawal',sans-serif;
-  transition:.3s;
-}
-.filter-btn.active,.filter-btn:hover{
-  background:linear-gradient(135deg,var(--cyan),var(--pink));color:#000;font-weight:700;
-}
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 30px rgba(0, 240, 255, 0.3);
+            letter-spacing: 2px;
+        }
 
-/* Campaigns Table */
-.table-card{
-  background:var(--card);border:1px solid var(--border);border-radius:16px;padding:22px;
-}
-.table-header{
-  display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;
-}
-.table-title{font-size:16px;font-weight:700}
-.btn-small{
-  padding:8px 18px;border-radius:10px;font-size:13px;font-weight:700;
-  border:none;cursor:pointer;font-family:'Tajawal',sans-serif;
-  background:linear-gradient(135deg,var(--cyan),var(--pink));color:#000;
-  transition:.3s;
-}
-.btn-small:hover{transform:translateY(-2px)}
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
 
-table{width:100%;border-collapse:collapse}
-th{text-align:right;padding:14px 16px;font-size:12px;color:var(--muted);font-weight:500;border-bottom:1px solid var(--border)}
-td{padding:14px 16px;font-size:14px;border-bottom:1px solid var(--border)}
-tr:hover td{background:rgba(37,244,238,0.03)}
-.campaign-name{display:flex;align-items:center;gap:12px}
-.campaign-thumb{
-  width:40px;height:40px;border-radius:10px;background:linear-gradient(135deg,var(--cyan),var(--pink));
-  display:flex;align-items:center;justify-content:center;font-size:16px;color:#000;
-}
-.status-badge{
-  padding:5px 14px;border-radius:20px;font-size:12px;font-weight:700;
-}
-.status-active{background:rgba(0,255,136,0.1);color:#00ff88}
-.status-pending{background:rgba(255,170,0,0.1);color:#ffaa00}
-.status-paused{background:rgba(136,136,136,0.1);color:var(--muted)}
-.progress-bar{
-  width:100%;height:6px;background:var(--card2);border-radius:3px;overflow:hidden;
-}
-.progress-fill{height:100%;border-radius:3px;transition:width 1s ease}
-.progress-fill.cyan{background:linear-gradient(90deg,var(--cyan),var(--pink))}
-.progress-text{font-size:12px;color:var(--muted);margin-top:4px}
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
 
-/* Influencers Grid */
-.influencers-grid{
-  display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:18px;
-}
-.influencer-card{
-  background:var(--card);border:1px solid var(--border);border-radius:16px;
-  padding:20px;text-align:center;transition:.3s;cursor:pointer;
-}
-.influencer-card:hover{border-color:rgba(37,244,238,0.3);transform:translateY(-5px)}
-.influencer-avatar{
-  width:70px;height:70px;border-radius:50%;margin:0 auto 15px;
-  background:linear-gradient(135deg,var(--cyan),var(--pink));
-  display:flex;align-items:center;justify-content:center;
-  font-size:28px;font-weight:900;color:#000;
-}
-.influencer-name{font-size:15px;font-weight:700;margin-bottom:4px}
-.influencer-handle{font-size:12px;color:var(--muted);margin-bottom:12px}
-.influencer-stats{display:flex;justify-content:center;gap:20px;margin-bottom:15px}
-.influencer-stat{text-align:center}
-.influencer-stat-value{font-size:16px;font-weight:900}
-.influencer-stat-label{font-size:11px;color:var(--muted)}
-.influencer-btn{
-  width:100%;padding:10px;border-radius:10px;border:1px solid var(--border);
-  background:transparent;color:#fff;font-size:13px;font-weight:700;
-  cursor:pointer;font-family:'Tajawal',sans-serif;transition:.3s;
-}
-.influencer-btn:hover{border-color:var(--cyan);background:rgba(37,244,238,0.05)}
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            right: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            transition: width 0.3s ease;
+        }
 
-/* Analytics Cards */
-.analytics-grid{
-  display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:30px;
-}
-.analytics-card{
-  background:var(--card);border:1px solid var(--border);border-radius:16px;padding:22px;
-}
-.analytics-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px}
-.analytics-title{font-size:14px;color:var(--muted)}
-.analytics-value{font-size:32px;font-weight:900;margin-bottom:8px}
-.analytics-sub{font-size:13px;color:var(--muted)}
-.mini-chart{height:60px;margin-top:15px;display:flex;align-items:flex-end;gap:4px}
-.mini-bar{flex:1;border-radius:3px;transition:.3s}
-.mini-bar:hover{opacity:.8}
+        .nav-links a:hover {
+            color: var(--primary);
+        }
 
-/* Toast */
-.toast{
-  position:fixed;top:25px;left:50%;transform:translateX(-50%) translateY(-100px);
-  background:var(--card);border:1px solid var(--cyan);border-radius:12px;
-  padding:14px 28px;display:flex;align-items:center;gap:12px;z-index:9999;
-  transition:transform .4s ease;box-shadow:0 10px40px rgba(0,0,0,0.4);
-}
-.toast.show{transform:translateX(-50%) translateY(0)}
-.toast-icon{
-  width:32px;height:32px;border-radius:50%;
-  background:linear-gradient(135deg,var(--cyan),var(--pink));
-  display:flex;align-items:center;justify-content:center;color:#000;font-size:14px;
-}
-.toast-text{font-size:14px;font-weight:700}
+        .nav-links a:hover::after {
+            width: 100%;
+        }
 
-/* Responsive */
-@media(max-width:1200px){
-  .stats-grid{grid-template-columns:repeat(2,1fr)}
-  .charts-row{grid-template-columns:1fr}
-  .analytics-grid{grid-template-columns:1fr}
-}
-@media(max-width:768px){
-  .sidebar{display:none}
-  .main-content{margin-right:0;padding:15px}
-  .stats-grid{grid-template-columns:1fr}
-  .search-box{width:100%}
-  table{font-size:12px}
-  th,td{padding:10px 8px}
-}
-</style>
+        .nav-cta {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--darker) !important;
+            padding: 10px 25px;
+            border-radius: 25px;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
+        }
+
+        .nav-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 30px rgba(0, 240, 255, 0.5);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            font-size: 1.5rem;
+            color: var(--primary);
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 120px 20px 60px;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 900px;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            padding: 8px 20px;
+            background: rgba(0, 240, 255, 0.1);
+            border: 1px solid rgba(0, 240, 255, 0.3);
+            border-radius: 50px;
+            color: var(--primary);
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(0, 240, 255, 0.4); }
+            50% { box-shadow: 0 0 0 10px rgba(0, 240, 255, 0); }
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 900;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero h1 .gradient-text {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: var(--text-muted);
+            margin-bottom: 40px;
+            line-height: 1.8;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            border: none;
+            font-family: inherit;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--darker);
+            box-shadow: 0 5px 25px rgba(0, 240, 255, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 40px rgba(0, 240, 255, 0.6);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: rgba(0, 240, 255, 0.1);
+            transform: translateY(-3px);
+        }
+
+        /* Stats Bar */
+        .stats-bar {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            padding: 40px;
+            background: rgba(18, 18, 42, 0.6);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            margin: -40px auto 0;
+            max-width: 1000px;
+            border: 1px solid rgba(0, 240, 255, 0.1);
+            position: relative;
+            z-index: 10;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-label {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+
+        /* Section Styles */
+        section {
+            padding: 100px 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 15px;
+        }
+
+        .section-header p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .section-line {
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            margin: 20px auto;
+            border-radius: 2px;
+        }
+
+        /* Services Section */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background: var(--card);
+            border-radius: 20px;
+            padding: 40px 30px;
+            border: 1px solid rgba(0, 240, 255, 0.1);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(0, 240, 255, 0.3);
+            box-shadow: 0 20px 50px rgba(0, 240, 255, 0.1);
+        }
+
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .service-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            background: rgba(0, 240, 255, 0.1);
+            color: var(--primary);
+        }
+
+        .service-card:nth-child(2) .service-icon {
+            background: rgba(112, 0, 255, 0.1);
+            color: var(--secondary);
+        }
+
+        .service-card:nth-child(3) .service-icon {
+            background: rgba(255, 0, 160, 0.1);
+            color: var(--accent);
+        }
+
+        .service-card:nth-child(4) .service-icon {
+            background: rgba(0, 255, 136, 0.1);
+            color: var(--success);
+        }
+
+        .service-card:nth-child(5) .service-icon {
+            background: rgba(255, 204, 0, 0.1);
+            color: var(--warning);
+        }
+
+        .service-card:nth-child(6) .service-icon {
+            background: rgba(255, 51, 102, 0.1);
+            color: var(--danger);
+        }
+
+        .service-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+        }
+
+        .service-card p {
+            color: var(--text-muted);
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+
+        /* Dashboard Preview */
+        .dashboard-section {
+            background: linear-gradient(180deg, transparent, rgba(0, 240, 255, 0.03), transparent);
+        }
+
+        .dashboard-preview {
+            background: var(--card);
+            border-radius: 25px;
+            border: 1px solid rgba(0, 240, 255, 0.15);
+            overflow: hidden;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+        }
+
+        .dashboard-header {
+            padding: 20px 30px;
+            background: rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border-bottom: 1px solid rgba(0, 240, 255, 0.1);
+        }
+
+        .dashboard-dots {
+            display: flex;
+            gap: 8px;
+        }
+
+        .dashboard-dots span {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .dashboard-dots span:nth-child(1) { background: #ff5f57; }
+        .dashboard-dots span:nth-child(2) { background: #ffbd2e; }
+        .dashboard-dots span:nth-child(3) { background: #28c840; }
+
+        .dashboard-title {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .dashboard-body {
+            padding: 30px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .dash-widget {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid rgba(0, 240, 255, 0.1);
+        }
+
+        .dash-widget-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .dash-widget-title {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .dash-widget-icon {
+            width: 35px;
+            height: 35px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+        }
+
+        .dash-widget-value {
+            font-size: 2rem;
+            font-weight: 900;
+            margin-bottom: 5px;
+        }
+
+        .dash-widget-change {
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .positive { color: var(--success); }
+        .negative { color: var(--danger); }
+
+        /* Chart Bars Animation */
+        .chart-container {
+            grid-column: span 2;
+            min-height: 200px;
+        }
+
+        .chart-bars {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-around;
+            height: 150px;
+            gap: 10px;
+            padding-top: 20px;
+        }
+
+        .chart-bar {
+            flex: 1;
+            background: linear-gradient(to top, var(--primary), var(--secondary));
+            border-radius: 5px 5px 0 0;
+            min-width: 20px;
+            animation: growUp 1.5s ease-out forwards;
+            transform-origin: bottom;
+            transform: scaleY(0);
+        }
+
+        @keyframes growUp {
+            to { transform: scaleY(1); }
+        }
+
+        .chart-labels {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 10px;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        /* Pricing Section */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            align-items: center;
+        }
+
+        .pricing-card {
+            background: var(--card);
+            border-radius: 25px;
+            padding: 40px 30px;
+            border: 1px solid rgba(0, 240, 255, 0.1);
+            text-align: center;
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .pricing-card.featured {
+            border-color: var(--primary);
+            transform: scale(1.05);
+            box-shadow: 0 20px 50px rgba(0, 240, 255, 0.15);
+        }
+
+        .pricing-card.featured::before {
+            content: 'الأكثر شيوعاً';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--darker);
+            padding: 5px 20px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(0, 240, 255, 0.3);
+        }
+
+        .pricing-card.featured:hover {
+            transform: scale(1.05) translateY(-10px);
+        }
+
+        .pricing-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .pricing-desc {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 25px;
+        }
+
+        .pricing-price {
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 5px;
+        }
+
+        .pricing-price span {
+            font-size: 1rem;
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin: 30px 0;
+            text-align: right;
+        }
+
+        .pricing-features li {
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.95rem;
+        }
+
+        .pricing-features li i {
+            color: var(--success);
+        }
+
+        .pricing-features li.unavailable {
+            color: var(--text-muted);
+        }
+
+        .pricing-features li.unavailable i {
+            color: var(--danger);
+        }
+
+        /* Testimonials */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .testimonial-card {
+            background: var(--card);
+            border-radius: 20px;
+            padding: 35px;
+            border: 1px solid rgba(0, 240, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(0, 240, 255, 0.2);
+        }
+
+        .testimonial-stars {
+            color: var(--warning);
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+        }
+
+        .testimonial-text {
+            font-size: 1rem;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            color: var(--text);
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .testimonial-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 1.2rem;
+            color: var(--darker);
+        }
+
+        .testimonial-info h4 {
+            font-size: 1rem;
+            margin-bottom: 3px;
+        }
+
+        .testimonial-info p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            text-align: center;
+            padding: 100px 20px;
+            position: relative;
+        }
+
+        .cta-box {
+            background: linear-gradient(135deg, rgba(0, 240, 255, 0.1), rgba(112, 0, 255, 0.1));
+            border: 1px solid rgba(0, 240, 255, 0.2);
+            border-radius: 30px;
+            padding: 80px 40px;
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-box::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0, 240, 255, 0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-box h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .cta-box p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            border-top: 1px solid rgba(0, 240, 255, 0.1);
+            padding: 60px 20px 30px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto 50px;
+        }
+
+        .footer-col h4 {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-col ul li a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--primary);
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .footer-social a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(0, 240, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 240, 255, 0.2);
+        }
+
+        .footer-social a:hover {
+            background: var(--primary);
+            color: var(--darker);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .footer-bottom .logo {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            display: inline-block;
+        }
+
+        /* Scroll Animation */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .stats-bar {
+                flex-direction: column;
+                gap: 30px;
+            }
+
+            .pricing-card.featured {
+                transform: scale(1);
+            }
+
+            .pricing-card.featured:hover {
+                transform: scale(1) translateY(-10px);
+            }
+
+            .chart-container {
+                grid-column: span 1;
+            }
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--darker);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(var(--primary), var(--secondary));
+            border-radius: 4px;
+        }
+
+        /* Loading Animation */
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--darker);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+
+        .loader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loader-spinner {
+            width: 60px;
+            height: 60px;
+            border: 3px solid rgba(0, 240, 255, 0.1);
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Particle Canvas */
+        #particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+    </style>
 </head>
 <body>
-
-<!-- ===== LOGIN PAGE ===== -->
-<div class="login-page" id="loginPage">
-  <div class="login-box">
-    <div class="login-logo">ᎷᎡ/ᏦᎯ ᏉᏫᏫ</div>
-    <div class="login-sub">منصة تسويق تيك توك الذكية</div>
-
-    <form id="loginForm" onsubmit="handleLogin(event)">
-      <div class="input-group">
-        <label>البريد الإلكتروني</label>
-        <input type="email" id="loginEmail" placeholder="your@email.com" required>
-      </div>
-      <div class="input-group">
-        <label>كلمة المرور</label>
-        <input type="password" id="loginPass" placeholder="••••••••" required>
-      </div>
-      <button type="submit" class="btn btn-primary" style="margin-bottom:15px">
-        <i class="fas fa-sign-in-alt"></i> تسجيل الدخول
-      </button>
-    </form>
-
-    <div class="divider">أو سجل بـ</div>
-
-    <button class="btn btn-outline" style="margin-bottom:10px" onclick="socialLogin('google')">
-      <i class="fab fa-google" style="color:#EA4335"></i> Google
-    </button>
-    <button class="btn btn-outline" onclick="socialLogin('phone')">
-      <i class="fas fa-mobile-alt" style="color:var(--cyan)"></i> رقم الهاتف
-    </button>
-
-    <div style="text-align:center;margin-top:20px;font-size:13px;color:var(--muted)">
-      ليس لديك حساب؟ <a href="#" style="color:var(--cyan);text-decoration:none;font-weight:700" onclick="showToast('سجل الآن مجانا!')">سجل الآن</a>
+    <!-- Loader -->
+    <div class="loader" id="loader">
+        <div class="loader-spinner"></div>
     </div>
-  </div>
-</div>
 
-<!-- ===== DASHBOARD ===== -->
-<div class="dashboard" id="dashboard">
-
-  <!-- Sidebar -->
-  <div class="sidebar">
-    <div class="sidebar-logo">ᎷᎡ/ᏦᎯ ᏉᏫᏫ</div>
-    <ul class="sidebar-menu">
-      <li class="active" onclick="switchTab('overview',this)"><i class="fas fa-home"></i> نظرة عامة</li>
-      <li onclick="switchTab('campaigns',this)"><i class="fas fa-bullhorn"></i> الحملات</li>
-      <li onclick="switchTab('influencers',this)"><i class="fas fa-users"></i> المؤثرين</li>
-      <li onclick="switchTab('analytics',this)"><i class="fas fa-chart-line"></i> التحليلات</li>
-      <li onclick="switchTab('wallet',this)"><i class="fas fa-wallet"></i> المحفظة</li>
-      <li onclick="switchTab('settings',this)"><i class="fas fa-cog"></i> الإعدادات</li>
-    </ul>
-    <div class="sidebar-user">
-      <div class="user-avatar" id="dashAvatar">U</div>
-      <div class="user-info">
-        <div class="name" id="dashName">مستخدم</div>
-        <div class="email" id="dashEmail">user@email.com</div>
-      </div>
-      <button class="logout-btn" onclick="doLogout()" title="تسجيل الخروج"><i class="fas fa-sign-out-alt"></i></button>
+    <!-- Background Effects -->
+    <div class="bg-animation">
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
     </div>
-  </div>
+    <div class="grid-overlay"></div>
+    <canvas id="particles"></canvas>
 
-  <!-- Main Content -->
-  <div class="main-content">
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">ᎷᎡ/ᏦᎯ ᏉᏫᏫ</div>
+        <ul class="nav-links">
+            <li><a href="#home">الرئيسية</a></li>
+            <li><a href="#services">الخدمات</a></li>
+            <li><a href="#dashboard">لوحة التحكم</a></li>
+            <li><a href="#pricing">الأسعار</a></li>
+            <li><a href="#testimonials">آراء العملاء</a></li>
+            <li><a href="#contact" class="nav-cta">ابدأ الآن</a></li>
+        </ul>
+        <div class="mobile-menu-btn"><i class="fas fa-bars"></i></div>
+    </nav>
 
-    <!-- OVERVIEW TAB -->
-    <div id="tab-overview">
-      <div class="topbar">
-        <h1>نظرة عامة</h1>
-        <div class="topbar-actions">
-          <div class="search-box">
-            <i class="fas fa-search"></i>
-            <input type="text" placeholder="بحث...">
-          </div>
-          <button class="badge-btn"><i class="fas fa-bell"></i><span class="dot"></span></button>
-          <button class="badge-btn"><i class="fas fa-envelope"></i></button>
-        </div>
-      </div>
-
-      <div class="stats-grid">
-        <div class="stat-card">
-          <div class="stat-card-header">
-            <div class="stat-card-icon cyan"><i class="fas fa-eye"></i></div>
-            <div class="stat-card-change up">+24.5% <i class="fas fa-arrow-up"></i></div>
-          </div>
-          <div class="stat-card-value" style="background:linear-gradient(135deg,var(--cyan),var(--pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent;">2.4M</div>
-          <div class="stat-card-label">إجمالي المشاهدات</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-card-header">
-            <div class="stat-card-icon pink"><i class="fas fa-heart"></i></div>
-            <div class="stat-card-change up">+12.3% <i class="fas fa-arrow-up"></i></div>
-          </div>
-          <div class="stat-card-value" style="background:linear-gradient(135deg,var(--cyan),var(--pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent;">856K</div>
-          <div class="stat-card-label">إجمالي الإعجابات</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-card-header">
-            <div class="stat-card-icon green"><i class="fas fa-dollar-sign"></i></div>
-            <div class="stat-card-change up">+18.7% <i class="fas fa-arrow-up"></i></div>
-          </div>
-          <div class="stat-card-value" style="background:linear-gradient(135deg,var(--cyan),var(--pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent;">$45,200</div>
-          <div class="stat-card-label">الإيرادات</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-card-header">
-            <div class="stat-card-icon orange"><i class="fas fa-chart-pie"></i></div>
-            <div class="stat-card-change down">-2.1% <i class="fas fa-arrow-down"></i></div>
-          </div>
-          <div class="stat-card-value" style="background:linear-gradient(135deg,var(--cyan),var(--pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent;">8.7%</div>
-          <div class="stat-card-label">معدل التفاعل</div>
-        </div>
-      </div>
-
-      <div class="charts-row">
-        <div class="chart-card">
-          <div class="chart-card-header">
-            <div class="chart-card-title"><i class="fas fa-chart-area" style="color:var(--cyan);margin-left:8px"></i> أداء الحملات</div>
-            <div class="chart-card-filter">
-              <button class="filter-btn active">شهر</button>
-              <button class="filter-btn">أسبوع</button>
-              <button class="filter-btn">يوم</button>
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <div class="hero-badge">
+                <i class="fas fa-sparkles"></i> منصة التسويق الذكية رقم 1 في الوطن العربي
             </div>
-          </div>
-          <canvas id="mainChart" height="280"></canvas>
+            <h1>
+                ارتقِ بمحتواك مع<br>
+                <span class="gradient-text">ᎷᎡ/ᏦᎯ ᏉᏫᏫ</span>
+            </h1>
+            <p>
+                منصة تسويق إلكتروني ذكية تستخدم أحدث تقنيات الذكاء الاصطناعي لتحليل أداء حساباتك، 
+                اقتراح أفضل المحتويات، وجدولة النشر في أوقات الذروة لتحقيق أقصى انتشار.
+            </p>
+            <div class="hero-buttons">
+                <a href="#dashboard" class="btn btn-primary">
+                    <i class="fas fa-rocket"></i> جرّب المنصة مجاناً
+                </a>
+                <a href="#services" class="btn btn-outline">
+                    <i class="fas fa-play"></i> شاهد العرض التوضيحي
+                </a>
+            </div>
         </div>
-        <div class="chart-card">
-          <div class="chart-card-header">
-            <div class="chart-card-title"><i class="fas fa-chart-pie" style="color:var(--pink);margin-left:8px"></i> توزيع الجمهور</div>
-          </div>
-          <canvas id="pieChart" height="280"></canvas>
-        </div>
-      </div>
+    </section>
 
-      <div class="table-card">
-        <div class="table-header">
-          <div class="table-title"><i class="fas fa-rocket" style="color:var(--cyan);margin-left:8px"></i> آخر الحملات</div>
-          <button class="btn-small" onclick="showToast('تم فتح نافذة إنشاء حملة جديدة')">+ حملة جديدة</button>
+    <!-- Stats Bar -->
+    <div class="stats-bar fade-in">
+        <div class="stat-item">
+            <div class="stat-number" data-target="50000">0</div>
+            <div class="stat-label">مستخدم نشط</div>
         </div>
-        <table>
-          <thead>
-            <tr>
-              <th>الحملة</th>
-              <th>الميزانية</th>
-              <th>المشاهدات</th>
-              <th>التقدم</th>
-              <th>الحالة</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>
-                <div class="campaign-name">
-                  <div class="campaign-thumb"><i class="fas fa-fire"></i></div>
-                  <div>
-                    <div style="font-weight:700">حملة صيف 2026</div>
-                    <div style="font-size:12px;color:var(--muted)">تيك توك - إعلانات</div>
-                  </div>
+        <div class="stat-item">
+            <div class="stat-number" data-target="2500000">0</div>
+            <div class="stat-label">محتوى تم تحليله</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number" data-target="98">0</div>
+            <div class="stat-label">نسبة رضا العملاء %</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number" data-target="150">0</div>
+            <div class="stat-label">دولة حول العالم</div>
+        </div>
+    </div>
+
+    <!-- Services Section -->
+    <section id="services">
+        <div class="section-header fade-in">
+            <h2>خدماتنا المتكاملة</h2>
+            <div class="section-line"></div>
+            <p>حلول ذكية لتسويق محتواك على TikTok ومنصات التواصل الاجتماعي</p>
+        </div>
+        <div class="services-grid">
+            <div class="service-card fade-in">
+                <div class="service-icon"><i class="fas fa-chart-line"></i></div>
+                <h3>تحليلات الأداء الذكية</h3>
+                <p>تتبع مؤشرات أداء حساباتك في الوقت الفعلي مع تقارير تفصيلية ورسوم بيانية تفاعلية تساعدك على فهم جمهورك.</p>
+            </div>
+            <div class="service-card fade-in">
+                <div class="service-icon"><i class="fas fa-lightbulb"></i></div>
+                <h3>مساعد AI للمحتوى</h3>
+                <p>ذكاء اصطناعي متقدم يقترح أفكار فيديوهات، هاشتاجات رائجة، ونصوص جذابة بناءً على تحليل الترندات الحالية.</p>
+            </div>
+            <div class="service-card fade-in">
+                <div class="service-icon"><i class="fas fa-clock"></i></div>
+                <h3>جدولة ذكية للنشر</h3>
+                <p>حدد أفضل أوقات النشر بناءً على نشاط جمهورك مع إمكانية الجدولة المسبقة لأسابيع أو أشهر قادمة.</p>
+            </div>
+            <div class="service-card fade-in">
+                <div class="service-icon"><i class="fas fa-users"></i></div>
+                <h3>تحليل الجمهور</h3>
+                <p>فهم ديموغرافيا متابعيك، اهتماماتهم، وسلوكهم التفاعلي لإنشاء محتوى يتناسب مع توقعاتهم.</p>
+            </div>
+            <div class="service-card fade-in">
+                <div class="service-icon"><i class="fas fa-fire"></i></div>
+                <h3>تتبع الترندات</h3>
+                <p>راقب أحدث الترندات والتحديات الرائجة في منطقتك وعلى مستوى العالم لتكون دائماً في المقدمة.</p>
+            </div>
+            <div class="service-card fade-in">
+                <div class="service-icon"><i class="fas fa-file-pdf"></i></div>
+                <h3>تقارير احترافية</h3>
+                <p>صدّر تقارير أداء تفاعلية بصيغة PDF لمشاركتها مع فريقك أو عملائك بشكل احترافي.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dashboard Preview -->
+    <section class="dashboard-section" id="dashboard">
+        <div class="section-header fade-in">
+            <h2>لوحة تحكم ذكية</h2>
+            <div class="section-line"></div>
+            <p>واجهة مستخدم بديهية تعرض كل ما تحتاجه لإدارة حساباتك في مكان واحد</p>
+        </div>
+        <div class="dashboard-preview fade-in">
+            <div class="dashboard-header">
+                <div class="dashboard-dots">
+                    <span></span>
+                    <span></span>
+                    <span></span>
                 </div>
-              </td>
-              <td>$5,000</td>
-              <td>1.2M</td>
-              <td>
-                <div class="progress-bar"><div class="progress-fill cyan" style="width:78%"></div></div>
-                <div class="progress-text">78% من الميزانية</div>
-              </td>
-              <td><span class="status-badge status-active">نشطة</span></td>
-            </tr>
-            <tr>
-              <td>
-                <div class="campaign-name">
-                  <div class="campaign-thumb" style="background:linear-gradient(135deg,#ff6b6b,#ee5a5a)"><i class="fas fa-tag"></i></div>
-                  <div>
-                    <div style="font-weight:700">تخفيضات العيد</div>
-                    <div style="font-size:12px;color:var(--muted)">تيك توك - مؤثرين</div>
-                  </div>
+                <div class="dashboard-title">لوحة تحكم ᎷᎡ/ᏦᎯ ᏉᏫᏫ - TikTok Analytics</div>
+            </div>
+            <div class="dashboard-body">
+                <div class="dash-widget">
+                    <div class="dash-widget-header">
+                        <span class="dash-widget-title">المشاهدات</span>
+                        <div class="dash-widget-icon" style="background: rgba(0,240,255,0.1); color: var(--primary);">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                    </div>
+                    <div class="dash-widget-value" style="color: var(--primary);">2.4M</div>
+                    <div class="dash-widget-change positive">
+                        <i class="fas fa-arrow-up"></i> +23.5% هذا الشهر
+                    </div>
                 </div>
-              </td>
-              <td>$3,200</td>
-              <td>890K</td>
-              <td>
-                <div class="progress-bar"><div class="progress-fill cyan" style="width:45%"></div></div>
-                <div class="progress-text">45% من الميزانية</div>
-              </td>
-              <td><span class="status-badge status-active">نشطة</span></td>
-            </tr>
-            <tr>
-              <td>
-                <div class="campaign-name">
-                  <div class="campaign-thumb" style="background:linear-gradient(135deg,#a78bfa,#8b5cf6)"><i class="fas fa-star"></i></div>
-                  <div>
-                    <div style="font-weight:700">إطلاق منتج جديد</div>
-                    <div style="font-size:12px;color:var(--muted)">تيك توك - لايف</div>
-                  </div>
+                <div class="dash-widget">
+                    <div class="dash-widget-header">
+                        <span class="dash-widget-title">المتابعين</span>
+                        <div class="dash-widget-icon" style="background: rgba(112,0,255,0.1); color: var(--secondary);">
+                            <i class="fas fa-user-plus"></i>
+                        </div>
+                    </div>
+                    <div class="dash-widget-value" style="color: var(--secondary);">185K</div>
+                    <div class="dash-widget-change positive">
+                        <i class="fas fa-arrow-up"></i> +12.8% هذا الشهر
+                    </div>
                 </div>
-              </td>
-              <td>$8,500</td>
-              <td>0</td>
-              <td>
-                <div class="progress-bar"><div class="progress-fill cyan" style="width:0%"></div></div>
-                <div class="progress-text">لم تبدأ بعد</div>
-              </td>
-              <td><span class="status-badge status-pending">قريبا</span></td>
-            </tr>
-            <tr>
-              <td>
-                <div class="campaign-name">
-                  <div class="campaign-thumb" style="background:linear-gradient(135deg,#fbbf24,#f59e0b)"><i class="fas fa-gift"></i></div>
-                  <div>
-                    <div style="font-weight:700">مسابقة المتابعين</div>
-                    <div style="font-size:12px;color:var(--muted)">تيك توك - تحدي</div>
-                  </div>
+                <div class="dash-widget">
+                    <div class="dash-widget-header">
+                        <span class="dash-widget-title">معدل التفاعل</span>
+                        <div class="dash-widget-icon" style="background: rgba(255,0,160,0.1); color: var(--accent);">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                    </div>
+                    <div class="dash-widget-value" style="color: var(--accent);">8.7%</div>
+                    <div class="dash-widget-change positive">
+                        <i class="fas fa-arrow-up"></i> +5.2% هذا الشهر
+                    </div>
                 </div>
-              </td>
-              <td>$1,500</td>
-              <td>2.1M</td>
-              <td>
-                <div class="progress-bar"><div class="progress-fill cyan" style="width:100%"></div></div>
-                <div class="progress-text">100% - مكتملة</div>
-              </td>
-              <td><span class="status-badge status-paused">منتهية</span></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-    <!-- CAMPAIGNS TAB -->
-    <div id="tab-campaigns" style="display:none">
-      <div class="topbar">
-        <h1>الحملات</h1>
-        <button class="btn-small" onclick="showToast('تم إنشاء حملة جديدة!')">+ حملة جديدة</button>
-      </div>
-      <div class="table-card">
-        <table>
-          <thead>
-            <tr><th>الحملة</th><th>النوع</th><th>الميزانية</th><th>المشاهدات</th><th>الإعجابات</th><th>الحالة</th><th>إجراءات</th></tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><div class="campaign-name"><div class="campaign-thumb"><i class="fas fa-fire"></i></div><div><div style="font-weight:700">حملة صيف 2026</div></div></div></td>
-              <td>إعلانات</td><td>$5,000</td><td>1.2M</td><td>45K</td>
-              <td><span class="status-badge status-active">نشطة</span></td>
-              <td><i class="fas fa-ellipsis-h" style="color:var(--muted);cursor:pointer"></i></td>
-            </tr>
-            <tr>
-              <td><div class="campaign-name"><div class="campaign-thumb" style="background:linear-gradient(135deg,#ff6b6b,#ee5a5a)"><i class="fas fa-tag"></i></div><div><div style="font-weight:700">تخفيضات العيد</div></div></div></td>
-              <td>مؤثرين</td><td>$3,200</td><td>890K</td><td>32K</td>
-              <td><span class="status-badge status-active">نشطة</span></td>
-              <td><i class="fas fa-ellipsis-h" style="color:var(--muted);cursor:pointer"></i></td>
-            </tr>
-            <tr>
-              <td><div class="campaign-name"><div class="campaign-thumb" style="background:linear-gradient(135deg,#a78bfa,#8b5cf6)"><i class="fas fa-star"></i></div><div><div style="font-weight:700">إطلاق منتج</div></div></div></td>
-              <td>لايف</td><td>$8,500</td><td>0</td><td>0</td>
-              <td><span class="status-badge status-pending">قريبا</span></td>
-              <td><i class="fas fa-ellipsis-h" style="color:var(--muted);cursor:pointer"></i></td>
-            </tr>
-            <tr>
-              <td><div class="campaign-name"><div class="campaign-thumb" style="background:linear-gradient(135deg,#fbbf24,#f59e0b)"><i class="fas fa-gift"></i></div><div><div style="font-weight:700">مسابقة</div></div></div></td>
-              <td>تحدي</td><td>$1,500</td><td>2.1M</td><td>89K</td>
-              <td><span class="status-badge status-paused">منتهية</span></td>
-              <td><i class="fas fa-ellipsis-h" style="color:var(--muted);cursor:pointer"></i></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-    <!-- INFLUENCERS TAB -->
-    <div id="tab-influencers" style="display:none">
-      <div class="topbar">
-        <h1>المؤثرين</h1>
-        <div class="search-box"><i class="fas fa-search"></i><input type="text" placeholder="بحث عن مؤثر..."></div>
-      </div>
-      <div class="influencers-grid">
-        <div class="influencer-card">
-          <div class="influencer-avatar">أ</div>
-          <div class="influencer-name">أحمد الشمري</div>
-          <div class="influencer-handle">@ahmedshammari</div>
-          <div class="influencer-stats">
-            <div class="influencer-stat"><div class="influencer-stat-value">2.4M</div><div class="influencer-stat-label">متابع</div></div>
-            <div class="influencer-stat"><div class="influencer-stat-value">8.5%</div><div class="influencer-stat-label">تفاعل</div></div>
-          </div>
-          <button class="influencer-btn" onclick="showToast('تم إرسال طلب تعاون!')">طلب تعاون</button>
+                <div class="dash-widget">
+                    <div class="dash-widget-header">
+                        <span class="dash-widget-title">الفيديوهات</span>
+                        <div class="dash-widget-icon" style="background: rgba(0,255,136,0.1); color: var(--success);">
+                            <i class="fas fa-video"></i>
+                        </div>
+                    </div>
+                    <div class="dash-widget-value" style="color: var(--success);">342</div>
+                    <div class="dash-widget-change positive">
+                        <i class="fas fa-arrow-up"></i> +18 هذا الشهر
+                    </div>
+                </div>
+                <div class="dash-widget chart-container">
+                    <div class="dash-widget-header">
+                        <span class="dash-widget-title">أداء المشاهدات - آخر 7 أيام</span>
+                        <div class="dash-widget-icon" style="background: rgba(255,204,0,0.1); color: var(--warning);">
+                            <i class="fas fa-chart-bar"></i>
+                        </div>
+                    </div>
+                    <div class="chart-bars">
+                        <div class="chart-bar" style="height: 40%"></div>
+                        <div class="chart-bar" style="height: 65%"></div>
+                        <div class="chart-bar" style="height: 45%"></div>
+                        <div class="chart-bar" style="height: 80%"></div>
+                        <div class="chart-bar" style="height: 55%"></div>
+                        <div class="chart-bar" style="height: 90%"></div>
+                        <div class="chart-bar" style="height: 75%"></div>
+                    </div>
+                    <div class="chart-labels">
+                        <span>السبت</span>
+                        <span>الأحد</span>
+                        <span>الإثنين</span>
+                        <span>الثلاثاء</span>
+                        <span>الأربعاء</span>
+                        <span>الخميس</span>
+                        <span>الجمعة</span>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="influencer-card">
-          <div class="influencer-avatar" style="background:linear-gradient(135deg,#ff6b6b,#ee5a5a)">س</div>
-          <div class="influencer-name">سارة العتيبي</div>
-          <div class="influencer-handle">@saraotibi</div>
-          <div class="influencer-stats">
-            <div class="influencer-stat"><div class="influencer-stat-value">1.8M</div><div class="influencer-stat-label">متابع</div></div>
-            <div class="influencer-stat"><div class="influencer-stat-value">12%</div><div class="influencer-stat-label">تفاعل</div></div>
-          </div>
-          <button class="influencer-btn" onclick="showToast('تم إرسال طلب تعاون!')">طلب تعاون</button>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing">
+        <div class="section-header fade-in">
+            <h2>خطط الأسعار</h2>
+            <div class="section-line"></div>
+            <p>اختر الخطة المناسبة لاحتياجاتك وابدأ رحلة النمو معنا</p>
         </div>
-        <div class="influencer-card">
-          <div class="influencer-avatar" style="background:linear-gradient(135deg,#a78bfa,#8b5cf6)">م</div>
-          <div class="influencer-name">محمد القحطاني</div>
-          <div class="influencer-handle">@mohalq</div>
-          <div class="influencer-stats">
-            <div class="influencer-stat"><div class="influencer-stat-value">950K</div><div class="influencer-stat-label">متابع</div></div>
-            <div class="influencer-stat"><div class="influencer-stat-value">6.2%</div><div class="influencer-stat-label">تفاعل</div></div>
-          </div>
-          <button class="influencer-btn" onclick="showToast('تم إرسال طلب تعاون!')">طلب تعاون</button>
+        <div class="pricing-grid">
+            <div class="pricing-card fade-in">
+                <div class="pricing-name">البداية</div>
+                <div class="pricing-desc">مثالي للمبتدئين</div>
+                <div class="pricing-price">مجاني<span> / للأبد</span></div>
+                <ul class="pricing-features">
+                    <li><i class="fas fa-check"></i> تحليل حساب واحد</li>
+                    <li><i class="fas fa-check"></i> 10 اقتراحات محتوى يومياً</li>
+                    <li><i class="fas fa-check"></i> تقرير أداء أسبوعي</li>
+                    <li><i class="fas fa-check"></i> تتبع 5 هاشتاجات</li>
+                    <li class="unavailable"><i class="fas fa-times"></i> جدولة النشر</li>
+                    <li class="unavailable"><i class="fas fa-times"></i> تحليل المنافسين</li>
+                    <li class="unavailable"><i class="fas fa-times"></i> دعم فني م priority</li>
+                </ul>
+                <button class="btn btn-outline" style="width: 100%;">ابدأ مجاناً</button>
+            </div>
+            <div class="pricing-card featured fade-in">
+                <div class="pricing-name">المحترف</div>
+                <div class="pricing-desc">للمؤثرين وصناع المحتوى</div>
+                <div class="pricing-price">$29<span> / شهر</span></div>
+                <ul class="pricing-features">
+                    <li><i class="fas fa-check"></i> 5 حسابات</li>
+                    <li><i class="fas fa-check"></i> اقتراحات محتوى غير محدودة</li>
+                    <li><i class="fas fa-check"></i> تقارير يومية مفصلة</li>
+                    <li><i class="fas fa-check"></i> تتبع 50 هاشتاج</li>
+                    <li><i class="fas fa-check"></i> جدولة النشر المتقدمة</li>
+                    <li><i class="fas fa-check"></i> تحليل 10 منافسين</li>
+                    <li class="unavailable"><i class="fas fa-times"></i> API الوصول</li>
+                </ul>
+                <button class="btn btn-primary" style="width: 100%;">اشترك الآن</button>
+            </div>
+            <div class="pricing-card fade-in">
+                <div class="pricing-name">الأعمال</div>
+                <div class="pricing-desc">للشركات والوكالات</div>
+                <div class="pricing-price">$99<span> / شهر</span></div>
+                <ul class="pricing-features">
+                    <li><i class="fas fa-check"></i> حسابات غير محدودة</li>
+                    <li><i class="fas fa-check"></i> AI مخصص للعلامة التجارية</li>
+                    <li><i class="fas fa-check"></i> تقارير مخصصة PDF</li>
+                    <li><i class="fas fa-check"></i> تتبع هاشتاجات غير محدود</li>
+                    <li><i class="fas fa-check"></i> جدولة فريق كامل</li>
+                    <li><i class="fas fa-check"></i> تحليل منافسين غير محدود</li>
+                    <li><i class="fas fa-check"></i> API كامل + دعم 24/7</li>
+                </ul>
+                <button class="btn btn-outline" style="width: 100%;">تواصل معنا</button>
+            </div>
         </div>
-        <div class="influencer-card">
-          <div class="influencer-avatar" style="background:linear-gradient(135deg,#fbbf24,#f59e0b)">ن</div>
-          <div class="influencer-name">نورة الدوسري</div>
-          <div class="influencer-handle">@nouraldos</div>
-          <div class="influencer-stats">
-            <div class="influencer-stat"><div class="influencer-stat-value">3.1M</div><div class="influencer-stat-label">متابع</div></div>
-            <div class="influencer-stat"><div class="influencer-stat-value">9.8%</div><div class="influencer-stat-label">تفاعل</div></div>
-          </div>
-          <button class="influencer-btn" onclick="showToast('تم إرسال طلب تعاون!')">طلب تعاون</button>
+    </section>
+
+    <!-- Testimonials -->
+    <section id="testimonials">
+        <div class="section-header fade-in">
+            <h2>ماذا يقول عملاؤنا</h2>
+            <div class="section-line"></div>
+            <p>قصص نجاح حقيقية من مستخدمي منصتنا</p>
         </div>
-        <div class="influencer-card">
-          <div class="influencer-avatar" style="background:linear-gradient(135deg,#34d399,#10b981)">ع</div>
-          <div class="influencer-name">عبدالله الحربي</div>
-          <div class="influencer-handle">@abdulharbi</div>
-          <div class="influencer-stats">
-            <div class="influencer-stat"><div class="influencer-stat-value">1.2M</div><div class="influencer-stat-label">متابع</div></div>
-            <div class="influencer-stat"><div class="influencer-stat-value">7.4%</div><div class="influencer-stat-label">تفاعل</div></div>
-          </div>
-          <button class="influencer-btn" onclick="showToast('تم إرسال طلب تعاون!')">طلب تعاون</button>
+        <div class="testimonials-grid">
+            <div class="testimonial-card fade-in">
+                <div class="testimonial-stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <p class="testimonial-text">
+                    "منصة ᎷᎡ/ᏦᎯ ᏉᏫᏫ غيرت طريقة تفكيري في التسويق. خلال شهر واحد فقط، زادت مشاهداتي بنسبة 300% بفضل اقتراحات المحتوى الذكية!"
+                </p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">أ</div>
+                    <div class="testimonial-info">
+                        <h4>أحمد السيد</h4>
+                        <p>صانع محتوى - 2M متابع</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card fade-in">
+                <div class="testimonial-stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <p class="testimonial-text">
+                    "كوكالة تسويق، نستخدم المنصة لإدارة 20+ حساب لعملائنا. لوحة التحكم الذكية وفرت علينا ساعات من العمل يومياً."
+                </p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">س</div>
+                    <div class="testimonial-info">
+                        <h4>سارة الخالد</h4>
+                        <p>مديرة وكالة تسويق رقمي</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card fade-in">
+                <div class="testimonial-stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                </div>
+                <p class="testimonial-text">
+                    "تحليل الجمهور ساعدني في فهم متابعيني بشكل أعمق. الآن أعرف بالضبط ما يريدون ومتى يريدونه. نتائج مذهلة!"
+                </p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">م</div>
+                    <div class="testimonial-info">
+                        <h4>محمد العلي</h4>
+                        <p>مؤثر - 500K متابع</p>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="influencer-card">
-          <div class="influencer-avatar" style="background:linear-gradient(135deg,#f472b6,#ec4899)">ل</div>
-          <div class="influencer-name">ليلى المالكي</div>
-          <div class="influencer-handle">@lailamalki</div>
-          <div class="influencer-stats">
-            <div class="influencer-stat"><div class="influencer-stat-value">2.7M</div><div class="influencer-stat-label">متابع</div></div>
-            <div class="influencer-stat"><div class="influencer-stat-value">11.2%</div><div class="influencer-stat-label">تفاعل</div></div>
-          </div>
-          <button class="influencer-btn" onclick="showToast('تم إرسال طلب تعاون!')">طلب تعاون</button>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section" id="contact">
+        <div class="cta-box fade-in">
+            <div class="cta-content">
+                <h2>جاهز لتنمو معنا؟</h2>
+                <p>
+                    انضم إلى آلاف صناع المحتوى والشركات التي تستخدم ᎷᎡ/ᏦᎯ ᏉᏫᏫ لتعزيز حضورهم الرقمي. 
+                    ابدأ مجاناً واكتشف قوة التسويق الذكي.
+                </p>
+                <div class="hero-buttons" style="justify-content: center;">
+                    <button class="btn btn-primary">
+                        <i class="fas fa-rocket"></i> ابدأ رحلتك الآن
+                    </button>
+                    <button class="btn btn-outline">
+                        <i class="fas fa-comments"></i> تحدث مع فريقنا
+                    </button>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
+    </section>
 
-    <!-- ANALYTICS TAB -->
-    <div id="tab-analytics" style="display:none">
-      <div class="topbar"><h1>التحليلات</h1></div>
-      <div class="analytics-grid">
-        <div class="analytics-card">
-          <div class="analytics-header"><div class="analytics-title">مشاهدات اليوم</div><i class="fas fa-eye" style="color:var(--cyan)"></i></div>
-          <div class="analytics-value" style="color:var(--cyan)">45,230</div>
-          <div class="analytics-sub">+12.5% عن الأمس</div>
-          <div class="mini-chart" id="chart1"></div>
+    <!-- Footer -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <div class="logo" style="margin-bottom: 15px;">ᎷᎡ/ᏦᎯ ᏉᏫᏫ</div>
+                <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.7;">
+                    منصة التسويق الإلكتروني الذكية التي تستخدم أحدث تقنيات الذكاء الاصطناعي لمساعدتك في النمو الرقمي.
+                </p>
+                <div class="footer-social">
+                    <a href="#"><i class="fab fa-tiktok"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>الخدمات</h4>
+                <ul>
+                    <li><a href="#">تحليلات الأداء</a></li>
+                    <li><a href="#">مساعد AI</a></li>
+                    <li><a href="#">جدولة النشر</a></li>
+                    <li><a href="#">تحليل الجمهور</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>الشركة</h4>
+                <ul>
+                    <li><a href="#">من نحن</a></li>
+                    <li><a href="#">فريق العمل</a></li>
+                    <li><a href="#">الوظائف</a></li>
+                    <li><a href="#">المدونة</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>الدعم</h4>
+                <ul>
+                    <li><a href="#">مركز المساعدة</a></li>
+                    <li><a href="#">الأسئلة الشائعة</a></li>
+                    <li><a href="#">تواصل معنا</a></li>
+                    <li><a href="#">حالة النظام</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>قانوني</h4>
+                <ul>
+                    <li><a href="#">شروط الخدمة</a></li>
+                    <li><a href="#">سياسة الخصوصية</a></li>
+                    <li><a href="#">سياسة الاستخدام</a></li>
+                    <li><a href="#">GDPR</a></li>
+                </ul>
+            </div>
         </div>
-        <div class="analytics-card">
-          <div class="analytics-header"><div class="analytics-title">إعجابات اليوم</div><i class="fas fa-heart" style="color:var(--pink)"></i></div>
-          <div class="analytics-value" style="color:var(--pink)">8,940</div>
-          <div class="analytics-sub">+8.3% عن الأمس</div>
-          <div class="mini-chart" id="chart2"></div>
+        <div class="footer-bottom">
+            <div class="logo">ᎷᎡ/ᏦᎯ ᏉᏫᏫ</div>
+            <p>© 2026 جميع الحقوق محفوظة. منصة التسويق الإلكتروني الذكية.</p>
         </div>
-        <div class="analytics-card">
-          <div class="analytics-header"><div class="analytics-title">مشاركات اليوم</div><i class="fas fa-share" style="color:#00ff88"></i></div>
-          <div class="analytics-value" style="color:#00ff88">1,250</div>
-          <div class="analytics-sub">+15.7% عن الأمس</div>
-          <div class="mini-chart" id="chart3"></div>
-        </div>
-      </div>
-      <div class="chart-card">
-        <div class="chart-card-header">
-          <div class="chart-card-title"><i class="fas fa-chart-bar" style="color:var(--cyan);margin-left:8px"></i> أداء المحتوى</div>
-        </div>
-        <canvas id="analyticsChart" height="300"></canvas>
-      </div>
-    </div>
+    </footer>
 
-    <!-- WALLET TAB -->
-    <div id="tab-wallet" style="display:none">
-      <div class="topbar"><h1>المحفظة</h1></div>
-      <div class="stats-grid" style="grid-template-columns:repeat(3,1fr)">
-        <div class="stat-card">
-          <div class="stat-card-header"><div class="stat-card-icon cyan"><i class="fas fa-wallet"></i></div></div>
-          <div class="stat-card-value" style="background:linear-gradient(135deg,var(--cyan),var(--pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent;">$12,450</div>
-          <div class="stat-card-label">الرصيد الحالي</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-card-header"><div class="stat-card-icon green"><i class="fas fa-arrow-down"></i></div></div>
-          <div class="stat-card-value" style="background:linear-gradient(135deg,var(--cyan),var(--pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent;">$45,200</div>
-          <div class="stat-card-label">إجمالي الإيداع</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-card-header"><div class="stat-card-icon pink"><i class="fas fa-arrow-up"></i></div></div>
-          <div class="stat-card-value" style="background:linear-gradient(135deg,var(--cyan),var(--pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent;">$32,750</div>
-          <div class="stat-card-label">إجمالي الصرف</div>
-        </div>
-      </div>
-    </div>
+    <script>
+        // Loader
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loader').classList.add('hidden');
+            }, 800);
+        });
 
-    <!-- SETTINGS TAB -->
-    <div id="tab-settings" style="display:none">
-      <div class="topbar"><h1>الإعدادات</h1></div>
-      <div class="table-card">
-        <div style="font-size:18px;font-weight:700;margin-bottom:25px">إعدادات الحساب</div>
-        <div class="input-group" style="max-width:500px">
-          <label>الاسم الكامل</label>
-          <input type="text" value="مستخدم ᎷᎡ/ᏦᎯ ᏉᏫᏫ" id="settingName">
-        </div>
-        <div class="input-group" style="max-width:500px">
-          <label>البريد الإلكتروني</label>
-          <input type="email" value="user@mrkavoo.com" id="settingEmail">
-        </div>
-        <div class="input-group" style="max-width:500px">
-          <label>رقم الهاتف</label>
-          <input type="tel" value="+966 50 123 4567">
-        </div>
-        <button class="btn btn-primary" style="max-width:200px;margin-top:10px" onclick="saveSettings()">
-          <i class="fas fa-save"></i> حفظ التغييرات
-        </button>
-      </div>
-    </div>
+        // Scroll Animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
 
-  </div>
-</div>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
 
-<!-- Toast -->
-<div class="toast" id="toast">
-  <div class="toast-icon"><i class="fas fa-check"></i></div>
-  <div class="toast-text" id="toastText">تم بنجاح!</div>
-</div>
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
-<script>
-// ===== LOGIN =====
-function handleLogin(e){
-  e.preventDefault();
-  const email=document.getElementById('loginEmail').value;
-  const name=email.split('@')[0];
-  login(name,email);
-}
-function socialLogin(provider){
-  const names={google:'مستخدم Google',phone:'مستخدم الهاتف'};
-  login(names[provider],provider+'@mrkavoo.com');
-}
-function login(name,email){
-  localStorage.setItem('mrkavoo_user',JSON.stringify({name,email}));
-  document.getElementById('loginPage').style.display='none';
-  document.getElementById('dashboard').classList.add('active');
-  document.getElementById('dashName').textContent=name;
-  document.getElementById('dashEmail').textContent=email;
-  document.getElementById('dashAvatar').textContent=name.charAt(0).toUpperCase();
-  document.getElementById('settingName').value=name;
-  document.getElementById('settingEmail').value=email;
-  showToast('مرحبا بك في لوحة التحكم!');
-  initCharts();
-}
-function doLogout(){
-  localStorage.removeItem('mrkavoo_user');
-  location.reload();
-}
+        // Counter Animation
+        function animateCounter(el) {
+            const target = parseInt(el.getAttribute('data-target'));
+            const duration = 2000;
+            const step = target / (duration / 16);
+            let current = 0;
 
-// ===== TABS =====
-function switchTab(tab,el){
-  document.querySelectorAll('.sidebar-menu li').forEach(li=>li.classList.remove('active'));
-  if(el) el.classList.add('active');
-  document.querySelectorAll('[id^="tab-"]').forEach(t=>t.style.display='none');
-  document.getElementById('tab-'+tab).style.display='block';
-}
+            const timer = setInterval(() => {
+                current += step;
+                if (current >= target) {
+                    el.textContent = target.toLocaleString();
+                    clearInterval(timer);
+                } else {
+                    el.textContent = Math.floor(current).toLocaleString();
+                }
+            }, 16);
+        }
 
-// ===== TOAST =====
-function showToast(msg){
-  document.getElementById('toastText').textContent=msg;
-  document.getElementById('toast').classList.add('show');
-  setTimeout(()=>document.getElementById('toast').classList.remove('show'),3000);
-}
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const numbers = entry.target.querySelectorAll('.stat-number');
+                    numbers.forEach(num => animateCounter(num));
+                    statsObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
 
-// ===== SETTINGS =====
-function saveSettings(){
-  const name=document.getElementById('settingName').value;
-  const email=document.getElementById('settingEmail').value;
-  localStorage.setItem('mrkavoo_user',JSON.stringify({name,email}));
-  document.getElementById('dashName').textContent=name;
-  document.getElementById('dashEmail').textContent=email;
-  document.getElementById('dashAvatar').textContent=name.charAt(0).toUpperCase();
-  showToast('تم حفظ الإعدادات بنجاح!');
-}
+        const statsBar = document.querySelector('.stats-bar');
+        if (statsBar) statsObserver.observe(statsBar);
 
-// ===== MINI CHARTS =====
-function createMiniBars(id,color){
-  const container=document.getElementById(id);
-  if(!container)return;
-  for(let i=0;i<20;i++){
-    const bar=document.createElement('div');
-    bar.className='mini-bar';
-    bar.style.height=Math.random()*100+'%';
-    bar.style.background=color;
-    container.appendChild(bar);
-  }
-}
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
 
-// ===== MAIN CHARTS =====
-let chartsInitialized=false;
-function initCharts(){
-  if(chartsInitialized)return;
-  chartsInitialized=true;
+        // Particle System
+        const canvas = document.getElementById('particles');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
 
-  // Line chart
-  new Chart(document.getElementById('mainChart'),{
-    type:'line',
-    data:{
-      labels:['يناير','فبراير','مارس','أبريل','مايو','يونيو'],
-      datasets:[{
-        label:'المشاهدات',data:[120,190,300,500,800,1200],
-        borderColor:'#25F4EE',backgroundColor:'rgba(37,244,238,0.1)',
-        borderWidth:3,tension:0.4,fill:true,
-        pointBackgroundColor:'#25F4EE',pointBorderColor:'#fff',pointBorderWidth:2,pointRadius:5
-      },{
-        label:'التفاعلات',data:[50,80,150,250,400,600],
-        borderColor:'#FE2C55',backgroundColor:'rgba(254,44,85,0.1)',
-        borderWidth:3,tension:0.4,fill:true,
-        pointBackgroundColor:'#FE2C55',pointBorderColor:'#fff',pointBorderWidth:2,pointRadius:5
-      }]
-    },
-    options:{
-      responsive:true,maintainAspectRatio:false,
-      plugins:{legend:{labels:{color:'#fff',font:{family:'Tajawal'}}}},
-      scales:{
-        x:{ticks:{color:'#888',font:{family:'Tajawal'}},grid:{color:'rgba(255,255,255,0.05)'}},
-        y:{ticks:{color:'#888',font:{family:'Tajawal'}},grid:{color:'rgba(255,255,255,0.05)'}}
-      }
-    }
-  });
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
 
-  // Pie chart
-  new Chart(document.getElementById('pieChart'),{
-    type:'doughnut',
-    data:{
-      labels:['السعودية','الإمارات','مصر','الكويت','آخر'],
-      datasets:[{
-        data:[45,20,15,10,10],
-        backgroundColor:['#25F4EE','#FE2C55','#a78bfa','#fbbf24','#34d399'],
-        borderWidth:0
-      }]
-    },
-    options:{
-      responsive:true,maintainAspectRatio:false,
-      plugins:{legend:{position:'bottom',labels:{color:'#fff',font:{family:'Tajawal'},padding:15}}}
-    }
-  });
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 0.5;
+                this.speedX = (Math.random() - 0.5) * 0.5;
+                this.speedY = (Math.random() - 0.5) * 0.5;
+                this.opacity = Math.random() * 0.5 + 0.1;
+            }
 
-  // Analytics bar chart
-  new Chart(document.getElementById('analyticsChart'),{
-    type:'bar',
-    data:{
-      labels:['فيديو 1','فيديو 2','فيديو 3','فيديو 4','فيديو 5','فيديو 6'],
-      datasets:[{
-        label:'المشاهدات',data:[450,320,890,1200,650,980],
-        backgroundColor:'rgba(37,244,238,0.6)',borderRadius:6
-      },{
-        label:'الإعجابات',data:[120,80,250,400,180,320],
-        backgroundColor:'rgba(254,44,85,0.6)',borderRadius:6
-      }]
-    },
-    options:{
-      responsive:true,maintainAspectRatio:false,
-      plugins:{legend:{labels:{color:'#fff',font:{family:'Tajawal'}}}},
-      scales:{
-        x:{ticks:{color:'#888'},grid:{color:'rgba(255,255,255,0.05)'}},
-        y:{ticks:{color:'#888'},grid:{color:'rgba(255,255,255,0.05)'}}
-      }
-    }
-  });
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
 
-  // Mini charts
-  createMiniBars('chart1','#25F4EE');
-  createMiniBars('chart2','#FE2C55');
-  createMiniBars('chart3','#00ff88');
-}
+                if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+            }
 
-// ===== CHECK LOGIN =====
-window.addEventListener('load',()=>{
-  const user=localStorage.getItem('mrkavoo_user');
-  if(user){
-    const u=JSON.parse(user);
-    document.getElementById('loginPage').style.display='none';
-    document.getElementById('dashboard').classList.add('active');
-    document.getElementById('dashName').textContent=u.name;
-    document.getElementById('dashEmail').textContent=u.email;
-    document.getElementById('dashAvatar').textContent=u.name.charAt(0).toUpperCase());
-    document.getElementById('settingName').value=u.name;
-    document.getElementById('settingEmail').value=u.email;
-    setTimeout(initCharts,100);
-  }
-});
-</script>
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(0, 240, 255, ${this.opacity})`;
+                ctx.fill();
+            }
+        }
+
+        function initParticles() {
+            particles = [];
+            const particleCount = Math.min(100, Math.floor(window.innerWidth / 15));
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(new Particle());
+            }
+        }
+        initParticles();
+
+        function connectParticles() {
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < 150) {
+                        ctx.beginPath();
+                        ctx.strokeStyle = `rgba(0, 240, 255, ${0.1 * (1 - distance / 150)})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            connectParticles();
+            requestAnimationFrame(animateParticles);
+        }
+        animateParticles();
+
+        // Mobile Menu
+        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+            navLinks.style.position = 'absolute';
+            navLinks.style.top = '60px';
+            navLinks.style.right = '0';
+            navLinks.style.left = '0';
+            navLinks.style.flexDirection = 'column';
+            navLinks.style.background = 'rgba(5, 5, 16, 0.98)';
+            navLinks.style.padding = '20px';
+            navLinks.style.gap = '15px';
+            navLinks.style.borderBottom = '1px solid rgba(0, 240, 255, 0.2)';
+        });
+
+        // Button click handlers
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                if (!this.closest('form')) {
+                    // Show coming soon popup
+                    const popup = document.createElement('div');
+                    popup.style.cssText = `
+                        position: fixed;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                        background: var(--card);
+                        border: 1px solid var(--primary);
+                        border-radius: 20px;
+                        padding: 40px;
+                        text-align: center;
+                        z-index: 10000;
+                        box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+                        min-width: 300px;
+                    `;
+                    popup.innerHTML = `
+                        <div style="font-size: 3rem; margin-bottom: 20px;">🚀</div>
+                        <h3 style="margin-bottom: 15px; color: var(--primary);">قريباً!</h3>
+                        <p style="color: var(--text-muted); margin-bottom: 25px;">هذه الميزة قيد التطوير وسيتم إطلاقها قريباً.</p>
+                        <button onclick="this.parentElement.remove(); document.querySelector('.popup-overlay')?.remove();" 
+                            style="background: linear-gradient(135deg, var(--primary), var(--secondary)); color: var(--darker); border: none; padding: 12px 30px; border-radius: 25px; font-weight: 700; cursor: pointer; font-family: inherit;">
+                            حسناً
+                        </button>
+                    `;
+
+                    const overlay = document.createElement('div');
+                    overlay.className = 'popup-overlay';
+                    overlay.style.cssText = `
+                        position: fixed;
+                        top: 0; left: 0; width: 100%; height: 100%;
+                        background: rgba(0,0,0,0.7);
+                        z-index: 9999;
+                    `;
+                    overlay.addEventListener('click', () => {
+                        popup.remove();
+                        overlay.remove();
+                    });
+
+                    document.body.appendChild(overlay);
+                    document.body.appendChild(popup);
+                }
+            });
+        });
+    </script>
 </body>
-    </html>
+  </html>
