@@ -2,1595 +2,361 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ᎷᎡ/ᏦᎯ ᏉᏫᏫ - منصة التسويق الإلكتروني الذكية</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <title>أحمد عبد المنعم - السيرة الذاتية</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --primary: #00f0ff;
-            --secondary: #7000ff;
-            --accent: #ff00a0;
-            --dark: #0a0a1a;
-            --darker: #050510;
-            --card: #12122a;
-            --card-hover: #1a1a3a;
-            --text: #e0e0ff;
-            --text-muted: #8899aa;
-            --success: #00ff88;
-            --warning: #ffcc00;
-            --danger: #ff3366;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: 'Cairo', 'Tajawal', sans-serif;
-            background: var(--darker);
-            color: var(--text);
-            overflow-x: hidden;
-            min-height: 100vh;
+            font-family: 'Cairo', sans-serif;
+            background: #fff;
+            color: #222;
+            direction: rtl;
+            font-size: 13px;
+            line-height: 1.7;
         }
 
-        /* Animated Background */
-        .bg-animation {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            overflow: hidden;
+        .page {
+            width: 210mm;
+            min-height: 297mm;
+            margin: 0 auto;
+            padding: 25mm 20mm;
         }
 
-        .bg-animation .circle {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(80px);
-            opacity: 0.15;
-            animation: float 20s infinite ease-in-out;
-        }
-
-        .bg-animation .circle:nth-child(1) {
-            width: 400px;
-            height: 400px;
-            background: var(--primary);
-            top: -100px;
-            right: -100px;
-            animation-delay: 0s;
-        }
-
-        .bg-animation .circle:nth-child(2) {
-            width: 300px;
-            height: 300px;
-            background: var(--secondary);
-            bottom: -50px;
-            left: -50px;
-            animation-delay: -5s;
-        }
-
-        .bg-animation .circle:nth-child(3) {
-            width: 250px;
-            height: 250px;
-            background: var(--accent);
-            top: 50%;
-            left: 50%;
-            animation-delay: -10s;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            25% { transform: translate(50px, -50px) scale(1.1); }
-            50% { transform: translate(-30px, 30px) scale(0.9); }
-            75% { transform: translate(40px, 20px) scale(1.05); }
-        }
-
-        /* Grid Pattern Overlay */
-        .grid-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            background-image: 
-                linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
-            background-size: 50px 50px;
-            pointer-events: none;
-        }
-
-        /* Navigation */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            padding: 15px 30px;
-            background: rgba(5, 5, 16, 0.9);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(0, 240, 255, 0.1);
-            z-index: 1000;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 900;
-            background: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-shadow: 0 0 30px rgba(0, 240, 255, 0.3);
-            letter-spacing: 2px;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 30px;
-            list-style: none;
-        }
-
-        .nav-links a {
-            color: var(--text-muted);
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.95rem;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            right: 0;
-            width: 0;
-            height: 2px;
-            background: linear-gradient(90deg, var(--primary), var(--accent));
-            transition: width 0.3s ease;
-        }
-
-        .nav-links a:hover {
-            color: var(--primary);
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        .nav-cta {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: var(--darker) !important;
-            padding: 10px 25px;
-            border-radius: 25px;
-            font-weight: 700;
-            transition: all 0.3s ease;
-            box-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
-        }
-
-        .nav-cta:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 30px rgba(0, 240, 255, 0.5);
-        }
-
-        .mobile-menu-btn {
-            display: none;
-            font-size: 1.5rem;
-            color: var(--primary);
-            cursor: pointer;
-        }
-
-        /* Hero Section */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        /* Header */
+        .header {
             text-align: center;
-            padding: 120px 20px 60px;
-            position: relative;
-        }
-
-        .hero-content {
-            max-width: 900px;
-        }
-
-        .hero-badge {
-            display: inline-block;
-            padding: 8px 20px;
-            background: rgba(0, 240, 255, 0.1);
-            border: 1px solid rgba(0, 240, 255, 0.3);
-            border-radius: 50px;
-            color: var(--primary);
-            font-size: 0.85rem;
-            font-weight: 700;
-            margin-bottom: 30px;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { box-shadow: 0 0 0 0 rgba(0, 240, 255, 0.4); }
-            50% { box-shadow: 0 0 0 10px rgba(0, 240, 255, 0); }
-        }
-
-        .hero h1 {
-            font-size: 4rem;
-            font-weight: 900;
+            border-bottom: 3px solid #1a365d;
+            padding-bottom: 15px;
             margin-bottom: 20px;
-            line-height: 1.2;
         }
 
-        .hero h1 .gradient-text {
-            background: linear-gradient(135deg, var(--primary), var(--accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+        .name {
+            font-size: 28px;
+            font-weight: 800;
+            color: #1a365d;
+            margin-bottom: 4px;
         }
 
-        .hero p {
-            font-size: 1.3rem;
-            color: var(--text-muted);
-            margin-bottom: 40px;
-            line-height: 1.8;
+        .title {
+            font-size: 15px;
+            color: #4a5568;
+            font-weight: 600;
+            margin-bottom: 10px;
         }
 
-        .hero-buttons {
+        .contact-line {
             display: flex;
-            gap: 20px;
             justify-content: center;
             flex-wrap: wrap;
-        }
-
-        .btn {
-            padding: 15px 40px;
-            border-radius: 50px;
-            font-size: 1.1rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            border: none;
-            font-family: inherit;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: var(--darker);
-            box-shadow: 0 5px 25px rgba(0, 240, 255, 0.4);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 40px rgba(0, 240, 255, 0.6);
-        }
-
-        .btn-outline {
-            background: transparent;
-            color: var(--primary);
-            border: 2px solid var(--primary);
-        }
-
-        .btn-outline:hover {
-            background: rgba(0, 240, 255, 0.1);
-            transform: translateY(-3px);
-        }
-
-        /* Stats Bar */
-        .stats-bar {
-            display: flex;
-            justify-content: center;
-            gap: 60px;
-            padding: 40px;
-            background: rgba(18, 18, 42, 0.6);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            margin: -40px auto 0;
-            max-width: 1000px;
-            border: 1px solid rgba(0, 240, 255, 0.1);
-            position: relative;
-            z-index: 10;
-        }
-
-        .stat-item {
-            text-align: center;
-        }
-
-        .stat-number {
-            font-size: 2.5rem;
-            font-weight: 900;
-            background: linear-gradient(135deg, var(--primary), var(--accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .stat-label {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            margin-top: 5px;
-        }
-
-        /* Section Styles */
-        section {
-            padding: 100px 20px;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 60px;
-        }
-
-        .section-header h2 {
-            font-size: 2.5rem;
-            font-weight: 900;
-            margin-bottom: 15px;
-        }
-
-        .section-header p {
-            color: var(--text-muted);
-            font-size: 1.1rem;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .section-line {
-            width: 80px;
-            height: 4px;
-            background: linear-gradient(90deg, var(--primary), var(--accent));
-            margin: 20px auto;
-            border-radius: 2px;
-        }
-
-        /* Services Section */
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-
-        .service-card {
-            background: var(--card);
-            border-radius: 20px;
-            padding: 40px 30px;
-            border: 1px solid rgba(0, 240, 255, 0.1);
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .service-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
-            transform: scaleX(0);
-            transition: transform 0.4s ease;
-        }
-
-        .service-card:hover {
-            transform: translateY(-10px);
-            border-color: rgba(0, 240, 255, 0.3);
-            box-shadow: 0 20px 50px rgba(0, 240, 255, 0.1);
-        }
-
-        .service-card:hover::before {
-            transform: scaleX(1);
-        }
-
-        .service-icon {
-            width: 70px;
-            height: 70px;
-            border-radius: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.8rem;
-            margin-bottom: 25px;
-            background: rgba(0, 240, 255, 0.1);
-            color: var(--primary);
-        }
-
-        .service-card:nth-child(2) .service-icon {
-            background: rgba(112, 0, 255, 0.1);
-            color: var(--secondary);
-        }
-
-        .service-card:nth-child(3) .service-icon {
-            background: rgba(255, 0, 160, 0.1);
-            color: var(--accent);
-        }
-
-        .service-card:nth-child(4) .service-icon {
-            background: rgba(0, 255, 136, 0.1);
-            color: var(--success);
-        }
-
-        .service-card:nth-child(5) .service-icon {
-            background: rgba(255, 204, 0, 0.1);
-            color: var(--warning);
-        }
-
-        .service-card:nth-child(6) .service-icon {
-            background: rgba(255, 51, 102, 0.1);
-            color: var(--danger);
-        }
-
-        .service-card h3 {
-            font-size: 1.3rem;
-            margin-bottom: 15px;
-        }
-
-        .service-card p {
-            color: var(--text-muted);
-            line-height: 1.7;
-            font-size: 0.95rem;
-        }
-
-        /* Dashboard Preview */
-        .dashboard-section {
-            background: linear-gradient(180deg, transparent, rgba(0, 240, 255, 0.03), transparent);
-        }
-
-        .dashboard-preview {
-            background: var(--card);
-            border-radius: 25px;
-            border: 1px solid rgba(0, 240, 255, 0.15);
-            overflow: hidden;
-            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
-        }
-
-        .dashboard-header {
-            padding: 20px 30px;
-            background: rgba(0, 0, 0, 0.3);
-            display: flex;
-            align-items: center;
             gap: 15px;
-            border-bottom: 1px solid rgba(0, 240, 255, 0.1);
+            font-size: 12px;
+            color: #4a5568;
         }
 
-        .dashboard-dots {
-            display: flex;
-            gap: 8px;
-        }
-
-        .dashboard-dots span {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-        }
-
-        .dashboard-dots span:nth-child(1) { background: #ff5f57; }
-        .dashboard-dots span:nth-child(2) { background: #ffbd2e; }
-        .dashboard-dots span:nth-child(3) { background: #28c840; }
-
-        .dashboard-title {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-        }
-
-        .dashboard-body {
-            padding: 30px;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-        }
-
-        .dash-widget {
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 15px;
-            padding: 25px;
-            border: 1px solid rgba(0, 240, 255, 0.1);
-        }
-
-        .dash-widget-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-        }
-
-        .dash-widget-title {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-        }
-
-        .dash-widget-icon {
-            width: 35px;
-            height: 35px;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.9rem;
-        }
-
-        .dash-widget-value {
-            font-size: 2rem;
-            font-weight: 900;
-            margin-bottom: 5px;
-        }
-
-        .dash-widget-change {
-            font-size: 0.8rem;
+        .contact-line span {
             display: flex;
             align-items: center;
             gap: 5px;
         }
 
-        .positive { color: var(--success); }
-        .negative { color: var(--danger); }
-
-        /* Chart Bars Animation */
-        .chart-container {
-            grid-column: span 2;
-            min-height: 200px;
+        /* Sections */
+        .section {
+            margin-bottom: 18px;
         }
 
-        .chart-bars {
-            display: flex;
-            align-items: flex-end;
-            justify-content: space-around;
-            height: 150px;
-            gap: 10px;
-            padding-top: 20px;
-        }
-
-        .chart-bar {
-            flex: 1;
-            background: linear-gradient(to top, var(--primary), var(--secondary));
-            border-radius: 5px 5px 0 0;
-            min-width: 20px;
-            animation: growUp 1.5s ease-out forwards;
-            transform-origin: bottom;
-            transform: scaleY(0);
-        }
-
-        @keyframes growUp {
-            to { transform: scaleY(1); }
-        }
-
-        .chart-labels {
-            display: flex;
-            justify-content: space-around;
-            margin-top: 10px;
-            font-size: 0.75rem;
-            color: var(--text-muted);
-        }
-
-        /* Pricing Section */
-        .pricing-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            align-items: center;
-        }
-
-        .pricing-card {
-            background: var(--card);
-            border-radius: 25px;
-            padding: 40px 30px;
-            border: 1px solid rgba(0, 240, 255, 0.1);
-            text-align: center;
-            transition: all 0.4s ease;
-            position: relative;
-        }
-
-        .pricing-card.featured {
-            border-color: var(--primary);
-            transform: scale(1.05);
-            box-shadow: 0 20px 50px rgba(0, 240, 255, 0.15);
-        }
-
-        .pricing-card.featured::before {
-            content: 'الأكثر شيوعاً';
-            position: absolute;
-            top: -12px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: var(--darker);
-            padding: 5px 20px;
-            border-radius: 20px;
-            font-size: 0.8rem;
+        .section-title {
+            font-size: 16px;
             font-weight: 700;
-        }
-
-        .pricing-card:hover {
-            transform: translateY(-10px);
-            border-color: rgba(0, 240, 255, 0.3);
-        }
-
-        .pricing-card.featured:hover {
-            transform: scale(1.05) translateY(-10px);
-        }
-
-        .pricing-name {
-            font-size: 1.5rem;
-            font-weight: 700;
+            color: #1a365d;
+            border-bottom: 2px solid #1a365d;
+            padding-bottom: 5px;
             margin-bottom: 10px;
-        }
-
-        .pricing-desc {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            margin-bottom: 25px;
-        }
-
-        .pricing-price {
-            font-size: 3.5rem;
-            font-weight: 900;
-            margin-bottom: 5px;
-        }
-
-        .pricing-price span {
-            font-size: 1rem;
-            color: var(--text-muted);
-            font-weight: 400;
-        }
-
-        .pricing-features {
-            list-style: none;
-            margin: 30px 0;
-            text-align: right;
-        }
-
-        .pricing-features li {
-            padding: 12px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
             display: flex;
             align-items: center;
-            gap: 10px;
-            font-size: 0.95rem;
+            gap: 8px;
         }
 
-        .pricing-features li i {
-            color: var(--success);
-        }
-
-        .pricing-features li.unavailable {
-            color: var(--text-muted);
-        }
-
-        .pricing-features li.unavailable i {
-            color: var(--danger);
-        }
-
-        /* Testimonials */
-        .testimonials-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
-        }
-
-        .testimonial-card {
-            background: var(--card);
-            border-radius: 20px;
-            padding: 35px;
-            border: 1px solid rgba(0, 240, 255, 0.1);
-            transition: all 0.3s ease;
-        }
-
-        .testimonial-card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(0, 240, 255, 0.2);
-        }
-
-        .testimonial-stars {
-            color: var(--warning);
-            margin-bottom: 15px;
-            font-size: 0.9rem;
-        }
-
-        .testimonial-text {
-            font-size: 1rem;
-            line-height: 1.8;
-            margin-bottom: 20px;
-            color: var(--text);
-        }
-
-        .testimonial-author {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .testimonial-avatar {
-            width: 50px;
-            height: 50px;
+        .section-title::before {
+            content: '';
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: #1a365d;
             border-radius: 50%;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
+        }
+
+        /* Two columns */
+        .two-col {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 900;
-            font-size: 1.2rem;
-            color: var(--darker);
+            gap: 25px;
         }
 
-        .testimonial-info h4 {
-            font-size: 1rem;
-            margin-bottom: 3px;
+        .col-left { flex: 1.4; }
+        .col-right { flex: 1; }
+
+        /* About */
+        .about-text {
+            font-size: 12.5px;
+            color: #333;
+            text-align: justify;
+            line-height: 1.8;
         }
 
-        .testimonial-info p {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-        }
-
-        /* CTA Section */
-        .cta-section {
-            text-align: center;
-            padding: 100px 20px;
+        /* Experience */
+        .exp-item {
+            margin-bottom: 12px;
+            padding-right: 15px;
+            border-right: 2px solid #cbd5e0;
             position: relative;
         }
 
-        .cta-box {
-            background: linear-gradient(135deg, rgba(0, 240, 255, 0.1), rgba(112, 0, 255, 0.1));
-            border: 1px solid rgba(0, 240, 255, 0.2);
-            border-radius: 30px;
-            padding: 80px 40px;
-            max-width: 900px;
-            margin: 0 auto;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .cta-box::before {
+        .exp-item::before {
             content: '';
             position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(0, 240, 255, 0.1) 0%, transparent 70%);
-            animation: rotate 20s linear infinite;
-        }
-
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        .cta-content {
-            position: relative;
-            z-index: 1;
-        }
-
-        .cta-box h2 {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-        }
-
-        .cta-box p {
-            color: var(--text-muted);
-            font-size: 1.1rem;
-            margin-bottom: 40px;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        /* Footer */
-        footer {
-            background: var(--dark);
-            border-top: 1px solid rgba(0, 240, 255, 0.1);
-            padding: 60px 20px 30px;
-        }
-
-        .footer-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 40px;
-            max-width: 1200px;
-            margin: 0 auto 50px;
-        }
-
-        .footer-col h4 {
-            font-size: 1.1rem;
-            margin-bottom: 20px;
-            color: var(--primary);
-        }
-
-        .footer-col ul {
-            list-style: none;
-        }
-
-        .footer-col ul li {
-            margin-bottom: 12px;
-        }
-
-        .footer-col ul li a {
-            color: var(--text-muted);
-            text-decoration: none;
-            transition: color 0.3s ease;
-            font-size: 0.95rem;
-        }
-
-        .footer-col ul li a:hover {
-            color: var(--primary);
-        }
-
-        .footer-social {
-            display: flex;
-            gap: 15px;
-            margin-top: 20px;
-        }
-
-        .footer-social a {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: rgba(0, 240, 255, 0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--primary);
-            text-decoration: none;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(0, 240, 255, 0.2);
-        }
-
-        .footer-social a:hover {
-            background: var(--primary);
-            color: var(--darker);
-            transform: translateY(-3px);
-        }
-
-        .footer-bottom {
-            text-align: center;
-            padding-top: 30px;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-            color: var(--text-muted);
-            font-size: 0.9rem;
-        }
-
-        .footer-bottom .logo {
-            font-size: 1.2rem;
-            margin-bottom: 10px;
-            display: inline-block;
-        }
-
-        /* Scroll Animation */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease;
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-
-            .mobile-menu-btn {
-                display: block;
-            }
-
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-
-            .hero p {
-                font-size: 1rem;
-            }
-
-            .stats-bar {
-                flex-direction: column;
-                gap: 30px;
-            }
-
-            .pricing-card.featured {
-                transform: scale(1);
-            }
-
-            .pricing-card.featured:hover {
-                transform: scale(1) translateY(-10px);
-            }
-
-            .chart-container {
-                grid-column: span 1;
-            }
-        }
-
-        /* Scrollbar */
-        ::-webkit-scrollbar {
+            right: -5px;
+            top: 6px;
             width: 8px;
+            height: 8px;
+            background: #1a365d;
+            border-radius: 50%;
         }
 
-        ::-webkit-scrollbar-track {
-            background: var(--darker);
+        .exp-item.current::before { background: #22c55e; }
+
+        .exp-date {
+            font-size: 11px;
+            color: #718096;
+            font-weight: 600;
+            margin-bottom: 2px;
         }
 
-        ::-webkit-scrollbar-thumb {
-            background: linear-gradient(var(--primary), var(--secondary));
+        .exp-company {
+            font-size: 13px;
+            font-weight: 700;
+            color: #1a365d;
+        }
+
+        .exp-role {
+            font-size: 12px;
+            color: #d69e2e;
+            font-weight: 600;
+        }
+
+        /* Skills */
+        .skill-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            margin-bottom: 8px;
+            padding: 6px 10px;
+            background: #f7fafc;
             border-radius: 4px;
         }
 
-        /* Loading Animation */
-        .loader {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--darker);
+        .skill-bullet {
+            width: 6px;
+            height: 6px;
+            background: #1a365d;
+            border-radius: 50%;
+            margin-top: 7px;
+            flex-shrink: 0;
+        }
+
+        .skill-text h4 {
+            font-size: 12px;
+            font-weight: 700;
+            color: #1a365d;
+        }
+
+        .skill-text p {
+            font-size: 11px;
+            color: #718096;
+        }
+
+        /* Education */
+        .edu-box {
+            background: #fffaf0;
+            border: 1px solid #fbd38d;
+            border-radius: 6px;
+            padding: 10px 12px;
+        }
+
+        .edu-box h4 {
+            font-size: 13px;
+            font-weight: 700;
+            color: #1a365d;
+            margin-bottom: 2px;
+        }
+
+        .edu-box .major {
+            font-size: 12px;
+            color: #c05621;
+            font-weight: 600;
+        }
+
+        .edu-box .years {
+            font-size: 11px;
+            color: #718096;
+        }
+
+        /* Traits */
+        .trait-item {
             display: flex;
             align-items: center;
-            justify-content: center;
-            z-index: 9999;
-            transition: opacity 0.5s ease, visibility 0.5s ease;
+            gap: 6px;
+            margin-bottom: 6px;
+            font-size: 12px;
+            color: #333;
         }
 
-        .loader.hidden {
-            opacity: 0;
-            visibility: hidden;
+        .trait-item::before {
+            content: '✓';
+            color: #22c55e;
+            font-weight: 700;
+            font-size: 13px;
         }
 
-        .loader-spinner {
-            width: 60px;
-            height: 60px;
-            border: 3px solid rgba(0, 240, 255, 0.1);
-            border-top-color: var(--primary);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        /* Particle Canvas */
-        #particles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            pointer-events: none;
+        @media print {
+            body { background: white; }
+            .page { padding: 20mm 18mm; }
         }
     </style>
 </head>
 <body>
-    <!-- Loader -->
-    <div class="loader" id="loader">
-        <div class="loader-spinner"></div>
+    <div class="page">
+        <!-- Header -->
+        <div class="header">
+            <h1 class="name">أحمد عبد المنعم إسماعيل محمد</h1>
+            <p class="title">نائب مدير عمليات | مطور تطبيقات</p>
+            <div class="contact-line">
+                <span>📞 0551139663</span>
+                <span>✉️ abdelmonama50@gmail.com</span>
+                <span>📍 جدة - المملكة العربية السعودية</span>
+                <span>🎂 15 ديسمبر 1999</span>
+                <span>🌍 مصري الجنسية</span>
+            </div>
+        </div>
+
+        <!-- About -->
+        <div class="section">
+            <h2 class="section-title">نبذة عني</h2>
+            <p class="about-text">أعمل في بيئة تنافسية يمكنني من خلالها تطبيق مهاراتي الشخصية وخلفيتي المعلوماتية لتحقيق أهداف المنظمة واكتساب الخبرة. أمتلك خبرة متنوعة في مجال التكييف والتبريد، وإدارة العمليات، بالإضافة إلى تطوير التطبيقات وقواعد البيانات. أبحث دائمًا عن فرص تطويرية تساهم في بناء مسيرتي المهنية.</p>
+        </div>
+
+        <div class="two-col">
+            <!-- Left Column -->
+            <div class="col-left">
+                <!-- Experience -->
+                <div class="section">
+                    <h2 class="section-title">الخبرات العملية</h2>
+
+                    <div class="exp-item current">
+                        <div class="exp-date">يناير 2026 - الآن</div>
+                        <div class="exp-company">مؤسسة فنون المعمارية للمقاولات</div>
+                        <div class="exp-role">فني تدفئة وتهوية وتكييف</div>
+                    </div>
+
+                    <div class="exp-item">
+                        <div class="exp-date">2023 - 2026</div>
+                        <div class="exp-company">شركة تمويلي للمشروعات الصغيرة والمتوسطة</div>
+                        <div class="exp-role">نائب مدير العمليات</div>
+                    </div>
+
+                    <div class="exp-item">
+                        <div class="exp-date">2022 - 2023</div>
+                        <div class="exp-company">جمعية المبادرة</div>
+                        <div class="exp-role">مسؤول استعلام ميداني (مراجع - متابع)</div>
+                    </div>
+                </div>
+
+                <!-- Education -->
+                <div class="section">
+                    <h2 class="section-title">التعليم</h2>
+                    <div class="edu-box">
+                        <h4>معهد فني صناعي</h4>
+                        <div class="major">تخصص تبريد وتكييف</div>
+                        <div class="years">الخمس سنوات</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column -->
+            <div class="col-right">
+                <!-- Skills -->
+                <div class="section">
+                    <h2 class="section-title">المهارات</h2>
+
+                    <div class="skill-item">
+                        <div class="skill-bullet"></div>
+                        <div class="skill-text">
+                            <h4>فن التسويق والتخطيط</h4>
+                            <p>استراتيجيات التسويق والتخطيط</p>
+                        </div>
+                    </div>
+
+                    <div class="skill-item">
+                        <div class="skill-bullet"></div>
+                        <div class="skill-text">
+                            <h4>المهارات التنظيمية</h4>
+                            <p>إدارة الوقت والموارد</p>
+                        </div>
+                    </div>
+
+                    <div class="skill-item">
+                        <div class="skill-bullet"></div>
+                        <div class="skill-text">
+                            <h4>رخصة قيادة سعودية (خاصة)</h4>
+                            <p>سارية المفعول</p>
+                        </div>
+                    </div>
+
+                    <div class="skill-item">
+                        <div class="skill-bullet"></div>
+                        <div class="skill-text">
+                            <h4>خدمة العملاء</h4>
+                            <p>تعامل ممتاز مع العملاء</p>
+                        </div>
+                    </div>
+
+                    <div class="skill-item">
+                        <div class="skill-bullet"></div>
+                        <div class="skill-text">
+                            <h4>IT - ICDL - Microsoft Office</h4>
+                            <p>إجادة تامة للبرامج المكتبية</p>
+                        </div>
+                    </div>
+
+                    <div class="skill-item">
+                        <div class="skill-bullet"></div>
+                        <div class="skill-text">
+                            <h4>البرمجة وتطوير التطبيقات</h4>
+                            <p>تطوير مواقع وتطبيقات ويب</p>
+                        </div>
+                    </div>
+
+                    <div class="skill-item">
+                        <div class="skill-bullet"></div>
+                        <div class="skill-text">
+                            <h4>قواعد البيانات</h4>
+                            <p>تصميم وإدارة قواعد البيانات</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Traits -->
+                <div class="section">
+                    <h2 class="section-title">سمات الشخصية</h2>
+
+                    <div class="trait-item">القدرة على التعلم وتطوير الذات</div>
+                    <div class="trait-item">المرونة والقدرة على العمل في أي وقت</div>
+                    <div class="trait-item">القدرة على العمل تحت أي ضغط</div>
+                    <div class="trait-item">التعاون الإيجابي لمصلحة العمل</div>
+                    <div class="trait-item">القدرة على القيام بمهام مختلفة</div>
+                    <div class="trait-item">عدم التواني في أداء المهام</div>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <!-- Background Effects -->
-    <div class="bg-animation">
-        <div class="circle"></div>
-        <div class="circle"></div>
-        <div class="circle"></div>
-    </div>
-    <div class="grid-overlay"></div>
-    <canvas id="particles"></canvas>
-
-    <!-- Navigation -->
-    <nav>
-        <div class="logo">ᎷᎡ/ᏦᎯ ᏉᏫᏫ</div>
-        <ul class="nav-links">
-            <li><a href="#home">الرئيسية</a></li>
-            <li><a href="#services">الخدمات</a></li>
-            <li><a href="#dashboard">لوحة التحكم</a></li>
-            <li><a href="#pricing">الأسعار</a></li>
-            <li><a href="#testimonials">آراء العملاء</a></li>
-            <li><a href="#contact" class="nav-cta">ابدأ الآن</a></li>
-        </ul>
-        <div class="mobile-menu-btn"><i class="fas fa-bars"></i></div>
-    </nav>
-
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="hero-content">
-            <div class="hero-badge">
-                <i class="fas fa-sparkles"></i> منصة التسويق الذكية رقم 1 في الوطن العربي
-            </div>
-            <h1>
-                ارتقِ بمحتواك مع<br>
-                <span class="gradient-text">ᎷᎡ/ᏦᎯ ᏉᏫᏫ</span>
-            </h1>
-            <p>
-                منصة تسويق إلكتروني ذكية تستخدم أحدث تقنيات الذكاء الاصطناعي لتحليل أداء حساباتك، 
-                اقتراح أفضل المحتويات، وجدولة النشر في أوقات الذروة لتحقيق أقصى انتشار.
-            </p>
-            <div class="hero-buttons">
-                <a href="#dashboard" class="btn btn-primary">
-                    <i class="fas fa-rocket"></i> جرّب المنصة مجاناً
-                </a>
-                <a href="#services" class="btn btn-outline">
-                    <i class="fas fa-play"></i> شاهد العرض التوضيحي
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Stats Bar -->
-    <div class="stats-bar fade-in">
-        <div class="stat-item">
-            <div class="stat-number" data-target="50000">0</div>
-            <div class="stat-label">مستخدم نشط</div>
-        </div>
-        <div class="stat-item">
-            <div class="stat-number" data-target="2500000">0</div>
-            <div class="stat-label">محتوى تم تحليله</div>
-        </div>
-        <div class="stat-item">
-            <div class="stat-number" data-target="98">0</div>
-            <div class="stat-label">نسبة رضا العملاء %</div>
-        </div>
-        <div class="stat-item">
-            <div class="stat-number" data-target="150">0</div>
-            <div class="stat-label">دولة حول العالم</div>
-        </div>
-    </div>
-
-    <!-- Services Section -->
-    <section id="services">
-        <div class="section-header fade-in">
-            <h2>خدماتنا المتكاملة</h2>
-            <div class="section-line"></div>
-            <p>حلول ذكية لتسويق محتواك على TikTok ومنصات التواصل الاجتماعي</p>
-        </div>
-        <div class="services-grid">
-            <div class="service-card fade-in">
-                <div class="service-icon"><i class="fas fa-chart-line"></i></div>
-                <h3>تحليلات الأداء الذكية</h3>
-                <p>تتبع مؤشرات أداء حساباتك في الوقت الفعلي مع تقارير تفصيلية ورسوم بيانية تفاعلية تساعدك على فهم جمهورك.</p>
-            </div>
-            <div class="service-card fade-in">
-                <div class="service-icon"><i class="fas fa-lightbulb"></i></div>
-                <h3>مساعد AI للمحتوى</h3>
-                <p>ذكاء اصطناعي متقدم يقترح أفكار فيديوهات، هاشتاجات رائجة، ونصوص جذابة بناءً على تحليل الترندات الحالية.</p>
-            </div>
-            <div class="service-card fade-in">
-                <div class="service-icon"><i class="fas fa-clock"></i></div>
-                <h3>جدولة ذكية للنشر</h3>
-                <p>حدد أفضل أوقات النشر بناءً على نشاط جمهورك مع إمكانية الجدولة المسبقة لأسابيع أو أشهر قادمة.</p>
-            </div>
-            <div class="service-card fade-in">
-                <div class="service-icon"><i class="fas fa-users"></i></div>
-                <h3>تحليل الجمهور</h3>
-                <p>فهم ديموغرافيا متابعيك، اهتماماتهم، وسلوكهم التفاعلي لإنشاء محتوى يتناسب مع توقعاتهم.</p>
-            </div>
-            <div class="service-card fade-in">
-                <div class="service-icon"><i class="fas fa-fire"></i></div>
-                <h3>تتبع الترندات</h3>
-                <p>راقب أحدث الترندات والتحديات الرائجة في منطقتك وعلى مستوى العالم لتكون دائماً في المقدمة.</p>
-            </div>
-            <div class="service-card fade-in">
-                <div class="service-icon"><i class="fas fa-file-pdf"></i></div>
-                <h3>تقارير احترافية</h3>
-                <p>صدّر تقارير أداء تفاعلية بصيغة PDF لمشاركتها مع فريقك أو عملائك بشكل احترافي.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Dashboard Preview -->
-    <section class="dashboard-section" id="dashboard">
-        <div class="section-header fade-in">
-            <h2>لوحة تحكم ذكية</h2>
-            <div class="section-line"></div>
-            <p>واجهة مستخدم بديهية تعرض كل ما تحتاجه لإدارة حساباتك في مكان واحد</p>
-        </div>
-        <div class="dashboard-preview fade-in">
-            <div class="dashboard-header">
-                <div class="dashboard-dots">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
-                <div class="dashboard-title">لوحة تحكم ᎷᎡ/ᏦᎯ ᏉᏫᏫ - TikTok Analytics</div>
-            </div>
-            <div class="dashboard-body">
-                <div class="dash-widget">
-                    <div class="dash-widget-header">
-                        <span class="dash-widget-title">المشاهدات</span>
-                        <div class="dash-widget-icon" style="background: rgba(0,240,255,0.1); color: var(--primary);">
-                            <i class="fas fa-eye"></i>
-                        </div>
-                    </div>
-                    <div class="dash-widget-value" style="color: var(--primary);">2.4M</div>
-                    <div class="dash-widget-change positive">
-                        <i class="fas fa-arrow-up"></i> +23.5% هذا الشهر
-                    </div>
-                </div>
-                <div class="dash-widget">
-                    <div class="dash-widget-header">
-                        <span class="dash-widget-title">المتابعين</span>
-                        <div class="dash-widget-icon" style="background: rgba(112,0,255,0.1); color: var(--secondary);">
-                            <i class="fas fa-user-plus"></i>
-                        </div>
-                    </div>
-                    <div class="dash-widget-value" style="color: var(--secondary);">185K</div>
-                    <div class="dash-widget-change positive">
-                        <i class="fas fa-arrow-up"></i> +12.8% هذا الشهر
-                    </div>
-                </div>
-                <div class="dash-widget">
-                    <div class="dash-widget-header">
-                        <span class="dash-widget-title">معدل التفاعل</span>
-                        <div class="dash-widget-icon" style="background: rgba(255,0,160,0.1); color: var(--accent);">
-                            <i class="fas fa-heart"></i>
-                        </div>
-                    </div>
-                    <div class="dash-widget-value" style="color: var(--accent);">8.7%</div>
-                    <div class="dash-widget-change positive">
-                        <i class="fas fa-arrow-up"></i> +5.2% هذا الشهر
-                    </div>
-                </div>
-                <div class="dash-widget">
-                    <div class="dash-widget-header">
-                        <span class="dash-widget-title">الفيديوهات</span>
-                        <div class="dash-widget-icon" style="background: rgba(0,255,136,0.1); color: var(--success);">
-                            <i class="fas fa-video"></i>
-                        </div>
-                    </div>
-                    <div class="dash-widget-value" style="color: var(--success);">342</div>
-                    <div class="dash-widget-change positive">
-                        <i class="fas fa-arrow-up"></i> +18 هذا الشهر
-                    </div>
-                </div>
-                <div class="dash-widget chart-container">
-                    <div class="dash-widget-header">
-                        <span class="dash-widget-title">أداء المشاهدات - آخر 7 أيام</span>
-                        <div class="dash-widget-icon" style="background: rgba(255,204,0,0.1); color: var(--warning);">
-                            <i class="fas fa-chart-bar"></i>
-                        </div>
-                    </div>
-                    <div class="chart-bars">
-                        <div class="chart-bar" style="height: 40%"></div>
-                        <div class="chart-bar" style="height: 65%"></div>
-                        <div class="chart-bar" style="height: 45%"></div>
-                        <div class="chart-bar" style="height: 80%"></div>
-                        <div class="chart-bar" style="height: 55%"></div>
-                        <div class="chart-bar" style="height: 90%"></div>
-                        <div class="chart-bar" style="height: 75%"></div>
-                    </div>
-                    <div class="chart-labels">
-                        <span>السبت</span>
-                        <span>الأحد</span>
-                        <span>الإثنين</span>
-                        <span>الثلاثاء</span>
-                        <span>الأربعاء</span>
-                        <span>الخميس</span>
-                        <span>الجمعة</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Pricing Section -->
-    <section id="pricing">
-        <div class="section-header fade-in">
-            <h2>خطط الأسعار</h2>
-            <div class="section-line"></div>
-            <p>اختر الخطة المناسبة لاحتياجاتك وابدأ رحلة النمو معنا</p>
-        </div>
-        <div class="pricing-grid">
-            <div class="pricing-card fade-in">
-                <div class="pricing-name">البداية</div>
-                <div class="pricing-desc">مثالي للمبتدئين</div>
-                <div class="pricing-price">مجاني<span> / للأبد</span></div>
-                <ul class="pricing-features">
-                    <li><i class="fas fa-check"></i> تحليل حساب واحد</li>
-                    <li><i class="fas fa-check"></i> 10 اقتراحات محتوى يومياً</li>
-                    <li><i class="fas fa-check"></i> تقرير أداء أسبوعي</li>
-                    <li><i class="fas fa-check"></i> تتبع 5 هاشتاجات</li>
-                    <li class="unavailable"><i class="fas fa-times"></i> جدولة النشر</li>
-                    <li class="unavailable"><i class="fas fa-times"></i> تحليل المنافسين</li>
-                    <li class="unavailable"><i class="fas fa-times"></i> دعم فني م priority</li>
-                </ul>
-                <button class="btn btn-outline" style="width: 100%;">ابدأ مجاناً</button>
-            </div>
-            <div class="pricing-card featured fade-in">
-                <div class="pricing-name">المحترف</div>
-                <div class="pricing-desc">للمؤثرين وصناع المحتوى</div>
-                <div class="pricing-price">$29<span> / شهر</span></div>
-                <ul class="pricing-features">
-                    <li><i class="fas fa-check"></i> 5 حسابات</li>
-                    <li><i class="fas fa-check"></i> اقتراحات محتوى غير محدودة</li>
-                    <li><i class="fas fa-check"></i> تقارير يومية مفصلة</li>
-                    <li><i class="fas fa-check"></i> تتبع 50 هاشتاج</li>
-                    <li><i class="fas fa-check"></i> جدولة النشر المتقدمة</li>
-                    <li><i class="fas fa-check"></i> تحليل 10 منافسين</li>
-                    <li class="unavailable"><i class="fas fa-times"></i> API الوصول</li>
-                </ul>
-                <button class="btn btn-primary" style="width: 100%;">اشترك الآن</button>
-            </div>
-            <div class="pricing-card fade-in">
-                <div class="pricing-name">الأعمال</div>
-                <div class="pricing-desc">للشركات والوكالات</div>
-                <div class="pricing-price">$99<span> / شهر</span></div>
-                <ul class="pricing-features">
-                    <li><i class="fas fa-check"></i> حسابات غير محدودة</li>
-                    <li><i class="fas fa-check"></i> AI مخصص للعلامة التجارية</li>
-                    <li><i class="fas fa-check"></i> تقارير مخصصة PDF</li>
-                    <li><i class="fas fa-check"></i> تتبع هاشتاجات غير محدود</li>
-                    <li><i class="fas fa-check"></i> جدولة فريق كامل</li>
-                    <li><i class="fas fa-check"></i> تحليل منافسين غير محدود</li>
-                    <li><i class="fas fa-check"></i> API كامل + دعم 24/7</li>
-                </ul>
-                <button class="btn btn-outline" style="width: 100%;">تواصل معنا</button>
-            </div>
-        </div>
-    </section>
-
-    <!-- Testimonials -->
-    <section id="testimonials">
-        <div class="section-header fade-in">
-            <h2>ماذا يقول عملاؤنا</h2>
-            <div class="section-line"></div>
-            <p>قصص نجاح حقيقية من مستخدمي منصتنا</p>
-        </div>
-        <div class="testimonials-grid">
-            <div class="testimonial-card fade-in">
-                <div class="testimonial-stars">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                </div>
-                <p class="testimonial-text">
-                    "منصة ᎷᎡ/ᏦᎯ ᏉᏫᏫ غيرت طريقة تفكيري في التسويق. خلال شهر واحد فقط، زادت مشاهداتي بنسبة 300% بفضل اقتراحات المحتوى الذكية!"
-                </p>
-                <div class="testimonial-author">
-                    <div class="testimonial-avatar">أ</div>
-                    <div class="testimonial-info">
-                        <h4>أحمد السيد</h4>
-                        <p>صانع محتوى - 2M متابع</p>
-                    </div>
-                </div>
-            </div>
-            <div class="testimonial-card fade-in">
-                <div class="testimonial-stars">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                </div>
-                <p class="testimonial-text">
-                    "كوكالة تسويق، نستخدم المنصة لإدارة 20+ حساب لعملائنا. لوحة التحكم الذكية وفرت علينا ساعات من العمل يومياً."
-                </p>
-                <div class="testimonial-author">
-                    <div class="testimonial-avatar">س</div>
-                    <div class="testimonial-info">
-                        <h4>سارة الخالد</h4>
-                        <p>مديرة وكالة تسويق رقمي</p>
-                    </div>
-                </div>
-            </div>
-            <div class="testimonial-card fade-in">
-                <div class="testimonial-stars">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star-half-alt"></i>
-                </div>
-                <p class="testimonial-text">
-                    "تحليل الجمهور ساعدني في فهم متابعيني بشكل أعمق. الآن أعرف بالضبط ما يريدون ومتى يريدونه. نتائج مذهلة!"
-                </p>
-                <div class="testimonial-author">
-                    <div class="testimonial-avatar">م</div>
-                    <div class="testimonial-info">
-                        <h4>محمد العلي</h4>
-                        <p>مؤثر - 500K متابع</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section class="cta-section" id="contact">
-        <div class="cta-box fade-in">
-            <div class="cta-content">
-                <h2>جاهز لتنمو معنا؟</h2>
-                <p>
-                    انضم إلى آلاف صناع المحتوى والشركات التي تستخدم ᎷᎡ/ᏦᎯ ᏉᏫᏫ لتعزيز حضورهم الرقمي. 
-                    ابدأ مجاناً واكتشف قوة التسويق الذكي.
-                </p>
-                <div class="hero-buttons" style="justify-content: center;">
-                    <button class="btn btn-primary">
-                        <i class="fas fa-rocket"></i> ابدأ رحلتك الآن
-                    </button>
-                    <button class="btn btn-outline">
-                        <i class="fas fa-comments"></i> تحدث مع فريقنا
-                    </button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="footer-grid">
-            <div class="footer-col">
-                <div class="logo" style="margin-bottom: 15px;">ᎷᎡ/ᏦᎯ ᏉᏫᏫ</div>
-                <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.7;">
-                    منصة التسويق الإلكتروني الذكية التي تستخدم أحدث تقنيات الذكاء الاصطناعي لمساعدتك في النمو الرقمي.
-                </p>
-                <div class="footer-social">
-                    <a href="#"><i class="fab fa-tiktok"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-youtube"></i></a>
-                    <a href="#"><i class="fab fa-linkedin"></i></a>
-                </div>
-            </div>
-            <div class="footer-col">
-                <h4>الخدمات</h4>
-                <ul>
-                    <li><a href="#">تحليلات الأداء</a></li>
-                    <li><a href="#">مساعد AI</a></li>
-                    <li><a href="#">جدولة النشر</a></li>
-                    <li><a href="#">تحليل الجمهور</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>الشركة</h4>
-                <ul>
-                    <li><a href="#">من نحن</a></li>
-                    <li><a href="#">فريق العمل</a></li>
-                    <li><a href="#">الوظائف</a></li>
-                    <li><a href="#">المدونة</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>الدعم</h4>
-                <ul>
-                    <li><a href="#">مركز المساعدة</a></li>
-                    <li><a href="#">الأسئلة الشائعة</a></li>
-                    <li><a href="#">تواصل معنا</a></li>
-                    <li><a href="#">حالة النظام</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>قانوني</h4>
-                <ul>
-                    <li><a href="#">شروط الخدمة</a></li>
-                    <li><a href="#">سياسة الخصوصية</a></li>
-                    <li><a href="#">سياسة الاستخدام</a></li>
-                    <li><a href="#">GDPR</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <div class="logo">ᎷᎡ/ᏦᎯ ᏉᏫᏫ</div>
-            <p>© 2026 جميع الحقوق محفوظة. منصة التسويق الإلكتروني الذكية.</p>
-        </div>
-    </footer>
-
-    <script>
-        // Loader
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                document.getElementById('loader').classList.add('hidden');
-            }, 800);
-        });
-
-        // Scroll Animation
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-
-        // Counter Animation
-        function animateCounter(el) {
-            const target = parseInt(el.getAttribute('data-target'));
-            const duration = 2000;
-            const step = target / (duration / 16);
-            let current = 0;
-
-            const timer = setInterval(() => {
-                current += step;
-                if (current >= target) {
-                    el.textContent = target.toLocaleString();
-                    clearInterval(timer);
-                } else {
-                    el.textContent = Math.floor(current).toLocaleString();
-                }
-            }, 16);
-        }
-
-        const statsObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const numbers = entry.target.querySelectorAll('.stat-number');
-                    numbers.forEach(num => animateCounter(num));
-                    statsObserver.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.5 });
-
-        const statsBar = document.querySelector('.stats-bar');
-        if (statsBar) statsObserver.observe(statsBar);
-
-        // Smooth Scroll
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-            });
-        });
-
-        // Particle System
-        const canvas = document.getElementById('particles');
-        const ctx = canvas.getContext('2d');
-        let particles = [];
-
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-        resizeCanvas();
-        window.addEventListener('resize', resizeCanvas);
-
-        class Particle {
-            constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 2 + 0.5;
-                this.speedX = (Math.random() - 0.5) * 0.5;
-                this.speedY = (Math.random() - 0.5) * 0.5;
-                this.opacity = Math.random() * 0.5 + 0.1;
-            }
-
-            update() {
-                this.x += this.speedX;
-                this.y += this.speedY;
-
-                if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
-                if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
-            }
-
-            draw() {
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(0, 240, 255, ${this.opacity})`;
-                ctx.fill();
-            }
-        }
-
-        function initParticles() {
-            particles = [];
-            const particleCount = Math.min(100, Math.floor(window.innerWidth / 15));
-            for (let i = 0; i < particleCount; i++) {
-                particles.push(new Particle());
-            }
-        }
-        initParticles();
-
-        function connectParticles() {
-            for (let i = 0; i < particles.length; i++) {
-                for (let j = i + 1; j < particles.length; j++) {
-                    const dx = particles[i].x - particles[j].x;
-                    const dy = particles[i].y - particles[j].y;
-                    const distance = Math.sqrt(dx * dx + dy * dy);
-
-                    if (distance < 150) {
-                        ctx.beginPath();
-                        ctx.strokeStyle = `rgba(0, 240, 255, ${0.1 * (1 - distance / 150)})`;
-                        ctx.lineWidth = 0.5;
-                        ctx.moveTo(particles[i].x, particles[i].y);
-                        ctx.lineTo(particles[j].x, particles[j].y);
-                        ctx.stroke();
-                    }
-                }
-            }
-        }
-
-        function animateParticles() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            particles.forEach(p => {
-                p.update();
-                p.draw();
-            });
-            connectParticles();
-            requestAnimationFrame(animateParticles);
-        }
-        animateParticles();
-
-        // Mobile Menu
-        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
-            const navLinks = document.querySelector('.nav-links');
-            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
-            navLinks.style.position = 'absolute';
-            navLinks.style.top = '60px';
-            navLinks.style.right = '0';
-            navLinks.style.left = '0';
-            navLinks.style.flexDirection = 'column';
-            navLinks.style.background = 'rgba(5, 5, 16, 0.98)';
-            navLinks.style.padding = '20px';
-            navLinks.style.gap = '15px';
-            navLinks.style.borderBottom = '1px solid rgba(0, 240, 255, 0.2)';
-        });
-
-        // Button click handlers
-        document.querySelectorAll('button').forEach(btn => {
-            btn.addEventListener('click', function(e) {
-                if (!this.closest('form')) {
-                    // Show coming soon popup
-                    const popup = document.createElement('div');
-                    popup.style.cssText = `
-                        position: fixed;
-                        top: 50%;
-                        left: 50%;
-                        transform: translate(-50%, -50%);
-                        background: var(--card);
-                        border: 1px solid var(--primary);
-                        border-radius: 20px;
-                        padding: 40px;
-                        text-align: center;
-                        z-index: 10000;
-                        box-shadow: 0 20px 60px rgba(0,0,0,0.5);
-                        min-width: 300px;
-                    `;
-                    popup.innerHTML = `
-                        <div style="font-size: 3rem; margin-bottom: 20px;">🚀</div>
-                        <h3 style="margin-bottom: 15px; color: var(--primary);">قريباً!</h3>
-                        <p style="color: var(--text-muted); margin-bottom: 25px;">هذه الميزة قيد التطوير وسيتم إطلاقها قريباً.</p>
-                        <button onclick="this.parentElement.remove(); document.querySelector('.popup-overlay')?.remove();" 
-                            style="background: linear-gradient(135deg, var(--primary), var(--secondary)); color: var(--darker); border: none; padding: 12px 30px; border-radius: 25px; font-weight: 700; cursor: pointer; font-family: inherit;">
-                            حسناً
-                        </button>
-                    `;
-
-                    const overlay = document.createElement('div');
-                    overlay.className = 'popup-overlay';
-                    overlay.style.cssText = `
-                        position: fixed;
-                        top: 0; left: 0; width: 100%; height: 100%;
-                        background: rgba(0,0,0,0.7);
-                        z-index: 9999;
-                    `;
-                    overlay.addEventListener('click', () => {
-                        popup.remove();
-                        overlay.remove();
-                    });
-
-                    document.body.appendChild(overlay);
-                    document.body.appendChild(popup);
-                }
-            });
-        });
-    </script>
 </body>
-  </html>
+</html>
