@@ -1,362 +1,279 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>أحمد عبد المنعم - السيرة الذاتية</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        body {
-            font-family: 'Cairo', sans-serif;
-            background: #fff;
-            color: #222;
-            direction: rtl;
-            font-size: 13px;
-            line-height: 1.7;
-        }
-
-        .page {
-            width: 210mm;
-            min-height: 297mm;
-            margin: 0 auto;
-            padding: 25mm 20mm;
-        }
-
-        /* Header */
-        .header {
-            text-align: center;
-            border-bottom: 3px solid #1a365d;
-            padding-bottom: 15px;
-            margin-bottom: 20px;
-        }
-
-        .name {
-            font-size: 28px;
-            font-weight: 800;
-            color: #1a365d;
-            margin-bottom: 4px;
-        }
-
-        .title {
-            font-size: 15px;
-            color: #4a5568;
-            font-weight: 600;
-            margin-bottom: 10px;
-        }
-
-        .contact-line {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 15px;
-            font-size: 12px;
-            color: #4a5568;
-        }
-
-        .contact-line span {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        /* Sections */
-        .section {
-            margin-bottom: 18px;
-        }
-
-        .section-title {
-            font-size: 16px;
-            font-weight: 700;
-            color: #1a365d;
-            border-bottom: 2px solid #1a365d;
-            padding-bottom: 5px;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .section-title::before {
-            content: '';
-            display: inline-block;
-            width: 8px;
-            height: 8px;
-            background: #1a365d;
-            border-radius: 50%;
-        }
-
-        /* Two columns */
-        .two-col {
-            display: flex;
-            gap: 25px;
-        }
-
-        .col-left { flex: 1.4; }
-        .col-right { flex: 1; }
-
-        /* About */
-        .about-text {
-            font-size: 12.5px;
-            color: #333;
-            text-align: justify;
-            line-height: 1.8;
-        }
-
-        /* Experience */
-        .exp-item {
-            margin-bottom: 12px;
-            padding-right: 15px;
-            border-right: 2px solid #cbd5e0;
-            position: relative;
-        }
-
-        .exp-item::before {
-            content: '';
-            position: absolute;
-            right: -5px;
-            top: 6px;
-            width: 8px;
-            height: 8px;
-            background: #1a365d;
-            border-radius: 50%;
-        }
-
-        .exp-item.current::before { background: #22c55e; }
-
-        .exp-date {
-            font-size: 11px;
-            color: #718096;
-            font-weight: 600;
-            margin-bottom: 2px;
-        }
-
-        .exp-company {
-            font-size: 13px;
-            font-weight: 700;
-            color: #1a365d;
-        }
-
-        .exp-role {
-            font-size: 12px;
-            color: #d69e2e;
-            font-weight: 600;
-        }
-
-        /* Skills */
-        .skill-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 8px;
-            margin-bottom: 8px;
-            padding: 6px 10px;
-            background: #f7fafc;
-            border-radius: 4px;
-        }
-
-        .skill-bullet {
-            width: 6px;
-            height: 6px;
-            background: #1a365d;
-            border-radius: 50%;
-            margin-top: 7px;
-            flex-shrink: 0;
-        }
-
-        .skill-text h4 {
-            font-size: 12px;
-            font-weight: 700;
-            color: #1a365d;
-        }
-
-        .skill-text p {
-            font-size: 11px;
-            color: #718096;
-        }
-
-        /* Education */
-        .edu-box {
-            background: #fffaf0;
-            border: 1px solid #fbd38d;
-            border-radius: 6px;
-            padding: 10px 12px;
-        }
-
-        .edu-box h4 {
-            font-size: 13px;
-            font-weight: 700;
-            color: #1a365d;
-            margin-bottom: 2px;
-        }
-
-        .edu-box .major {
-            font-size: 12px;
-            color: #c05621;
-            font-weight: 600;
-        }
-
-        .edu-box .years {
-            font-size: 11px;
-            color: #718096;
-        }
-
-        /* Traits */
-        .trait-item {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            margin-bottom: 6px;
-            font-size: 12px;
-            color: #333;
-        }
-
-        .trait-item::before {
-            content: '✓';
-            color: #22c55e;
-            font-weight: 700;
-            font-size: 13px;
-        }
-
-        @media print {
-            body { background: white; }
-            .page { padding: 20mm 18mm; }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ahmed Abdelmonem - CV</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+  background: #f0f2f5;
+  padding: 10px;
+}
+.btn-download {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #1a365d;
+  color: #fff;
+  border: none;
+  padding: 14px 40px;
+  border-radius: 30px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  z-index: 1000;
+  box-shadow: 0 4px 15px rgba(26,54,93,0.4);
+}
+.btn-download:active { transform: translateX(-50%) scale(0.95); }
+#cv-content {
+  background: #fff;
+  max-width: 210mm;
+  margin: 0 auto 80px;
+  padding: 25px 22px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+.header {
+  text-align: center;
+  border-bottom: 3px solid #1a365d;
+  padding-bottom: 14px;
+  margin-bottom: 16px;
+}
+.name { font-size: 26px; font-weight: 800; color: #1a365d; margin-bottom: 3px; }
+.title { font-size: 14px; color: #4a5568; font-weight: 600; margin-bottom: 10px; }
+.contact-line {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  font-size: 11px;
+  color: #4a5568;
+}
+.section { margin-bottom: 14px; }
+.section-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: #1a365d;
+  border-bottom: 2px solid #1a365d;
+  padding-bottom: 4px;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.section-title::before {
+  content: '';
+  display: inline-block;
+  width: 7px; height: 7px;
+  background: #1a365d;
+  border-radius: 50%;
+}
+.two-col { display: flex; gap: 18px; }
+.col-left { flex: 1.4; }
+.col-right { flex: 1; }
+.about-text {
+  font-size: 12px;
+  color: #333;
+  text-align: justify;
+  line-height: 1.7;
+}
+.exp-item {
+  margin-bottom: 10px;
+  padding-left: 12px;
+  border-left: 2px solid #cbd5e0;
+  position: relative;
+}
+.exp-item::before {
+  content: '';
+  position: absolute;
+  left: -4px; top: 5px;
+  width: 7px; height: 7px;
+  background: #1a365d;
+  border-radius: 50%;
+}
+.exp-item.current::before { background: #22c55e; }
+.exp-date { font-size: 10px; color: #718096; font-weight: 600; margin-bottom: 1px; }
+.exp-company { font-size: 12px; font-weight: 700; color: #1a365d; }
+.exp-role { font-size: 11px; color: #c05621; font-weight: 600; }
+.edu-box {
+  background: #fffaf0;
+  border: 1px solid #fbd38d;
+  border-radius: 5px;
+  padding: 8px 10px;
+}
+.edu-box h4 { font-size: 12px; font-weight: 700; color: #1a365d; margin-bottom: 1px; }
+.edu-box .major { font-size: 11px; color: #c05621; font-weight: 600; }
+.edu-box .years { font-size: 10px; color: #718096; }
+.skill-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  margin-bottom: 6px;
+  padding: 5px 8px;
+  background: #f7fafc;
+  border-radius: 3px;
+}
+.skill-bullet {
+  width: 5px; height: 5px;
+  background: #1a365d;
+  border-radius: 50%;
+  margin-top: 6px;
+  flex-shrink: 0;
+}
+.skill-text h4 { font-size: 11px; font-weight: 700; color: #1a365d; }
+.skill-text p { font-size: 10px; color: #718096; }
+.trait-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 5px;
+  font-size: 11px;
+  color: #333;
+}
+.trait-item::before {
+  content: '✓';
+  color: #22c55e;
+  font-weight: 700;
+  font-size: 12px;
+}
+@media (max-width: 600px) {
+  .two-col { flex-direction: column; gap: 10px; }
+  .name { font-size: 22px; }
+  #cv-content { padding: 18px 15px; }
+}
+</style>
 </head>
 <body>
-    <div class="page">
-        <!-- Header -->
-        <div class="header">
-            <h1 class="name">أحمد عبد المنعم إسماعيل محمد</h1>
-            <p class="title">نائب مدير عمليات | مطور تطبيقات</p>
-            <div class="contact-line">
-                <span>📞 0551139663</span>
-                <span>✉️ abdelmonama50@gmail.com</span>
-                <span>📍 جدة - المملكة العربية السعودية</span>
-                <span>🎂 15 ديسمبر 1999</span>
-                <span>🌍 مصري الجنسية</span>
-            </div>
-        </div>
 
-        <!-- About -->
-        <div class="section">
-            <h2 class="section-title">نبذة عني</h2>
-            <p class="about-text">أعمل في بيئة تنافسية يمكنني من خلالها تطبيق مهاراتي الشخصية وخلفيتي المعلوماتية لتحقيق أهداف المنظمة واكتساب الخبرة. أمتلك خبرة متنوعة في مجال التكييف والتبريد، وإدارة العمليات، بالإضافة إلى تطوير التطبيقات وقواعد البيانات. أبحث دائمًا عن فرص تطويرية تساهم في بناء مسيرتي المهنية.</p>
-        </div>
+<button class="btn-download" onclick="downloadPDF()">📥 Download PDF</button>
 
-        <div class="two-col">
-            <!-- Left Column -->
-            <div class="col-left">
-                <!-- Experience -->
-                <div class="section">
-                    <h2 class="section-title">الخبرات العملية</h2>
-
-                    <div class="exp-item current">
-                        <div class="exp-date">يناير 2026 - الآن</div>
-                        <div class="exp-company">مؤسسة فنون المعمارية للمقاولات</div>
-                        <div class="exp-role">فني تدفئة وتهوية وتكييف</div>
-                    </div>
-
-                    <div class="exp-item">
-                        <div class="exp-date">2023 - 2026</div>
-                        <div class="exp-company">شركة تمويلي للمشروعات الصغيرة والمتوسطة</div>
-                        <div class="exp-role">نائب مدير العمليات</div>
-                    </div>
-
-                    <div class="exp-item">
-                        <div class="exp-date">2022 - 2023</div>
-                        <div class="exp-company">جمعية المبادرة</div>
-                        <div class="exp-role">مسؤول استعلام ميداني (مراجع - متابع)</div>
-                    </div>
-                </div>
-
-                <!-- Education -->
-                <div class="section">
-                    <h2 class="section-title">التعليم</h2>
-                    <div class="edu-box">
-                        <h4>معهد فني صناعي</h4>
-                        <div class="major">تخصص تبريد وتكييف</div>
-                        <div class="years">الخمس سنوات</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Right Column -->
-            <div class="col-right">
-                <!-- Skills -->
-                <div class="section">
-                    <h2 class="section-title">المهارات</h2>
-
-                    <div class="skill-item">
-                        <div class="skill-bullet"></div>
-                        <div class="skill-text">
-                            <h4>فن التسويق والتخطيط</h4>
-                            <p>استراتيجيات التسويق والتخطيط</p>
-                        </div>
-                    </div>
-
-                    <div class="skill-item">
-                        <div class="skill-bullet"></div>
-                        <div class="skill-text">
-                            <h4>المهارات التنظيمية</h4>
-                            <p>إدارة الوقت والموارد</p>
-                        </div>
-                    </div>
-
-                    <div class="skill-item">
-                        <div class="skill-bullet"></div>
-                        <div class="skill-text">
-                            <h4>رخصة قيادة سعودية (خاصة)</h4>
-                            <p>سارية المفعول</p>
-                        </div>
-                    </div>
-
-                    <div class="skill-item">
-                        <div class="skill-bullet"></div>
-                        <div class="skill-text">
-                            <h4>خدمة العملاء</h4>
-                            <p>تعامل ممتاز مع العملاء</p>
-                        </div>
-                    </div>
-
-                    <div class="skill-item">
-                        <div class="skill-bullet"></div>
-                        <div class="skill-text">
-                            <h4>IT - ICDL - Microsoft Office</h4>
-                            <p>إجادة تامة للبرامج المكتبية</p>
-                        </div>
-                    </div>
-
-                    <div class="skill-item">
-                        <div class="skill-bullet"></div>
-                        <div class="skill-text">
-                            <h4>البرمجة وتطوير التطبيقات</h4>
-                            <p>تطوير مواقع وتطبيقات ويب</p>
-                        </div>
-                    </div>
-
-                    <div class="skill-item">
-                        <div class="skill-bullet"></div>
-                        <div class="skill-text">
-                            <h4>قواعد البيانات</h4>
-                            <p>تصميم وإدارة قواعد البيانات</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Traits -->
-                <div class="section">
-                    <h2 class="section-title">سمات الشخصية</h2>
-
-                    <div class="trait-item">القدرة على التعلم وتطوير الذات</div>
-                    <div class="trait-item">المرونة والقدرة على العمل في أي وقت</div>
-                    <div class="trait-item">القدرة على العمل تحت أي ضغط</div>
-                    <div class="trait-item">التعاون الإيجابي لمصلحة العمل</div>
-                    <div class="trait-item">القدرة على القيام بمهام مختلفة</div>
-                    <div class="trait-item">عدم التواني في أداء المهام</div>
-                </div>
-            </div>
-        </div>
+<div id="cv-content">
+  <div class="header">
+    <h1 class="name">Ahmed Abdelmonem Ismail Mohamed</h1>
+    <p class="title">Deputy Operations Manager | Application Developer</p>
+    <div class="contact-line">
+      <span>📞 +966 55 113 9663</span>
+      <span>✉️ abdelmonama50@gmail.com</span>
+      <span>📍 Jeddah, Kingdom of Saudi Arabia</span>
+      <span>🎂 December 15, 1999</span>
+      <span>🌍 Egyptian</span>
     </div>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">Professional Summary</h2>
+    <p class="about-text">I thrive in competitive environments where I can apply my personal skills and IT background to achieve organizational goals and gain experience. I have diverse experience in HVAC, operations management, as well as application development and database management. I am always seeking development opportunities that contribute to building my professional career.</p>
+  </div>
+
+  <div class="two-col">
+    <div class="col-left">
+      <div class="section">
+        <h2 class="section-title">Work Experience</h2>
+        <div class="exp-item current">
+          <div class="exp-date">January 2026 - Present</div>
+          <div class="exp-company">Fonoon Al-Mi'mariyah Contracting Est.</div>
+          <div class="exp-role">HVAC Technician (Heating, Ventilation & Air Conditioning)</div>
+        </div>
+        <div class="exp-item">
+          <div class="exp-date">2023 - 2026</div>
+          <div class="exp-company">Tamweeli Company for Small & Medium Enterprises</div>
+          <div class="exp-role">Deputy Operations Manager</div>
+        </div>
+        <div class="exp-item">
+          <div class="exp-date">2022 - 2023</div>
+          <div class="exp-company">Al-Mubadara Association</div>
+          <div class="exp-role">Field Inquiry Officer (Reviewer - Follow-up)</div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2 class="section-title">Education</h2>
+        <div class="edu-box">
+          <h4>Industrial Technical Institute</h4>
+          <div class="major">Specialization: Refrigeration & Air Conditioning</div>
+          <div class="years">Five-Year Program</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-right">
+      <div class="section">
+        <h2 class="section-title">Skills</h2>
+        <div class="skill-item">
+          <div class="skill-bullet"></div>
+          <div class="skill-text"><h4>Marketing & Planning</h4><p>Marketing strategies & planning</p></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-bullet"></div>
+          <div class="skill-text"><h4>Organizational Skills</h4><p>Time & resource management</p></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-bullet"></div>
+          <div class="skill-text"><h4>Saudi Driving License (Private)</h4><p>Valid & active</p></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-bullet"></div>
+          <div class="skill-text"><h4>Customer Service</h4><p>Excellent client interaction</p></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-bullet"></div>
+          <div class="skill-text"><h4>IT - ICDL - Microsoft Office</h4><p>Full proficiency in office software</p></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-bullet"></div>
+          <div class="skill-text"><h4>Programming & App Development</h4><p>Web development & applications</p></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-bullet"></div>
+          <div class="skill-text"><h4>Database Management</h4><p>Database design & administration</p></div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2 class="section-title">Personal Traits</h2>
+        <div class="trait-item">Ability to learn and self-develop</div>
+        <div class="trait-item">Flexibility to work at any time</div>
+        <div class="trait-item">Ability to work under pressure</div>
+        <div class="trait-item">Positive cooperation for work benefit</div>
+        <div class="trait-item">Ability to perform diverse tasks</div>
+        <div class="trait-item">No hesitation in performing duties</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function downloadPDF() {
+  const element = document.getElementById('cv-content');
+  const btn = document.querySelector('.btn-download');
+  btn.textContent = '⏳ Generating...';
+  btn.disabled = true;
+
+  const opt = {
+    margin: [8, 8, 8, 8],
+    filename: 'CV_Ahmed_Abdelmonem.pdf',
+    image: { type: 'jpeg', quality: 0.98 },
+    html2canvas: { scale: 3, useCORS: true, logging: false },
+    jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+  };
+
+  html2pdf().set(opt).from(element).save().then(() => {
+    btn.textContent = '✅ Downloaded!';
+    setTimeout(() => {
+      btn.textContent = '📥 Download PDF';
+      btn.disabled = false;
+    }, 2000);
+  }).catch(err => {
+    btn.textContent = '❌ Error';
+    setTimeout(() => {
+      btn.textContent = '📥 Download PDF';
+      btn.disabled = false;
+    }, 2000);
+  });
+}
+</script>
 </body>
 </html>
