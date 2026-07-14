@@ -1,921 +1,801 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SPEED - سوشال ميديا | صناعة الفيديوهات للبراندات</title>
-<meta name="description" content="سبيد سوشال ميديا - فريق إبداعي شبابي متخصص بصناعة الفيديوهات في السوشال ميديا للبراندات">
-<script src="https://cdn.tailwindcss.com"></script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-<style>
-:root { --speed-red: #E31E24; --speed-black: #0A0A0A; --speed-dark: #111; --speed-gray: #1a1a1a; }
-* { scroll-behavior: smooth; margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: 'Cairo', sans-serif; background: var(--speed-black); color: white; overflow-x: hidden; }
-.font-en { font-family: 'Montserrat', sans-serif; }
+            <p style="color: var(--text-muted); margin-bottom: 20px;">شكرا لثقتكم، ومتحمسين للتعاون معاكم!</p>
+            <a href="https://wa.me/966544656944" target="_blank" class="cta-btn" id="contact-cta">
+                <i class="fab fa-whatsapp"></i> تواصل عبر واتساب
+            </a>
+        </div>
 
-/* Custom scrollbar */
-::-webkit-scrollbar { width: 8px; }
-::-webkit-scrollbar-track { background: var(--speed-black); }
-::-webkit-scrollbar-thumb { background: var(--speed-red); border-radius: 4px; }
-
-/* Animations */
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(40px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-@keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 0 20px rgba(227,30,36,0.3); }
-  50% { box-shadow: 0 0 40px rgba(227,30,36,0.6); }
-}
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-15px); }
-}
-@keyframes shimmer {
-  0% { background-position: -200% center; }
-  100% { background-position: 200% center; }
-}
-@keyframes countUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-@keyframes marquee {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-@keyframes spin-slow {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-.animate-fadeInUp { animation: fadeInUp 0.8s ease forwards; }
-.animate-float { animation: float 3s ease-in-out infinite; }
-.animate-pulse-glow { animation: pulse-glow 2s ease-in-out infinite; }
-
-/* Reveal on scroll */
-.reveal { opacity: 0; transform: translateY(50px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
-.reveal.active { opacity: 1; transform: translateY(0); }
-.reveal-delay-1 { transition-delay: 0.1s; }
-.reveal-delay-2 { transition-delay: 0.2s; }
-.reveal-delay-3 { transition-delay: 0.3s; }
-.reveal-delay-4 { transition-delay: 0.4s; }
-
-/* Glass effect */
-.glass {
-  background: rgba(255,255,255,0.03);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(255,255,255,0.06);
-}
-.glass:hover {
-  border-color: rgba(227,30,36,0.3);
-  box-shadow: 0 0 30px rgba(227,30,36,0.1);
-}
-
-/* Button styles */
-.btn-primary {
-  background: var(--speed-red);
-  color: white;
-  padding: 14px 32px;
-  border-radius: 50px;
-  font-weight: 700;
-  font-size: 16px;
-  border: none;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  position: relative;
-  overflow: hidden;
-}
-.btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 30px rgba(227,30,36,0.4);
-}
-.btn-primary::after {
-  content: '';
-  position: absolute;
-  top: 0; left: -100%;
-  width: 100%; height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-  transition: left 0.5s;
-}
-.btn-primary:hover::after { left: 100%; }
-
-.btn-outline {
-  background: transparent;
-  color: white;
-  padding: 14px 32px;
-  border-radius: 50px;
-  font-weight: 700;
-  font-size: 16px;
-  border: 2px solid rgba(255,255,255,0.2);
-  cursor: pointer;
-  transition: all 0.3s ease;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-}
-.btn-outline:hover {
-  border-color: var(--speed-red);
-  color: var(--speed-red);
-  transform: translateY(-2px);
-}
-
-/* Section title */
-.section-title {
-  font-size: 42px;
-  font-weight: 900;
-  text-align: center;
-  margin-bottom: 16px;
-  position: relative;
-}
-.section-subtitle {
-  text-align: center;
-  color: rgba(255,255,255,0.6);
-  font-size: 18px;
-  margin-bottom: 60px;
-}
-
-/* Gradient text */
-.gradient-text {
-  background: linear-gradient(135deg, #fff 0%, #E31E24 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-/* Stats counter */
-.stat-number {
-  font-size: 64px;
-  font-weight: 900;
-  color: var(--speed-red);
-  line-height: 1;
-}
-.stat-label {
-  color: rgba(255,255,255,0.7);
-  font-size: 16px;
-  margin-top: 8px;
-}
-
-/* Partner logo */
-.partner-logo {
-  filter: grayscale(100%) brightness(0.6);
-  transition: all 0.3s ease;
-  opacity: 0.7;
-}
-.partner-logo:hover {
-  filter: grayscale(0%) brightness(1);
-  opacity: 1;
-}
-
-/* Testimonial card */
-.testimonial-card {
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.06);
-  border-radius: 20px;
-  padding: 32px;
-  transition: all 0.3s ease;
-}
-.testimonial-card:hover {
-  border-color: rgba(227,30,36,0.3);
-  transform: translateY(-5px);
-}
-
-/* Input styles */
-.input-field {
-  width: 100%;
-  padding: 16px 20px;
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.1);
-  border-radius: 12px;
-  color: white;
-  font-size: 16px;
-  font-family: 'Cairo', sans-serif;
-  transition: all 0.3s ease;
-}
-.input-field:focus {
-  outline: none;
-  border-color: var(--speed-red);
-  box-shadow: 0 0 20px rgba(227,30,36,0.1);
-}
-.input-field::placeholder { color: rgba(255,255,255,0.4); }
-
-/* WhatsApp float */
-.whatsapp-float {
-  position: fixed;
-  bottom: 30px;
-  left: 30px;
-  z-index: 999;
-  width: 60px;
-  height: 60px;
-  background: #25D366;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 4px 20px rgba(37,211,102,0.4);
-  animation: pulse-glow 2s infinite;
-  cursor: pointer;
-  transition: transform 0.3s;
-}
-.whatsapp-float:hover { transform: scale(1.1); }
-
-/* Navigation */
-.nav-scrolled {
-  background: rgba(10,10,10,0.95) !important;
-  backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(255,255,255,0.05);
-}
-
-/* Mobile menu */
-.mobile-menu {
-  display: none;
-  position: fixed;
-  top: 0; right: 0;
-  width: 100%; height: 100vh;
-  background: rgba(10,10,10,0.98);
-  z-index: 999;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 30px;
-}
-.mobile-menu.active { display: flex; }
-.mobile-menu a {
-  font-size: 24px;
-  font-weight: 700;
-  color: white;
-  text-decoration: none;
-  transition: color 0.3s;
-}
-.mobile-menu a:hover { color: var(--speed-red); }
-
-/* Video card */
-.video-card {
-  position: relative;
-  border-radius: 20px;
-  overflow: hidden;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-.video-card:hover { transform: scale(1.02); }
-.video-card .play-btn {
-  position: absolute;
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
-  width: 60px; height: 60px;
-  background: var(--speed-red);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.3s;
-}
-.video-card:hover .play-btn { transform: translate(-50%, -50%) scale(1.1); }
-
-/* Marquee */
-.marquee-container { overflow: hidden; }
-.marquee-content {
-  display: flex;
-  animation: marquee 30s linear infinite;
-  width: max-content;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  .section-title { font-size: 28px; }
-  .stat-number { font-size: 40px; }
-}
-</style>
-</head>
-<body>
-
-<!-- WhatsApp Floating Button -->
-<a href="https://wa.me/966544656944" target="_blank" class="whatsapp-float">
-  <svg width="28" height="28" viewBox="0 0 24 24" fill="white">
-    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-  </svg>
-</a>
-
-<!-- Mobile Menu -->
-<div id="mobileMenu" class="mobile-menu">
-  <button id="closeMenu" style="position:absolute;top:30px;right:30px;background:none;border:none;color:white;cursor:pointer;">
-    <svg width="32" height="32" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12"/></svg>
-  </button>
-  <a href="#hero" onclick="closeMobileMenu()">الرئيسية</a>
-  <a href="#about" onclick="closeMobileMenu()">من نحن</a>
-  <a href="#services" onclick="closeMobileMenu()">خدماتنا</a>
-  <a href="#portfolio" onclick="closeMobileMenu()">أعمالنا</a>
-  <a href="#clients" onclick="closeMobileMenu()">شركاؤنا</a>
-  <a href="#pricing" onclick="closeMobileMenu()">الباقات</a>
-  <a href="#contact" onclick="closeMobileMenu()">تواصل معنا</a>
-</div>
-
-<!-- Navigation -->
-<nav id="navbar" style="position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 0;transition:all 0.3s;">
-  <div style="max-width:1200px;margin:0 auto;padding:0 24px;display:flex;justify-content:space-between;align-items:center;">
-    <a href="#hero" style="display:flex;align-items:center;gap:10px;text-decoration:none;">
-      <img src="logo_speed.png" alt="SPEED" style="height:45px;width:auto;">
-    </a>
-    <div style="display:flex;align-items:center;gap:32px;" class="hidden md:flex">
-      <a href="#hero" style="color:white;text-decoration:none;font-weight:600;font-size:15px;transition:color 0.3s;" onmouseover="this.style.color='#E31E24'" onmouseout="this.style.color='white'">الرئيسية</a>
-      <a href="#about" style="color:white;text-decoration:none;font-weight:600;font-size:15px;transition:color 0.3s;" onmouseover="this.style.color='#E31E24'" onmouseout="this.style.color='white'">من نحن</a>
-      <a href="#services" style="color:white;text-decoration:none;font-weight:600;font-size:15px;transition:color 0.3s;" onmouseover="this.style.color='#E31E24'" onmouseout="this.style.color='white'">خدماتنا</a>
-      <a href="#portfolio" style="color:white;text-decoration:none;font-weight:600;font-size:15px;transition:color 0.3s;" onmouseover="this.style.color='#E31E24'" onmouseout="this.style.color='white'">أعمالنا</a>
-      <a href="#clients" style="color:white;text-decoration:none;font-weight:600;font-size:15px;transition:color 0.3s;" onmouseover="this.style.color='#E31E24'" onmouseout="this.style.color='white'">شركاؤنا</a>
-      <a href="#pricing" style="color:white;text-decoration:none;font-weight:600;font-size:15px;transition:color 0.3s;" onmouseover="this.style.color='#E31E24'" onmouseout="this.style.color='white'">الباقات</a>
-      <a href="https://wa.me/966544656944" target="_blank" class="btn-primary" style="padding:10px 24px;font-size:14px;">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-        تواصل واتساب
-      </a>
-    </div>
-    <button id="menuBtn" class="md:hidden" style="background:none;border:none;color:white;cursor:pointer;">
-      <svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
-    </button>
-  </div>
-</nav>
-
-<!-- Hero Section -->
-<section id="hero" style="min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;background:linear-gradient(135deg, #0a0a0a 0%, #1a0a0a 50%, #0a0a0a 100%);">
-  <!-- Background effects -->
-  <div style="position:absolute;inset:0;opacity:0.3;">
-    <div style="position:absolute;top:20%;left:10%;width:300px;height:300px;background:radial-gradient(circle, rgba(227,30,36,0.15), transparent 70%);border-radius:50%;filter:blur(60px);"></div>
-    <div style="position:absolute;bottom:20%;right:10%;width:400px;height:400px;background:radial-gradient(circle, rgba(227,30,36,0.1), transparent 70%);border-radius:50%;filter:blur(80px);"></div>
-  </div>
-
-  <div style="max-width:1200px;margin:0 auto;padding:120px 24px 80px;text-align:center;position:relative;z-index:1;">
-    <div class="reveal active" style="margin-bottom:30px;">
-      <img src="logo_speed.png" alt="SPEED" style="height:120px;width:auto;margin:0 auto;display:block;filter:drop-shadow(0 0 30px rgba(227,30,36,0.3));">
+        <div class="footer">
+            <div class="footer-logo">
+                <span>SPEED</span>
+            </div>
+            <div class="footer-social">
+                <a href="https://www.instagram.com/speed.social.media" target="_blank" id="footer-instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.tiktok.com/@speed.social.media" target="_blank" id="footer-tiktok"><i class="fab fa-tiktok"></i></a>
+                <a href="#" id="footer-checkered"><i class="fas fa-flag-checkered"></i></a>
+            </div>
+        </div>
     </div>
 
-    <h1 class="reveal active" style="font-size:clamp(36px, 6vw, 72px);font-weight:900;line-height:1.2;margin-bottom:20px;">
-      <span style="color:white;">نصوّر</span>
-      <span style="color:var(--speed-red);">.. نمونتج</span>
-      <span style="color:white;">.. نبيع</span>
-    </h1>
+    <!-- ===== ADMIN PANEL ===== -->
+    <div class="admin-panel" id="admin-panel">
+        <div class="admin-header">
+            <h2 style="color: var(--red);">⚙️ لوحة التحكم</h2>
+            <div style="display: flex; gap: 10px;">
+                <button class="admin-btn admin-btn-primary" id="global-save-btn" onclick="saveAllChanges()" style="opacity: 0.5; pointer-events: none;">
+                    <i class="fas fa-save"></i> حفظ الكل
+                </button>
+                <button class="admin-btn admin-btn-secondary" onclick="logout()"><i class="fas fa-sign-out-alt"></i> خروج</button>
+            </div>
+        </div>
 
-    <p class="reveal active reveal-delay-1" style="font-size:clamp(18px, 3vw, 28px);color:rgba(255,255,255,0.7);max-width:700px;margin:0 auto 40px;line-height:1.6;">
-      فيديوهاتنا ما تمر مرور الكرام... تمر مرور البطاقة 💳😎
-    </p>
+        <div class="stats-grid">
+            <div class="stat-card"><i class="fas fa-eye"></i><div class="stat-number" id="stat-visits">0</div><div class="stat-label">زيارات</div></div>
+            <div class="stat-card"><i class="fas fa-box"></i><div class="stat-number" id="stat-packages">3</div><div class="stat-label">الباقات</div></div>
+            <div class="stat-card"><i class="fas fa-lightbulb"></i><div class="stat-number" id="stat-ideas">100</div><div class="stat-label">أفكار</div></div>
+        </div>
 
-    <div class="reveal active reveal-delay-2" style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
-      <a href="#portfolio" class="btn-primary" style="font-size:18px;padding:16px 40px;">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
-        شاهد أعمالنا
-      </a>
-      <a href="https://wa.me/966544656944" target="_blank" class="btn-outline" style="font-size:18px;padding:16px 40px;">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-        تواصل واتساب
-      </a>
+        <div class="admin-menu" id="admin-menu">
+            <div class="admin-menu-item active" onclick="showAdminSection('profile')"><i class="fas fa-user-circle"></i><span>البروفايل</span></div>
+            <div class="admin-menu-item" onclick="showAdminSection('video-bg')"><i class="fas fa-video"></i><span>خلفية الفيديو</span></div>
+            <div class="admin-menu-item" onclick="showAdminSection('content')"><i class="fas fa-edit"></i><span>المحتوى</span></div>
+            <div class="admin-menu-item" onclick="showAdminSection('packages')"><i class="fas fa-box-open"></i><span>الباقات</span></div>
+            <div class="admin-menu-item" onclick="showAdminSection('services')"><i class="fas fa-cogs"></i><span>الخدمات</span></div>
+            <div class="admin-menu-item" onclick="showAdminSection('social')"><i class="fas fa-share-alt"></i><span>التواصل</span></div>
+            <div class="admin-menu-item" onclick="showAdminSection('ideas')"><i class="fas fa-lightbulb"></i><span>الأفكار</span></div>
+            <div class="admin-menu-item" onclick="showAdminSection('password')"><i class="fas fa-lock"></i><span>الباسورد</span></div>
+        </div>
+
+        <div class="admin-content" id="admin-content">
+            <!-- Profile Section -->
+            <div class="admin-section active" id="section-profile">
+                <h3><i class="fas fa-user-circle"></i> إعدادات البروفايل</h3>
+                <div class="form-group"><label>العنوان الرئيسي</label><input type="text" id="admin-hero-title" value="SPEED"></div>
+                <div class="form-group"><label>العنوان الفرعي</label><input type="text" id="admin-hero-subtitle" value="سوشال ميديا"></div>
+                <div class="form-group"><label>الشعار/الوصف</label><input type="text" id="admin-hero-tagline" value="في عالم السرعة.. وعالم الفيديوهات!"></div>
+                <div class="form-group"><label>صورة اللوجو (URL)</label><input type="url" id="admin-logo-url" placeholder="رابط صورة اللوجو"></div>
+                <button class="admin-btn admin-btn-primary" onclick="saveProfile()"><i class="fas fa-save"></i> حفظ البروفايل</button>
+            </div>
+
+            <!-- Video Background Section -->
+            <div class="admin-section" id="section-video-bg">
+                <h3><i class="fas fa-video"></i> خلفية الفيديو</h3>
+                <p style="color: var(--text-muted); margin-bottom: 20px;">اختر فيديو الخلفية أو أدخل رابط فيديو مخصص</p>
+                <div class="form-group">
+                    <label>فيديوهات جاهزة</label>
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin: 15px 0;">
+                        <div class="bg-preset" style="padding: 15px; background: rgba(255,0,0,0.1); border: 2px solid transparent; border-radius: 12px; cursor: pointer; text-align: center;" onclick="selectVideoBg('speed1')" data-video="speed1">
+                            <i class="fas fa-tachometer-alt" style="font-size: 2rem; color: var(--red); margin-bottom: 8px;"></i>
+                            <p style="font-size: 0.8rem;">سرعة الطريق</p>
+                        </div>
+                        <div class="bg-preset" style="padding: 15px; background: rgba(255,0,0,0.1); border: 2px solid transparent; border-radius: 12px; cursor: pointer; text-align: center;" onclick="selectVideoBg('racing')" data-video="racing">
+                            <i class="fas fa-flag-checkered" style="font-size: 2rem; color: var(--red); margin-bottom: 8px;"></i>
+                            <p style="font-size: 0.8rem;">سباق</p>
+                        </div>
+                        <div class="bg-preset" style="padding: 15px; background: rgba(255,0,0,0.1); border: 2px solid transparent; border-radius: 12px; cursor: pointer; text-align: center;" onclick="selectVideoBg('city')" data-video="city">
+                            <i class="fas fa-city" style="font-size: 2rem; color: var(--red); margin-bottom: 8px;"></i>
+                            <p style="font-size: 0.8rem;">مدينة ليلاً</p>
+                        </div>
+                        <div class="bg-preset" style="padding: 15px; background: rgba(255,0,0,0.1); border: 2px solid transparent; border-radius: 12px; cursor: pointer; text-align: center;" onclick="selectVideoBg('custom')" data-video="custom">
+                            <i class="fas fa-link" style="font-size: 2rem; color: var(--red); margin-bottom: 8px;"></i>
+                            <p style="font-size: 0.8rem;">رابط مخصص</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group" id="custom-video-group" style="display: none;">
+                    <label>رابط الفيديو المخصص (MP4)</label>
+                    <input type="url" id="admin-video-url" placeholder="https://example.com/video.mp4">
+                </div>
+                <button class="admin-btn admin-btn-primary" onclick="saveVideoBg()"><i class="fas fa-save"></i> حفظ الخلفية</button>
+            </div>
+
+            <!-- Content Section -->
+            <div class="admin-section" id="section-content">
+                <h3><i class="fas fa-edit"></i> تعديل المحتوى</h3>
+                <div class="form-group"><label>نص "من نحن"</label><textarea id="admin-about-intro">نحن سبيد، فريق إبداعي شبابي متخصص بصناعة الفيديوهات في السوشال ميديا للبراندات</textarea></div>
+                <div class="form-group"><label>نص "ليش نحتاج محتوى"</label><textarea id="admin-why-text">الريلز والفيديوهات القصيرة هي المحرك الأساسي للطلبات حالياً في جدة والعالم</textarea></div>
+                <div class="form-group"><label>نص "الرؤية"</label><textarea id="admin-vision-title">الرؤية والقيمة المضافة لبراندك يا شريكي الجميل</textarea></div>
+                <div class="form-group"><label>نص "خلاف؟"</label><textarea id="admin-dispute-text">ممكن تتساءل مع نفسك ولا مع شركاءك؛ هذول يمكن ما يمشوا بالاتفاق أو يخالفوا مثل السابقين ويخسرونا ولا نستفيد شيء:</textarea></div>
+                <div class="form-group"><label>اقتباس "خلاف؟"</label><input type="text" id="admin-dispute-quote" value="حنشتغل وكأنها هذي شركتنا"></div>
+                <div class="form-group"><label>نص أسفل الباقات</label><input type="text" id="admin-packages-footer" value="نحول المنتج من شيء عادي إلى تجربة "يعيشوها.. ويحبوها.. ويتكلموا عنها""></div>
+                <button class="admin-btn admin-btn-primary" onclick="saveContent()"><i class="fas fa-save"></i> حفظ المحتوى</button>
+            </div>
+
+            <!-- Packages Section -->
+            <div class="admin-section" id="section-packages">
+                <h3><i class="fas fa-box-open"></i> تعديل الباقات</h3>
+
+                <h4 style="color: var(--red); margin: 20px 0 15px;">باقة بلس</h4>
+                <div class="form-row">
+                    <div class="form-group"><label>عدد الفيديوهات</label><input type="number" id="pkg-plus-videos" value="4"></div>
+                    <div class="form-group"><label>عدد الصور</label><input type="number" id="pkg-plus-photos" value="2"></div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group"><label>عدد الموديلات</label><input type="number" id="pkg-plus-models" value="1"></div>
+                    <div class="form-group"><label>عدد الستوري</label><input type="number" id="pkg-plus-stories" value="4"></div>
+                </div>
+                <div class="form-group"><label>السعر (ر.س)</label><input type="number" id="pkg-plus-price" value="5170"></div>
+
+                <h4 style="color: var(--red); margin: 20px 0 15px;">باقة برو</h4>
+                <div class="form-row">
+                    <div class="form-group"><label>عدد الفيديوهات</label><input type="number" id="pkg-pro-videos" value="6"></div>
+                    <div class="form-group"><label>عدد الصور</label><input type="number" id="pkg-pro-photos" value="3"></div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group"><label>عدد الموديلات</label><input type="number" id="pkg-pro-models" value="2"></div>
+                    <div class="form-group"><label>عدد الستوري</label><input type="number" id="pkg-pro-stories" value="6"></div>
+                </div>
+                <div class="form-group"><label>السعر (ر.س)</label><input type="number" id="pkg-pro-price" value="7170"></div>
+
+                <h4 style="color: var(--red); margin: 20px 0 15px;">باقة سبيد</h4>
+                <div class="form-row">
+                    <div class="form-group"><label>عدد الفيديوهات</label><input type="number" id="pkg-speed-videos" value="8"></div>
+                    <div class="form-group"><label>عدد الصور</label><input type="number" id="pkg-speed-photos" value="4"></div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group"><label>عدد الموديلات</label><input type="number" id="pkg-speed-models" value="3"></div>
+                    <div class="form-group"><label>عدد الستوري</label><input type="number" id="pkg-speed-stories" value="8"></div>
+                </div>
+                <div class="form-group"><label>السعر (ر.س)</label><input type="number" id="pkg-speed-price" value="8170"></div>
+
+                <button class="admin-btn admin-btn-primary" onclick="savePackages()" style="margin-top: 20px;"><i class="fas fa-save"></i> حفظ الباقات</button>
+            </div>
+
+            <!-- Services Section -->
+            <div class="admin-section" id="section-services">
+                <h3><i class="fas fa-cogs"></i> تعديل الخدمات</h3>
+                <div class="form-group"><label>الخدمات (سطر لكل خدمة)</label><textarea id="admin-services-list" rows="10">فهم عميق في خوارزميات السوشال ميديا
+نحضر مؤتمرات شركات الميديا (تيك توك، انستقرام)
+عندنا شهادة معتمدة عالمية في التصوير
+أدوات احترافية متكاملة
+كتابة محتوى + إخراج + مونتاج + موسيقى + تأثيرات + كابشن
+تعليق صوتي
+عندنا أشخاص (مودل مميزين) خاص فينا بكل المواصفات
+إدارة الحسابات (تطوير + تنزيل + تفاعل دائم)
+إمكانية استخدام الثقافتين: العربية والإنجليزية</textarea></div>
+                <button class="admin-btn admin-btn-primary" onclick="saveServices()"><i class="fas fa-save"></i> حفظ الخدمات</button>
+            </div>
+
+            <!-- Social Section -->
+            <div class="admin-section" id="section-social">
+                <h3><i class="fas fa-share-alt"></i> روابط التواصل</h3>
+                <div class="form-row">
+                    <div class="form-group"><label><i class="fab fa-tiktok"></i> TikTok</label><input type="url" id="admin-tiktok" value="https://www.tiktok.com/@speed.social.media"></div>
+                    <div class="form-group"><label><i class="fab fa-instagram"></i> Instagram</label><input type="url" id="admin-instagram" value="https://www.instagram.com/speed.social.media"></div>
+                </div>
+                <div class="form-group"><label><i class="fab fa-whatsapp"></i> WhatsApp</label><input type="url" id="admin-whatsapp" value="https://wa.me/966544656944"></div>
+                <div class="form-group"><label>رقم الهاتف</label><input type="text" id="admin-phone" value="0544656944"></div>
+                <button class="admin-btn admin-btn-primary" onclick="saveSocial()"><i class="fas fa-save"></i> حفظ الروابط</button>
+            </div>
+
+            <!-- Ideas Section -->
+            <div class="admin-section" id="section-ideas">
+                <h3><i class="fas fa-lightbulb"></i> تعديل الأفكار</h3>
+                <div class="form-group"><label>قائمة الأفكار (سطر لكل فكرة)</label><textarea id="admin-ideas-list" rows="15">قبل / وبعد
+وجهة نظر POV
+تجربة عميل UGC
+إحساس الفخامة Luxury Feel
+احترافي Transitions
+قصة قصيرة Mini Story
+انبوكسينق Unboxing
+محتوى مع الموظفين
+نصائح اليوم Day Tip
+تحدي Challenge
+وراء الكواليس BTS
+مقارنة Comparison
+تعليمي Tutorial
+رياكشن Reaction
+توب 5 Top 5
+ميث Myth
+تساؤل Question
+تعليق Comment
+استفتاء Poll
+قصة نجاح Success Story
+ورود Customer Review
+عروض Offers
+مناسبات Events
+ترفيه Entertainment</textarea></div>
+                <button class="admin-btn admin-btn-primary" onclick="saveIdeas()"><i class="fas fa-save"></i> حفظ الأفكار</button>
+            </div>
+
+            <!-- Password Section -->
+            <div class="admin-section" id="section-password">
+                <h3><i class="fas fa-lock"></i> تغيير كلمة المرور</h3>
+                <div class="form-group"><label>كلمة المرور الحالية</label><input type="password" id="current-password" placeholder="••••••"></div>
+                <div class="form-group"><label>كلمة المرور الجديدة</label><input type="password" id="new-password" placeholder="••••••"></div>
+                <div class="form-group"><label>تأكيد كلمة المرور الجديدة</label><input type="password" id="confirm-password" placeholder="••••••"></div>
+                <button class="admin-btn admin-btn-primary" onclick="changePassword()"><i class="fas fa-save"></i> حفظ الباسورد</button>
+            </div>
+        </div>
     </div>
 
-    <!-- Social icons -->
-    <div class="reveal active reveal-delay-3" style="display:flex;gap:20px;justify-content:center;margin-top:50px;">
-      <a href="#" style="width:50px;height:50px;border-radius:50%;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;transition:all 0.3s;" onmouseover="this.style.borderColor='#E31E24';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.1)';this.style.transform='translateY(0)'">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
-      </a>
-      <a href="#" style="width:50px;height:50px;border-radius:50%;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;transition:all 0.3s;" onmouseover="this.style.borderColor='#E31E24';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.1)';this.style.transform='translateY(0)'">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M12.53.02C13.84 0 15.14.01 16.44 0c.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
-      </a>
-      <a href="#" style="width:50px;height:50px;border-radius:50%;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;transition:all 0.3s;" onmouseover="this.style.borderColor='#E31E24';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.1)';this.style.transform='translateY(0)'">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-      </a>
-    </div>
-  </div>
+    <!-- ===== BOTTOM NAVIGATION ===== -->
+    <nav class="bottom-nav" id="bottom-nav">
+        <button class="bottom-nav-item active" onclick="navigateTo('home')">
+            <i class="fas fa-home"></i>
+            <span>الرئيسية</span>
+        </button>
+        <button class="bottom-nav-item" onclick="navigateTo('about')">
+            <i class="fas fa-users"></i>
+            <span>من نحن</span>
+        </button>
+        <button class="bottom-nav-item" onclick="navigateTo('packages')">
+            <i class="fas fa-box-open"></i>
+            <span>الباقات</span>
+        </button>
+        <button class="bottom-nav-item" onclick="navigateTo('ideas')">
+            <i class="fas fa-lightbulb"></i>
+            <span>أفكار</span>
+        </button>
+        <button class="bottom-nav-item" onclick="navigateTo('contact')">
+            <i class="fas fa-phone"></i>
+            <span>تواصل</span>
+        </button>
+    </nav>
 
-  <!-- Scroll indicator -->
-  <div style="position:absolute;bottom:30px;left:50%;transform:translateX(-50%);animation:bounce 2s infinite;">
-    <svg width="24" height="24" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="2" viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
-  </div>
-</section>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getDatabase, ref, onValue, set, get } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+        import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
-<!-- About Section -->
-<section id="about" style="padding:100px 0;position:relative;">
-  <div style="max-width:1200px;margin:0 auto;padding:0 24px;">
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;">
-      <div class="reveal">
-        <div style="position:relative;">
-          <div style="width:100%;aspect-ratio:1;border-radius:30px;background:linear-gradient(135deg, rgba(227,30,36,0.1), rgba(227,30,36,0.05));display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;">
-            <div style="position:absolute;inset:0;background:radial-gradient(circle at 30% 30%, rgba(227,30,36,0.2), transparent 60%);"></div>
-            <img src="logo_speed.png" alt="SPEED" style="width:70%;height:auto;position:relative;z-index:1;filter:drop-shadow(0 20px 40px rgba(0,0,0,0.5));">
-          </div>
-          <!-- Decorative elements -->
-          <div style="position:absolute;top:-20px;right:-20px;width:80px;height:80px;border:2px solid rgba(227,30,36,0.3);border-radius:20px;"></div>
-          <div style="position:absolute;bottom:-20px;left:-20px;width:60px;height:60px;background:rgba(227,30,36,0.1);border-radius:15px;"></div>
-        </div>
-      </div>
+        const firebaseConfig = {
+            apiKey: "AIzaSyB6Rstt9-LUsZfaB8ItWwl3xQ2Z7Fp0GUA",
+            authDomain: "ahmed-3fedb.firebaseapp.com",
+            databaseURL: "https://ahmed-3fedb-default-rtdb.firebaseio.com",
+            projectId: "ahmed-3fedb",
+            storageBucket: "ahmed-3fedb.firebasestorage.app",
+            messagingSenderId: "660897595229",
+            appId: "1:660897595229:web:57f512a2f8dbcf076ff2b4",
+            measurementId: "G-S0P08G2HW4"
+        };
 
-      <div class="reveal reveal-delay-1">
-        <h2 style="font-size:42px;font-weight:900;margin-bottom:20px;line-height:1.2;">
-          نحن <span style="color:var(--speed-red);">SPEED</span><br>
-          <span style="font-size:28px;color:rgba(255,255,255,0.7);">سوشال ميديا</span>
-        </h2>
-        <p style="font-size:18px;color:rgba(255,255,255,0.7);line-height:1.8;margin-bottom:24px;">
-          فريق إبداعي شبابي متخصص بصناعة الفيديوهات في السوشال ميديا للبراندات. نركز على إنتاج محتوى إيجابي، عاطفي، ومجتمعي يجمع الناس ويبني علاقة حقيقية.
-        </p>
-        <p style="font-size:18px;color:rgba(255,255,255,0.7);line-height:1.8;margin-bottom:30px;">
-          نشتغل بالمفهوم العالمي "نبيع العاطفة والسعادة، لا المنتج" 🔥
-        </p>
-        <a href="https://wa.me/966544656944" target="_blank" class="btn-primary">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-          تواصل معنا
-        </a>
-      </div>
-    </div>
-  </div>
-</section>
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+        const auth = getAuth(app);
 
-<!-- Stats Section -->
-<section style="padding:80px 0;background:linear-gradient(180deg, transparent, rgba(227,30,36,0.03), transparent);">
-  <div style="max-width:1200px;margin:0 auto;padding:0 24px;">
-    <div style="display:grid;grid-template-columns:repeat(4, 1fr);gap:40px;text-align:center;">
-      <div class="reveal">
-        <div class="stat-number" data-target="150">0</div>
-        <div class="stat-label">فيديو منشور</div>
-      </div>
-      <div class="reveal reveal-delay-1">
-        <div class="stat-number" data-target="50">0</div>
-        <div class="stat-label">عميل سعيد</div>
-      </div>
-      <div class="reveal reveal-delay-2">
-        <div class="stat-number" data-target="10">0</div>
-        <div class="stat-label">مليون مشاهدة</div>
-      </div>
-      <div class="reveal reveal-delay-3">
-        <div class="stat-number" data-target="100">0</div>
-        <div class="stat-label">فكرة محتوى</div>
-      </div>
-    </div>
-  </div>
-</section>
+        let currentUser = null;
+        let appData = null;
+        let isSaving = false;
+        let pendingChanges = {};
+        let hasUnsavedChanges = false;
+        let currentPage = 'home';
 
-<!-- Services Section -->
-<section id="services" style="padding:100px 0;">
-  <div style="max-width:1200px;margin:0 auto;padding:0 24px;">
-    <h2 class="section-title reveal">خدماتنا المتكاملة</h2>
-    <p class="section-subtitle reveal">كل اللي تحتاجه في مكان واحد</p>
+        // Video backgrounds
+        const videoPresets = {
+            'speed1': 'https://assets.mixkit.co/videos/preview/mixkit-speeding-down-a-highway-at-night-34566-large.mp4',
+            'racing': 'https://assets.mixkit.co/videos/preview/mixkit-racing-car-on-a-race-track-34567-large.mp4',
+            'city': 'https://assets.mixkit.co/videos/preview/mixkit-city-traffic-at-night-34568-large.mp4',
+            'custom': ''
+        };
 
-    <div style="display:grid;grid-template-columns:repeat(3, 1fr);gap:24px;">
-      <div class="glass reveal" style="padding:40px 30px;border-radius:20px;text-align:center;">
-        <div style="width:70px;height:70px;background:linear-gradient(135deg, rgba(227,30,36,0.2), rgba(227,30,36,0.05));border-radius:20px;display:flex;align-items:center;justify-content:center;margin:0 auto 24px;">
-          <svg width="32" height="32" fill="none" stroke="#E31E24" stroke-width="2" viewBox="0 0 24 24"><path d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
-        </div>
-        <h3 style="font-size:20px;font-weight:700;margin-bottom:12px;">تصوير احترافي</h3>
-        <p style="color:rgba(255,255,255,0.6);font-size:15px;line-height:1.6;">تصوير سينمائي بأحدث الأدوات والتقنيات</p>
-      </div>
+        // Default data
+        const defaultData = {
+            profile: {
+                title: 'SPEED',
+                subtitle: 'سوشال ميديا',
+                tagline: 'في عالم السرعة.. وعالم الفيديوهات!',
+                logo: ''
+            },
+            videoBg: {
+                preset: 'speed1',
+                customUrl: ''
+            },
+            content: {
+                aboutIntro: 'نحن سبيد، فريق إبداعي شبابي متخصص بصناعة الفيديوهات في السوشال ميديا للبراندات',
+                whyText: 'الريلز والفيديوهات القصيرة هي المحرك الأساسي للطلبات حالياً في جدة والعالم',
+                visionTitle: 'الرؤية والقيمة المضافة لبراندك يا شريكي الجميل',
+                disputeText: 'ممكن تتساءل مع نفسك ولا مع شركاءك؛ هذول يمكن ما يمشوا بالاتفاق أو يخالفوا مثل السابقين ويخسرونا ولا نستفيد شيء:',
+                disputeQuote: 'حنشتغل وكأنها هذي شركتنا',
+                packagesFooter: 'نحول المنتج من شيء عادي إلى تجربة "يعيشوها.. ويحبوها.. ويتكلموا عنها"'
+            },
+            packages: {
+                plus: { videos: 4, photos: 2, models: 1, stories: 4, price: 5170 },
+                pro: { videos: 6, photos: 3, models: 2, stories: 6, price: 7170 },
+                speed: { videos: 8, photos: 4, models: 3, stories: 8, price: 8170 }
+            },
+            services: [
+                'فهم عميق في خوارزميات السوشال ميديا',
+                'نحضر مؤتمرات شركات الميديا (تيك توك، انستقرام)',
+                'عندنا شهادة معتمدة عالمية في التصوير',
+                'أدوات احترافية متكاملة',
+                'كتابة محتوى + إخراج + مونتاج + موسيقى + تأثيرات + كابشن',
+                'تعليق صوتي',
+                'عندنا أشخاص (مودل مميزين) خاص فينا بكل المواصفات',
+                'إدارة الحسابات (تطوير + تنزيل + تفاعل دائم)',
+                'إمكانية استخدام الثقافتين: العربية والإنجليزية'
+            ],
+            social: {
+                tiktok: 'https://www.tiktok.com/@speed.social.media',
+                instagram: 'https://www.instagram.com/speed.social.media',
+                whatsapp: 'https://wa.me/966544656944',
+                phone: '0544656944'
+            },
+            ideas: [
+                'قبل / وبعد', 'وجهة نظر POV', 'تجربة عميل UGC', 'إحساس الفخامة Luxury Feel',
+                'احترافي Transitions', 'قصة قصيرة Mini Story', 'انبوكسينق Unboxing',
+                'محتوى مع الموظفين', 'نصائح اليوم Day Tip', 'تحدي Challenge',
+                'وراء الكواليس BTS', 'مقارنة Comparison', 'تعليمي Tutorial',
+                'رياكشن Reaction', 'توب 5 Top 5', 'ميث Myth', 'تساؤل Question',
+                'تعليق Comment', 'استفتاء Poll', 'قصة نجاح Success Story',
+                'ورود Customer Review', 'عروض Offers', 'مناسبات Events', 'ترفيه Entertainment'
+            ],
+            stats: { visits: 0 }
+        };
 
-      <div class="glass reveal reveal-delay-1" style="padding:40px 30px;border-radius:20px;text-align:center;">
-        <div style="width:70px;height:70px;background:linear-gradient(135deg, rgba(227,30,36,0.2), rgba(227,30,36,0.05));border-radius:20px;display:flex;align-items:center;justify-content:center;margin:0 auto 24px;">
-          <svg width="32" height="32" fill="none" stroke="#E31E24" stroke-width="2" viewBox="0 0 24 24"><path d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/><path d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-        </div>
-        <h3 style="font-size:20px;font-weight:700;margin-bottom:12px;">مونتاج احترافي</h3>
-        <p style="color:rgba(255,255,255,0.6);font-size:15px;line-height:1.6;">مونتاج سينمائي مع تأثيرات وترانزيشنز</p>
-      </div>
+        // Auth state
+        onAuthStateChanged(auth, (user) => {
+            currentUser = user;
+        });
 
-      <div class="glass reveal reveal-delay-2" style="padding:40px 30px;border-radius:20px;text-align:center;">
-        <div style="width:70px;height:70px;background:linear-gradient(135deg, rgba(227,30,36,0.2), rgba(227,30,36,0.05));border-radius:20px;display:flex;align-items:center;justify-content:center;margin:0 auto 24px;">
-          <svg width="32" height="32" fill="none" stroke="#E31E24" stroke-width="2" viewBox="0 0 24 24"><path d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
-        </div>
-        <h3 style="font-size:20px;font-weight:700;margin-bottom:12px;">كتابة محتوى</h3>
-        <p style="color:rgba(255,255,255,0.6);font-size:15px;line-height:1.6;">كتابة سيناريوهات وكابشنز جاذبة</p>
-      </div>
-
-      <div class="glass reveal" style="padding:40px 30px;border-radius:20px;text-align:center;">
-        <div style="width:70px;height:70px;background:linear-gradient(135deg, rgba(227,30,36,0.2), rgba(227,30,36,0.05));border-radius:20px;display:flex;align-items:center;justify-content:center;margin:0 auto 24px;">
-          <svg width="32" height="32" fill="none" stroke="#E31E24" stroke-width="2" viewBox="0 0 24 24"><path d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"/></svg>
-        </div>
-        <h3 style="font-size:20px;font-weight:700;margin-bottom:12px;">تعليق صوتي</h3>
-        <p style="color:rgba(255,255,255,0.6);font-size:15px;line-height:1.6;">تعليق صوتي احترافي بأصوات مميزة</p>
-      </div>
-
-      <div class="glass reveal reveal-delay-1" style="padding:40px 30px;border-radius:20px;text-align:center;">
-        <div style="width:70px;height:70px;background:linear-gradient(135deg, rgba(227,30,36,0.2), rgba(227,30,36,0.05));border-radius:20px;display:flex;align-items:center;justify-content:center;margin:0 auto 24px;">
-          <svg width="32" height="32" fill="none" stroke="#E31E24" stroke-width="2" viewBox="0 0 24 24"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
-        </div>
-        <h3 style="font-size:20px;font-weight:700;margin-bottom:12px;">مودلز مميزين</h3>
-        <p style="color:rgba(255,255,255,0.6);font-size:15px;line-height:1.6;">أشخاص خاصين فينا بكل المواصفات</p>
-      </div>
-
-      <div class="glass reveal reveal-delay-2" style="padding:40px 30px;border-radius:20px;text-align:center;">
-        <div style="width:70px;height:70px;background:linear-gradient(135deg, rgba(227,30,36,0.2), rgba(227,30,36,0.05));border-radius:20px;display:flex;align-items:center;justify-content:center;margin:0 auto 24px;">
-          <svg width="32" height="32" fill="none" stroke="#E31E24" stroke-width="2" viewBox="0 0 24 24"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
-        </div>
-        <h3 style="font-size:20px;font-weight:700;margin-bottom:12px;">إدارة حسابات</h3>
-        <p style="color:rgba(255,255,255,0.6);font-size:15px;line-height:1.6;">تطوير + تنزيل + تفاعل دائم</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Portfolio Section -->
-<section id="portfolio" style="padding:100px 0;background:linear-gradient(180deg, transparent, rgba(227,30,36,0.02), transparent);">
-  <div style="max-width:1200px;margin:0 auto;padding:0 24px;">
-    <h2 class="section-title reveal">أعمالنا</h2>
-    <p class="section-subtitle reveal">فيديوهاتنا اللي خلت البراندات تتألق</p>
-
-    <div style="display:grid;grid-template-columns:repeat(3, 1fr);gap:24px;">
-      <div class="video-card reveal" style="aspect-ratio:9/16;background:linear-gradient(180deg, #1a1a1a, #0a0a0a);position:relative;">
-        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">
-          <div class="play-btn">
-            <svg width="24" height="24" fill="white" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-          </div>
-        </div>
-        <div style="position:absolute;bottom:0;left:0;right:0;padding:30px;background:linear-gradient(transparent, rgba(0,0,0,0.9));">
-          <span style="background:var(--speed-red);padding:4px 12px;border-radius:20px;font-size:12px;font-weight:700;">ريلز</span>
-          <h3 style="margin-top:10px;font-size:18px;font-weight:700;">فيديو ترويجي للمنتج</h3>
-        </div>
-      </div>
-
-      <div class="video-card reveal reveal-delay-1" style="aspect-ratio:9/16;background:linear-gradient(180deg, #1a1a1a, #0a0a0a);position:relative;">
-        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">
-          <div class="play-btn">
-            <svg width="24" height="24" fill="white" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-          </div>
-        </div>
-        <div style="position:absolute;bottom:0;left:0;right:0;padding:30px;background:linear-gradient(transparent, rgba(0,0,0,0.9));">
-          <span style="background:#3b82f6;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:700;">تيك توك</span>
-          <h3 style="margin-top:10px;font-size:18px;font-weight:700;">محتوى تفاعلي</h3>
-        </div>
-      </div>
-
-      <div class="video-card reveal reveal-delay-2" style="aspect-ratio:9/16;background:linear-gradient(180deg, #1a1a1a, #0a0a0a);position:relative;">
-        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">
-          <div class="play-btn">
-            <svg width="24" height="24" fill="white" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-          </div>
-        </div>
-        <div style="position:absolute;bottom:0;left:0;right:0;padding:30px;background:linear-gradient(transparent, rgba(0,0,0,0.9));">
-          <span style="background:#8b5cf6;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:700;">ستوري</span>
-          <h3 style="margin-top:10px;font-size:18px;font-weight:700;">يوم في حياتنا</h3>
-        </div>
-      </div>
-
-      <div class="video-card reveal" style="aspect-ratio:9/16;background:linear-gradient(180deg, #1a1a1a, #0a0a0a);position:relative;">
-        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">
-          <div class="play-btn">
-            <svg width="24" height="24" fill="white" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-          </div>
-        </div>
-        <div style="position:absolute;bottom:0;left:0;right:0;padding:30px;background:linear-gradient(transparent, rgba(0,0,0,0.9));">
-          <span style="background:#22c55e;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:700;">UGC</span>
-          <h3 style="margin-top:10px;font-size:18px;font-weight:700;">تجربة عميل حقيقية</h3>
-        </div>
-      </div>
-
-      <div class="video-card reveal reveal-delay-1" style="aspect-ratio:9/16;background:linear-gradient(180deg, #1a1a1a, #0a0a0a);position:relative;">
-        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">
-          <div class="play-btn">
-            <svg width="24" height="24" fill="white" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-          </div>
-        </div>
-        <div style="position:absolute;bottom:0;left:0;right:0;padding:30px;background:linear-gradient(transparent, rgba(0,0,0,0.9));">
-          <span style="background:#f97316;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:700;">Unboxing</span>
-          <h3 style="margin-top:10px;font-size:18px;font-weight:700;">انبوكسينق احترافي</h3>
-        </div>
-      </div>
-
-      <div class="video-card reveal reveal-delay-2" style="aspect-ratio:9/16;background:linear-gradient(180deg, #1a1a1a, #0a0a0a);position:relative;">
-        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">
-          <div class="play-btn">
-            <svg width="24" height="24" fill="white" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-          </div>
-        </div>
-        <div style="position:absolute;bottom:0;left:0;right:0;padding:30px;background:linear-gradient(transparent, rgba(0,0,0,0.9));">
-          <span style="background:#ec4899;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:700;">Mini Story</span>
-          <h3 style="margin-top:10px;font-size:18px;font-weight:700;">قصة قصيرة</h3>
-        </div>
-      </div>
-    </div>
-
-    <div style="text-align:center;margin-top:50px;" class="reveal">
-      <a href="https://wa.me/966544656944" target="_blank" class="btn-primary">
-        شاهد المزيد من الأعمال
-        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- Clients / Partners Section -->
-<section id="clients" style="padding:100px 0;">
-  <div style="max-width:1200px;margin:0 auto;padding:0 24px;">
-    <h2 class="section-title reveal">شركاؤنا</h2>
-    <p class="section-subtitle reveal">براندات اشتغلنا معها وكانت النتائج مبهرة</p>
-
-    <!-- Partner logos marquee -->
-    <div class="marquee-container reveal" style="margin-bottom:80px;">
-      <div class="marquee-content">
-        <div style="display:flex;gap:60px;padding:0 30px;align-items:center;">
-          <div style="width:150px;height:60px;background:rgba(255,255,255,0.05);border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:700;color:rgba(255,255,255,0.4);">شريك 1</div>
-          <div style="width:150px;height:60px;background:rgba(255,255,255,0.05);border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:700;color:rgba(255,255,255,0.4);">شريك 2</div>
-          <div style="width:150px;height:60px;background:rgba(255,255,255,0.05);border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:700;color:rgba(255,255,255,0.4);">شريك 3</div>
-          <div style="width:150px;height:60px;background:rgba(255,255,255,0.05);border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:700;color:rgba(255,255,255,0.4);">شريك 4</div>
-          <div style="width:150px;height:60px;background:rgba(255,255,255,0.05);border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:700;color:rgba(255,255,255,0.4);">شريك 5</div>
-          <div style="width:150px;height:60px;background:rgba(255,255,255,0.05);border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:700;color:rgba(255,255,255,0.4);">شريك 6</div>
-        </div>
-        <div style="display:flex;gap:60px;padding:0 30px;align-items:center;">
-          <div style="width:150px;height:60px;background:rgba(255,255,255,0.05);border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:700;color:rgba(255,255,255,0.4);">شريك 1</div>
-          <div style="width:150px;height:60px;background:rgba(255,255,255,0.05);border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:700;color:rgba(255,255,255,0.4);">شريك 2</div>
-          <div style="width:150px;height:60px;background:rgba(255,255,255,0.05);border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:700;color:rgba(255,255,255,0.4);">شريك 3</div>
-          <div style="width:150px;height:60px;background:rgba(255,255,255,0.05);border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:700;color:rgba(255,255,255,0.4);">شريك 4</div>
-          <div style="width:150px;height:60px;background:rgba(255,255,255,0.05);border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:700;color:rgba(255,255,255,0.4);">شريك 5</div>
-          <div style="width:150px;height:60px;background:rgba(255,255,255,0.05);border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:700;color:rgba(255,255,255,0.4);">شريك 6</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Testimonials -->
-    <div style="display:grid;grid-template-columns:repeat(3, 1fr);gap:24px;">
-      <div class="testimonial-card reveal">
-        <div style="display:flex;gap:4px;margin-bottom:16px;">
-          <svg width="20" height="20" fill="#E31E24" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg width="20" height="20" fill="#E31E24" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg width="20" height="20" fill="#E31E24" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg width="20" height="20" fill="#E31E24" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg width="20" height="20" fill="#E31E24" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-        </div>
-        <p style="color:rgba(255,255,255,0.8);line-height:1.8;margin-bottom:20px;font-size:15px;">"محتوى ممتاز وتفاعل خرافي، زاد الوعي بالعلامة التجارية بشكل ملحوظ. فريق محترف جداً"</p>
-        <div style="display:flex;align-items:center;gap:12px;">
-          <div style="width:50px;height:50px;border-radius:50%;background:linear-gradient(135deg, #E31E24, #991b1b);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:20px;">ف</div>
-          <div>
-            <div style="font-weight:700;">مستشفى الفرسان</div>
-            <div style="font-size:13px;color:rgba(255,255,255,0.5);">قطاع صحي</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="testimonial-card reveal reveal-delay-1">
-        <div style="display:flex;gap:4px;margin-bottom:16px;">
-          <svg width="20" height="20" fill="#E31E24" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg width="20" height="20" fill="#E31E24" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg width="20" height="20" fill="#E31E24" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg width="20" height="20" fill="#E31E24" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg width="20" height="20" fill="#E31E24" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-        </div>
-        <p style="color:rgba(255,255,255,0.8);line-height:1.8;margin-bottom:20px;font-size:15px;">"الفيديوهات خلت الناس تجي للمطعم بكثرة، نتائج فوق التوقعات بمراحل. شكراً SPEED"</p>
-        <div style="display:flex;align-items:center;gap:12px;">
-          <div style="width:50px;height:50px;border-radius:50%;background:linear-gradient(135deg, #E31E24, #991b1b);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:20px;">ش</div>
-          <div>
-            <div style="font-weight:700;">مطعم الشيف</div>
-            <div style="font-size:13px;color:rgba(255,255,255,0.5);">قطاع المطاعم</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="testimonial-card reveal reveal-delay-2">
-        <div style="display:flex;gap:4px;margin-bottom:16px;">
-          <svg width="20" height="20" fill="#E31E24" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg width="20" height="20" fill="#E31E24" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg width="20" height="20" fill="#E31E24" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg width="20" height="20" fill="#E31E24" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg width="20" height="20" fill="#E31E24" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-        </div>
-        <p style="color:rgba(255,255,255,0.8);line-height:1.8;margin-bottom:20px;font-size:15px;">"أسلوب التصوير والمونتاج احترافي جداً، العملاء يمدحون المحتوى ويتفاعلون بشكل كبير"</p>
-        <div style="display:flex;align-items:center;gap:12px;">
-          <div style="width:50px;height:50px;border-radius:50%;background:linear-gradient(135deg, #E31E24, #991b1b);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:20px;">ف</div>
-          <div>
-            <div style="font-weight:700;">متجر فاشن ستور</div>
-            <div style="font-size:13px;color:rgba(255,255,255,0.5);">قطاع الأزياء</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Pricing Section -->
-<section id="pricing" style="padding:100px 0;background:linear-gradient(180deg, transparent, rgba(227,30,36,0.02), transparent);">
-  <div style="max-width:1200px;margin:0 auto;padding:0 24px;">
-    <h2 class="section-title reveal">باقاتنا</h2>
-    <p class="section-subtitle reveal">اختر الباقة المناسبة لبراندك</p>
-
-    <div style="display:grid;grid-template-columns:repeat(3, 1fr);gap:30px;">
-      <!-- Plus Package -->
-      <div class="glass reveal" style="padding:40px 30px;border-radius:24px;text-align:center;position:relative;">
-        <div style="font-size:20px;font-weight:700;margin-bottom:8px;">باقة بلس</div>
-        <div style="font-size:48px;font-weight:900;color:var(--speed-red);margin-bottom:8px;">5170<span style="font-size:18px;color:rgba(255,255,255,0.5);"> ر.س</span></div>
-        <div style="font-size:14px;color:rgba(255,255,255,0.5);margin-bottom:30px;">شهرياً</div>
-
-        <ul style="list-style:none;padding:0;margin:0 0 30px;text-align:right;">
-          <li style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.05);display:flex;align-items:center;gap:10px;">
-            <svg width="20" height="20" fill="none" stroke="#22c55e" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
-            <span>4 فيديوهات</span>
-          </li>
-          <li style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.05);display:flex;align-items:center;gap:10px;">
-            <svg width="20" height="20" fill="none" stroke="#22c55e" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
-            <span>2 صور</span>
-          </li>
-          <li style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.05);display:flex;align-items:center;gap:10px;">
-            <svg width="20" height="20" fill="none" stroke="#22c55e" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
-            <span>1 مودل مجاناً</span>
-          </li>
-          <li style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.05);display:flex;align-items:center;gap:10px;">
-            <svg width="20" height="20" fill="none" stroke="#22c55e" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
-            <span>4 ستوري مجاناً</span>
-          </li>
-          <li style="padding:10px 0;display:flex;align-items:center;gap:10px;">
-            <svg width="20" height="20" fill="none" stroke="#22c55e" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
-            <span>تفاعل مجاني</span>
-          </li>
-        </ul>
-
-        <a href="https://wa.me/966544656944" target="_blank" class="btn-outline" style="width:100%;justify-content:center;">اشترك الآن</a>
-      </div>
-
-      <!-- Pro Package -->
-      <div class="glass reveal reveal-delay-1" style="padding:40px 30px;border-radius:24px;text-align:center;position:relative;border:2px solid var(--speed-red);">
-        <div style="position:absolute;top:-15px;left:50%;transform:translateX(-50%);background:var(--speed-red);padding:6px 20px;border-radius:20px;font-size:13px;font-weight:700;">الأكثر طلباً</div>
-        <div style="font-size:20px;font-weight:700;margin-bottom:8px;margin-top:10px;">باقة برو</div>
-        <div style="font-size:48px;font-weight:900;color:var(--speed-red);margin-bottom:8px;">7170<span style="font-size:18px;color:rgba(255,255,255,0.5);"> ر.س</span></div>
-        <div style="font-size:14px;color:rgba(255,255,255,0.5);margin-bottom:30px;">شهرياً</div>
-
-        <ul style="list-style:none;padding:0;margin:0 0 30px;text-align:right;">
-          <li style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.05);display:flex;align-items:center;gap:10px;">
-            <svg width="20" height="20" fill="none" stroke="#22c55e" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
-            <span>6 فيديوهات</span>
-          </li>
-          <li style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.05);display:flex;align-items:center;gap:10px;">
-            <svg width="20" height="20" fill="none" stroke="#22c55e" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
-            <span>3 صور</span>
-          </li>
-          <li style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.05);display:flex;align-items:center;gap:10px;">
-            <svg width="20" height="20" fill="none" stroke="#22c55e" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
-            <span>2 مودل مجاناً</span>
-          </li>
-          <li style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.05);display:flex;align-items:center;gap:10px;">
-            <svg width="20" height="20" fill="none" stroke="#22c55e" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
-            <span>6 ستوري مجاناً</span>
-          </li>
-          <li style="padding:10px 0;display:flex;align-items:center;gap:10px;">
-            <svg width="20" height="20" fill="none" stroke="#22c55e" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
-            <span>تفاعل مجاني</span>
-          </li>
-        </ul>
-
-        <a href="https://wa.me/966544656944" target="_blank" class="btn-primary" style="width:100%;justify-content:center;">اشترك الآن</a>
-      </div>
-
-      <!-- Speed Package -->
-      <div class="glass reveal reveal-delay-2" style="padding:40px 30px;border-radius:24px;text-align:center;position:relative;">
-        <div style="font-size:20px;font-weight:700;margin-bottom:8px;">باقة سبيد</div>
-        <div style="font-size:48px;font-weight:900;color:var(--speed-red);margin-bottom:8px;">8170<span style="font-size:18px;color:rgba(255,255,255,0.5);"> ر.س</span></div>
-        <div style="font-size:14px;color:rgba(255,255,255,0.5);margin-bottom:30px;">شهرياً</div>
-
-        <ul style="list-style:none;padding:0;margin:0 0 30px;text-align:right;">
-          <li style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.05);display:flex;align-items:center;gap:10px;">
-            <svg width="20" height="20" fill="none" stroke="#22c55e" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
-            <span>8 فيديوهات</span>
-          </li>
-          <li style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.05);display:flex;align-items:center;gap:10px;">
-            <svg width="20" height="20" fill="none" stroke="#22c55e" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
-            <span>4 صور</span>
-          </li>
-          <li style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.05);display:flex;align-items:center;gap:10px;">
-            <svg width="20" height="20" fill="none" stroke="#22c55e" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
-            <span>3 مودل مجاناً</span>
-          </li>
-          <li style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.05);display:flex;align-items:center;gap:10px;">
-            <svg width="20" height="20" fill="none" stroke="#22c55e" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
-            <span>8 ستوري مجاناً</span>
-          </li>
-          <li style="padding:10px 0;display:flex;align-items:center;gap:10px;">
-            <svg width="20" height="20" fill="none" stroke="#22c55e" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
-            <span>تفاعل مجاني</span>
-          </li>
-        </ul>
-
-        <a href="https://wa.me/966544656944" target="_blank" class="btn-outline" style="width:100%;justify-content:center;">اشترك الآن</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Contact Section -->
-<section id="contact" style="padding:100px 0;">
-  <div style="max-width:800px;margin:0 auto;padding:0 24px;text-align:center;">
-    <h2 class="section-title reveal">تواصل معنا</h2>
-    <p class="section-subtitle reveal">جاهزين نبدأ الرحلة معاك؟</p>
-
-    <div class="reveal" style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:24px;padding:50px 40px;">
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:30px;text-align:right;">
-        <input type="text" placeholder="الاسم" class="input-field">
-        <input type="email" placeholder="البريد الإلكتروني" class="input-field">
-        <input type="tel" placeholder="رقم الجوال" class="input-field">
-        <input type="text" placeholder="اسم البراند" class="input-field">
-      </div>
-      <textarea placeholder="رسالتك..." class="input-field" style="min-height:150px;margin-bottom:30px;resize:vertical;"></textarea>
-
-      <button class="btn-primary" style="width:100%;justify-content:center;font-size:18px;padding:18px;">
-        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
-        إرسال الرسالة
-      </button>
-
-      <div style="display:flex;gap:20px;justify-content:center;margin-top:40px;">
-        <a href="https://wa.me/966544656944" target="_blank" style="display:flex;align-items:center;gap:10px;color:#25D366;text-decoration:none;font-weight:700;transition:transform 0.3s;" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform='translateY(0)'">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-          واتساب
-        </a>
-        <a href="tel:0544656944" style="display:flex;align-items:center;gap:10px;color:var(--speed-red);text-decoration:none;font-weight:700;transition:transform 0.3s;" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform='translateY(0)'">
-          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
-          اتصال
-        </a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Footer -->
-<footer style="padding:60px 0 30px;border-top:1px solid rgba(255,255,255,0.05);">
-  <div style="max-width:1200px;margin:0 auto;padding:0 24px;">
-    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;margin-bottom:40px;">
-      <div style="display:flex;align-items:center;gap:12px;">
-        <img src="logo_speed.png" alt="SPEED" style="height:40px;width:auto;">
-      </div>
-      <div style="display:flex;gap:30px;">
-        <a href="#hero" style="color:rgba(255,255,255,0.6);text-decoration:none;font-size:14px;transition:color 0.3s;" onmouseover="this.style.color='#E31E24'" onmouseout="this.style.color='rgba(255,255,255,0.6)'">الرئيسية</a>
-        <a href="#about" style="color:rgba(255,255,255,0.6);text-decoration:none;font-size:14px;transition:color 0.3s;" onmouseover="this.style.color='#E31E24'" onmouseout="this.style.color='rgba(255,255,255,0.6)'">من نحن</a>
-        <a href="#services" style="color:rgba(255,255,255,0.6);text-decoration:none;font-size:14px;transition:color 0.3s;" onmouseover="this.style.color='#E31E24'" onmouseout="this.style.color='rgba(255,255,255,0.6)'">خدماتنا</a>
-        <a href="#portfolio" style="color:rgba(255,255,255,0.6);text-decoration:none;font-size:14px;transition:color 0.3s;" onmouseover="this.style.color='#E31E24'" onmouseout="this.style.color='rgba(255,255,255,0.6)'">أعمالنا</a>
-        <a href="#contact" style="color:rgba(255,255,255,0.6);text-decoration:none;font-size:14px;transition:color 0.3s;" onmouseover="this.style.color='#E31E24'" onmouseout="this.style.color='rgba(255,255,255,0.6)'">تواصل</a>
-      </div>
-      <div style="display:flex;gap:16px;">
-        <a href="#" style="width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,0.05);display:flex;align-items:center;justify-content:center;transition:all 0.3s;" onmouseover="this.style.background='var(--speed-red)'" onmouseout="this.style.background='rgba(255,255,255,0.05)'">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
-        </a>
-        <a href="#" style="width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,0.05);display:flex;align-items:center;justify-content:center;transition:all 0.3s;" onmouseover="this.style.background='var(--speed-red)'" onmouseout="this.style.background='rgba(255,255,255,0.05)'">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M12.53.02C13.84 0 15.14.01 16.44 0c.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
-        </a>
-        <a href="#" style="width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,0.05);display:flex;align-items:center;justify-content:center;transition:all 0.3s;" onmouseover="this.style.background='var(--speed-red)'" onmouseout="this.style.background='rgba(255,255,255,0.05)'">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-        </a>
-      </div>
-    </div>
-    <div style="text-align:center;padding-top:30px;border-top:1px solid rgba(255,255,255,0.05);">
-      <p style="color:rgba(255,255,255,0.4);font-size:14px;">جميع الحقوق محفوظة © 2026 | SPEED - سوشال ميديا</p>
-    </div>
-  </div>
-</footer>
-
-<!-- Scripts -->
-<script>
-// Mobile menu
-document.getElementById('menuBtn').addEventListener('click', function() {
-  document.getElementById('mobileMenu').classList.add('active');
-});
-document.getElementById('closeMenu').addEventListener('click', function() {
-  document.getElementById('mobileMenu').classList.remove('active');
-});
-function closeMobileMenu() {
-  document.getElementById('mobileMenu').classList.remove('active');
-}
-
-// Navbar scroll effect
-const navbar = document.getElementById('navbar');
-window.addEventListener('scroll', function() {
-  if (window.scrollY > 50) {
-    navbar.classList.add('nav-scrolled');
-  } else {
-    navbar.classList.remove('nav-scrolled');
-  }
-});
-
-// Reveal on scroll
-const revealElements = document.querySelectorAll('.reveal');
-const revealObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('active');
-    }
-  });
-}, { threshold: 0.1 });
-revealElements.forEach(el => revealObserver.observe(el));
-
-// Counter animation
-const counters = document.querySelectorAll('.stat-number');
-const counterObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      const target = parseInt(entry.target.dataset.target);
-      let current = 0;
-      const increment = target / 50;
-      const timer = setInterval(() => {
-        current += increment;
-        if (current >= target) {
-          entry.target.textContent = target + '+';
-          clearInterval(timer);
-        } else {
-          entry.target.textContent = Math.floor(current) + '+';
+        // Listen to data
+        function listenToData() {
+            const dataRef = ref(db, 'speed_social');
+            onValue(dataRef, (snapshot) => {
+                if (snapshot.exists()) {
+                    appData = snapshot.val();
+                } else {
+                    appData = JSON.parse(JSON.stringify(defaultData));
+                    set(dataRef, appData);
+                }
+                renderAll();
+                hideLoading();
+            }, (error) => {
+                console.error('Firebase error:', error);
+                appData = JSON.parse(JSON.stringify(defaultData));
+                renderAll();
+                hideLoading();
+            });
         }
-      }, 30);
-      counterObserver.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.5 });
-counters.forEach(counter => counterObserver.observe(counter));
-</script>
 
+        function getData() { return appData || JSON.parse(JSON.stringify(defaultData)); }
+
+        function hideLoading() {
+            const loader = document.getElementById('loading-overlay');
+            if (loader) {
+                loader.classList.add('hidden');
+                setTimeout(() => { loader.style.display = 'none'; }, 600);
+            }
+        }
+
+        // Toast
+        function showToast(message, type) {
+            type = type || 'success';
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toast-message');
+            const icon = toast.querySelector('i');
+            toastMessage.textContent = message;
+            toast.className = 'toast show ' + type;
+            icon.className = type === 'error' ? 'fas fa-exclamation-circle' : 'fas fa-check-circle';
+            setTimeout(() => toast.classList.remove('show'), 3000);
+        }
+        window.showToast = showToast;
+
+        // Mark unsaved
+        function markUnsaved() {
+            hasUnsavedChanges = true;
+            const saveBtn = document.getElementById('global-save-btn');
+            if (saveBtn) {
+                saveBtn.style.opacity = '1';
+                saveBtn.style.pointerEvents = 'all';
+                saveBtn.innerHTML = '<i class="fas fa-save"></i> حفظ التغييرات (' + Object.keys(pendingChanges).length + ')';
+            }
+        }
+
+        function clearUnsaved() {
+            hasUnsavedChanges = false;
+            pendingChanges = {};
+            const saveBtn = document.getElementById('global-save-btn');
+            if (saveBtn) {
+                saveBtn.style.opacity = '0.5';
+                saveBtn.style.pointerEvents = 'none';
+                saveBtn.innerHTML = '<i class="fas fa-check"></i> تم الحفظ';
+                setTimeout(() => {
+                    if (!hasUnsavedChanges) saveBtn.innerHTML = '<i class="fas fa-save"></i> حفظ الكل';
+                }, 2000);
+            }
+        }
+
+        function queueChange(key, value) {
+            pendingChanges[key] = value;
+            markUnsaved();
+            showToast('تم التعديل! اضغط "حفظ الكل" للتأكيد', 'success');
+        }
+
+        async function saveAllChanges() {
+            if (!hasUnsavedChanges || Object.keys(pendingChanges).length === 0) {
+                showToast('لا توجد تغييرات للحفظ', 'error');
+                return;
+            }
+            if (isSaving) { showToast('جاري الحفظ...', 'success'); return; }
+
+            showToast('جاري حفظ جميع التغييرات...', 'success');
+            isSaving = true;
+
+            try {
+                const data = getData();
+                for (const [key, value] of Object.entries(pendingChanges)) {
+                    const keys = key.split('.');
+                    let target = data;
+                    for (let i = 0; i < keys.length - 1; i++) {
+                        if (!target[keys[i]]) target[keys[i]] = {};
+                        target = target[keys[i]];
+                    }
+                    target[keys[keys.length - 1]] = value;
+                }
+                await set(ref(db, 'speed_social'), data);
+                clearUnsaved();
+                showToast('تم حفظ جميع التغييرات بنجاح!');
+                renderAll();
+            } catch (e) {
+                showToast('خطأ في الحفظ: ' + e.message, 'error');
+            } finally {
+                isSaving = false;
+            }
+        }
+        window.saveAllChanges = saveAllChanges;
+
+        // Auth functions
+        async function loginAdmin() {
+            const email = document.getElementById('login-email').value.trim();
+            const password = document.getElementById('login-password').value;
+            if (!email || !password) { showToast('يرجى إدخال البريد وكلمة المرور', 'error'); return; }
+
+            showToast('جاري تسجيل الدخول...', 'success');
+            try {
+                await signInWithEmailAndPassword(auth, email, password);
+                closeLoginModal();
+                showAdminPanel();
+                showToast('تم تسجيل الدخول بنجاح!');
+            } catch (error) {
+                showToast('بيانات الدخول غير صحيحة!', 'error');
+            }
+        }
+        window.loginAdmin = loginAdmin;
+
+        async function logout() {
+            try {
+                await signOut(auth);
+                currentUser = null;
+                currentPage = 'home';
+                showMainPage();
+                showToast('تم تسجيل الخروج');
+            } catch (e) { showToast('خطأ في تسجيل الخروج', 'error'); }
+        }
+        window.logout = logout;
+
+        function closeLoginModal() { document.getElementById('login-modal').classList.remove('active'); }
+        window.closeLoginModal = closeLoginModal;
+
+        // Navigation
+        function navigateTo(page) {
+            currentPage = page;
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.bottom-nav-item').forEach(item => item.classList.remove('active'));
+            const pageEl = document.getElementById('page-' + page);
+            if (pageEl) pageEl.classList.add('active');
+            const navItems = document.querySelectorAll('.bottom-nav-item');
+            const pages = ['home', 'about', 'packages', 'ideas', 'contact'];
+            const idx = pages.indexOf(page);
+            if (idx !== -1 && navItems[idx]) navItems[idx].classList.add('active');
+            window.scrollTo(0, 0);
+        }
+        window.navigateTo = navigateTo;
+
+        // Render all
+        function renderAll() {
+            renderVideoBg();
+            renderProfile();
+            renderContent();
+            renderPackages();
+            renderServices();
+            renderSocial();
+            renderIdeas();
+            renderStats();
+        }
+
+        function renderVideoBg() {
+            const data = getData();
+            const video = document.getElementById('bg-video');
+            const bg = data.videoBg || defaultData.videoBg;
+            let src = videoPresets[bg.preset] || videoPresets['speed1'];
+            if (bg.preset === 'custom' && bg.customUrl) src = bg.customUrl;
+            if (video && src) video.src = src;
+        }
+
+        function renderProfile() {
+            const data = getData();
+            const p = data.profile || defaultData.profile;
+            document.getElementById('hero-title').textContent = p.title;
+            document.getElementById('hero-subtitle').textContent = p.subtitle;
+            document.getElementById('hero-tagline').innerHTML = '<i class="fab fa-tiktok"></i><span>' + p.tagline + '</span><i class="fas fa-flag-checkered" style="color: var(--red);"></i>';
+
+            const logoDisplay = document.getElementById('logo-display');
+            if (p.logo) {
+                logoDisplay.innerHTML = '<img src="' + p.logo + '" alt="SPEED" style="width:100%;height:100%;object-fit:contain;padding:10px;">';
+            } else {
+                logoDisplay.innerHTML = '<span style="font-size:2.5rem;font-weight:900;color:var(--red);text-shadow:0 0 20px rgba(255,0,0,0.5);">SPEED</span>';
+            }
+        }
+
+        function renderContent() {
+            const data = getData();
+            const c = data.content || defaultData.content;
+            document.getElementById('about-intro').innerHTML = 'نحن <strong style="color: var(--red);">سبيد</strong>، ' + c.aboutIntro;
+            document.getElementById('vision-title').textContent = c.visionTitle;
+            document.getElementById('dispute-text').textContent = c.disputeText;
+            document.getElementById('dispute-quote').textContent = '"' + c.disputeQuote + '"';
+            document.getElementById('packages-footer').textContent = c.packagesFooter;
+        }
+
+        function renderPackages() {
+            const data = getData();
+            const pkgs = data.packages || defaultData.packages;
+
+            // Update Plus
+            document.querySelector('.package-row.plus .package-videos-count').textContent = pkgs.plus.videos;
+            document.querySelector('.package-row.plus .package-photos-count').textContent = pkgs.plus.photos;
+            document.querySelector('.package-row.plus .package-free-models').innerHTML = 
+                '<p><i class="fas fa-user"></i> ' + pkgs.plus.models + ' مودل مجاناً</p>' +
+                '<p><i class="fas fa-image"></i> ' + pkgs.plus.stories + ' ستوري مجاناً</p>' +
+                '<p><i class="fas fa-comments"></i> التفاعل مع الناس مجاناً</p>';
+            document.querySelector('.package-row.plus .package-price-bottom').textContent = pkgs.plus.price + ' ر.س';
+
+            // Update Pro
+            document.querySelector('.package-row.pro .package-videos-count').textContent = pkgs.pro.videos;
+            document.querySelector('.package-row.pro .package-photos-count').textContent = pkgs.pro.photos;
+            document.querySelector('.package-row.pro .package-free-models').innerHTML = 
+                '<p><i class="fas fa-user"></i> ' + pkgs.pro.models + ' مودل مجاناً</p>' +
+                '<p><i class="fas fa-image"></i> ' + pkgs.pro.stories + ' ستوري مجاناً</p>' +
+                '<p><i class="fas fa-comments"></i> التفاعل مع الناس مجاناً</p>';
+            document.querySelector('.package-row.pro .package-price-bottom').textContent = pkgs.pro.price + ' ر.س';
+
+            // Update Speed
+            document.querySelector('.package-row.speed .package-videos-count').textContent = pkgs.speed.videos;
+            document.querySelector('.package-row.speed .package-photos-count').textContent = pkgs.speed.photos;
+            document.querySelector('.package-row.speed .package-free-models').innerHTML = 
+                '<p><i class="fas fa-user"></i> ' + pkgs.speed.models + ' مودل مجاناً</p>' +
+                '<p><i class="fas fa-image"></i> ' + pkgs.speed.stories + ' ستوري مجاناً</p>' +
+                '<p><i class="fas fa-comments"></i> التفاعل مع الناس مجاناً</p>';
+            document.querySelector('.package-row.speed .package-price-bottom').textContent = pkgs.speed.price + ' ر.س';
+        }
+
+        function renderServices() {
+            const data = getData();
+            const services = data.services || defaultData.services;
+            const container = document.getElementById('services-list');
+            if (container) {
+                container.innerHTML = services.map(s => 
+                    '<div class="service-item"><i class="fas fa-check-circle"></i> ' + s + '</div>'
+                ).join('');
+            }
+        }
+
+        function renderSocial() {
+            const data = getData();
+            const s = data.social || defaultData.social;
+            document.getElementById('tiktok-link').href = s.tiktok;
+            document.getElementById('instagram-link').href = s.instagram;
+            document.getElementById('whatsapp-link').href = s.whatsapp;
+            document.getElementById('contact-phone').textContent = s.phone.split('').join(' ');
+            document.getElementById('contact-cta').href = s.whatsapp;
+            document.getElementById('footer-instagram').href = s.instagram;
+            document.getElementById('footer-tiktok').href = s.tiktok;
+        }
+
+        function renderIdeas() {
+            const data = getData();
+            const ideas = data.ideas || defaultData.ideas;
+            const container = document.getElementById('ideas-list');
+            if (container) {
+                container.innerHTML = ideas.map(idea => '<li>' + idea + '</li>').join('');
+            }
+        }
+
+        function renderStats() {
+            const data = getData();
+            const visits = data.stats?.visits || 0;
+            document.getElementById('stat-visits').textContent = visits;
+        }
+
+        // Admin functions
+        function showAdminPanel() {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById('admin-panel').classList.add('active');
+            document.getElementById('bottom-nav').style.display = 'none';
+
+            const data = getData();
+            document.getElementById('admin-hero-title').value = data.profile.title;
+            document.getElementById('admin-hero-subtitle').value = data.profile.subtitle;
+            document.getElementById('admin-hero-tagline').value = data.profile.tagline;
+            document.getElementById('admin-logo-url').value = data.profile.logo || '';
+            document.getElementById('admin-video-url').value = data.videoBg?.customUrl || '';
+            document.getElementById('admin-about-intro').value = data.content?.aboutIntro || '';
+            document.getElementById('admin-why-text').value = data.content?.whyText || '';
+            document.getElementById('admin-vision-title').value = data.content?.visionTitle || '';
+            document.getElementById('admin-dispute-text').value = data.content?.disputeText || '';
+            document.getElementById('admin-dispute-quote').value = data.content?.disputeQuote || '';
+            document.getElementById('admin-packages-footer').value = data.content?.packagesFooter || '';
+            document.getElementById('admin-tiktok').value = data.social?.tiktok || '';
+            document.getElementById('admin-instagram').value = data.social?.instagram || '';
+            document.getElementById('admin-whatsapp').value = data.social?.whatsapp || '';
+            document.getElementById('admin-phone').value = data.social?.phone || '';
+            document.getElementById('admin-services-list').value = (data.services || []).join('\n');
+            document.getElementById('admin-ideas-list').value = (data.ideas || []).join('\n');
+
+            // Packages
+            const pkgs = data.packages || defaultData.packages;
+            document.getElementById('pkg-plus-videos').value = pkgs.plus.videos;
+            document.getElementById('pkg-plus-photos').value = pkgs.plus.photos;
+            document.getElementById('pkg-plus-models').value = pkgs.plus.models;
+            document.getElementById('pkg-plus-stories').value = pkgs.plus.stories;
+            document.getElementById('pkg-plus-price').value = pkgs.plus.price;
+            document.getElementById('pkg-pro-videos').value = pkgs.pro.videos;
+            document.getElementById('pkg-pro-photos').value = pkgs.pro.photos;
+            document.getElementById('pkg-pro-models').value = pkgs.pro.models;
+            document.getElementById('pkg-pro-stories').value = pkgs.pro.stories;
+            document.getElementById('pkg-pro-price').value = pkgs.pro.price;
+            document.getElementById('pkg-speed-videos').value = pkgs.speed.videos;
+            document.getElementById('pkg-speed-photos').value = pkgs.speed.photos;
+            document.getElementById('pkg-speed-models').value = pkgs.speed.models;
+            document.getElementById('pkg-speed-stories').value = pkgs.speed.stories;
+            document.getElementById('pkg-speed-price').value = pkgs.speed.price;
+        }
+
+        function showMainPage() {
+            document.getElementById('admin-panel').classList.remove('active');
+            document.getElementById('bottom-nav').style.display = 'flex';
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            const currentPageEl = document.getElementById('page-' + currentPage);
+            if (currentPageEl) currentPageEl.classList.add('active');
+            document.querySelectorAll('.bottom-nav-item').forEach(item => item.classList.remove('active'));
+            const pages = ['home', 'about', 'packages', 'ideas', 'contact'];
+            const idx = pages.indexOf(currentPage);
+            if (idx !== -1) {
+                const navItems = document.querySelectorAll('.bottom-nav-item');
+                if (navItems[idx]) navItems[idx].classList.add('active');
+            }
+            renderAll();
+            window.scrollTo(0, 0);
+        }
+
+        function showAdminSection(sectionId) {
+            document.querySelectorAll('.admin-section').forEach(s => s.classList.remove('active'));
+            document.getElementById('section-' + sectionId).classList.add('active');
+            document.querySelectorAll('.admin-menu-item').forEach(item => item.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+        }
+        window.showAdminSection = showAdminSection;
+
+        // Save functions
+        function saveProfile() {
+            queueChange('profile.title', document.getElementById('admin-hero-title').value.trim());
+            queueChange('profile.subtitle', document.getElementById('admin-hero-subtitle').value.trim());
+            queueChange('profile.tagline', document.getElementById('admin-hero-tagline').value.trim());
+            queueChange('profile.logo', document.getElementById('admin-logo-url').value.trim());
+            showToast('تم تسجيل تغييرات البروفايل!');
+        }
+        window.saveProfile = saveProfile;
+
+        function selectVideoBg(preset) {
+            document.querySelectorAll('.bg-preset').forEach(p => p.style.borderColor = 'transparent');
+            event.currentTarget.style.borderColor = 'var(--red)';
+            if (preset === 'custom') {
+                document.getElementById('custom-video-group').style.display = 'block';
+            } else {
+                document.getElementById('custom-video-group').style.display = 'none';
+            }
+        }
+        window.selectVideoBg = selectVideoBg;
+
+        function saveVideoBg() {
+            const selected = document.querySelector('.bg-preset[style*="var(--red)"]');
+            let preset = 'speed1';
+            if (selected) preset = selected.dataset.video;
+            queueChange('videoBg.preset', preset);
+            queueChange('videoBg.customUrl', document.getElementById('admin-video-url').value.trim());
+            showToast('تم تسجيل تغييرات الخلفية!');
+        }
+        window.saveVideoBg = saveVideoBg;
+
+        function saveContent() {
+            queueChange('content.aboutIntro', document.getElementById('admin-about-intro').value.trim());
+            queueChange('content.whyText', document.getElementById('admin-why-text').value.trim());
+            queueChange('content.visionTitle', document.getElementById('admin-vision-title').value.trim());
+            queueChange('content.disputeText', document.getElementById('admin-dispute-text').value.trim());
+            queueChange('content.disputeQuote', document.getElementById('admin-dispute-quote').value.trim());
+            queueChange('content.packagesFooter', document.getElementById('admin-packages-footer').value.trim());
+            showToast('تم تسجيل تغييرات المحتوى!');
+        }
+        window.saveContent = saveContent;
+
+        function savePackages() {
+            queueChange('packages.plus', {
+                videos: parseInt(document.getElementById('pkg-plus-videos').value) || 4,
+                photos: parseInt(document.getElementById('pkg-plus-photos').value) || 2,
+                models: parseInt(document.getElementById('pkg-plus-models').value) || 1,
+                stories: parseInt(document.getElementById('pkg-plus-stories').value) || 4,
+                price: parseInt(document.getElementById('pkg-plus-price').value) || 5170
+            });
+            queueChange('packages.pro', {
+                videos: parseInt(document.getElementById('pkg-pro-videos').value) || 6,
+                photos: parseInt(document.getElementById('pkg-pro-photos').value) || 3,
+                models: parseInt(document.getElementById('pkg-pro-models').value) || 2,
+                stories: parseInt(document.getElementById('pkg-pro-stories').value) || 6,
+                price: parseInt(document.getElementById('pkg-pro-price').value) || 7170
+            });
+            queueChange('packages.speed', {
+                videos: parseInt(document.getElementById('pkg-speed-videos').value) || 8,
+                photos: parseInt(document.getElementById('pkg-speed-photos').value) || 4,
+                models: parseInt(document.getElementById('pkg-speed-models').value) || 3,
+                stories: parseInt(document.getElementById('pkg-speed-stories').value) || 8,
+                price: parseInt(document.getElementById('pkg-speed-price').value) || 8170
+            });
+            showToast('تم تسجيل تغييرات الباقات!');
+        }
+        window.savePackages = savePackages;
+
+        function saveServices() {
+            const services = document.getElementById('admin-services-list').value.split('\n').filter(s => s.trim());
+            queueChange('services', services);
+            showToast('تم تسجيل تغييرات الخدمات!');
+        }
+        window.saveServices = saveServices;
+
+        function saveSocial() {
+            queueChange('social.tiktok', document.getElementById('admin-tiktok').value.trim());
+            queueChange('social.instagram', document.getElementById('admin-instagram').value.trim());
+            queueChange('social.whatsapp', document.getElementById('admin-whatsapp').value.trim());
+            queueChange('social.phone', document.getElementById('admin-phone').value.trim());
+            showToast('تم تسجيل تغييرات التواصل!');
+        }
+        window.saveSocial = saveSocial;
+
+        function saveIdeas() {
+            const ideas = document.getElementById('admin-ideas-list').value.split('\n').filter(i => i.trim());
+            queueChange('ideas', ideas);
+            showToast('تم تسجيل تغييرات الأفكار!');
+        }
+        window.saveIdeas = saveIdeas;
+
+        async function changePassword() {
+            const current = document.getElementById('current-password').value;
+            const newPass = document.getElementById('new-password').value;
+            const confirm = document.getElementById('confirm-password').value;
+
+            if (!newPass || newPass.length < 6) { showToast('الباسورد الجديد لازم يكون 6 أحرف على الأقل', 'error'); return; }
+            if (newPass !== confirm) { showToast('الباسورد الجديد غير متطابق!', 'error'); return; }
+
+            try {
+                await set(ref(db, 'speed_social/admin/password'), newPass);
+                showToast('تم تغيير الباسورد بنجاح!');
+                document.getElementById('current-password').value = '';
+                document.getElementById('new-password').value = '';
+                document.getElementById('confirm-password').value = '';
+            } catch (e) { showToast('خطأ في حفظ الباسورد!', 'error'); }
+        }
+        window.changePassword = changePassword;
+
+        // Open admin (5 taps)
+        let tapCount = 0;
+        let tapTimeout = null;
+        document.addEventListener('click', (e) => {
+            const target = e.target;
+            const isInteractive = target.closest('button') || target.closest('a') || target.closest('input') || target.closest('textarea') || target.closest('.bottom-nav') || target.closest('.modal-overlay') || target.closest('.admin-panel');
+            if (isInteractive) return;
+            tapCount++;
+            if (tapTimeout) clearTimeout(tapTimeout);
+            tapTimeout = setTimeout(() => { tapCount = 0; }, 2000);
+            if (tapCount >= 5) {
+                tapCount = 0;
+                if (tapTimeout) clearTimeout(tapTimeout);
+                document.getElementById('login-modal').classList.add('active');
+            }
+        });
+
+        // Init
+        document.addEventListener('DOMContentLoaded', () => {
+            listenToData();
+            document.getElementById('login-modal').addEventListener('click', (e) => { if (e.target === e.currentTarget) closeLoginModal(); });
+        });
+    </script>
 </body>
 </html>
