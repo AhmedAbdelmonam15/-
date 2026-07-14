@@ -10,474 +10,675 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-:root { --speed-red: #E31E24; --speed-black: #0A0A0A; }
-* { scroll-behavior: smooth; }
+:root { --speed-red: #E31E24; --speed-black: #0A0A0A; --speed-dark: #111; --speed-gray: #1a1a1a; }
+* { scroll-behavior: smooth; margin: 0; padding: 0; box-sizing: border-box; }
 body { font-family: 'Cairo', sans-serif; background: var(--speed-black); color: white; overflow-x: hidden; }
 .font-en { font-family: 'Montserrat', sans-serif; }
-.speed-red { color: var(--speed-red); }
-.bg-speed-red { background-color: var(--speed-red); }
-.glass-card { background: rgba(255,255,255,0.03); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.08); transition: all 0.4s ease; }
-.glass-card:hover { border-color: var(--speed-red); box-shadow: 0 0 40px rgba(227,30,36,0.15); }
-.neon-text { text-shadow: 0 0 20px rgba(227,30,36,0.5), 0 0 40px rgba(227,30,36,0.3); }
-.marquee-track { display: flex; animation: marquee 30s linear infinite; }
-@keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-.reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+
+/* Custom scrollbar */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--speed-black); }
+::-webkit-scrollbar-thumb { background: var(--speed-red); border-radius: 4px; }
+
+/* Animations */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(227,30,36,0.3); }
+  50% { box-shadow: 0 0 40px rgba(227,30,36,0.6); }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+}
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+@keyframes countUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.animate-fadeInUp { animation: fadeInUp 0.8s ease forwards; }
+.animate-float { animation: float 3s ease-in-out infinite; }
+.animate-pulse-glow { animation: pulse-glow 2s ease-in-out infinite; }
+
+/* Reveal on scroll */
+.reveal { opacity: 0; transform: translateY(50px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
 .reveal.active { opacity: 1; transform: translateY(0); }
-.pricing-card { transition: all 0.4s ease; }
-.pricing-card:hover { transform: translateY(-10px); }
-.btn-glare { position: relative; overflow: hidden; }
-.btn-glare::after { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent); transform: rotate(45deg); transition: all 0.5s; }
-.btn-glare:hover::after { left: 100%; }
-.scroll-indicator { animation: bounce 2s infinite; }
-@keyframes bounce { 0%, 20%, 50%, 80%, 100% { transform: translateY(0); } 40% { transform: translateY(-10px); } 60% { transform: translateY(-5px); } }
-.speed-bg { background: radial-gradient(ellipse at center, rgba(227,30,36,0.08) 0%, transparent 70%); }
-.tire-track { background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.02'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"); }
-.whatsapp-float { position: fixed; bottom: 30px; left: 30px; z-index: 100; animation: pulse-whatsapp 2s infinite; }
-@keyframes pulse-whatsapp { 0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); } 70% { box-shadow: 0 0 0 20px rgba(37, 211, 102, 0); } 100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); } }
-.nav-scrolled { background: rgba(10, 10, 10, 0.95) !important; backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255,255,255,0.05); }
-.video-card:hover .play-btn { transform: scale(1.1); }
-.play-btn { transition: all 0.3s ease; box-shadow: 0 0 30px rgba(227,30,36,0.4); }
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+
+/* Glass effect */
+.glass {
+  background: rgba(255,255,255,0.03);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.06);
+}
+.glass:hover {
+  border-color: rgba(227,30,36,0.3);
+  box-shadow: 0 0 30px rgba(227,30,36,0.1);
+}
+
+/* Button styles */
+.btn-primary {
+  background: var(--speed-red);
+  color: white;
+  padding: 14px 32px;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+  overflow: hidden;
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(227,30,36,0.4);
+}
+.btn-primary::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 100%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: left 0.5s;
+}
+.btn-primary:hover::after { left: 100%; }
+
+.btn-outline {
+  background: transparent;
+  color: white;
+  padding: 14px 32px;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 16px;
+  border: 2px solid rgba(255,255,255,0.2);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.btn-outline:hover {
+  border-color: var(--speed-red);
+  color: var(--speed-red);
+  transform: translateY(-2px);
+}
+
+/* Section title */
+.section-title {
+  font-size: 42px;
+  font-weight: 900;
+  text-align: center;
+  margin-bottom: 16px;
+  position: relative;
+}
+.section-subtitle {
+  text-align: center;
+  color: rgba(255,255,255,0.6);
+  font-size: 18px;
+  margin-bottom: 60px;
+}
+
+/* Gradient text */
+.gradient-text {
+  background: linear-gradient(135deg, #fff 0%, #E31E24 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Stats counter */
+.stat-number {
+  font-size: 64px;
+  font-weight: 900;
+  color: var(--speed-red);
+  line-height: 1;
+}
+.stat-label {
+  color: rgba(255,255,255,0.7);
+  font-size: 16px;
+  margin-top: 8px;
+}
+
+/* Partner logo */
+.partner-logo {
+  filter: grayscale(100%) brightness(0.6);
+  transition: all 0.3s ease;
+  opacity: 0.7;
+}
+.partner-logo:hover {
+  filter: grayscale(0%) brightness(1);
+  opacity: 1;
+}
+
+/* Testimonial card */
+.testimonial-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 20px;
+  padding: 32px;
+  transition: all 0.3s ease;
+}
+.testimonial-card:hover {
+  border-color: rgba(227,30,36,0.3);
+  transform: translateY(-5px);
+}
+
+/* Input styles */
+.input-field {
+  width: 100%;
+  padding: 16px 20px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px;
+  color: white;
+  font-size: 16px;
+  font-family: 'Cairo', sans-serif;
+  transition: all 0.3s ease;
+}
+.input-field:focus {
+  outline: none;
+  border-color: var(--speed-red);
+  box-shadow: 0 0 20px rgba(227,30,36,0.1);
+}
+.input-field::placeholder { color: rgba(255,255,255,0.4); }
+
+/* WhatsApp float */
+.whatsapp-float {
+  position: fixed;
+  bottom: 30px;
+  left: 30px;
+  z-index: 999;
+  width: 60px;
+  height: 60px;
+  background: #25D366;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+  animation: pulse-glow 2s infinite;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+.whatsapp-float:hover { transform: scale(1.1); }
+
+/* Navigation */
+.nav-scrolled {
+  background: rgba(10,10,10,0.95) !important;
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+/* Mobile menu */
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top: 0; right: 0;
+  width: 100%; height: 100vh;
+  background: rgba(10,10,10,0.98);
+  z-index: 999;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+}
+.mobile-menu.active { display: flex; }
+.mobile-menu a {
+  font-size: 24px;
+  font-weight: 700;
+  color: white;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+.mobile-menu a:hover { color: var(--speed-red); }
+
+/* Video card */
+.video-card {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.video-card:hover { transform: scale(1.02); }
+.video-card .play-btn {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60px; height: 60px;
+  background: var(--speed-red);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+}
+.video-card:hover .play-btn { transform: translate(-50%, -50%) scale(1.1); }
+
+/* Marquee */
+.marquee-container { overflow: hidden; }
+.marquee-content {
+  display: flex;
+  animation: marquee 30s linear infinite;
+  width: max-content;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .section-title { font-size: 28px; }
+  .stat-number { font-size: 40px; }
+}
 </style>
 </head>
-<body class="tire-track">
+<body>
 
 <!-- WhatsApp Floating Button -->
-<a href="https://wa.me/966544656944" target="_blank" class="whatsapp-float w-16 h-16 bg-green-500 rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-transform">
-  <svg class="w-8 h-8 text-white" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+<a href="https://wa.me/966544656944" target="_blank" class="whatsapp-float">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="white">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
 </a>
 
+<!-- Mobile Menu -->
+<div id="mobileMenu" class="mobile-menu">
+  <button id="closeMenu" style="position:absolute;top:30px;right:30px;background:none;border:none;color:white;cursor:pointer;">
+    <svg width="32" height="32" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12"/></svg>
+  </button>
+  <a href="#hero" onclick="closeMobileMenu()">الرئيسية</a>
+  <a href="#about" onclick="closeMobileMenu()">من نحن</a>
+  <a href="#services" onclick="closeMobileMenu()">خدماتنا</a>
+  <a href="#portfolio" onclick="closeMobileMenu()">أعمالنا</a>
+  <a href="#clients" onclick="closeMobileMenu()">شركاؤنا</a>
+  <a href="#pricing" onclick="closeMobileMenu()">الباقات</a>
+  <a href="#contact" onclick="closeMobileMenu()">تواصل معنا</a>
+</div>
+
 <!-- Navigation -->
-<nav id="navbar" class="fixed top-0 w-full z-50 transition-all duration-300 bg-transparent">
-  <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-    <div class="flex items-center gap-2">
-      <div class="w-10 h-10 bg-speed-red rounded-full flex items-center justify-center">
-        <span class="font-en font-black text-white text-lg">S</span>
-      </div>
-      <div class="leading-tight">
-        <h1 class="font-en font-black text-2xl tracking-tighter">SPEED</h1>
-        <p class="text-xs speed-red font-bold -mt-1">سوشال ميديا</p>
-      </div>
-    </div>
-    <div class="hidden md:flex items-center gap-8">
-      <a href="#hero" class="hover:speed-red transition-colors text-sm font-semibold">الرئيسية</a>
-      <a href="#about" class="hover:speed-red transition-colors text-sm font-semibold">من نحن</a>
-      <a href="#services" class="hover:speed-red transition-colors text-sm font-semibold">خدماتنا</a>
-      <a href="#portfolio" class="hover:speed-red transition-colors text-sm font-semibold">أعمالنا</a>
-      <a href="#clients" class="hover:speed-red transition-colors text-sm font-semibold">شركاؤنا</a>
-      <a href="#pricing" class="hover:speed-red transition-colors text-sm font-semibold">الباقات</a>
-      <a href="https://wa.me/966544656944" target="_blank" class="bg-speed-red px-6 py-2 rounded-full font-bold text-sm btn-glare hover:shadow-lg hover:shadow-red-500/30 transition-all flex items-center gap-2">
-        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+<nav id="navbar" style="position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 0;transition:all 0.3s;">
+  <div style="max-width:1200px;margin:0 auto;padding:0 24px;display:flex;justify-content:space-between;align-items:center;">
+    <a href="#hero" style="display:flex;align-items:center;gap:10px;text-decoration:none;">
+      <img src="logo_speed.png" alt="SPEED" style="height:45px;width:auto;">
+    </a>
+    <div style="display:flex;align-items:center;gap:32px;" class="hidden md:flex">
+      <a href="#hero" style="color:white;text-decoration:none;font-weight:600;font-size:15px;transition:color 0.3s;" onmouseover="this.style.color='#E31E24'" onmouseout="this.style.color='white'">الرئيسية</a>
+      <a href="#about" style="color:white;text-decoration:none;font-weight:600;font-size:15px;transition:color 0.3s;" onmouseover="this.style.color='#E31E24'" onmouseout="this.style.color='white'">من نحن</a>
+      <a href="#services" style="color:white;text-decoration:none;font-weight:600;font-size:15px;transition:color 0.3s;" onmouseover="this.style.color='#E31E24'" onmouseout="this.style.color='white'">خدماتنا</a>
+      <a href="#portfolio" style="color:white;text-decoration:none;font-weight:600;font-size:15px;transition:color 0.3s;" onmouseover="this.style.color='#E31E24'" onmouseout="this.style.color='white'">أعمالنا</a>
+      <a href="#clients" style="color:white;text-decoration:none;font-weight:600;font-size:15px;transition:color 0.3s;" onmouseover="this.style.color='#E31E24'" onmouseout="this.style.color='white'">شركاؤنا</a>
+      <a href="#pricing" style="color:white;text-decoration:none;font-weight:600;font-size:15px;transition:color 0.3s;" onmouseover="this.style.color='#E31E24'" onmouseout="this.style.color='white'">الباقات</a>
+      <a href="https://wa.me/966544656944" target="_blank" class="btn-primary" style="padding:10px 24px;font-size:14px;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
         تواصل واتساب
       </a>
     </div>
-    <button id="mobile-menu-btn" class="md:hidden text-white">
-      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+    <button id="menuBtn" class="md:hidden" style="background:none;border:none;color:white;cursor:pointer;">
+      <svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
     </button>
-  </div>
-  <div id="mobile-menu" class="hidden md:hidden bg-black/95 backdrop-blur-xl border-t border-white/10">
-    <div class="px-6 py-4 flex flex-col gap-4">
-      <a href="#hero" class="py-2 hover:speed-red transition-colors">الرئيسية</a>
-      <a href="#about" class="py-2 hover:speed-red transition-colors">من نحن</a>
-      <a href="#services" class="py-2 hover:speed-red transition-colors">خدماتنا</a>
-      <a href="#portfolio" class="py-2 hover:speed-red transition-colors">أعمالنا</a>
-      <a href="#clients" class="py-2 hover:speed-red transition-colors">شركاؤنا</a>
-      <a href="#pricing" class="py-2 hover:speed-red transition-colors">الباقات</a>
-      <a href="https://wa.me/966544656944" target="_blank" class="bg-green-600 px-6 py-3 rounded-full font-bold text-center flex items-center justify-center gap-2">
-        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-        تواصل واتساب
-      </a>
-    </div>
   </div>
 </nav>
 
 <!-- Hero Section -->
-<section id="hero" class="relative min-h-screen flex items-center justify-center overflow-hidden">
-  <div class="absolute inset-0 speed-bg"></div>
-  <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black"></div>
-  <div class="absolute inset-0 overflow-hidden pointer-events-none">
-    <div class="absolute top-1/4 left-0 w-full h-px bg-gradient-to-r from-transparent via-red-500/30 to-transparent animate-pulse"></div>
-    <div class="absolute top-1/2 left-0 w-full h-px bg-gradient-to-r from-transparent via-red-500/20 to-transparent animate-pulse" style="animation-delay: 0.5s"></div>
-    <div class="absolute top-3/4 left-0 w-full h-px bg-gradient-to-r from-transparent via-red-500/30 to-transparent animate-pulse" style="animation-delay: 1s"></div>
+<section id="hero" style="min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;background:linear-gradient(135deg, #0a0a0a 0%, #1a0a0a 50%, #0a0a0a 100%);">
+  <!-- Background effects -->
+  <div style="position:absolute;inset:0;opacity:0.3;">
+    <div style="position:absolute;top:20%;left:10%;width:300px;height:300px;background:radial-gradient(circle, rgba(227,30,36,0.15), transparent 70%);border-radius:50%;filter:blur(60px);"></div>
+    <div style="position:absolute;bottom:20%;right:10%;width:400px;height:400px;background:radial-gradient(circle, rgba(227,30,36,0.1), transparent 70%);border-radius:50%;filter:blur(80px);"></div>
   </div>
-  <div class="relative z-10 text-center px-6 max-w-5xl mx-auto">
-    <div class="mb-8 reveal active">
-      <h1 class="font-en font-black text-7xl md:text-9xl tracking-tighter leading-none">
-        <span class="relative inline-block">SPEED<span class="absolute -bottom-2 left-0 w-full h-1 bg-speed-red"></span></span>
-      </h1>
-      <p class="speed-red text-3xl md:text-5xl font-black mt-2 neon-text">سوشال ميديا</p>
+
+  <div style="max-width:1200px;margin:0 auto;padding:120px 24px 80px;text-align:center;position:relative;z-index:1;">
+    <div class="reveal active" style="margin-bottom:30px;">
+      <img src="logo_speed.png" alt="SPEED" style="height:120px;width:auto;margin:0 auto;display:block;filter:drop-shadow(0 0 30px rgba(227,30,36,0.3));">
     </div>
-    <div class="flex items-center justify-center gap-4 mb-8 reveal active" style="transition-delay: 0.2s">
-      <div class="w-12 h-12 bg-black rounded-xl flex items-center justify-center border border-white/10">
-        <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.88-2.5c0-1.4 1.03-2.58 2.4-2.83v-3.5a6.28 6.28 0 00-5.88 6.33 6.28 6.28 0 006.36 6.33 6.28 6.28 0 006.36-6.33V8.83a8.45 8.45 0 004.96 1.61V6.92c-.7 0-1.35-.13-1.96-.23z" fill="#fff"/></svg>
-      </div>
-      <div class="w-12 h-12 bg-gradient-to-br from-purple-600 to-pink-500 rounded-xl flex items-center justify-center">
-        <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="currentColor"><path d="M12.53.02C13.84 0 15.14.01 16.44 0c.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
-      </div>
-      <span class="text-xl md:text-2xl font-bold">🏎️</span>
-    </div>
-    <p class="text-xl md:text-3xl font-bold mb-4 reveal active" style="transition-delay: 0.3s">في عالم السرعة .. وعالم الفيديوهات!</p>
-    <p class="text-gray-400 text-lg mb-12 reveal active" style="transition-delay: 0.4s">نحول المنتج من شيء عادي إلى تجربة "يعيشوها.. ويحبوها.. ويتكلموا عنها"</p>
-    <div class="flex flex-col sm:flex-row gap-4 justify-center reveal active" style="transition-delay: 0.5s">
-      <a href="#portfolio" class="bg-speed-red px-8 py-4 rounded-full font-bold text-lg btn-glare hover:shadow-xl hover:shadow-red-500/40 transition-all flex items-center justify-center gap-2">
-        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+
+    <h1 class="reveal active" style="font-size:clamp(36px, 6vw, 72px);font-weight:900;line-height:1.2;margin-bottom:20px;">
+      <span style="color:white;">نصوّر</span>
+      <span style="color:var(--speed-red);">.. نمونتج</span>
+      <span style="color:white;">.. نبيع</span>
+    </h1>
+
+    <p class="reveal active reveal-delay-1" style="font-size:clamp(18px, 3vw, 28px);color:rgba(255,255,255,0.7);max-width:700px;margin:0 auto 40px;line-height:1.6;">
+      فيديوهاتنا ما تمر مرور الكرام... تمر مرور البطاقة 💳😎
+    </p>
+
+    <div class="reveal active reveal-delay-2" style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+      <a href="#portfolio" class="btn-primary" style="font-size:18px;padding:16px 40px;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
         شاهد أعمالنا
       </a>
-      <a href="https://wa.me/966544656944" target="_blank" class="glass-card px-8 py-4 rounded-full font-bold text-lg hover:bg-white/10 transition-all flex items-center justify-center gap-2">
-        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      <a href="https://wa.me/966544656944" target="_blank" class="btn-outline" style="font-size:18px;padding:16px 40px;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
         تواصل واتساب
       </a>
     </div>
-    <div class="absolute bottom-10 left-1/2 -translate-x-1/2 scroll-indicator">
-      <div class="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center pt-2">
-        <div class="w-1.5 h-3 bg-speed-red rounded-full animate-bounce"></div>
-      </div>
+
+    <!-- Social icons -->
+    <div class="reveal active reveal-delay-3" style="display:flex;gap:20px;justify-content:center;margin-top:50px;">
+      <a href="#" style="width:50px;height:50px;border-radius:50%;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;transition:all 0.3s;" onmouseover="this.style.borderColor='#E31E24';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.1)';this.style.transform='translateY(0)'">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+      </a>
+      <a href="#" style="width:50px;height:50px;border-radius:50%;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;transition:all 0.3s;" onmouseover="this.style.borderColor='#E31E24';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.1)';this.style.transform='translateY(0)'">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M12.53.02C13.84 0 15.14.01 16.44 0c.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+      </a>
+      <a href="#" style="width:50px;height:50px;border-radius:50%;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;transition:all 0.3s;" onmouseover="this.style.borderColor='#E31E24';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.1)';this.style.transform='translateY(0)'">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+      </a>
     </div>
   </div>
-  <div class="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-black to-transparent"></div>
+
+  <!-- Scroll indicator -->
+  <div style="position:absolute;bottom:30px;left:50%;transform:translateX(-50%);animation:bounce 2s infinite;">
+    <svg width="24" height="24" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="2" viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+  </div>
 </section>
 
 <!-- About Section -->
-<section id="about" class="py-24 relative">
-  <div class="max-w-7xl mx-auto px-6">
-    <div class="flex items-center gap-4 mb-16 reveal">
-      <div class="w-3 h-16 bg-speed-red"></div>
-      <div>
-        <h2 class="font-en font-black text-4xl md:text-5xl">WHO R WE?</h2>
-        <p class="text-gray-400 text-xl">Guess!</p>
-      </div>
-      <div class="mr-auto"><span class="text-4xl">🏁</span></div>
-    </div>
-    <div class="text-center max-w-3xl mx-auto mb-16 reveal">
-      <p class="text-xl md:text-2xl leading-relaxed mb-8">نحن <span class="speed-red font-bold">سبيد</span> ، فريق إبداعي شبابي متخصص بصناعة الفيديوهات في السوشال ميديا للبراندات</p>
-      <p class="text-gray-400 text-lg">نركز على إنتاج محتوى: <span class="text-white font-bold">إيجابي</span> ، <span class="text-white font-bold">عاطفي</span> ، <span class="text-white font-bold">مجتمعي</span></p>
-    </div>
-    <div class="grid md:grid-cols-3 gap-8 mb-16">
-      <div class="glass-card rounded-3xl p-8 text-center reveal hover:border-red-500/50 transition-all">
-        <div class="w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-green-500/20 to-green-600/10 flex items-center justify-center text-4xl">🌳</div>
-        <h3 class="text-2xl font-bold mb-3">إيجابي</h3>
-        <p class="text-gray-400 text-sm">محتوى ينشر الطاقة الإيجابية والأمل</p>
-      </div>
-      <div class="glass-card rounded-3xl p-8 text-center reveal hover:border-red-500/50 transition-all" style="transition-delay: 0.1s">
-        <div class="w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-blue-500/20 to-blue-600/10 flex items-center justify-center text-4xl">💙</div>
-        <h3 class="text-2xl font-bold mb-3">عاطفي</h3>
-        <p class="text-gray-400 text-sm">محتوى يلامس المشاعر ويبني علاقة حقيقية</p>
-      </div>
-      <div class="glass-card rounded-3xl p-8 text-center reveal hover:border-red-500/50 transition-all" style="transition-delay: 0.2s">
-        <div class="w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-orange-500/20 to-orange-600/10 flex items-center justify-center text-4xl">🤝</div>
-        <h3 class="text-2xl font-bold mb-3">مجتمعي</h3>
-        <p class="text-gray-400 text-sm">محتوى يجمع الناس ويبني مجتمعاً قويًا</p>
-      </div>
-    </div>
-    <div class="glass-card rounded-3xl p-8 md:p-12 reveal relative overflow-hidden">
-      <div class="absolute top-0 right-0 w-64 h-64 bg-speed-red/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
-      <div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
-        <div class="text-center md:text-right">
-          <div class="flex items-center gap-4 justify-center md:justify-start mb-4">
-            <span class="text-6xl font-en font-black speed-red">2026</span>
-            <span class="text-4xl">🎤</span>
+<section id="about" style="padding:100px 0;position:relative;">
+  <div style="max-width:1200px;margin:0 auto;padding:0 24px;">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;">
+      <div class="reveal">
+        <div style="position:relative;">
+          <div style="width:100%;aspect-ratio:1;border-radius:30px;background:linear-gradient(135deg, rgba(227,30,36,0.1), rgba(227,30,36,0.05));display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;">
+            <div style="position:absolute;inset:0;background:radial-gradient(circle at 30% 30%, rgba(227,30,36,0.2), transparent 60%);"></div>
+            <img src="logo_speed.png" alt="SPEED" style="width:70%;height:auto;position:relative;z-index:1;filter:drop-shadow(0 20px 40px rgba(0,0,0,0.5));">
           </div>
-          <p class="text-xl font-bold">أولاً نسأل نفسنا:</p>
-          <p class="text-gray-400">ليش نحتاج محتوى فيديو مستمر في 2026</p>
+          <!-- Decorative elements -->
+          <div style="position:absolute;top:-20px;right:-20px;width:80px;height:80px;border:2px solid rgba(227,30,36,0.3);border-radius:20px;"></div>
+          <div style="position:absolute;bottom:-20px;left:-20px;width:60px;height:60px;background:rgba(227,30,36,0.1);border-radius:15px;"></div>
         </div>
-        <div class="flex-1 max-w-xl">
-          <ul class="space-y-4">
-            <li class="flex items-start gap-3"><span class="w-2 h-2 bg-speed-red rounded-full mt-2 flex-shrink-0"></span><span>الريلز والفيديوهات القصيرة هي المحرك الأساسي للطلبات حالياً في جدة والعالم 🔥</span></li>
-            <li class="flex items-start gap-3"><span class="w-2 h-2 bg-speed-red rounded-full mt-2 flex-shrink-0"></span><span>الشركات تنزل مئات الفيديوهات وتتقدم وتنجح</span></li>
-            <li class="flex items-start gap-3"><span class="w-2 h-2 bg-speed-red rounded-full mt-2 flex-shrink-0"></span><span>المحتوى المجتمعي، والعاطفي، والإيجابي يزيد التفاعل بشكل مبهر</span></li>
-          </ul>
-          <p class="mt-6 text-gray-400 italic border-r-2 border-speed-red pr-4">نشتغل بالمفهوم العالمي "نبيع العاطفة والسعادة، لا المنتج"</p>
-        </div>
+      </div>
+
+      <div class="reveal reveal-delay-1">
+        <h2 style="font-size:42px;font-weight:900;margin-bottom:20px;line-height:1.2;">
+          نحن <span style="color:var(--speed-red);">SPEED</span><br>
+          <span style="font-size:28px;color:rgba(255,255,255,0.7);">سوشال ميديا</span>
+        </h2>
+        <p style="font-size:18px;color:rgba(255,255,255,0.7);line-height:1.8;margin-bottom:24px;">
+          فريق إبداعي شبابي متخصص بصناعة الفيديوهات في السوشال ميديا للبراندات. نركز على إنتاج محتوى إيجابي، عاطفي، ومجتمعي يجمع الناس ويبني علاقة حقيقية.
+        </p>
+        <p style="font-size:18px;color:rgba(255,255,255,0.7);line-height:1.8;margin-bottom:30px;">
+          نشتغل بالمفهوم العالمي "نبيع العاطفة والسعادة، لا المنتج" 🔥
+        </p>
+        <a href="https://wa.me/966544656944" target="_blank" class="btn-primary">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          تواصل معنا
+        </a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Vision Section -->
-<section class="py-24 relative overflow-hidden">
-  <div class="absolute inset-0 opacity-30" style="background-image: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255,255,255,0.05) 10px, rgba(255,255,255,0.05) 20px);"></div>
-  <div class="max-w-7xl mx-auto px-6 relative z-10">
-    <div class="glass-card rounded-3xl p-8 md:p-16 reveal">
-      <div class="text-center mb-12">
-        <div class="inline-block mb-6">
-          <svg width="120" height="60" viewBox="0 0 120 60" class="mx-auto">
-            <path d="M0 30 L20 10 L40 30 L60 10 L80 30 L100 10 L120 30" stroke="white" stroke-width="4" fill="none" stroke-linecap="round"/>
-            <path d="M0 45 L20 25 L40 45 L60 25 L80 45 L100 25 L120 45" stroke="white" stroke-width="4" fill="none" stroke-linecap="round" opacity="0.5"/>
-          </svg>
-        </div>
-        <h2 class="font-en font-black text-2xl md:text-3xl mb-2">THE VISION AND ADDED VALUE OF YOUR BRAND</h2>
-        <p class="font-en font-black text-2xl md:text-3xl speed-red">MY DEAR PARTNER</p>
+<!-- Stats Section -->
+<section style="padding:80px 0;background:linear-gradient(180deg, transparent, rgba(227,30,36,0.03), transparent);">
+  <div style="max-width:1200px;margin:0 auto;padding:0 24px;">
+    <div style="display:grid;grid-template-columns:repeat(4, 1fr);gap:40px;text-align:center;">
+      <div class="reveal">
+        <div class="stat-number" data-target="150">0</div>
+        <div class="stat-label">فيديو منشور</div>
       </div>
-      <div class="max-w-3xl mx-auto">
-        <h3 class="text-2xl md:text-3xl font-bold text-center mb-10">الرؤية والقيمة المضافة لبراندك يا شريكي الجميل</h3>
-        <ul class="space-y-5">
-          <li class="flex items-start gap-4 reveal"><span class="w-8 h-8 bg-speed-red rounded-lg flex items-center justify-center flex-shrink-0 mt-1"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg></span><span class="text-lg">مواكبة التطور الرقمي بسرعة</span></li>
-          <li class="flex items-start gap-4 reveal" style="transition-delay: 0.1s"><span class="w-8 h-8 bg-speed-red rounded-lg flex items-center justify-center flex-shrink-0 mt-1"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg></span><span class="text-lg">ظهور واضح ومستمر للبراند في السوشال ميديا</span></li>
-          <li class="flex items-start gap-4 reveal" style="transition-delay: 0.2s"><span class="w-8 h-8 bg-speed-red rounded-lg flex items-center justify-center flex-shrink-0 mt-1"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></span><span class="text-lg">محتوى مناسب لنشاطك ولفئتك المستهدفة</span></li>
-          <li class="flex items-start gap-4 reveal" style="transition-delay: 0.3s"><span class="w-8 h-8 bg-speed-red rounded-lg flex items-center justify-center flex-shrink-0 mt-1"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg></span><span class="text-lg">بناء علاقة طويلة الأمد مع الزبائن (ذكريات، ولاء، ثقة، عائلة)</span></li>
-          <li class="flex items-start gap-4 reveal" style="transition-delay: 0.4s"><span class="w-8 h-8 bg-speed-red rounded-lg flex items-center justify-center flex-shrink-0 mt-1"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/></svg></span><span class="text-lg">دعم المبيعات وزيادة الطلبات</span></li>
-          <li class="flex items-start gap-4 reveal" style="transition-delay: 0.5s"><span class="w-8 h-8 bg-speed-red rounded-lg flex items-center justify-center flex-shrink-0 mt-1"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg></span><span class="text-lg">تعزيز شعور "هذا المكان يفهمني، يفزعلي، يحبني"</span></li>
-        </ul>
+      <div class="reveal reveal-delay-1">
+        <div class="stat-number" data-target="50">0</div>
+        <div class="stat-label">عميل سعيد</div>
       </div>
-      <div class="mt-12 flex justify-center">
-        <div class="relative">
-          <span class="text-8xl font-en font-black speed-red opacity-20">1</span>
-          <span class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-6xl">🏎️</span>
-        </div>
+      <div class="reveal reveal-delay-2">
+        <div class="stat-number" data-target="10">0</div>
+        <div class="stat-label">مليون مشاهدة</div>
+      </div>
+      <div class="reveal reveal-delay-3">
+        <div class="stat-number" data-target="100">0</div>
+        <div class="stat-label">فكرة محتوى</div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- Services Section -->
-<section id="services" class="py-24 relative">
-  <div class="absolute inset-0 bg-gradient-to-b from-black via-red-950/10 to-black"></div>
-  <div class="max-w-7xl mx-auto px-6 relative z-10">
-    <div class="text-center mb-16 reveal">
-      <h2 class="font-en font-black text-4xl md:text-5xl mb-4">OUR INTEGRATED SERVICES</h2>
-      <div class="h-0.5 w-32 mx-auto" style="background: linear-gradient(90deg, transparent, var(--speed-red), transparent);"></div>
-    </div>
-    <div class="glass-card rounded-3xl p-8 md:p-12 reveal">
-      <div class="flex items-center gap-4 mb-10">
-        <div class="w-16 h-16 bg-speed-red rounded-2xl flex items-center justify-center">
-          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-        </div>
-        <div>
-          <h3 class="text-2xl font-bold">خدماتنا المتكاملة:</h3>
-          <p class="text-gray-400">كل اللي تحتاجه في مكان واحد</p>
-        </div>
-      </div>
-      <div class="grid md:grid-cols-2 gap-4">
-        <div class="flex items-center gap-4 p-4 rounded-xl bg-white/5 hover:bg-white/10 transition-colors"><span class="w-3 h-3 bg-speed-red rounded-full"></span><span>فهم عميق في خوارزميات السوشال ميديا</span></div>
-        <div class="flex items-center gap-4 p-4 rounded-xl bg-white/5 hover:bg-white/10 transition-colors"><span class="w-3 h-3 bg-speed-red rounded-full"></span><span>نحضر مؤتمرات شركات الميديا (تيك توك، انستقرام)</span></div>
-        <div class="flex items-center gap-4 p-4 rounded-xl bg-white/5 hover:bg-white/10 transition-colors"><span class="w-3 h-3 bg-speed-red rounded-full"></span><span>عندنا شهادة معتمدة عالمية في التصوير</span></div>
-        <div class="flex items-center gap-4 p-4 rounded-xl bg-white/5 hover:bg-white/10 transition-colors"><span class="w-3 h-3 bg-speed-red rounded-full"></span><span>أدوات احترافية متكاملة</span></div>
-        <div class="flex items-center gap-4 p-4 rounded-xl bg-white/5 hover:bg-white/10 transition-colors"><span class="w-3 h-3 bg-speed-red rounded-full"></span><span>كتابة محتوى + إخراج + مونتاج + موسيقى + تأثيرات + كابشن</span></div>
-        <div class="flex items-center gap-4 p-4 rounded-xl bg-white/5 hover:bg-white/10 transition-colors"><span class="w-3 h-3 bg-speed-red rounded-full"></span><span>تعليق صوتي</span></div>
-        <div class="flex items-center gap-4 p-4 rounded-xl bg-white/5 hover:bg-white/10 transition-colors"><span class="w-3 h-3 bg-speed-red rounded-full"></span><span>عندنا أشخاص (مودل مميزين) خاص فينا بكل المواصفات</span></div>
-        <div class="flex items-center gap-4 p-4 rounded-xl bg-white/5 hover:bg-white/10 transition-colors"><span class="w-3 h-3 bg-speed-red rounded-full"></span><span>إدارة الحسابات (تطوير + تنزيل + تفاعل دائم)</span></div>
-        <div class="flex items-center gap-4 p-4 rounded-xl bg-white/5 hover:bg-white/10 transition-colors md:col-span-2"><span class="w-3 h-3 bg-speed-red rounded-full"></span><span>إمكانية استخدام الثقافتين: العربية 🇸🇦 والإنجليزية 🇺🇸</span></div>
-      </div>
-    </div>
-  </div>
-</section>
+<section id="services" style="padding:100px 0;">
+  <div style="max-width:1200px;margin:0 auto;padding:0 24px;">
+    <h2 class="section-title reveal">خدماتنا المتكاملة</h2>
+    <p class="section-subtitle reveal">كل اللي تحتاجه في مكان واحد</p>
 
-<!-- Content Ideas Section -->
-<section class="py-24 relative">
-  <div class="max-w-7xl mx-auto px-6">
-    <div class="text-center mb-16 reveal">
-      <div class="inline-flex items-center gap-3 mb-4">
-        <span class="font-en font-black text-5xl speed-red">+100</span>
-        <div class="h-1 w-20 bg-speed-red"></div>
+    <div style="display:grid;grid-template-columns:repeat(3, 1fr);gap:24px;">
+      <div class="glass reveal" style="padding:40px 30px;border-radius:20px;text-align:center;">
+        <div style="width:70px;height:70px;background:linear-gradient(135deg, rgba(227,30,36,0.2), rgba(227,30,36,0.05));border-radius:20px;display:flex;align-items:center;justify-content:center;margin:0 auto 24px;">
+          <svg width="32" height="32" fill="none" stroke="#E31E24" stroke-width="2" viewBox="0 0 24 24"><path d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+        </div>
+        <h3 style="font-size:20px;font-weight:700;margin-bottom:12px;">تصوير احترافي</h3>
+        <p style="color:rgba(255,255,255,0.6);font-size:15px;line-height:1.6;">تصوير سينمائي بأحدث الأدوات والتقنيات</p>
       </div>
-      <h2 class="text-3xl md:text-4xl font-bold mb-2">اكثر من 100 فكرة محتوى رهيب!</h2>
-      <p class="text-gray-400">بعد إتمام العقد بتشوفوا الأفكار كاملة ..</p>
-    </div>
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 reveal">
-      <div class="glass-card p-6 rounded-2xl flex items-center gap-4 hover:bg-white/5 transition-all"><span class="font-en font-bold text-speed-red text-xl">01</span><span>قبل / وبعد</span></div>
-      <div class="glass-card p-6 rounded-2xl flex items-center gap-4 hover:bg-white/5 transition-all"><span class="font-en font-bold text-speed-red text-xl">02</span><span>وجهة نظر POV</span></div>
-      <div class="glass-card p-6 rounded-2xl flex items-center gap-4 hover:bg-white/5 transition-all"><span class="font-en font-bold text-speed-red text-xl">03</span><span>تجربة عميل UGC</span></div>
-      <div class="glass-card p-6 rounded-2xl flex items-center gap-4 hover:bg-white/5 transition-all"><span class="font-en font-bold text-speed-red text-xl">04</span><span>إحساس الفخامة Luxury Feel</span></div>
-      <div class="glass-card p-6 rounded-2xl flex items-center gap-4 hover:bg-white/5 transition-all"><span class="font-en font-bold text-speed-red text-xl">05</span><span>احترافي Transitions</span></div>
-      <div class="glass-card p-6 rounded-2xl flex items-center gap-4 hover:bg-white/5 transition-all"><span class="font-en font-bold text-speed-red text-xl">06</span><span>قصة قصيرة Mini Story</span></div>
-      <div class="glass-card p-6 rounded-2xl flex items-center gap-4 hover:bg-white/5 transition-all"><span class="font-en font-bold text-speed-red text-xl">07</span><span>انبوكسينق Unboxing</span></div>
-      <div class="glass-card p-6 rounded-2xl flex items-center gap-4 hover:bg-white/5 transition-all"><span class="font-en font-bold text-speed-red text-xl">08</span><span>محتوى مع الموظفين</span></div>
-      <div class="glass-card p-6 rounded-2xl flex items-center gap-4 hover:bg-white/5 transition-all"><span class="font-en font-bold text-speed-red text-xl">09</span><span>تعليق على الترند</span></div>
-      <div class="glass-card p-6 rounded-2xl flex items-center gap-4 hover:bg-white/5 transition-all"><span class="font-en font-bold text-speed-red text-xl">10</span><span>يوم في حياتنا</span></div>
-      <div class="glass-card p-6 rounded-2xl flex items-center gap-4 hover:bg-white/5 transition-all"><span class="font-en font-bold text-speed-red text-xl">11</span><span>تحدي بين الموظفين</span></div>
-      <div class="glass-card p-6 rounded-2xl flex items-center gap-4 hover:bg-white/5 transition-all"><span class="font-en font-bold text-speed-red text-xl">12</span><span>أسئلة وجواب</span></div>
-    </div>
-    <div class="text-center mt-8 reveal">
-      <p class="text-gray-400 text-lg">... والمزيد! الأفكار بحر.. التنفيذ والاستمرارية أهم شيء!</p>
+
+      <div class="glass reveal reveal-delay-1" style="padding:40px 30px;border-radius:20px;text-align:center;">
+        <div style="width:70px;height:70px;background:linear-gradient(135deg, rgba(227,30,36,0.2), rgba(227,30,36,0.05));border-radius:20px;display:flex;align-items:center;justify-content:center;margin:0 auto 24px;">
+          <svg width="32" height="32" fill="none" stroke="#E31E24" stroke-width="2" viewBox="0 0 24 24"><path d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/><path d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        </div>
+        <h3 style="font-size:20px;font-weight:700;margin-bottom:12px;">مونتاج احترافي</h3>
+        <p style="color:rgba(255,255,255,0.6);font-size:15px;line-height:1.6;">مونتاج سينمائي مع تأثيرات وترانزيشنز</p>
+      </div>
+
+      <div class="glass reveal reveal-delay-2" style="padding:40px 30px;border-radius:20px;text-align:center;">
+        <div style="width:70px;height:70px;background:linear-gradient(135deg, rgba(227,30,36,0.2), rgba(227,30,36,0.05));border-radius:20px;display:flex;align-items:center;justify-content:center;margin:0 auto 24px;">
+          <svg width="32" height="32" fill="none" stroke="#E31E24" stroke-width="2" viewBox="0 0 24 24"><path d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+        </div>
+        <h3 style="font-size:20px;font-weight:700;margin-bottom:12px;">كتابة محتوى</h3>
+        <p style="color:rgba(255,255,255,0.6);font-size:15px;line-height:1.6;">كتابة سيناريوهات وكابشنز جاذبة</p>
+      </div>
+
+      <div class="glass reveal" style="padding:40px 30px;border-radius:20px;text-align:center;">
+        <div style="width:70px;height:70px;background:linear-gradient(135deg, rgba(227,30,36,0.2), rgba(227,30,36,0.05));border-radius:20px;display:flex;align-items:center;justify-content:center;margin:0 auto 24px;">
+          <svg width="32" height="32" fill="none" stroke="#E31E24" stroke-width="2" viewBox="0 0 24 24"><path d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"/></svg>
+        </div>
+        <h3 style="font-size:20px;font-weight:700;margin-bottom:12px;">تعليق صوتي</h3>
+        <p style="color:rgba(255,255,255,0.6);font-size:15px;line-height:1.6;">تعليق صوتي احترافي بأصوات مميزة</p>
+      </div>
+
+      <div class="glass reveal reveal-delay-1" style="padding:40px 30px;border-radius:20px;text-align:center;">
+        <div style="width:70px;height:70px;background:linear-gradient(135deg, rgba(227,30,36,0.2), rgba(227,30,36,0.05));border-radius:20px;display:flex;align-items:center;justify-content:center;margin:0 auto 24px;">
+          <svg width="32" height="32" fill="none" stroke="#E31E24" stroke-width="2" viewBox="0 0 24 24"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+        </div>
+        <h3 style="font-size:20px;font-weight:700;margin-bottom:12px;">مودلز مميزين</h3>
+        <p style="color:rgba(255,255,255,0.6);font-size:15px;line-height:1.6;">أشخاص خاصين فينا بكل المواصفات</p>
+      </div>
+
+      <div class="glass reveal reveal-delay-2" style="padding:40px 30px;border-radius:20px;text-align:center;">
+        <div style="width:70px;height:70px;background:linear-gradient(135deg, rgba(227,30,36,0.2), rgba(227,30,36,0.05));border-radius:20px;display:flex;align-items:center;justify-content:center;margin:0 auto 24px;">
+          <svg width="32" height="32" fill="none" stroke="#E31E24" stroke-width="2" viewBox="0 0 24 24"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+        </div>
+        <h3 style="font-size:20px;font-weight:700;margin-bottom:12px;">إدارة حسابات</h3>
+        <p style="color:rgba(255,255,255,0.6);font-size:15px;line-height:1.6;">تطوير + تنزيل + تفاعل دائم</p>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- Portfolio Section -->
-<section id="portfolio" class="py-24 relative">
-  <div class="absolute inset-0 bg-gradient-to-b from-black via-red-950/5 to-black"></div>
-  <div class="max-w-7xl mx-auto px-6 relative z-10">
-    <div class="text-center mb-16 reveal">
-      <h2 class="font-en font-black text-4xl md:text-5xl mb-4">أعمالنا</h2>
-      <p class="text-gray-400 text-xl">فيديوهاتنا اللي خلت البراندات تتألق</p>
-      <div class="h-0.5 w-32 mx-auto mt-6" style="background: linear-gradient(90deg, transparent, var(--speed-red), transparent);"></div>
-    </div>
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-      <div class="video-card glass-card rounded-3xl overflow-hidden reveal group cursor-pointer">
-        <div class="relative aspect-[9/16] bg-gradient-to-b from-gray-800 to-gray-900 flex items-center justify-center">
-          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
-          <div class="play-btn w-16 h-16 bg-speed-red rounded-full flex items-center justify-center relative z-10">
-            <svg class="w-6 h-6 text-white ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-          </div>
-          <div class="absolute bottom-4 left-4 right-4 z-10">
-            <span class="bg-speed-red px-3 py-1 rounded-full text-xs font-bold">ريلز</span>
-            <h3 class="font-bold mt-2">فيديو ترويجي للمنتج</h3>
-            <p class="text-gray-400 text-sm">تصوير احترافي + مونتاج سينمائي</p>
+<section id="portfolio" style="padding:100px 0;background:linear-gradient(180deg, transparent, rgba(227,30,36,0.02), transparent);">
+  <div style="max-width:1200px;margin:0 auto;padding:0 24px;">
+    <h2 class="section-title reveal">أعمالنا</h2>
+    <p class="section-subtitle reveal">فيديوهاتنا اللي خلت البراندات تتألق</p>
+
+    <div style="display:grid;grid-template-columns:repeat(3, 1fr);gap:24px;">
+      <div class="video-card reveal" style="aspect-ratio:9/16;background:linear-gradient(180deg, #1a1a1a, #0a0a0a);position:relative;">
+        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">
+          <div class="play-btn">
+            <svg width="24" height="24" fill="white" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
           </div>
         </div>
-      </div>
-      <div class="video-card glass-card rounded-3xl overflow-hidden reveal group cursor-pointer" style="transition-delay: 0.1s">
-        <div class="relative aspect-[9/16] bg-gradient-to-b from-gray-800 to-gray-900 flex items-center justify-center">
-          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
-          <div class="play-btn w-16 h-16 bg-speed-red rounded-full flex items-center justify-center relative z-10">
-            <svg class="w-6 h-6 text-white ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-          </div>
-          <div class="absolute bottom-4 left-4 right-4 z-10">
-            <span class="bg-blue-500 px-3 py-1 rounded-full text-xs font-bold">تيك توك</span>
-            <h3 class="font-bold mt-2">محتوى تفاعلي</h3>
-            <p class="text-gray-400 text-sm">ترند + كرياتيف</p>
-          </div>
+        <div style="position:absolute;bottom:0;left:0;right:0;padding:30px;background:linear-gradient(transparent, rgba(0,0,0,0.9));">
+          <span style="background:var(--speed-red);padding:4px 12px;border-radius:20px;font-size:12px;font-weight:700;">ريلز</span>
+          <h3 style="margin-top:10px;font-size:18px;font-weight:700;">فيديو ترويجي للمنتج</h3>
         </div>
       </div>
-      <div class="video-card glass-card rounded-3xl overflow-hidden reveal group cursor-pointer" style="transition-delay: 0.2s">
-        <div class="relative aspect-[9/16] bg-gradient-to-b from-gray-800 to-gray-900 flex items-center justify-center">
-          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
-          <div class="play-btn w-16 h-16 bg-speed-red rounded-full flex items-center justify-center relative z-10">
-            <svg class="w-6 h-6 text-white ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-          </div>
-          <div class="absolute bottom-4 left-4 right-4 z-10">
-            <span class="bg-purple-500 px-3 py-1 rounded-full text-xs font-bold">ستوري</span>
-            <h3 class="font-bold mt-2">يوم في حياتنا</h3>
-            <p class="text-gray-400 text-sm">محتوى يومي تفاعلي</p>
+
+      <div class="video-card reveal reveal-delay-1" style="aspect-ratio:9/16;background:linear-gradient(180deg, #1a1a1a, #0a0a0a);position:relative;">
+        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">
+          <div class="play-btn">
+            <svg width="24" height="24" fill="white" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
           </div>
         </div>
-      </div>
-      <div class="video-card glass-card rounded-3xl overflow-hidden reveal group cursor-pointer">
-        <div class="relative aspect-[9/16] bg-gradient-to-b from-gray-800 to-gray-900 flex items-center justify-center">
-          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
-          <div class="play-btn w-16 h-16 bg-speed-red rounded-full flex items-center justify-center relative z-10">
-            <svg class="w-6 h-6 text-white ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-          </div>
-          <div class="absolute bottom-4 left-4 right-4 z-10">
-            <span class="bg-green-500 px-3 py-1 rounded-full text-xs font-bold">UGC</span>
-            <h3 class="font-bold mt-2">تجربة عميل حقيقية</h3>
-            <p class="text-gray-400 text-sm">محتوى من المستخدمين</p>
-          </div>
+        <div style="position:absolute;bottom:0;left:0;right:0;padding:30px;background:linear-gradient(transparent, rgba(0,0,0,0.9));">
+          <span style="background:#3b82f6;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:700;">تيك توك</span>
+          <h3 style="margin-top:10px;font-size:18px;font-weight:700;">محتوى تفاعلي</h3>
         </div>
       </div>
-      <div class="video-card glass-card rounded-3xl overflow-hidden reveal group cursor-pointer" style="transition-delay: 0.1s">
-        <div class="relative aspect-[9/16] bg-gradient-to-b from-gray-800 to-gray-900 flex items-center justify-center">
-          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
-          <div class="play-btn w-16 h-16 bg-speed-red rounded-full flex items-center justify-center relative z-10">
-            <svg class="w-6 h-6 text-white ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-          </div>
-          <div class="absolute bottom-4 left-4 right-4 z-10">
-            <span class="bg-orange-500 px-3 py-1 rounded-full text-xs font-bold">Unboxing</span>
-            <h3 class="font-bold mt-2">انبوكسينق احترافي</h3>
-            <p class="text-gray-400 text-sm">تجربة فتح المنتج</p>
+
+      <div class="video-card reveal reveal-delay-2" style="aspect-ratio:9/16;background:linear-gradient(180deg, #1a1a1a, #0a0a0a);position:relative;">
+        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">
+          <div class="play-btn">
+            <svg width="24" height="24" fill="white" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
           </div>
         </div>
+        <div style="position:absolute;bottom:0;left:0;right:0;padding:30px;background:linear-gradient(transparent, rgba(0,0,0,0.9));">
+          <span style="background:#8b5cf6;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:700;">ستوري</span>
+          <h3 style="margin-top:10px;font-size:18px;font-weight:700;">يوم في حياتنا</h3>
+        </div>
       </div>
-      <div class="video-card glass-card rounded-3xl overflow-hidden reveal group cursor-pointer" style="transition-delay: 0.2s">
-        <div class="relative aspect-[9/16] bg-gradient-to-b from-gray-800 to-gray-900 flex items-center justify-center">
-          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
-          <div class="play-btn w-16 h-16 bg-speed-red rounded-full flex items-center justify-center relative z-10">
-            <svg class="w-6 h-6 text-white ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+
+      <div class="video-card reveal" style="aspect-ratio:9/16;background:linear-gradient(180deg, #1a1a1a, #0a0a0a);position:relative;">
+        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">
+          <div class="play-btn">
+            <svg width="24" height="24" fill="white" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
           </div>
-          <div class="absolute bottom-4 left-4 right-4 z-10">
-            <span class="bg-pink-500 px-3 py-1 rounded-full text-xs font-bold">Mini Story</span>
-            <h3 class="font-bold mt-2">قصة قصيرة</h3>
-            <p class="text-gray-400 text-sm">سرد قصصي مؤثر</p>
+        </div>
+        <div style="position:absolute;bottom:0;left:0;right:0;padding:30px;background:linear-gradient(transparent, rgba(0,0,0,0.9));">
+          <span style="background:#22c55e;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:700;">UGC</span>
+          <h3 style="margin-top:10px;font-size:18px;font-weight:700;">تجربة عميل حقيقية</h3>
+        </div>
+      </div>
+
+      <div class="video-card reveal reveal-delay-1" style="aspect-ratio:9/16;background:linear-gradient(180deg, #1a1a1a, #0a0a0a);position:relative;">
+        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">
+          <div class="play-btn">
+            <svg width="24" height="24" fill="white" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
           </div>
+        </div>
+        <div style="position:absolute;bottom:0;left:0;right:0;padding:30px;background:linear-gradient(transparent, rgba(0,0,0,0.9));">
+          <span style="background:#f97316;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:700;">Unboxing</span>
+          <h3 style="margin-top:10px;font-size:18px;font-weight:700;">انبوكسينق احترافي</h3>
+        </div>
+      </div>
+
+      <div class="video-card reveal reveal-delay-2" style="aspect-ratio:9/16;background:linear-gradient(180deg, #1a1a1a, #0a0a0a);position:relative;">
+        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">
+          <div class="play-btn">
+            <svg width="24" height="24" fill="white" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+        </div>
+        <div style="position:absolute;bottom:0;left:0;right:0;padding:30px;background:linear-gradient(transparent, rgba(0,0,0,0.9));">
+          <span style="background:#ec4899;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:700;">Mini Story</span>
+          <h3 style="margin-top:10px;font-size:18px;font-weight:700;">قصة قصيرة</h3>
         </div>
       </div>
     </div>
-    <div class="text-center mt-12 reveal">
-      <a href="https://wa.me/966544656944" target="_blank" class="inline-flex items-center gap-2 bg-speed-red px-8 py-4 rounded-full font-bold text-lg btn-glare hover:shadow-xl hover:shadow-red-500/40 transition-all">
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+
+    <div style="text-align:center;margin-top:50px;" class="reveal">
+      <a href="https://wa.me/966544656944" target="_blank" class="btn-primary">
         شاهد المزيد من الأعمال
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
       </a>
     </div>
   </div>
 </section>
 
-<!-- Clients Section -->
-<section id="clients" class="py-24 relative">
-  <div class="max-w-7xl mx-auto px-6">
-    <div class="text-center mb-16 reveal">
-      <h2 class="font-en font-black text-4xl md:text-5xl mb-4">شركاؤنا</h2>
-      <p class="text-gray-400 text-xl">براندات اشتغلنا معها وكانت النتائج مبهرة</p>
-      <div class="h-0.5 w-32 mx-auto mt-6" style="background: linear-gradient(90deg, transparent, var(--speed-red), transparent);"></div>
-    </div>
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-      <div class="glass-card rounded-3xl p-8 reveal hover:border-red-500/50 transition-all">
-        <div class="w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-gray-700 to-gray-800 flex items-center justify-center text-3xl">🏥</div>
-        <h3 class="text-xl font-bold text-center mb-2">مستشفى الفرسان</h3>
-        <p class="text-gray-400 text-center text-sm mb-4">قطاع صحي</p>
-        <div class="bg-white/5 rounded-xl p-4 mb-4">
-          <div class="flex gap-1 mb-2 justify-center">
-            <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-            <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-            <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-            <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-            <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          </div>
-          <p class="text-sm text-gray-300 italic text-center">"محتوى ممتاز وتفاعل خرافي، زاد الوعي بالعلامة التجارية بشكل ملحوظ"</p>
+<!-- Clients / Partners Section -->
+<section id="clients" style="padding:100px 0;">
+  <div style="max-width:1200px;margin:0 auto;padding:0 24px;">
+    <h2 class="section-title reveal">شركاؤنا</h2>
+    <p class="section-subtitle reveal">براندات اشتغلنا معها وكانت النتائج مبهرة</p>
+
+    <!-- Partner logos marquee -->
+    <div class="marquee-container reveal" style="margin-bottom:80px;">
+      <div class="marquee-content">
+        <div style="display:flex;gap:60px;padding:0 30px;align-items:center;">
+          <div style="width:150px;height:60px;background:rgba(255,255,255,0.05);border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:700;color:rgba(255,255,255,0.4);">شريك 1</div>
+          <div style="width:150px;height:60px;background:rgba(255,255,255,0.05);border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:700;color:rgba(255,255,255,0.4);">شريك 2</div>
+          <div style="width:150px;height:60px;background:rgba(255,255,255,0.05);border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:700;color:rgba(255,255,255,0.4);">شريك 3</div>
+          <div style="width:150px;height:60px;background:rgba(255,255,255,0.05);border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:700;color:rgba(255,255,255,0.4);">شريك 4</div>
+          <div style="width:150px;height:60px;background:rgba(255,255,255,0.05);border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:700;color:rgba(255,255,255,0.4);">شريك 5</div>
+          <div style="width:150px;height:60px;background:rgba(255,255,255,0.05);border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:700;color:rgba(255,255,255,0.4);">شريك 6</div>
         </div>
-        <div class="flex items-center gap-2 text-speed-red text-sm font-bold justify-center">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
-          <span>+250% تفاعل</span>
-        </div>
-      </div>
-      <div class="glass-card rounded-3xl p-8 reveal hover:border-red-500/50 transition-all" style="transition-delay: 0.1s">
-        <div class="w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-gray-700 to-gray-800 flex items-center justify-center text-3xl">🍔</div>
-        <h3 class="text-xl font-bold text-center mb-2">مطعم الشيف</h3>
-        <p class="text-gray-400 text-center text-sm mb-4">قطاع المطاعم</p>
-        <div class="bg-white/5 rounded-xl p-4 mb-4">
-          <div class="flex gap-1 mb-2 justify-center">
-            <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-            <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-            <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-            <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-            <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          </div>
-          <p class="text-sm text-gray-300 italic text-center">"الفيديوهات خلت الناس تجي للمطعم بكثرة، نتائج فوق التوقعات"</p>
-        </div>
-        <div class="flex items-center gap-2 text-speed-red text-sm font-bold justify-center">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
-          <span>+180% زيادة طلبات</span>
-        </div>
-      </div>
-      <div class="glass-card rounded-3xl p-8 reveal hover:border-red-500/50 transition-all" style="transition-delay: 0.2s">
-        <div class="w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-gray-700 to-gray-800 flex items-center justify-center text-3xl">👕</div>
-        <h3 class="text-xl font-bold text-center mb-2">متجر فاشن ستور</h3>
-        <p class="text-gray-400 text-center text-sm mb-4">قطاع الأزياء</p>
-        <div class="bg-white/5 rounded-xl p-4 mb-4">
-          <div class="flex gap-1 mb-2 justify-center">
-            <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-            <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-            <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-            <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-            <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          </div>
-          <p class="text-sm text-gray-300 italic text-center">"أسلوب التصوير والمونتاج احترافي جداً، العملاء يمدحون المحتوى"</p>
-        </div>
-        <div class="flex items-center gap-2 text-speed-red text-sm font-bold justify-center">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
-          <span>+300% مشاهدات</span>
+        <div style="display:flex;gap:60px;padding:0 30px;align-items:center;">
+          <div style="width:150px;height:60px;background:rgba(255,255,255,0.05);border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:700;color:rgba(255,255,255,0.4);">شريك 1</div>
+          <div style="width:150px;height:60px;background:rgba(255,255,255,0.05);border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:700;color:rgba(255,255,255,0.4);">شريك 2</div>
+          <div style="width:150px;height:60px;background:rgba(255,255,255,0.05);border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:700;color:rgba(255,255,255,0.4);">شريك 3</div>
+          <div style="width:150px;height:60px;background:rgba(255,255,255,0.05);border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:700;color:rgba(255,255,255,0.4);">شريك 4</div>
+          <div style="width:150px;height:60px;background:rgba(255,255,255,0.05);border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:700;color:rgba(255,255,255,0.4);">شريك 5</div>
+          <div style="width:150px;height:60px;background:rgba(255,255,255,0.05);border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:700;color:rgba(255,255,255,0.4);">شريك 6</div>
         </div>
       </div>
     </div>
-    <div class="mt-16 overflow-hidden reveal">
-      <p class="text-center text-gray-500 text-sm mb-6">براندات وثقت فينا</p>
-      <div class="relative">
-        <div class="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-black to-transparent z-10"></div>
-        <div class="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-black to-transparent z-10"></div>
-        <div class="marquee-track">
-          <div class="flex items-center gap-12 px-6">
-            <div class="w-32 h-16 bg-white/10 rounded-xl flex items-center justify-center text-gray-400 font-bold text-sm whitespace-nowrap px-4">براند 1</div>
-            <div class="w-32 h-16 bg-white/10 rounded-xl flex items-center justify-center text-gray-400 font-bold text-sm whitespace-nowrap px-4">براند 2</div>
-            <div class="w-32 h-16 bg-white/10 rounded-xl flex items-center justify-center text-gray-400 font-bold text-sm whitespace-nowrap px-4">براند 3</div>
-            <div class="w-32 h-16 bg-white/10 rounded-xl flex items-center justify-center text-gray-400 font-bold text-sm whitespace-nowrap px-4">براند 4</div>
-            <div class="w-32 h-16 bg-white/10 rounded-xl flex items-center justify-center text-gray-400 font-bold text-sm whitespace-nowrap px-4">براند 5</div>
-            <div class="w-32 h-16 bg-white/10 rounded-xl flex items-center justify-center text-gray-400 font-bold text-sm whitespace-nowrap px-4">براند 6</div>
+
+    <!-- Testimonials -->
+    <div style="display:grid;grid-template-columns:repeat(3, 1fr);gap:24px;">
+      <div class="testimonial-card reveal">
+        <div style="display:flex;gap:4px;margin-bottom:16px;">
+          <svg width="20" height="20" fill="#E31E24" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg width="20" height="20" fill="#E31E24" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg width="20" height="20" fill="#E31E24" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg width="20" height="20" fill="#E31E24" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg width="20" height="20" fill="#E31E24" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </div>
+        <p style="color:rgba(255,255,255,0.8);line-height:1.8;margin-bottom:20px;font-size:15px;">"محتوى ممتاز وتفاعل خرافي، زاد الوعي بالعلامة التجارية بشكل ملحوظ. فريق محترف جداً"</p>
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div style="width:50px;height:50px;border-radius:50%;background:linear-gradient(135deg, #E31E24, #991b1b);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:20px;">ف</div>
+          <div>
+            <div style="font-weight:700;">مستشفى الفرسان</div>
+            <div style="font-size:13px;color:rgba(255,255,255,0.5);">قطاع صحي</div>
           </div>
-          <div class="flex items-center gap-12 px-6">
-            <div class="w-32 h-16 bg-white/10 rounded-xl flex items-center justify-center text-gray-400 font-bold text-sm whitespace-nowrap px-4">براند 1</div>
-            <div class="w-32 h-16 bg-white/10 rounded-xl flex items-center justify-center text-gray-400 font-bold text-sm whitespace-nowrap px-4">براند 2</div>
-            <div class="w-32 h-16 bg-white/10 rounded-xl flex items-center justify-center text-gray-400 font-bold text-sm whitespace-nowrap px-4">براند 3</div>
-            <div class="w-32 h-16 bg-white/10 rounded-xl flex items-center justify-center text-gray-400 font-bold text-sm whitespace-nowrap px-4">براند 4</div>
-            <div class="w-32 h-16 bg-white/10 rounded-xl flex items-center justify-center text-gray-400 font-bold text-sm whitespace-nowrap px-4">براند 5</div>
-            <div class="w-32 h-16 bg-white/10 rounded-xl flex items-center justify-center text-gray-400 font-bold text-sm whitespace-nowrap px-4">براند 6</div>
+        </div>
+      </div>
+
+      <div class="testimonial-card reveal reveal-delay-1">
+        <div style="display:flex;gap:4px;margin-bottom:16px;">
+          <svg width="20" height="20" fill="#E31E24" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg width="20" height="20" fill="#E31E24" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg width="20" height="20" fill="#E31E24" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg width="20" height="20" fill="#E31E24" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg width="20" height="20" fill="#E31E24" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </div>
+        <p style="color:rgba(255,255,255,0.8);line-height:1.8;margin-bottom:20px;font-size:15px;">"الفيديوهات خلت الناس تجي للمطعم بكثرة، نتائج فوق التوقعات بمراحل. شكراً SPEED"</p>
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div style="width:50px;height:50px;border-radius:50%;background:linear-gradient(135deg, #E31E24, #991b1b);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:20px;">ش</div>
+          <div>
+            <div style="font-weight:700;">مطعم الشيف</div>
+            <div style="font-size:13px;color:rgba(255,255,255,0.5);">قطاع المطاعم</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card reveal reveal-delay-2">
+        <div style="display:flex;gap:4px;margin-bottom:16px;">
+          <svg width="20" height="20" fill="#E31E24" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg width="20" height="20" fill="#E31E24" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg width="20" height="20" fill="#E31E24" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg width="20" height="20" fill="#E31E24" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg width="20" height="20" fill="#E31E24" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </div>
+        <p style="color:rgba(255,255,255,0.8);line-height:1.8;margin-bottom:20px;font-size:15px;">"أسلوب التصوير والمونتاج احترافي جداً، العملاء يمدحون المحتوى ويتفاعلون بشكل كبير"</p>
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div style="width:50px;height:50px;border-radius:50%;background:linear-gradient(135deg, #E31E24, #991b1b);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:20px;">ف</div>
+          <div>
+            <div style="font-weight:700;">متجر فاشن ستور</div>
+            <div style="font-size:13px;color:rgba(255,255,255,0.5);">قطاع الأزياء</div>
           </div>
         </div>
       </div>
@@ -486,218 +687,194 @@ body { font-family: 'Cairo', sans-serif; background: var(--speed-black); color: 
 </section>
 
 <!-- Pricing Section -->
-<section id="pricing" class="py-24 relative">
-  <div class="absolute inset-0 bg-gradient-to-b from-black via-red-950/10 to-black"></div>
-  <div class="max-w-7xl mx-auto px-6 relative z-10">
-    <div class="text-center mb-16 reveal">
-      <div class="flex items-center justify-center gap-2 mb-4">
-        <span class="font-en font-black text-5xl">SPEED</span>
-        <span class="speed-red text-2xl font-bold">سوشال ميديا</span>
-      </div>
-      <h2 class="text-3xl md:text-4xl font-bold mb-2">3 باقات شهرية</h2>
-      <p class="text-gray-400">*تفاصيل الخدمات والسعر شامل الضريبة</p>
-    </div>
-    <div class="grid md:grid-cols-3 gap-6">
-      <div class="pricing-card glass-card rounded-3xl p-8 reveal relative overflow-hidden">
-        <div class="absolute top-0 right-0 w-32 h-32 bg-gray-500/10 rounded-full blur-2xl"></div>
-        <div class="relative z-10">
-          <div class="flex items-center justify-between mb-6">
-            <h3 class="text-2xl font-bold">باقة بلس</h3>
-            <div class="w-12 h-12 bg-gray-700 rounded-xl flex items-center justify-center"><span class="text-2xl">🎁</span></div>
-          </div>
-          <div class="space-y-3 mb-8">
-            <div class="flex items-center gap-3"><svg class="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg><span>4 فيديوهات</span></div>
-            <div class="flex items-center gap-3"><svg class="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg><span>2 صــــــور</span></div>
-          </div>
-          <div class="border-t border-white/10 pt-6 mb-6">
-            <p class="text-gray-400 text-sm mb-2">مجاناً:</p>
-            <ul class="space-y-2 text-sm">
-              <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-speed-red rounded-full"></span><span>1 مودل مجاناً</span></li>
-              <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-speed-red rounded-full"></span><span>4 ستوري مجاناً</span></li>
-              <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-speed-red rounded-full"></span><span>التفاعل مع الناس مجاناً</span></li>
-            </ul>
-          </div>
-          <div class="text-center"><span class="text-4xl font-en font-black">5170</span><span class="text-gray-400 mr-2">ر.س</span></div>
-        </div>
-      </div>
-      <div class="pricing-card glass-card rounded-3xl p-8 reveal relative overflow-hidden border-2 border-speed-red" style="transition-delay: 0.1s">
-        <div class="absolute top-4 left-1/2 -translate-x-1/2 bg-speed-red px-4 py-1 rounded-full text-xs font-bold">الأكثر طلباً</div>
-        <div class="absolute top-0 right-0 w-32 h-32 bg-blue-500/10 rounded-full blur-2xl"></div>
-        <div class="relative z-10">
-          <div class="flex items-center justify-between mb-6 mt-4">
-            <h3 class="text-2xl font-bold">باقة برو</h3>
-            <div class="w-12 h-12 bg-gradient-to-br from-blue-600 to-blue-800 rounded-xl flex items-center justify-center"><span class="text-2xl">🎁</span></div>
-          </div>
-          <div class="space-y-3 mb-8">
-            <div class="flex items-center gap-3"><svg class="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg><span>6 فيديوهات</span></div>
-            <div class="flex items-center gap-3"><svg class="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg><span>3 صــــــور</span></div>
-          </div>
-          <div class="border-t border-white/10 pt-6 mb-6">
-            <p class="text-gray-400 text-sm mb-2">مجاناً:</p>
-            <ul class="space-y-2 text-sm">
-              <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-speed-red rounded-full"></span><span>2 مودل مجاناً</span></li>
-              <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-speed-red rounded-full"></span><span>6 ستوري مجاناً</span></li>
-              <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-speed-red rounded-full"></span><span>التفاعل مع الناس مجاناً</span></li>
-            </ul>
-          </div>
-          <div class="text-center"><span class="text-4xl font-en font-black">7170</span><span class="text-gray-400 mr-2">ر.س</span></div>
-        </div>
-      </div>
-      <div class="pricing-card glass-card rounded-3xl p-8 reveal relative overflow-hidden" style="transition-delay: 0.2s">
-        <div class="absolute top-0 right-0 w-32 h-32 bg-red-500/10 rounded-full blur-2xl"></div>
-        <div class="relative z-10">
-          <div class="flex items-center justify-between mb-6">
-            <h3 class="text-2xl font-bold">باقة سبيد</h3>
-            <div class="w-12 h-12 bg-gradient-to-br from-red-600 to-red-800 rounded-xl flex items-center justify-center"><span class="text-2xl">🎁</span></div>
-          </div>
-          <div class="space-y-3 mb-8">
-            <div class="flex items-center gap-3"><svg class="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg><span>8 فيديوهات</span></div>
-            <div class="flex items-center gap-3"><svg class="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg><span>4 صــــــور</span></div>
-          </div>
-          <div class="border-t border-white/10 pt-6 mb-6">
-            <p class="text-gray-400 text-sm mb-2">مجاناً:</p>
-            <ul class="space-y-2 text-sm">
-              <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-speed-red rounded-full"></span><span>3 مودل مجاناً</span></li>
-              <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-speed-red rounded-full"></span><span>8 ستوري مجاناً</span></li>
-              <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-speed-red rounded-full"></span><span>التفاعل مع الناس مجاناً</span></li>
-            </ul>
-          </div>
-          <div class="text-center"><span class="text-4xl font-en font-black">8170</span><span class="text-gray-400 mr-2">ر.س</span></div>
-        </div>
-      </div>
-    </div>
-    <div class="text-center mt-12 reveal">
-      <p class="text-gray-400 text-lg">نحول المنتج من شيء عادي</p>
-      <p class="text-xl font-bold mt-2">إلى تجربة "يعيشوها.. ويحبوها.. ويتكلموا عنها"</p>
-    </div>
-  </div>
-</section>
+<section id="pricing" style="padding:100px 0;background:linear-gradient(180deg, transparent, rgba(227,30,36,0.02), transparent);">
+  <div style="max-width:1200px;margin:0 auto;padding:0 24px;">
+    <h2 class="section-title reveal">باقاتنا</h2>
+    <p class="section-subtitle reveal">اختر الباقة المناسبة لبراندك</p>
 
-<!-- Dispute Section -->
-<section class="py-24 relative">
-  <div class="max-w-4xl mx-auto px-6">
-    <div class="glass-card rounded-3xl p-8 md:p-16 reveal">
-      <div class="flex items-center gap-4 mb-10">
-        <div class="w-2 h-16 bg-speed-red"></div>
-        <div>
-          <h2 class="text-3xl md:text-4xl font-bold">خلاف؟</h2>
-          <p class="font-en font-black text-3xl speed-red">DISPUTE</p>
-        </div>
-      </div>
-      <div class="space-y-6 text-lg">
-        <p class="text-gray-300">ممكن تتساءل مع نفسك ولا مع شركاءك ؛ هذول يمكن ما يمشوا بالاتفاق او يخالفوا مثل السابقين ويخسرونا ولا نستفيد شيء:</p>
-        <div class="space-y-4 mr-6">
-          <p>صحيح من حقك</p>
-          <p>بس معانا.. نطمنك</p>
-          <p class="speed-red font-bold">برضو وارد الخلاف!</p>
-          <p>بس راح يكون بطريقتنا..</p>
-          <p>اذا خالفنا؟</p>
-          <p class="font-bold">بنخالف (الإبداع)</p>
-          <p>ما بيكون بالضبط مثل المستوى المطلوب</p>
-          <p class="speed-red font-bold text-xl">بل راح يزيييييد الإبداع</p>
-        </div>
-        <div class="mt-8 p-6 bg-speed-red/10 rounded-2xl border border-speed-red/30">
-          <p class="text-center text-xl font-bold">"حنشتغل وكأنها هذي شركتنا"</p>
-        </div>
-      </div>
-      <div class="mt-10 text-center">
-        <p class="text-gray-400">_ سبيد سوشال ميديا</p>
-      </div>
-    </div>
-  </div>
-</section>
+    <div style="display:grid;grid-template-columns:repeat(3, 1fr);gap:30px;">
+      <!-- Plus Package -->
+      <div class="glass reveal" style="padding:40px 30px;border-radius:24px;text-align:center;position:relative;">
+        <div style="font-size:20px;font-weight:700;margin-bottom:8px;">باقة بلس</div>
+        <div style="font-size:48px;font-weight:900;color:var(--speed-red);margin-bottom:8px;">5170<span style="font-size:18px;color:rgba(255,255,255,0.5);"> ر.س</span></div>
+        <div style="font-size:14px;color:rgba(255,255,255,0.5);margin-bottom:30px;">شهرياً</div>
 
-<!-- CTA Section -->
-<section class="py-24 relative overflow-hidden">
-  <div class="absolute inset-0 speed-bg"></div>
-  <div class="max-w-4xl mx-auto px-6 text-center relative z-10">
-    <div class="mb-8 reveal">
-      <div class="inline-block relative">
-        <span class="text-8xl font-en font-black speed-red opacity-20">1</span>
-        <span class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-6xl">🏆</span>
+        <ul style="list-style:none;padding:0;margin:0 0 30px;text-align:right;">
+          <li style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.05);display:flex;align-items:center;gap:10px;">
+            <svg width="20" height="20" fill="none" stroke="#22c55e" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
+            <span>4 فيديوهات</span>
+          </li>
+          <li style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.05);display:flex;align-items:center;gap:10px;">
+            <svg width="20" height="20" fill="none" stroke="#22c55e" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
+            <span>2 صور</span>
+          </li>
+          <li style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.05);display:flex;align-items:center;gap:10px;">
+            <svg width="20" height="20" fill="none" stroke="#22c55e" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
+            <span>1 مودل مجاناً</span>
+          </li>
+          <li style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.05);display:flex;align-items:center;gap:10px;">
+            <svg width="20" height="20" fill="none" stroke="#22c55e" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
+            <span>4 ستوري مجاناً</span>
+          </li>
+          <li style="padding:10px 0;display:flex;align-items:center;gap:10px;">
+            <svg width="20" height="20" fill="none" stroke="#22c55e" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
+            <span>تفاعل مجاني</span>
+          </li>
+        </ul>
+
+        <a href="https://wa.me/966544656944" target="_blank" class="btn-outline" style="width:100%;justify-content:center;">اشترك الآن</a>
+      </div>
+
+      <!-- Pro Package -->
+      <div class="glass reveal reveal-delay-1" style="padding:40px 30px;border-radius:24px;text-align:center;position:relative;border:2px solid var(--speed-red);">
+        <div style="position:absolute;top:-15px;left:50%;transform:translateX(-50%);background:var(--speed-red);padding:6px 20px;border-radius:20px;font-size:13px;font-weight:700;">الأكثر طلباً</div>
+        <div style="font-size:20px;font-weight:700;margin-bottom:8px;margin-top:10px;">باقة برو</div>
+        <div style="font-size:48px;font-weight:900;color:var(--speed-red);margin-bottom:8px;">7170<span style="font-size:18px;color:rgba(255,255,255,0.5);"> ر.س</span></div>
+        <div style="font-size:14px;color:rgba(255,255,255,0.5);margin-bottom:30px;">شهرياً</div>
+
+        <ul style="list-style:none;padding:0;margin:0 0 30px;text-align:right;">
+          <li style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.05);display:flex;align-items:center;gap:10px;">
+            <svg width="20" height="20" fill="none" stroke="#22c55e" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
+            <span>6 فيديوهات</span>
+          </li>
+          <li style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.05);display:flex;align-items:center;gap:10px;">
+            <svg width="20" height="20" fill="none" stroke="#22c55e" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
+            <span>3 صور</span>
+          </li>
+          <li style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.05);display:flex;align-items:center;gap:10px;">
+            <svg width="20" height="20" fill="none" stroke="#22c55e" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
+            <span>2 مودل مجاناً</span>
+          </li>
+          <li style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.05);display:flex;align-items:center;gap:10px;">
+            <svg width="20" height="20" fill="none" stroke="#22c55e" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
+            <span>6 ستوري مجاناً</span>
+          </li>
+          <li style="padding:10px 0;display:flex;align-items:center;gap:10px;">
+            <svg width="20" height="20" fill="none" stroke="#22c55e" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
+            <span>تفاعل مجاني</span>
+          </li>
+        </ul>
+
+        <a href="https://wa.me/966544656944" target="_blank" class="btn-primary" style="width:100%;justify-content:center;">اشترك الآن</a>
+      </div>
+
+      <!-- Speed Package -->
+      <div class="glass reveal reveal-delay-2" style="padding:40px 30px;border-radius:24px;text-align:center;position:relative;">
+        <div style="font-size:20px;font-weight:700;margin-bottom:8px;">باقة سبيد</div>
+        <div style="font-size:48px;font-weight:900;color:var(--speed-red);margin-bottom:8px;">8170<span style="font-size:18px;color:rgba(255,255,255,0.5);"> ر.س</span></div>
+        <div style="font-size:14px;color:rgba(255,255,255,0.5);margin-bottom:30px;">شهرياً</div>
+
+        <ul style="list-style:none;padding:0;margin:0 0 30px;text-align:right;">
+          <li style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.05);display:flex;align-items:center;gap:10px;">
+            <svg width="20" height="20" fill="none" stroke="#22c55e" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
+            <span>8 فيديوهات</span>
+          </li>
+          <li style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.05);display:flex;align-items:center;gap:10px;">
+            <svg width="20" height="20" fill="none" stroke="#22c55e" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
+            <span>4 صور</span>
+          </li>
+          <li style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.05);display:flex;align-items:center;gap:10px;">
+            <svg width="20" height="20" fill="none" stroke="#22c55e" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
+            <span>3 مودل مجاناً</span>
+          </li>
+          <li style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.05);display:flex;align-items:center;gap:10px;">
+            <svg width="20" height="20" fill="none" stroke="#22c55e" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
+            <span>8 ستوري مجاناً</span>
+          </li>
+          <li style="padding:10px 0;display:flex;align-items:center;gap:10px;">
+            <svg width="20" height="20" fill="none" stroke="#22c55e" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
+            <span>تفاعل مجاني</span>
+          </li>
+        </ul>
+
+        <a href="https://wa.me/966544656944" target="_blank" class="btn-outline" style="width:100%;justify-content:center;">اشترك الآن</a>
       </div>
     </div>
-    <h2 class="text-3xl md:text-5xl font-bold mb-4 reveal">جاهزين نبدأ الرحلة الآن؟</h2>
-    <p class="font-en font-black text-2xl md:text-3xl mb-12 reveal">READY TO START THE JOURNEY NOW?</p>
-    <div class="h-0.5 w-48 mx-auto mb-12" style="background: linear-gradient(90deg, transparent, var(--speed-red), transparent);"></div>
   </div>
 </section>
 
 <!-- Contact Section -->
-<section id="contact" class="py-24 relative">
-  <div class="max-w-4xl mx-auto px-6">
-    <div class="glass-card rounded-3xl p-8 md:p-16 reveal">
-      <div class="text-center mb-12">
-        <h2 class="text-3xl md:text-4xl font-bold mb-2">تواصل معنا</h2>
-        <p class="text-gray-400">سبيد - سوشال ميديا</p>
+<section id="contact" style="padding:100px 0;">
+  <div style="max-width:800px;margin:0 auto;padding:0 24px;text-align:center;">
+    <h2 class="section-title reveal">تواصل معنا</h2>
+    <p class="section-subtitle reveal">جاهزين نبدأ الرحلة معاك؟</p>
+
+    <div class="reveal" style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:24px;padding:50px 40px;">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:30px;text-align:right;">
+        <input type="text" placeholder="الاسم" class="input-field">
+        <input type="email" placeholder="البريد الإلكتروني" class="input-field">
+        <input type="tel" placeholder="رقم الجوال" class="input-field">
+        <input type="text" placeholder="اسم البراند" class="input-field">
       </div>
-      <div class="grid md:grid-cols-2 gap-8">
-        <a href="https://wa.me/966544656944" target="_blank" class="group bg-green-600/20 border border-green-500/30 rounded-2xl p-8 text-center hover:bg-green-600/30 transition-all">
-          <div class="w-16 h-16 bg-green-500 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
-            <svg class="w-8 h-8 text-white" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-          </div>
-          <h3 class="text-xl font-bold mb-2">واتساب</h3>
-          <p class="text-gray-400 text-sm mb-4">راسلنا مباشرة على الواتساب</p>
-          <p class="text-green-400 font-bold font-en text-lg">0544656944</p>
+      <textarea placeholder="رسالتك..." class="input-field" style="min-height:150px;margin-bottom:30px;resize:vertical;"></textarea>
+
+      <button class="btn-primary" style="width:100%;justify-content:center;font-size:18px;padding:18px;">
+        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+        إرسال الرسالة
+      </button>
+
+      <div style="display:flex;gap:20px;justify-content:center;margin-top:40px;">
+        <a href="https://wa.me/966544656944" target="_blank" style="display:flex;align-items:center;gap:10px;color:#25D366;text-decoration:none;font-weight:700;transition:transform 0.3s;" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform='translateY(0)'">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          واتساب
         </a>
-        <div class="glass-card rounded-2xl p-8 text-center">
-          <div class="w-16 h-16 bg-speed-red rounded-2xl flex items-center justify-center mx-auto mb-4">
-            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
-          </div>
-          <h3 class="text-xl font-bold mb-2">اتصال</h3>
-          <p class="text-gray-400 text-sm mb-4">اتصل بنا للاستفسارات</p>
-          <p class="speed-red font-bold font-en text-lg">0544656944</p>
-        </div>
-      </div>
-      <div class="mt-12 text-center">
-        <p class="text-gray-400 mb-4">تابعنا على السوشال ميديا</p>
-        <div class="flex justify-center gap-4">
-          <a href="#" class="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center hover:bg-speed-red transition-colors">
-            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.88-2.5c0-1.4 1.03-2.58 2.4-2.83v-3.5a6.28 6.28 0 00-5.88 6.33 6.28 6.28 0 006.36 6.33 6.28 6.28 0 006.36-6.33V8.83a8.45 8.45 0 004.96 1.61V6.92c-.7 0-1.35-.13-1.96-.23z" fill="#fff"/></svg>
-          </a>
-          <a href="#" class="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center hover:bg-speed-red transition-colors">
-            <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="currentColor"><path d="M12.53.02C13.84 0 15.14.01 16.44 0c.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
-          </a>
-          <a href="#" class="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center hover:bg-speed-red transition-colors">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-          </a>
-        </div>
+        <a href="tel:0544656944" style="display:flex;align-items:center;gap:10px;color:var(--speed-red);text-decoration:none;font-weight:700;transition:transform 0.3s;" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform='translateY(0)'">
+          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+          اتصال
+        </a>
       </div>
     </div>
   </div>
 </section>
 
 <!-- Footer -->
-<footer class="py-12 border-t border-white/5">
-  <div class="max-w-7xl mx-auto px-6">
-    <div class="flex flex-col md:flex-row items-center justify-between gap-6">
-      <div class="flex items-center gap-2">
-        <div class="w-8 h-8 bg-speed-red rounded-full flex items-center justify-center">
-          <span class="font-en font-black text-white text-sm">S</span>
-        </div>
-        <div class="leading-tight">
-          <h1 class="font-en font-black text-xl tracking-tighter">SPEED</h1>
-          <p class="text-xs speed-red font-bold -mt-1">سوشال ميديا</p>
-        </div>
+<footer style="padding:60px 0 30px;border-top:1px solid rgba(255,255,255,0.05);">
+  <div style="max-width:1200px;margin:0 auto;padding:0 24px;">
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;margin-bottom:40px;">
+      <div style="display:flex;align-items:center;gap:12px;">
+        <img src="logo_speed.png" alt="SPEED" style="height:40px;width:auto;">
       </div>
-      <p class="text-gray-500 text-sm">جميع الحقوق محفوظة © 2026</p>
-      <p class="text-gray-500 text-sm">سبيد - سوشال ميديا</p>
+      <div style="display:flex;gap:30px;">
+        <a href="#hero" style="color:rgba(255,255,255,0.6);text-decoration:none;font-size:14px;transition:color 0.3s;" onmouseover="this.style.color='#E31E24'" onmouseout="this.style.color='rgba(255,255,255,0.6)'">الرئيسية</a>
+        <a href="#about" style="color:rgba(255,255,255,0.6);text-decoration:none;font-size:14px;transition:color 0.3s;" onmouseover="this.style.color='#E31E24'" onmouseout="this.style.color='rgba(255,255,255,0.6)'">من نحن</a>
+        <a href="#services" style="color:rgba(255,255,255,0.6);text-decoration:none;font-size:14px;transition:color 0.3s;" onmouseover="this.style.color='#E31E24'" onmouseout="this.style.color='rgba(255,255,255,0.6)'">خدماتنا</a>
+        <a href="#portfolio" style="color:rgba(255,255,255,0.6);text-decoration:none;font-size:14px;transition:color 0.3s;" onmouseover="this.style.color='#E31E24'" onmouseout="this.style.color='rgba(255,255,255,0.6)'">أعمالنا</a>
+        <a href="#contact" style="color:rgba(255,255,255,0.6);text-decoration:none;font-size:14px;transition:color 0.3s;" onmouseover="this.style.color='#E31E24'" onmouseout="this.style.color='rgba(255,255,255,0.6)'">تواصل</a>
+      </div>
+      <div style="display:flex;gap:16px;">
+        <a href="#" style="width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,0.05);display:flex;align-items:center;justify-content:center;transition:all 0.3s;" onmouseover="this.style.background='var(--speed-red)'" onmouseout="this.style.background='rgba(255,255,255,0.05)'">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+        </a>
+        <a href="#" style="width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,0.05);display:flex;align-items:center;justify-content:center;transition:all 0.3s;" onmouseover="this.style.background='var(--speed-red)'" onmouseout="this.style.background='rgba(255,255,255,0.05)'">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M12.53.02C13.84 0 15.14.01 16.44 0c.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+        </a>
+        <a href="#" style="width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,0.05);display:flex;align-items:center;justify-content:center;transition:all 0.3s;" onmouseover="this.style.background='var(--speed-red)'" onmouseout="this.style.background='rgba(255,255,255,0.05)'">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+        </a>
+      </div>
+    </div>
+    <div style="text-align:center;padding-top:30px;border-top:1px solid rgba(255,255,255,0.05);">
+      <p style="color:rgba(255,255,255,0.4);font-size:14px;">جميع الحقوق محفوظة © 2026 | SPEED - سوشال ميديا</p>
     </div>
   </div>
 </footer>
 
 <!-- Scripts -->
 <script>
-// Mobile menu toggle
-const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-const mobileMenu = document.getElementById('mobile-menu');
-mobileMenuBtn.addEventListener('click', () => {
-  mobileMenu.classList.toggle('hidden');
+// Mobile menu
+document.getElementById('menuBtn').addEventListener('click', function() {
+  document.getElementById('mobileMenu').classList.add('active');
 });
+document.getElementById('closeMenu').addEventListener('click', function() {
+  document.getElementById('mobileMenu').classList.remove('active');
+});
+function closeMobileMenu() {
+  document.getElementById('mobileMenu').classList.remove('active');
+}
 
 // Navbar scroll effect
 const navbar = document.getElementById('navbar');
-window.addEventListener('scroll', () => {
+window.addEventListener('scroll', function() {
   if (window.scrollY > 50) {
     navbar.classList.add('nav-scrolled');
   } else {
@@ -714,8 +891,30 @@ const revealObserver = new IntersectionObserver((entries) => {
     }
   });
 }, { threshold: 0.1 });
-
 revealElements.forEach(el => revealObserver.observe(el));
+
+// Counter animation
+const counters = document.querySelectorAll('.stat-number');
+const counterObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const target = parseInt(entry.target.dataset.target);
+      let current = 0;
+      const increment = target / 50;
+      const timer = setInterval(() => {
+        current += increment;
+        if (current >= target) {
+          entry.target.textContent = target + '+';
+          clearInterval(timer);
+        } else {
+          entry.target.textContent = Math.floor(current) + '+';
+        }
+      }, 30);
+      counterObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.5 });
+counters.forEach(counter => counterObserver.observe(counter));
 </script>
 
 </body>
