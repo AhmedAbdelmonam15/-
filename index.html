@@ -1,801 +1,967 @@
-            <p style="color: var(--text-muted); margin-bottom: 20px;">شكرا لثقتكم، ومتحمسين للتعاون معاكم!</p>
-            <a href="https://wa.me/966544656944" target="_blank" class="cta-btn" id="contact-cta">
-                <i class="fab fa-whatsapp"></i> تواصل عبر واتساب
-            </a>
-        </div>
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>SPEED سوشال ميديا | صناعة الفيديوهات</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Tajawal', sans-serif; 
+            background: #0a0a0a; 
+            color: #fff; 
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
 
-        <div class="footer">
-            <div class="footer-logo">
-                <span>SPEED</span>
-            </div>
-            <div class="footer-social">
-                <a href="https://www.instagram.com/speed.social.media" target="_blank" id="footer-instagram"><i class="fab fa-instagram"></i></a>
-                <a href="https://www.tiktok.com/@speed.social.media" target="_blank" id="footer-tiktok"><i class="fab fa-tiktok"></i></a>
-                <a href="#" id="footer-checkered"><i class="fas fa-flag-checkered"></i></a>
-            </div>
-        </div>
+        /* Mobile Container */
+        .app-container {
+            max-width: 430px;
+            margin: 0 auto;
+            min-height: 100vh;
+            background: #0a0a0a;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Animated Background */
+        .bg-animated {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: 
+                radial-gradient(ellipse at 20% 50%, rgba(255,0,0,0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 20%, rgba(255,50,0,0.1) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 80%, rgba(200,0,0,0.08) 0%, transparent 50%);
+            z-index: 0;
+            animation: bgPulse 8s ease-in-out infinite;
+        }
+        @keyframes bgPulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        /* Speed Lines Background */
+        .speed-lines-bg {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            z-index: 1;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        .speed-line {
+            position: absolute;
+            height: 1px;
+            background: rgba(255,0,0,0.3);
+            animation: speedLine 3s linear infinite;
+        }
+        @keyframes speedLine {
+            0% { transform: translateX(-100%); width: 0; opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateX(100vw); width: 200px; opacity: 0; }
+        }
+
+        /* Top Bar */
+        .top-bar {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+        .top-btn {
+            width: 45px; height: 45px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,0,0,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: #ff0000;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+            transition: 0.3s;
+        }
+        .top-btn:hover { background: rgba(255,0,0,0.2); transform: scale(1.1); }
+
+        /* Logo Circle */
+        .logo-section {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+        .logo-ring {
+            width: 180px; height: 180px;
+            border-radius: 50%;
+            border: 3px solid transparent;
+            background: linear-gradient(#0a0a0a, #0a0a0a) padding-box,
+                        linear-gradient(135deg, #ff0000, #ff6600, #ff0000) border-box;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            animation: ringGlow 3s ease-in-out infinite;
+            box-shadow: 0 0 30px rgba(255,0,0,0.3), inset 0 0 30px rgba(255,0,0,0.1);
+        }
+        @keyframes ringGlow {
+            0%, 100% { box-shadow: 0 0 30px rgba(255,0,0,0.3), inset 0 0 30px rgba(255,0,0,0.1); }
+            50% { box-shadow: 0 0 60px rgba(255,0,0,0.6), inset 0 0 50px rgba(255,0,0,0.2); }
+        }
+        .logo-inner {
+            width: 150px; height: 150px;
+            border-radius: 50%;
+            background: #111;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(255,0,0,0.2);
+        }
+        .logo-text {
+            font-size: 42px;
+            font-weight: 900;
+            color: #fff;
+            letter-spacing: 3px;
+            line-height: 1;
+            text-shadow: 0 0 20px rgba(255,0,0,0.8);
+        }
+        .logo-sub {
+            font-size: 12px;
+            color: #ff0000;
+            font-weight: 700;
+            margin-top: 5px;
+            letter-spacing: 2px;
+        }
+        .logo-icon {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+
+        /* Racing Flag Decoration */
+        .flag-deco {
+            position: absolute;
+            top: -10px; right: -10px;
+            font-size: 30px;
+            animation: wave 2s ease-in-out infinite;
+        }
+        @keyframes wave {
+            0%, 100% { transform: rotate(-10deg); }
+            50% { transform: rotate(10deg); }
+        }
+
+        /* Brand Name */
+        .brand-name {
+            text-align: center;
+            margin-top: 25px;
+            position: relative;
+            z-index: 10;
+        }
+        .brand-name h1 {
+            font-size: 32px;
+            font-weight: 900;
+            background: linear-gradient(135deg, #ff0000, #ff6600, #ff0000);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 2px;
+        }
+        .brand-name p {
+            font-size: 14px;
+            color: #888;
+            margin-top: 8px;
+            line-height: 1.8;
+        }
+
+        /* Main CTA Button */
+        .cta-main {
+            position: relative;
+            z-index: 10;
+            margin: 30px 20px;
+            padding: 18px 30px;
+            border-radius: 50px;
+            background: rgba(255,0,0,0.1);
+            border: 1px solid rgba(255,0,0,0.4);
+            text-align: center;
+            font-size: 16px;
+            font-weight: 700;
+            color: #ff0000;
+            backdrop-filter: blur(10px);
+            cursor: pointer;
+            transition: 0.3s;
+            animation: ctaPulse 2s ease-in-out infinite;
+        }
+        @keyframes ctaPulse {
+            0%, 100% { box-shadow: 0 0 20px rgba(255,0,0,0.2); }
+            50% { box-shadow: 0 0 40px rgba(255,0,0,0.4); }
+        }
+        .cta-main:hover { transform: scale(1.02); background: rgba(255,0,0,0.2); }
+
+        /* Social Buttons */
+        .social-buttons {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            padding: 0 20px;
+            margin-bottom: 20px;
+        }
+        .social-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 16px 30px;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+            border: none;
+            position: relative;
+            overflow: hidden;
+        }
+        .social-btn::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: rgba(255,255,255,0.2);
+            transition: 0.5s;
+        }
+        .social-btn:hover::before { left: 100%; }
+        .social-btn:hover { transform: translateY(-3px); }
+
+        .btn-tiktok {
+            background: linear-gradient(135deg, #00f2ea, #ff0050);
+            color: #fff;
+            box-shadow: 0 5px 20px rgba(0,242,234,0.3);
+        }
+        .btn-youtube {
+            background: linear-gradient(135deg, #ff0000, #cc0000);
+            color: #fff;
+            box-shadow: 0 5px 20px rgba(255,0,0,0.3);
+        }
+        .btn-instagram {
+            background: linear-gradient(135deg, #833ab4, #fd1d1d, #f77737);
+            color: #fff;
+            box-shadow: 0 5px 20px rgba(131,58,180,0.3);
+        }
+        .btn-whatsapp {
+            background: linear-gradient(135deg, #25d366, #128c7e);
+            color: #fff;
+            box-shadow: 0 5px 20px rgba(37,211,102,0.3);
+        }
+
+        /* Sections Cards */
+        .sections-area {
+            position: relative;
+            z-index: 10;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 100px;
+        }
+        .section-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,0,0,0.15);
+            border-radius: 20px;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+            transition: 0.3s;
+            cursor: pointer;
+        }
+        .section-card:hover {
+            border-color: rgba(255,0,0,0.5);
+            transform: translateX(-5px);
+            box-shadow: 0 5px 20px rgba(255,0,0,0.2);
+        }
+        .section-card-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 12px;
+        }
+        .section-icon {
+            width: 45px; height: 45px;
+            border-radius: 12px;
+            background: rgba(255,0,0,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            border: 1px solid rgba(255,0,0,0.2);
+        }
+        .section-title-text {
+            font-size: 18px;
+            font-weight: 700;
+            color: #fff;
+        }
+        .section-desc {
+            font-size: 13px;
+            color: #888;
+            line-height: 1.6;
+        }
+        .section-arrow {
+            text-align: left;
+            color: #ff0000;
+            font-size: 20px;
+            margin-top: 10px;
+        }
+
+        /* Packages Preview */
+        .packages-preview {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .pkg-mini {
+            flex: 1;
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+            padding: 12px;
+            text-align: center;
+            border: 1px solid rgba(255,0,0,0.1);
+        }
+        .pkg-mini-name {
+            font-size: 12px;
+            color: #ff0000;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        .pkg-mini-price {
+            font-size: 16px;
+            font-weight: 900;
+            color: #fff;
+        }
+
+        /* Bottom Navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0; left: 0; right: 0;
+            max-width: 430px;
+            margin: 0 auto;
+            background: rgba(10,10,10,0.95);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(255,0,0,0.2);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 10px 0 25px;
+            z-index: 100;
+        }
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            cursor: pointer;
+            transition: 0.3s;
+            padding: 5px 15px;
+            border-radius: 12px;
+        }
+        .nav-item:hover { background: rgba(255,0,0,0.1); }
+        .nav-item.active { color: #ff0000; }
+        .nav-item.active .nav-icon { color: #ff0000; }
+        .nav-icon {
+            font-size: 22px;
+            color: #666;
+            transition: 0.3s;
+        }
+        .nav-label {
+            font-size: 11px;
+            font-weight: 700;
+            color: #666;
+        }
+        .nav-item.active .nav-label { color: #ff0000; }
+
+        /* Contact Float Button */
+        .float-contact {
+            position: fixed;
+            bottom: 90px;
+            right: 20px;
+            width: 55px; height: 55px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ff0000, #ff6600);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: #fff;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(255,0,0,0.4);
+            z-index: 99;
+            animation: floatBounce 2s ease-in-out infinite;
+            border: 2px solid rgba(255,255,255,0.2);
+        }
+        @keyframes floatBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Racing Stripe Bottom */
+        .racing-stripe {
+            position: fixed;
+            bottom: 75px;
+            left: 0; right: 0;
+            max-width: 430px;
+            margin: 0 auto;
+            height: 4px;
+            background: repeating-linear-gradient(90deg, #fff, #fff 10px, #000 10px, #000 20px, #ff0000 20px, #ff0000 30px);
+            z-index: 101;
+            opacity: 0.5;
+        }
+
+        /* Content Detail View (Hidden by default) */
+        .detail-view {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: #0a0a0a;
+            z-index: 200;
+            overflow-y: auto;
+            padding-bottom: 100px;
+        }
+        .detail-view.active { display: block; }
+        .detail-header {
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            gap: 15px;
+            border-bottom: 1px solid rgba(255,0,0,0.2);
+        }
+        .back-btn {
+            width: 40px; height: 40px;
+            border-radius: 50%;
+            background: rgba(255,0,0,0.1);
+            border: 1px solid rgba(255,0,0,0.3);
+            color: #ff0000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            cursor: pointer;
+        }
+        .detail-title {
+            font-size: 20px;
+            font-weight: 700;
+        }
+        .detail-content {
+            padding: 20px;
+        }
+
+        /* Package Cards in Detail */
+        .pkg-card {
+            background: rgba(255,255,255,0.03);
+            border: 2px solid rgba(255,0,0,0.2);
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 15px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .pkg-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #ff0000, #ff6600, #ff0000);
+        }
+        .pkg-card.popular {
+            border-color: #ff0000;
+            box-shadow: 0 0 30px rgba(255,0,0,0.2);
+        }
+        .pkg-badge {
+            position: absolute;
+            top: 10px; right: 10px;
+            background: #ff0000;
+            color: #fff;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+        }
+        .pkg-name { font-size: 22px; font-weight: 900; margin-bottom: 10px; }
+        .pkg-price { font-size: 36px; font-weight: 900; color: #ff0000; margin-bottom: 15px; }
+        .pkg-features { list-style: none; text-align: right; }
+        .pkg-features li {
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .pkg-features li::before {
+            content: '⚡';
+            color: #ff0000;
+        }
+        .pkg-btn {
+            width: 100%;
+            padding: 15px;
+            margin-top: 15px;
+            border-radius: 50px;
+            background: #ff0000;
+            color: #fff;
+            border: none;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .pkg-btn:hover { transform: scale(1.02); box-shadow: 0 5px 20px rgba(255,0,0,0.4); }
+
+        /* Service List */
+        .service-list-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 15px;
+            margin-bottom: 10px;
+            border-right: 3px solid #ff0000;
+        }
+        .service-num {
+            width: 35px; height: 35px;
+            border-radius: 10px;
+            background: rgba(255,0,0,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 900;
+            color: #ff0000;
+            flex-shrink: 0;
+        }
+        .service-text { font-size: 14px; font-weight: 700; }
+
+        /* Content Ideas Grid */
+        .ideas-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+        .idea-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,0,0,0.15);
+            border-radius: 15px;
+            padding: 15px;
+            text-align: center;
+            transition: 0.3s;
+        }
+        .idea-card:hover { border-color: #ff0000; transform: scale(1.02); }
+        .idea-num { font-size: 24px; font-weight: 900; color: #ff0000; margin-bottom: 5px; }
+        .idea-text { font-size: 12px; font-weight: 700; }
+
+        /* Contact Info */
+        .contact-box {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,0,0,0.2);
+            border-radius: 20px;
+            padding: 25px;
+            text-align: center;
+        }
+        .contact-phone {
+            font-size: 28px;
+            font-weight: 900;
+            color: #ff0000;
+            letter-spacing: 3px;
+            margin: 15px 0;
+        }
+        .contact-quote {
+            font-size: 14px;
+            color: #888;
+            font-style: italic;
+            margin-top: 15px;
+            padding: 15px;
+            background: rgba(255,0,0,0.05);
+            border-radius: 15px;
+            border-right: 3px solid #ff0000;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: #0a0a0a; }
+        ::-webkit-scrollbar-thumb { background: #ff0000; border-radius: 2px; }
+    </style>
+</head>
+<body>
+
+<div class="app-container">
+  <div class="bg-animated"></div>
+  <div class="speed-lines-bg" id="speedLines"></div>
+
+  <!-- Main View -->
+  <div id="mainView">
+    <!-- Top Bar -->
+    <div class="top-bar">
+      <div class="top-btn" onclick="toggleTheme()">🌙</div>
+      <div class="top-btn">🔊</div>
     </div>
 
-    <!-- ===== ADMIN PANEL ===== -->
-    <div class="admin-panel" id="admin-panel">
-        <div class="admin-header">
-            <h2 style="color: var(--red);">⚙️ لوحة التحكم</h2>
-            <div style="display: flex; gap: 10px;">
-                <button class="admin-btn admin-btn-primary" id="global-save-btn" onclick="saveAllChanges()" style="opacity: 0.5; pointer-events: none;">
-                    <i class="fas fa-save"></i> حفظ الكل
-                </button>
-                <button class="admin-btn admin-btn-secondary" onclick="logout()"><i class="fas fa-sign-out-alt"></i> خروج</button>
-            </div>
+    <!-- Logo -->
+    <div class="logo-section">
+      <div class="logo-ring">
+        <div class="flag-deco">🏁</div>
+        <div class="logo-inner">
+          <div class="logo-icon">🏎️</div>
+          <div class="logo-text">SPEED</div>
+          <div class="logo-sub">سوشال ميديا</div>
         </div>
-
-        <div class="stats-grid">
-            <div class="stat-card"><i class="fas fa-eye"></i><div class="stat-number" id="stat-visits">0</div><div class="stat-label">زيارات</div></div>
-            <div class="stat-card"><i class="fas fa-box"></i><div class="stat-number" id="stat-packages">3</div><div class="stat-label">الباقات</div></div>
-            <div class="stat-card"><i class="fas fa-lightbulb"></i><div class="stat-number" id="stat-ideas">100</div><div class="stat-label">أفكار</div></div>
-        </div>
-
-        <div class="admin-menu" id="admin-menu">
-            <div class="admin-menu-item active" onclick="showAdminSection('profile')"><i class="fas fa-user-circle"></i><span>البروفايل</span></div>
-            <div class="admin-menu-item" onclick="showAdminSection('video-bg')"><i class="fas fa-video"></i><span>خلفية الفيديو</span></div>
-            <div class="admin-menu-item" onclick="showAdminSection('content')"><i class="fas fa-edit"></i><span>المحتوى</span></div>
-            <div class="admin-menu-item" onclick="showAdminSection('packages')"><i class="fas fa-box-open"></i><span>الباقات</span></div>
-            <div class="admin-menu-item" onclick="showAdminSection('services')"><i class="fas fa-cogs"></i><span>الخدمات</span></div>
-            <div class="admin-menu-item" onclick="showAdminSection('social')"><i class="fas fa-share-alt"></i><span>التواصل</span></div>
-            <div class="admin-menu-item" onclick="showAdminSection('ideas')"><i class="fas fa-lightbulb"></i><span>الأفكار</span></div>
-            <div class="admin-menu-item" onclick="showAdminSection('password')"><i class="fas fa-lock"></i><span>الباسورد</span></div>
-        </div>
-
-        <div class="admin-content" id="admin-content">
-            <!-- Profile Section -->
-            <div class="admin-section active" id="section-profile">
-                <h3><i class="fas fa-user-circle"></i> إعدادات البروفايل</h3>
-                <div class="form-group"><label>العنوان الرئيسي</label><input type="text" id="admin-hero-title" value="SPEED"></div>
-                <div class="form-group"><label>العنوان الفرعي</label><input type="text" id="admin-hero-subtitle" value="سوشال ميديا"></div>
-                <div class="form-group"><label>الشعار/الوصف</label><input type="text" id="admin-hero-tagline" value="في عالم السرعة.. وعالم الفيديوهات!"></div>
-                <div class="form-group"><label>صورة اللوجو (URL)</label><input type="url" id="admin-logo-url" placeholder="رابط صورة اللوجو"></div>
-                <button class="admin-btn admin-btn-primary" onclick="saveProfile()"><i class="fas fa-save"></i> حفظ البروفايل</button>
-            </div>
-
-            <!-- Video Background Section -->
-            <div class="admin-section" id="section-video-bg">
-                <h3><i class="fas fa-video"></i> خلفية الفيديو</h3>
-                <p style="color: var(--text-muted); margin-bottom: 20px;">اختر فيديو الخلفية أو أدخل رابط فيديو مخصص</p>
-                <div class="form-group">
-                    <label>فيديوهات جاهزة</label>
-                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin: 15px 0;">
-                        <div class="bg-preset" style="padding: 15px; background: rgba(255,0,0,0.1); border: 2px solid transparent; border-radius: 12px; cursor: pointer; text-align: center;" onclick="selectVideoBg('speed1')" data-video="speed1">
-                            <i class="fas fa-tachometer-alt" style="font-size: 2rem; color: var(--red); margin-bottom: 8px;"></i>
-                            <p style="font-size: 0.8rem;">سرعة الطريق</p>
-                        </div>
-                        <div class="bg-preset" style="padding: 15px; background: rgba(255,0,0,0.1); border: 2px solid transparent; border-radius: 12px; cursor: pointer; text-align: center;" onclick="selectVideoBg('racing')" data-video="racing">
-                            <i class="fas fa-flag-checkered" style="font-size: 2rem; color: var(--red); margin-bottom: 8px;"></i>
-                            <p style="font-size: 0.8rem;">سباق</p>
-                        </div>
-                        <div class="bg-preset" style="padding: 15px; background: rgba(255,0,0,0.1); border: 2px solid transparent; border-radius: 12px; cursor: pointer; text-align: center;" onclick="selectVideoBg('city')" data-video="city">
-                            <i class="fas fa-city" style="font-size: 2rem; color: var(--red); margin-bottom: 8px;"></i>
-                            <p style="font-size: 0.8rem;">مدينة ليلاً</p>
-                        </div>
-                        <div class="bg-preset" style="padding: 15px; background: rgba(255,0,0,0.1); border: 2px solid transparent; border-radius: 12px; cursor: pointer; text-align: center;" onclick="selectVideoBg('custom')" data-video="custom">
-                            <i class="fas fa-link" style="font-size: 2rem; color: var(--red); margin-bottom: 8px;"></i>
-                            <p style="font-size: 0.8rem;">رابط مخصص</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group" id="custom-video-group" style="display: none;">
-                    <label>رابط الفيديو المخصص (MP4)</label>
-                    <input type="url" id="admin-video-url" placeholder="https://example.com/video.mp4">
-                </div>
-                <button class="admin-btn admin-btn-primary" onclick="saveVideoBg()"><i class="fas fa-save"></i> حفظ الخلفية</button>
-            </div>
-
-            <!-- Content Section -->
-            <div class="admin-section" id="section-content">
-                <h3><i class="fas fa-edit"></i> تعديل المحتوى</h3>
-                <div class="form-group"><label>نص "من نحن"</label><textarea id="admin-about-intro">نحن سبيد، فريق إبداعي شبابي متخصص بصناعة الفيديوهات في السوشال ميديا للبراندات</textarea></div>
-                <div class="form-group"><label>نص "ليش نحتاج محتوى"</label><textarea id="admin-why-text">الريلز والفيديوهات القصيرة هي المحرك الأساسي للطلبات حالياً في جدة والعالم</textarea></div>
-                <div class="form-group"><label>نص "الرؤية"</label><textarea id="admin-vision-title">الرؤية والقيمة المضافة لبراندك يا شريكي الجميل</textarea></div>
-                <div class="form-group"><label>نص "خلاف؟"</label><textarea id="admin-dispute-text">ممكن تتساءل مع نفسك ولا مع شركاءك؛ هذول يمكن ما يمشوا بالاتفاق أو يخالفوا مثل السابقين ويخسرونا ولا نستفيد شيء:</textarea></div>
-                <div class="form-group"><label>اقتباس "خلاف؟"</label><input type="text" id="admin-dispute-quote" value="حنشتغل وكأنها هذي شركتنا"></div>
-                <div class="form-group"><label>نص أسفل الباقات</label><input type="text" id="admin-packages-footer" value="نحول المنتج من شيء عادي إلى تجربة "يعيشوها.. ويحبوها.. ويتكلموا عنها""></div>
-                <button class="admin-btn admin-btn-primary" onclick="saveContent()"><i class="fas fa-save"></i> حفظ المحتوى</button>
-            </div>
-
-            <!-- Packages Section -->
-            <div class="admin-section" id="section-packages">
-                <h3><i class="fas fa-box-open"></i> تعديل الباقات</h3>
-
-                <h4 style="color: var(--red); margin: 20px 0 15px;">باقة بلس</h4>
-                <div class="form-row">
-                    <div class="form-group"><label>عدد الفيديوهات</label><input type="number" id="pkg-plus-videos" value="4"></div>
-                    <div class="form-group"><label>عدد الصور</label><input type="number" id="pkg-plus-photos" value="2"></div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group"><label>عدد الموديلات</label><input type="number" id="pkg-plus-models" value="1"></div>
-                    <div class="form-group"><label>عدد الستوري</label><input type="number" id="pkg-plus-stories" value="4"></div>
-                </div>
-                <div class="form-group"><label>السعر (ر.س)</label><input type="number" id="pkg-plus-price" value="5170"></div>
-
-                <h4 style="color: var(--red); margin: 20px 0 15px;">باقة برو</h4>
-                <div class="form-row">
-                    <div class="form-group"><label>عدد الفيديوهات</label><input type="number" id="pkg-pro-videos" value="6"></div>
-                    <div class="form-group"><label>عدد الصور</label><input type="number" id="pkg-pro-photos" value="3"></div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group"><label>عدد الموديلات</label><input type="number" id="pkg-pro-models" value="2"></div>
-                    <div class="form-group"><label>عدد الستوري</label><input type="number" id="pkg-pro-stories" value="6"></div>
-                </div>
-                <div class="form-group"><label>السعر (ر.س)</label><input type="number" id="pkg-pro-price" value="7170"></div>
-
-                <h4 style="color: var(--red); margin: 20px 0 15px;">باقة سبيد</h4>
-                <div class="form-row">
-                    <div class="form-group"><label>عدد الفيديوهات</label><input type="number" id="pkg-speed-videos" value="8"></div>
-                    <div class="form-group"><label>عدد الصور</label><input type="number" id="pkg-speed-photos" value="4"></div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group"><label>عدد الموديلات</label><input type="number" id="pkg-speed-models" value="3"></div>
-                    <div class="form-group"><label>عدد الستوري</label><input type="number" id="pkg-speed-stories" value="8"></div>
-                </div>
-                <div class="form-group"><label>السعر (ر.س)</label><input type="number" id="pkg-speed-price" value="8170"></div>
-
-                <button class="admin-btn admin-btn-primary" onclick="savePackages()" style="margin-top: 20px;"><i class="fas fa-save"></i> حفظ الباقات</button>
-            </div>
-
-            <!-- Services Section -->
-            <div class="admin-section" id="section-services">
-                <h3><i class="fas fa-cogs"></i> تعديل الخدمات</h3>
-                <div class="form-group"><label>الخدمات (سطر لكل خدمة)</label><textarea id="admin-services-list" rows="10">فهم عميق في خوارزميات السوشال ميديا
-نحضر مؤتمرات شركات الميديا (تيك توك، انستقرام)
-عندنا شهادة معتمدة عالمية في التصوير
-أدوات احترافية متكاملة
-كتابة محتوى + إخراج + مونتاج + موسيقى + تأثيرات + كابشن
-تعليق صوتي
-عندنا أشخاص (مودل مميزين) خاص فينا بكل المواصفات
-إدارة الحسابات (تطوير + تنزيل + تفاعل دائم)
-إمكانية استخدام الثقافتين: العربية والإنجليزية</textarea></div>
-                <button class="admin-btn admin-btn-primary" onclick="saveServices()"><i class="fas fa-save"></i> حفظ الخدمات</button>
-            </div>
-
-            <!-- Social Section -->
-            <div class="admin-section" id="section-social">
-                <h3><i class="fas fa-share-alt"></i> روابط التواصل</h3>
-                <div class="form-row">
-                    <div class="form-group"><label><i class="fab fa-tiktok"></i> TikTok</label><input type="url" id="admin-tiktok" value="https://www.tiktok.com/@speed.social.media"></div>
-                    <div class="form-group"><label><i class="fab fa-instagram"></i> Instagram</label><input type="url" id="admin-instagram" value="https://www.instagram.com/speed.social.media"></div>
-                </div>
-                <div class="form-group"><label><i class="fab fa-whatsapp"></i> WhatsApp</label><input type="url" id="admin-whatsapp" value="https://wa.me/966544656944"></div>
-                <div class="form-group"><label>رقم الهاتف</label><input type="text" id="admin-phone" value="0544656944"></div>
-                <button class="admin-btn admin-btn-primary" onclick="saveSocial()"><i class="fas fa-save"></i> حفظ الروابط</button>
-            </div>
-
-            <!-- Ideas Section -->
-            <div class="admin-section" id="section-ideas">
-                <h3><i class="fas fa-lightbulb"></i> تعديل الأفكار</h3>
-                <div class="form-group"><label>قائمة الأفكار (سطر لكل فكرة)</label><textarea id="admin-ideas-list" rows="15">قبل / وبعد
-وجهة نظر POV
-تجربة عميل UGC
-إحساس الفخامة Luxury Feel
-احترافي Transitions
-قصة قصيرة Mini Story
-انبوكسينق Unboxing
-محتوى مع الموظفين
-نصائح اليوم Day Tip
-تحدي Challenge
-وراء الكواليس BTS
-مقارنة Comparison
-تعليمي Tutorial
-رياكشن Reaction
-توب 5 Top 5
-ميث Myth
-تساؤل Question
-تعليق Comment
-استفتاء Poll
-قصة نجاح Success Story
-ورود Customer Review
-عروض Offers
-مناسبات Events
-ترفيه Entertainment</textarea></div>
-                <button class="admin-btn admin-btn-primary" onclick="saveIdeas()"><i class="fas fa-save"></i> حفظ الأفكار</button>
-            </div>
-
-            <!-- Password Section -->
-            <div class="admin-section" id="section-password">
-                <h3><i class="fas fa-lock"></i> تغيير كلمة المرور</h3>
-                <div class="form-group"><label>كلمة المرور الحالية</label><input type="password" id="current-password" placeholder="••••••"></div>
-                <div class="form-group"><label>كلمة المرور الجديدة</label><input type="password" id="new-password" placeholder="••••••"></div>
-                <div class="form-group"><label>تأكيد كلمة المرور الجديدة</label><input type="password" id="confirm-password" placeholder="••••••"></div>
-                <button class="admin-btn admin-btn-primary" onclick="changePassword()"><i class="fas fa-save"></i> حفظ الباسورد</button>
-            </div>
-        </div>
+      </div>
     </div>
 
-    <!-- ===== BOTTOM NAVIGATION ===== -->
-    <nav class="bottom-nav" id="bottom-nav">
-        <button class="bottom-nav-item active" onclick="navigateTo('home')">
-            <i class="fas fa-home"></i>
-            <span>الرئيسية</span>
-        </button>
-        <button class="bottom-nav-item" onclick="navigateTo('about')">
-            <i class="fas fa-users"></i>
-            <span>من نحن</span>
-        </button>
-        <button class="bottom-nav-item" onclick="navigateTo('packages')">
-            <i class="fas fa-box-open"></i>
-            <span>الباقات</span>
-        </button>
-        <button class="bottom-nav-item" onclick="navigateTo('ideas')">
-            <i class="fas fa-lightbulb"></i>
-            <span>أفكار</span>
-        </button>
-        <button class="bottom-nav-item" onclick="navigateTo('contact')">
-            <i class="fas fa-phone"></i>
-            <span>تواصل</span>
-        </button>
-    </nav>
+    <!-- Brand Name -->
+    <div class="brand-name">
+      <h1>SPEED سوشال ميديا</h1>
+      <p>في عالم السرعة.. وعالم الفيديوهات!<br>فريق إبداعي شاب متخصص بصناعة الفيديوهات</p>
+    </div>
 
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getDatabase, ref, onValue, set, get } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
-        import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+    <!-- CTA -->
+    <div class="cta-main" onclick="showDetail('packages')">
+      ⚡ ابدأ رحلتك معنا الآن ⚡
+    </div>
 
-        const firebaseConfig = {
-            apiKey: "AIzaSyB6Rstt9-LUsZfaB8ItWwl3xQ2Z7Fp0GUA",
-            authDomain: "ahmed-3fedb.firebaseapp.com",
-            databaseURL: "https://ahmed-3fedb-default-rtdb.firebaseio.com",
-            projectId: "ahmed-3fedb",
-            storageBucket: "ahmed-3fedb.firebasestorage.app",
-            messagingSenderId: "660897595229",
-            appId: "1:660897595229:web:57f512a2f8dbcf076ff2b4",
-            measurementId: "G-S0P08G2HW4"
-        };
+    <!-- Social Buttons -->
+    <div class="social-buttons">
+      <button class="social-btn btn-tiktok">
+        <span>🎵</span> تيك توك
+      </button>
+      <button class="social-btn btn-youtube">
+        <span>📺</span> يوتيوب
+      </button>
+      <button class="social-btn btn-instagram">
+        <span>📷</span> انستقرام
+      </button>
+      <button class="social-btn btn-whatsapp">
+        <span>💬</span> واتساب
+      </button>
+    </div>
 
-        const app = initializeApp(firebaseConfig);
-        const db = getDatabase(app);
-        const auth = getAuth(app);
+    <!-- Sections -->
+    <div class="sections-area">
+      <div class="section-card" onclick="showDetail('about')">
+        <div class="section-card-header">
+          <div class="section-icon">👥</div>
+          <div class="section-title-text">من نحن؟</div>
+        </div>
+        <div class="section-desc">فريق إبداعي شاب متخصص بصناعة الفيديوهات في السوشال ميديا للبراندات</div>
+        <div class="section-arrow">←</div>
+      </div>
 
-        let currentUser = null;
-        let appData = null;
-        let isSaving = false;
-        let pendingChanges = {};
-        let hasUnsavedChanges = false;
-        let currentPage = 'home';
+      <div class="section-card" onclick="showDetail('services')">
+        <div class="section-card-header">
+          <div class="section-icon">🛠️</div>
+          <div class="section-title-text">خدماتنا المتكاملة</div>
+        </div>
+        <div class="section-desc">فهم عميق في خوارزميات السوشال ميديا + أدوات احترافية + إدارة حسابات</div>
+        <div class="section-arrow">←</div>
+      </div>
 
-        // Video backgrounds
-        const videoPresets = {
-            'speed1': 'https://assets.mixkit.co/videos/preview/mixkit-speeding-down-a-highway-at-night-34566-large.mp4',
-            'racing': 'https://assets.mixkit.co/videos/preview/mixkit-racing-car-on-a-race-track-34567-large.mp4',
-            'city': 'https://assets.mixkit.co/videos/preview/mixkit-city-traffic-at-night-34568-large.mp4',
-            'custom': ''
-        };
+      <div class="section-card" onclick="showDetail('packages')">
+        <div class="section-card-header">
+          <div class="section-icon">💎</div>
+          <div class="section-title-text">باقاتنا الشهرية</div>
+        </div>
+        <div class="section-desc">3 باقات شهرية بتفاصيل الخدمات والسعر شامل الضريبة</div>
+        <div class="packages-preview">
+          <div class="pkg-mini">
+            <div class="pkg-mini-name">بلس</div>
+            <div class="pkg-mini-price">5170</div>
+          </div>
+          <div class="pkg-mini">
+            <div class="pkg-mini-name">برو</div>
+            <div class="pkg-mini-price">7170</div>
+          </div>
+          <div class="pkg-mini">
+            <div class="pkg-mini-name">سبيد</div>
+            <div class="pkg-mini-price">8170</div>
+          </div>
+        </div>
+        <div class="section-arrow">←</div>
+      </div>
 
-        // Default data
-        const defaultData = {
-            profile: {
-                title: 'SPEED',
-                subtitle: 'سوشال ميديا',
-                tagline: 'في عالم السرعة.. وعالم الفيديوهات!',
-                logo: ''
-            },
-            videoBg: {
-                preset: 'speed1',
-                customUrl: ''
-            },
-            content: {
-                aboutIntro: 'نحن سبيد، فريق إبداعي شبابي متخصص بصناعة الفيديوهات في السوشال ميديا للبراندات',
-                whyText: 'الريلز والفيديوهات القصيرة هي المحرك الأساسي للطلبات حالياً في جدة والعالم',
-                visionTitle: 'الرؤية والقيمة المضافة لبراندك يا شريكي الجميل',
-                disputeText: 'ممكن تتساءل مع نفسك ولا مع شركاءك؛ هذول يمكن ما يمشوا بالاتفاق أو يخالفوا مثل السابقين ويخسرونا ولا نستفيد شيء:',
-                disputeQuote: 'حنشتغل وكأنها هذي شركتنا',
-                packagesFooter: 'نحول المنتج من شيء عادي إلى تجربة "يعيشوها.. ويحبوها.. ويتكلموا عنها"'
-            },
-            packages: {
-                plus: { videos: 4, photos: 2, models: 1, stories: 4, price: 5170 },
-                pro: { videos: 6, photos: 3, models: 2, stories: 6, price: 7170 },
-                speed: { videos: 8, photos: 4, models: 3, stories: 8, price: 8170 }
-            },
-            services: [
-                'فهم عميق في خوارزميات السوشال ميديا',
-                'نحضر مؤتمرات شركات الميديا (تيك توك، انستقرام)',
-                'عندنا شهادة معتمدة عالمية في التصوير',
-                'أدوات احترافية متكاملة',
-                'كتابة محتوى + إخراج + مونتاج + موسيقى + تأثيرات + كابشن',
-                'تعليق صوتي',
-                'عندنا أشخاص (مودل مميزين) خاص فينا بكل المواصفات',
-                'إدارة الحسابات (تطوير + تنزيل + تفاعل دائم)',
-                'إمكانية استخدام الثقافتين: العربية والإنجليزية'
-            ],
-            social: {
-                tiktok: 'https://www.tiktok.com/@speed.social.media',
-                instagram: 'https://www.instagram.com/speed.social.media',
-                whatsapp: 'https://wa.me/966544656944',
-                phone: '0544656944'
-            },
-            ideas: [
-                'قبل / وبعد', 'وجهة نظر POV', 'تجربة عميل UGC', 'إحساس الفخامة Luxury Feel',
-                'احترافي Transitions', 'قصة قصيرة Mini Story', 'انبوكسينق Unboxing',
-                'محتوى مع الموظفين', 'نصائح اليوم Day Tip', 'تحدي Challenge',
-                'وراء الكواليس BTS', 'مقارنة Comparison', 'تعليمي Tutorial',
-                'رياكشن Reaction', 'توب 5 Top 5', 'ميث Myth', 'تساؤل Question',
-                'تعليق Comment', 'استفتاء Poll', 'قصة نجاح Success Story',
-                'ورود Customer Review', 'عروض Offers', 'مناسبات Events', 'ترفيه Entertainment'
-            ],
-            stats: { visits: 0 }
-        };
+      <div class="section-card" onclick="showDetail('content')">
+        <div class="section-card-header">
+          <div class="section-icon">🎬</div>
+          <div class="section-title-text">+100 فكرة محتوى</div>
+        </div>
+        <div class="section-desc">قبل/بعد • POV • UGC • Luxury Feel • Transitions • Unboxing • BTS</div>
+        <div class="section-arrow">←</div>
+      </div>
 
-        // Auth state
-        onAuthStateChanged(auth, (user) => {
-            currentUser = user;
-        });
+      <div class="section-card" onclick="showDetail('contact')">
+        <div class="section-card-header">
+          <div class="section-icon">📞</div>
+          <div class="section-title-text">تواصل معنا</div>
+        </div>
+        <div class="section-desc">جاهزين نبدأ الرحلة؟ 0544656944</div>
+        <div class="section-arrow">←</div>
+      </div>
+    </div>
+  </div>
 
-        // Listen to data
-        function listenToData() {
-            const dataRef = ref(db, 'speed_social');
-            onValue(dataRef, (snapshot) => {
-                if (snapshot.exists()) {
-                    appData = snapshot.val();
-                } else {
-                    appData = JSON.parse(JSON.stringify(defaultData));
-                    set(dataRef, appData);
-                }
-                renderAll();
-                hideLoading();
-            }, (error) => {
-                console.error('Firebase error:', error);
-                appData = JSON.parse(JSON.stringify(defaultData));
-                renderAll();
-                hideLoading();
-            });
-        }
+  <!-- Detail Views -->
+  <div class="detail-view" id="detail-about">
+    <div class="detail-header">
+      <div class="back-btn" onclick="hideDetail()">→</div>
+      <div class="detail-title">من نحن؟</div>
+    </div>
+    <div class="detail-content">
+      <div class="section-card" style="margin-bottom: 15px;">
+        <div class="section-card-header">
+          <div class="section-icon">🎯</div>
+          <div class="section-title-text">إيجابي</div>
+        </div>
+        <div class="section-desc">نحمل الطاقة الإيجابية في كل محتوى ننتجه، نؤمن بأن الإيجابية تنتشر بسرعة البرق</div>
+      </div>
+      <div class="section-card" style="margin-bottom: 15px;">
+        <div class="section-card-header">
+          <div class="section-icon">🎨</div>
+          <div class="section-title-text">عاطفي</div>
+        </div>
+        <div class="section-desc">نصنع محتوى يلمس القلوب ويُحدث رد فعل عاطفي قوي، لأن العاطفة هي سر الانتشار</div>
+      </div>
+      <div class="section-card" style="margin-bottom: 15px;">
+        <div class="section-card-header">
+          <div class="section-icon">🌟</div>
+          <div class="section-title-text">مجتمعي</div>
+        </div>
+        <div class="section-desc">نبني مجتمعات حول البراندات، نخلق تجربة تفاعلية تجعل الجمهور جزءًا من القصة</div>
+      </div>
+      <div class="contact-quote">
+        ⚡ الرايلز والفيديوهات القصيرة هي المحرك الأساسي للطلبات حاليًا في جدة والعالم<br><br>
+        🔥 الشركات تنزل مئات الفيديوهات وتتقدم وتنجح<br><br>
+        🚀 المحتوى المجتمعي والعاطفي والإيجابي يزيد التفاعل بشكل مبهر
+      </div>
+    </div>
+  </div>
 
-        function getData() { return appData || JSON.parse(JSON.stringify(defaultData)); }
+  <div class="detail-view" id="detail-services">
+    <div class="detail-header">
+      <div class="back-btn" onclick="hideDetail()">→</div>
+      <div class="detail-title">خدماتنا المتكاملة</div>
+    </div>
+    <div class="detail-content">
+      <div class="service-list-item"><div class="service-num">01</div><div class="service-text">فهم عميق في خوارزميات السوشال ميديا</div></div>
+      <div class="service-list-item"><div class="service-num">02</div><div class="service-text">نحضر مؤتمرات شركات الميديا (تيك توك، انستقرام)</div></div>
+      <div class="service-list-item"><div class="service-num">03</div><div class="service-text">شهادة معتمدة عالمية في التصوير</div></div>
+      <div class="service-list-item"><div class="service-num">04</div><div class="service-text">أدوات احترافية متكاملة</div></div>
+      <div class="service-list-item"><div class="service-num">05</div><div class="service-text">كتابة محتوى + إخراج + مونتاج + موسيقى + تأثيرات + كابشن</div></div>
+      <div class="service-list-item"><div class="service-num">06</div><div class="service-text">تعليق صوتي</div></div>
+      <div class="service-list-item"><div class="service-num">07</div><div class="service-text">إشخاص (مودل مميزين) خاص فينا بكل المواصفات</div></div>
+      <div class="service-list-item"><div class="service-num">08</div><div class="service-text">إدارة الحسابات (تطوير + تنزيل + تفاعل دائم)</div></div>
+      <div class="service-list-item"><div class="service-num">09</div><div class="service-text">🇸🇦🇺🇸 إمكانية استخدام الثقافتين: العربية والإنجليزية</div></div>
+    </div>
+  </div>
 
-        function hideLoading() {
-            const loader = document.getElementById('loading-overlay');
-            if (loader) {
-                loader.classList.add('hidden');
-                setTimeout(() => { loader.style.display = 'none'; }, 600);
-            }
-        }
+  <div class="detail-view" id="detail-packages">
+    <div class="detail-header">
+      <div class="back-btn" onclick="hideDetail()">→</div>
+      <div class="detail-title">باقاتنا الشهرية</div>
+    </div>
+    <div class="detail-content">
+      <div class="pkg-card">
+        <div class="pkg-name">🥉 باقة بلس</div>
+        <div class="pkg-price">5170 ر.س</div>
+        <ul class="pkg-features">
+          <li>4 فيديوهات</li>
+          <li>2 صور</li>
+          <li>1 مودل مجاناً</li>
+          <li>4 ستوري مجاناً</li>
+          <li>التفاعل مع الناس مجاناً</li>
+        </ul>
+        <button class="pkg-btn">اختر الباقة</button>
+      </div>
 
-        // Toast
-        function showToast(message, type) {
-            type = type || 'success';
-            const toast = document.getElementById('toast');
-            const toastMessage = document.getElementById('toast-message');
-            const icon = toast.querySelector('i');
-            toastMessage.textContent = message;
-            toast.className = 'toast show ' + type;
-            icon.className = type === 'error' ? 'fas fa-exclamation-circle' : 'fas fa-check-circle';
-            setTimeout(() => toast.classList.remove('show'), 3000);
-        }
-        window.showToast = showToast;
+      <div class="pkg-card popular">
+        <div class="pkg-badge">الأكثر طلباً</div>
+        <div class="pkg-name">🥈 باقة برو</div>
+        <div class="pkg-price">7170 ر.س</div>
+        <ul class="pkg-features">
+          <li>6 فيديوهات</li>
+          <li>3 صور</li>
+          <li>2 مودل مجاناً</li>
+          <li>6 ستوري مجاناً</li>
+          <li>التفاعل مع الناس مجاناً</li>
+        </ul>
+        <button class="pkg-btn">اختر الباقة</button>
+      </div>
 
-        // Mark unsaved
-        function markUnsaved() {
-            hasUnsavedChanges = true;
-            const saveBtn = document.getElementById('global-save-btn');
-            if (saveBtn) {
-                saveBtn.style.opacity = '1';
-                saveBtn.style.pointerEvents = 'all';
-                saveBtn.innerHTML = '<i class="fas fa-save"></i> حفظ التغييرات (' + Object.keys(pendingChanges).length + ')';
-            }
-        }
+      <div class="pkg-card">
+        <div class="pkg-name">🥇 باقة سبيد</div>
+        <div class="pkg-price">8170 ر.س</div>
+        <ul class="pkg-features">
+          <li>8 فيديوهات</li>
+          <li>4 صور</li>
+          <li>3 مودل مجاناً</li>
+          <li>8 ستوري مجاناً</li>
+          <li>التفاعل مع الناس مجاناً</li>
+        </ul>
+        <button class="pkg-btn">اختر الباقة</button>
+      </div>
 
-        function clearUnsaved() {
-            hasUnsavedChanges = false;
-            pendingChanges = {};
-            const saveBtn = document.getElementById('global-save-btn');
-            if (saveBtn) {
-                saveBtn.style.opacity = '0.5';
-                saveBtn.style.pointerEvents = 'none';
-                saveBtn.innerHTML = '<i class="fas fa-check"></i> تم الحفظ';
-                setTimeout(() => {
-                    if (!hasUnsavedChanges) saveBtn.innerHTML = '<i class="fas fa-save"></i> حفظ الكل';
-                }, 2000);
-            }
-        }
+      <p style="text-align: center; color: #ff0000; font-size: 14px; margin-top: 20px; font-weight: 700;">
+        🎁 نحول المنتج من شيء عادي إلى تجربة "يعيشوها.. ويحبوها.. ويتكلموا عنها"
+      </p>
+    </div>
+  </div>
 
-        function queueChange(key, value) {
-            pendingChanges[key] = value;
-            markUnsaved();
-            showToast('تم التعديل! اضغط "حفظ الكل" للتأكيد', 'success');
-        }
+  <div class="detail-view" id="detail-content">
+    <div class="detail-header">
+      <div class="back-btn" onclick="hideDetail()">→</div>
+      <div class="detail-title">+100 فكرة محتوى</div>
+    </div>
+    <div class="detail-content">
+      <div class="ideas-grid">
+        <div class="idea-card"><div class="idea-num">01</div><div class="idea-text">قبل / وبعد</div></div>
+        <div class="idea-card"><div class="idea-num">02</div><div class="idea-text">وجهة نظر POV</div></div>
+        <div class="idea-card"><div class="idea-num">03</div><div class="idea-text">تجربة عميل UGC</div></div>
+        <div class="idea-card"><div class="idea-num">04</div><div class="idea-text">إحساس الفخامة</div></div>
+        <div class="idea-card"><div class="idea-num">05</div><div class="idea-text">احترافي Transitions</div></div>
+        <div class="idea-card"><div class="idea-num">06</div><div class="idea-text">قصة قصيرة</div></div>
+        <div class="idea-card"><div class="idea-num">07</div><div class="idea-text">انبوكسينق</div></div>
+        <div class="idea-card"><div class="idea-num">08</div><div class="idea-text">محتوى مع الموظفين</div></div>
+        <div class="idea-card"><div class="idea-num">09</div><div class="idea-text">BTS</div></div>
+        <div class="idea-card"><div class="idea-num">10</div><div class="idea-text">تعليمي</div></div>
+        <div class="idea-card"><div class="idea-num">11</div><div class="idea-text">تحدي</div></div>
+        <div class="idea-card"><div class="idea-num">12</div><div class="idea-text">ريأكشن</div></div>
+      </div>
+      <div class="contact-quote" style="margin-top: 20px;">
+        💡 "بعد إتمام العقد بتشوفوا الأفكار كاملة.."<br><br>
+        الأفكار بحر.. التنفيذ والاستمرارية أهم شيء!
+      </div>
+    </div>
+  </div>
 
-        async function saveAllChanges() {
-            if (!hasUnsavedChanges || Object.keys(pendingChanges).length === 0) {
-                showToast('لا توجد تغييرات للحفظ', 'error');
-                return;
-            }
-            if (isSaving) { showToast('جاري الحفظ...', 'success'); return; }
+  <div class="detail-view" id="detail-contact">
+    <div class="detail-header">
+      <div class="back-btn" onclick="hideDetail()">→</div>
+      <div class="detail-title">تواصل معنا</div>
+    </div>
+    <div class="detail-content">
+      <div class="contact-box">
+        <div style="font-size: 18px; font-weight: 700;">سبيد - سوشال ميديا</div>
+        <div class="contact-phone">0544656944</div>
+        <div style="font-size: 14px; color: #888;">شكراً لثقتكم، و متحمسين للتعاون معاكم! 🏎️⚡️</div>
+      </div>
 
-            showToast('جاري حفظ جميع التغييرات...', 'success');
-            isSaving = true;
+      <div class="contact-quote" style="margin-top: 20px;">
+        ⚡ نحن لا نتسابق مع السابقين ويخسرونا<br><br>
+        صحيح من حقك بس معانا.. نطمنك<br>
+        برضو وارد الخلاف!<br>
+        بس راح يكون بطريقتنا..<br>
+        إذا خالفنا؟ بنخالف (الإبداع)<br>
+        ما بيكون بالضبط مثل المستوى المطلوب<br>
+        بل راح يزيييييد الإبداع
+      </div>
 
-            try {
-                const data = getData();
-                for (const [key, value] of Object.entries(pendingChanges)) {
-                    const keys = key.split('.');
-                    let target = data;
-                    for (let i = 0; i < keys.length - 1; i++) {
-                        if (!target[keys[i]]) target[keys[i]] = {};
-                        target = target[keys[i]];
-                    }
-                    target[keys[keys.length - 1]] = value;
-                }
-                await set(ref(db, 'speed_social'), data);
-                clearUnsaved();
-                showToast('تم حفظ جميع التغييرات بنجاح!');
-                renderAll();
-            } catch (e) {
-                showToast('خطأ في الحفظ: ' + e.message, 'error');
-            } finally {
-                isSaving = false;
-            }
-        }
-        window.saveAllChanges = saveAllChanges;
+      <div class="contact-quote" style="margin-top: 15px; border-right: 3px solid #ff6600;">
+        <span style="color: #ff6600; font-weight: 900;">"حنشتغل وكأنها هذي شركتنا"</span>
+      </div>
 
-        // Auth functions
-        async function loginAdmin() {
-            const email = document.getElementById('login-email').value.trim();
-            const password = document.getElementById('login-password').value;
-            if (!email || !password) { showToast('يرجى إدخال البريد وكلمة المرور', 'error'); return; }
+      <div class="social-buttons" style="margin-top: 25px;">
+        <button class="social-btn btn-tiktok"><span>🎵</span> تيك توك</button>
+        <button class="social-btn btn-instagram"><span>📷</span> انستقرام</button>
+        <button class="social-btn btn-whatsapp"><span>💬</span> واتساب</button>
+      </div>
+    </div>
+  </div>
 
-            showToast('جاري تسجيل الدخول...', 'success');
-            try {
-                await signInWithEmailAndPassword(auth, email, password);
-                closeLoginModal();
-                showAdminPanel();
-                showToast('تم تسجيل الدخول بنجاح!');
-            } catch (error) {
-                showToast('بيانات الدخول غير صحيحة!', 'error');
-            }
-        }
-        window.loginAdmin = loginAdmin;
+  <!-- Racing Stripe -->
+  <div class="racing-stripe"></div>
 
-        async function logout() {
-            try {
-                await signOut(auth);
-                currentUser = null;
-                currentPage = 'home';
-                showMainPage();
-                showToast('تم تسجيل الخروج');
-            } catch (e) { showToast('خطأ في تسجيل الخروج', 'error'); }
-        }
-        window.logout = logout;
+  <!-- Bottom Navigation -->
+  <div class="bottom-nav">
+    <div class="nav-item active" onclick="setActiveNav(this); showDetail('about')">
+      <div class="nav-icon">ℹ️</div>
+      <div class="nav-label">عنا</div>
+    </div>
+    <div class="nav-item" onclick="setActiveNav(this); showDetail('services')">
+      <div class="nav-icon">🛠️</div>
+      <div class="nav-label">الخدمات</div>
+    </div>
+    <div class="nav-item" onclick="setActiveNav(this); showDetail('packages')">
+      <div class="nav-icon">💎</div>
+      <div class="nav-label">الباقات</div>
+    </div>
+    <div class="nav-item" onclick="setActiveNav(this); showDetail('content')">
+      <div class="nav-icon">🎬</div>
+      <div class="nav-label">المحتوى</div>
+    </div>
+    <div class="nav-item" onclick="setActiveNav(this); showDetail('contact')">
+      <div class="nav-icon">📞</div>
+      <div class="nav-label">تواصل</div>
+    </div>
+  </div>
 
-        function closeLoginModal() { document.getElementById('login-modal').classList.remove('active'); }
-        window.closeLoginModal = closeLoginModal;
+  <!-- Float Contact -->
+  <div class="float-contact" onclick="showDetail('contact')">📞</div>
+</div>
 
-        // Navigation
-        function navigateTo(page) {
-            currentPage = page;
-            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-            document.querySelectorAll('.bottom-nav-item').forEach(item => item.classList.remove('active'));
-            const pageEl = document.getElementById('page-' + page);
-            if (pageEl) pageEl.classList.add('active');
-            const navItems = document.querySelectorAll('.bottom-nav-item');
-            const pages = ['home', 'about', 'packages', 'ideas', 'contact'];
-            const idx = pages.indexOf(page);
-            if (idx !== -1 && navItems[idx]) navItems[idx].classList.add('active');
-            window.scrollTo(0, 0);
-        }
-        window.navigateTo = navigateTo;
+<script>
+  // Speed lines
+  const speedLinesContainer = document.getElementById('speedLines');
+  for (let i = 0; i < 15; i++) {
+    const line = document.createElement('div');
+    line.className = 'speed-line';
+    line.style.top = Math.random() * 100 + '%';
+    line.style.animationDelay = Math.random() * 3 + 's';
+    line.style.animationDuration = (1 + Math.random() * 2) + 's';
+    speedLinesContainer.appendChild(line);
+  }
 
-        // Render all
-        function renderAll() {
-            renderVideoBg();
-            renderProfile();
-            renderContent();
-            renderPackages();
-            renderServices();
-            renderSocial();
-            renderIdeas();
-            renderStats();
-        }
+  // Navigation
+  function setActiveNav(el) {
+    document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+    el.classList.add('active');
+  }
 
-        function renderVideoBg() {
-            const data = getData();
-            const video = document.getElementById('bg-video');
-            const bg = data.videoBg || defaultData.videoBg;
-            let src = videoPresets[bg.preset] || videoPresets['speed1'];
-            if (bg.preset === 'custom' && bg.customUrl) src = bg.customUrl;
-            if (video && src) video.src = src;
-        }
+  // Show/Hide Detail Views
+  function showDetail(section) {
+    document.querySelectorAll('.detail-view').forEach(v => v.classList.remove('active'));
+    document.getElementById('detail-' + section).classList.add('active');
+    document.getElementById('mainView').style.display = 'none';
+  }
 
-        function renderProfile() {
-            const data = getData();
-            const p = data.profile || defaultData.profile;
-            document.getElementById('hero-title').textContent = p.title;
-            document.getElementById('hero-subtitle').textContent = p.subtitle;
-            document.getElementById('hero-tagline').innerHTML = '<i class="fab fa-tiktok"></i><span>' + p.tagline + '</span><i class="fas fa-flag-checkered" style="color: var(--red);"></i>';
+  function hideDetail() {
+    document.querySelectorAll('.detail-view').forEach(v => v.classList.remove('active'));
+    document.getElementById('mainView').style.display = 'block';
+  }
 
-            const logoDisplay = document.getElementById('logo-display');
-            if (p.logo) {
-                logoDisplay.innerHTML = '<img src="' + p.logo + '" alt="SPEED" style="width:100%;height:100%;object-fit:contain;padding:10px;">';
-            } else {
-                logoDisplay.innerHTML = '<span style="font-size:2.5rem;font-weight:900;color:var(--red);text-shadow:0 0 20px rgba(255,0,0,0.5);">SPEED</span>';
-            }
-        }
+  // Theme toggle
+  let darkMode = true;
+  function toggleTheme() {
+    darkMode = !darkMode;
+    document.body.style.background = darkMode ? '#0a0a0a' : '#f5f5f5';
+    document.body.style.color = darkMode ? '#fff' : '#000';
+  }
 
-        function renderContent() {
-            const data = getData();
-            const c = data.content || defaultData.content;
-            document.getElementById('about-intro').innerHTML = 'نحن <strong style="color: var(--red);">سبيد</strong>، ' + c.aboutIntro;
-            document.getElementById('vision-title').textContent = c.visionTitle;
-            document.getElementById('dispute-text').textContent = c.disputeText;
-            document.getElementById('dispute-quote').textContent = '"' + c.disputeQuote + '"';
-            document.getElementById('packages-footer').textContent = c.packagesFooter;
-        }
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
 
-        function renderPackages() {
-            const data = getData();
-            const pkgs = data.packages || defaultData.packages;
-
-            // Update Plus
-            document.querySelector('.package-row.plus .package-videos-count').textContent = pkgs.plus.videos;
-            document.querySelector('.package-row.plus .package-photos-count').textContent = pkgs.plus.photos;
-            document.querySelector('.package-row.plus .package-free-models').innerHTML = 
-                '<p><i class="fas fa-user"></i> ' + pkgs.plus.models + ' مودل مجاناً</p>' +
-                '<p><i class="fas fa-image"></i> ' + pkgs.plus.stories + ' ستوري مجاناً</p>' +
-                '<p><i class="fas fa-comments"></i> التفاعل مع الناس مجاناً</p>';
-            document.querySelector('.package-row.plus .package-price-bottom').textContent = pkgs.plus.price + ' ر.س';
-
-            // Update Pro
-            document.querySelector('.package-row.pro .package-videos-count').textContent = pkgs.pro.videos;
-            document.querySelector('.package-row.pro .package-photos-count').textContent = pkgs.pro.photos;
-            document.querySelector('.package-row.pro .package-free-models').innerHTML = 
-                '<p><i class="fas fa-user"></i> ' + pkgs.pro.models + ' مودل مجاناً</p>' +
-                '<p><i class="fas fa-image"></i> ' + pkgs.pro.stories + ' ستوري مجاناً</p>' +
-                '<p><i class="fas fa-comments"></i> التفاعل مع الناس مجاناً</p>';
-            document.querySelector('.package-row.pro .package-price-bottom').textContent = pkgs.pro.price + ' ر.س';
-
-            // Update Speed
-            document.querySelector('.package-row.speed .package-videos-count').textContent = pkgs.speed.videos;
-            document.querySelector('.package-row.speed .package-photos-count').textContent = pkgs.speed.photos;
-            document.querySelector('.package-row.speed .package-free-models').innerHTML = 
-                '<p><i class="fas fa-user"></i> ' + pkgs.speed.models + ' مودل مجاناً</p>' +
-                '<p><i class="fas fa-image"></i> ' + pkgs.speed.stories + ' ستوري مجاناً</p>' +
-                '<p><i class="fas fa-comments"></i> التفاعل مع الناس مجاناً</p>';
-            document.querySelector('.package-row.speed .package-price-bottom').textContent = pkgs.speed.price + ' ر.س';
-        }
-
-        function renderServices() {
-            const data = getData();
-            const services = data.services || defaultData.services;
-            const container = document.getElementById('services-list');
-            if (container) {
-                container.innerHTML = services.map(s => 
-                    '<div class="service-item"><i class="fas fa-check-circle"></i> ' + s + '</div>'
-                ).join('');
-            }
-        }
-
-        function renderSocial() {
-            const data = getData();
-            const s = data.social || defaultData.social;
-            document.getElementById('tiktok-link').href = s.tiktok;
-            document.getElementById('instagram-link').href = s.instagram;
-            document.getElementById('whatsapp-link').href = s.whatsapp;
-            document.getElementById('contact-phone').textContent = s.phone.split('').join(' ');
-            document.getElementById('contact-cta').href = s.whatsapp;
-            document.getElementById('footer-instagram').href = s.instagram;
-            document.getElementById('footer-tiktok').href = s.tiktok;
-        }
-
-        function renderIdeas() {
-            const data = getData();
-            const ideas = data.ideas || defaultData.ideas;
-            const container = document.getElementById('ideas-list');
-            if (container) {
-                container.innerHTML = ideas.map(idea => '<li>' + idea + '</li>').join('');
-            }
-        }
-
-        function renderStats() {
-            const data = getData();
-            const visits = data.stats?.visits || 0;
-            document.getElementById('stat-visits').textContent = visits;
-        }
-
-        // Admin functions
-        function showAdminPanel() {
-            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-            document.getElementById('admin-panel').classList.add('active');
-            document.getElementById('bottom-nav').style.display = 'none';
-
-            const data = getData();
-            document.getElementById('admin-hero-title').value = data.profile.title;
-            document.getElementById('admin-hero-subtitle').value = data.profile.subtitle;
-            document.getElementById('admin-hero-tagline').value = data.profile.tagline;
-            document.getElementById('admin-logo-url').value = data.profile.logo || '';
-            document.getElementById('admin-video-url').value = data.videoBg?.customUrl || '';
-            document.getElementById('admin-about-intro').value = data.content?.aboutIntro || '';
-            document.getElementById('admin-why-text').value = data.content?.whyText || '';
-            document.getElementById('admin-vision-title').value = data.content?.visionTitle || '';
-            document.getElementById('admin-dispute-text').value = data.content?.disputeText || '';
-            document.getElementById('admin-dispute-quote').value = data.content?.disputeQuote || '';
-            document.getElementById('admin-packages-footer').value = data.content?.packagesFooter || '';
-            document.getElementById('admin-tiktok').value = data.social?.tiktok || '';
-            document.getElementById('admin-instagram').value = data.social?.instagram || '';
-            document.getElementById('admin-whatsapp').value = data.social?.whatsapp || '';
-            document.getElementById('admin-phone').value = data.social?.phone || '';
-            document.getElementById('admin-services-list').value = (data.services || []).join('\n');
-            document.getElementById('admin-ideas-list').value = (data.ideas || []).join('\n');
-
-            // Packages
-            const pkgs = data.packages || defaultData.packages;
-            document.getElementById('pkg-plus-videos').value = pkgs.plus.videos;
-            document.getElementById('pkg-plus-photos').value = pkgs.plus.photos;
-            document.getElementById('pkg-plus-models').value = pkgs.plus.models;
-            document.getElementById('pkg-plus-stories').value = pkgs.plus.stories;
-            document.getElementById('pkg-plus-price').value = pkgs.plus.price;
-            document.getElementById('pkg-pro-videos').value = pkgs.pro.videos;
-            document.getElementById('pkg-pro-photos').value = pkgs.pro.photos;
-            document.getElementById('pkg-pro-models').value = pkgs.pro.models;
-            document.getElementById('pkg-pro-stories').value = pkgs.pro.stories;
-            document.getElementById('pkg-pro-price').value = pkgs.pro.price;
-            document.getElementById('pkg-speed-videos').value = pkgs.speed.videos;
-            document.getElementById('pkg-speed-photos').value = pkgs.speed.photos;
-            document.getElementById('pkg-speed-models').value = pkgs.speed.models;
-            document.getElementById('pkg-speed-stories').value = pkgs.speed.stories;
-            document.getElementById('pkg-speed-price').value = pkgs.speed.price;
-        }
-
-        function showMainPage() {
-            document.getElementById('admin-panel').classList.remove('active');
-            document.getElementById('bottom-nav').style.display = 'flex';
-            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-            const currentPageEl = document.getElementById('page-' + currentPage);
-            if (currentPageEl) currentPageEl.classList.add('active');
-            document.querySelectorAll('.bottom-nav-item').forEach(item => item.classList.remove('active'));
-            const pages = ['home', 'about', 'packages', 'ideas', 'contact'];
-            const idx = pages.indexOf(currentPage);
-            if (idx !== -1) {
-                const navItems = document.querySelectorAll('.bottom-nav-item');
-                if (navItems[idx]) navItems[idx].classList.add('active');
-            }
-            renderAll();
-            window.scrollTo(0, 0);
-        }
-
-        function showAdminSection(sectionId) {
-            document.querySelectorAll('.admin-section').forEach(s => s.classList.remove('active'));
-            document.getElementById('section-' + sectionId).classList.add('active');
-            document.querySelectorAll('.admin-menu-item').forEach(item => item.classList.remove('active'));
-            event.currentTarget.classList.add('active');
-        }
-        window.showAdminSection = showAdminSection;
-
-        // Save functions
-        function saveProfile() {
-            queueChange('profile.title', document.getElementById('admin-hero-title').value.trim());
-            queueChange('profile.subtitle', document.getElementById('admin-hero-subtitle').value.trim());
-            queueChange('profile.tagline', document.getElementById('admin-hero-tagline').value.trim());
-            queueChange('profile.logo', document.getElementById('admin-logo-url').value.trim());
-            showToast('تم تسجيل تغييرات البروفايل!');
-        }
-        window.saveProfile = saveProfile;
-
-        function selectVideoBg(preset) {
-            document.querySelectorAll('.bg-preset').forEach(p => p.style.borderColor = 'transparent');
-            event.currentTarget.style.borderColor = 'var(--red)';
-            if (preset === 'custom') {
-                document.getElementById('custom-video-group').style.display = 'block';
-            } else {
-                document.getElementById('custom-video-group').style.display = 'none';
-            }
-        }
-        window.selectVideoBg = selectVideoBg;
-
-        function saveVideoBg() {
-            const selected = document.querySelector('.bg-preset[style*="var(--red)"]');
-            let preset = 'speed1';
-            if (selected) preset = selected.dataset.video;
-            queueChange('videoBg.preset', preset);
-            queueChange('videoBg.customUrl', document.getElementById('admin-video-url').value.trim());
-            showToast('تم تسجيل تغييرات الخلفية!');
-        }
-        window.saveVideoBg = saveVideoBg;
-
-        function saveContent() {
-            queueChange('content.aboutIntro', document.getElementById('admin-about-intro').value.trim());
-            queueChange('content.whyText', document.getElementById('admin-why-text').value.trim());
-            queueChange('content.visionTitle', document.getElementById('admin-vision-title').value.trim());
-            queueChange('content.disputeText', document.getElementById('admin-dispute-text').value.trim());
-            queueChange('content.disputeQuote', document.getElementById('admin-dispute-quote').value.trim());
-            queueChange('content.packagesFooter', document.getElementById('admin-packages-footer').value.trim());
-            showToast('تم تسجيل تغييرات المحتوى!');
-        }
-        window.saveContent = saveContent;
-
-        function savePackages() {
-            queueChange('packages.plus', {
-                videos: parseInt(document.getElementById('pkg-plus-videos').value) || 4,
-                photos: parseInt(document.getElementById('pkg-plus-photos').value) || 2,
-                models: parseInt(document.getElementById('pkg-plus-models').value) || 1,
-                stories: parseInt(document.getElementById('pkg-plus-stories').value) || 4,
-                price: parseInt(document.getElementById('pkg-plus-price').value) || 5170
-            });
-            queueChange('packages.pro', {
-                videos: parseInt(document.getElementById('pkg-pro-videos').value) || 6,
-                photos: parseInt(document.getElementById('pkg-pro-photos').value) || 3,
-                models: parseInt(document.getElementById('pkg-pro-models').value) || 2,
-                stories: parseInt(document.getElementById('pkg-pro-stories').value) || 6,
-                price: parseInt(document.getElementById('pkg-pro-price').value) || 7170
-            });
-            queueChange('packages.speed', {
-                videos: parseInt(document.getElementById('pkg-speed-videos').value) || 8,
-                photos: parseInt(document.getElementById('pkg-speed-photos').value) || 4,
-                models: parseInt(document.getElementById('pkg-speed-models').value) || 3,
-                stories: parseInt(document.getElementById('pkg-speed-stories').value) || 8,
-                price: parseInt(document.getElementById('pkg-speed-price').value) || 8170
-            });
-            showToast('تم تسجيل تغييرات الباقات!');
-        }
-        window.savePackages = savePackages;
-
-        function saveServices() {
-            const services = document.getElementById('admin-services-list').value.split('\n').filter(s => s.trim());
-            queueChange('services', services);
-            showToast('تم تسجيل تغييرات الخدمات!');
-        }
-        window.saveServices = saveServices;
-
-        function saveSocial() {
-            queueChange('social.tiktok', document.getElementById('admin-tiktok').value.trim());
-            queueChange('social.instagram', document.getElementById('admin-instagram').value.trim());
-            queueChange('social.whatsapp', document.getElementById('admin-whatsapp').value.trim());
-            queueChange('social.phone', document.getElementById('admin-phone').value.trim());
-            showToast('تم تسجيل تغييرات التواصل!');
-        }
-        window.saveSocial = saveSocial;
-
-        function saveIdeas() {
-            const ideas = document.getElementById('admin-ideas-list').value.split('\n').filter(i => i.trim());
-            queueChange('ideas', ideas);
-            showToast('تم تسجيل تغييرات الأفكار!');
-        }
-        window.saveIdeas = saveIdeas;
-
-        async function changePassword() {
-            const current = document.getElementById('current-password').value;
-            const newPass = document.getElementById('new-password').value;
-            const confirm = document.getElementById('confirm-password').value;
-
-            if (!newPass || newPass.length < 6) { showToast('الباسورد الجديد لازم يكون 6 أحرف على الأقل', 'error'); return; }
-            if (newPass !== confirm) { showToast('الباسورد الجديد غير متطابق!', 'error'); return; }
-
-            try {
-                await set(ref(db, 'speed_social/admin/password'), newPass);
-                showToast('تم تغيير الباسورد بنجاح!');
-                document.getElementById('current-password').value = '';
-                document.getElementById('new-password').value = '';
-                document.getElementById('confirm-password').value = '';
-            } catch (e) { showToast('خطأ في حفظ الباسورد!', 'error'); }
-        }
-        window.changePassword = changePassword;
-
-        // Open admin (5 taps)
-        let tapCount = 0;
-        let tapTimeout = null;
-        document.addEventListener('click', (e) => {
-            const target = e.target;
-            const isInteractive = target.closest('button') || target.closest('a') || target.closest('input') || target.closest('textarea') || target.closest('.bottom-nav') || target.closest('.modal-overlay') || target.closest('.admin-panel');
-            if (isInteractive) return;
-            tapCount++;
-            if (tapTimeout) clearTimeout(tapTimeout);
-            tapTimeout = setTimeout(() => { tapCount = 0; }, 2000);
-            if (tapCount >= 5) {
-                tapCount = 0;
-                if (tapTimeout) clearTimeout(tapTimeout);
-                document.getElementById('login-modal').classList.add('active');
-            }
-        });
-
-        // Init
-        document.addEventListener('DOMContentLoaded', () => {
-            listenToData();
-            document.getElementById('login-modal').addEventListener('click', (e) => { if (e.target === e.currentTarget) closeLoginModal(); });
-        });
-    </script>
+  document.querySelectorAll('.section-card, .service-list-item, .pkg-card, .idea-card').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'all 0.5s ease';
+    observer.observe(el);
+  });
+</script>
 </body>
 </html>
